@@ -1,7 +1,7 @@
 ﻿{
-  "version": "1.0.0-*",
-  "description": "ScmBackup Console Application",
-  "authors": [ "cs" ],
+  "version": "0.1.0-*",
+  "description": "Backup repositories from cloud hosters to your local machine",
+  "authors": [ "Christian Specht" ],
   "tags": [ "" ],
   "projectUrl": "",
   "licenseUrl": "",
