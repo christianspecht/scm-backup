@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace ScmBackup
+﻿namespace ScmBackup
 {
     public class Program
     {
         public static void Main(string[] args)
         {
+            Bootstrapper.Bootstrap();
         }
     }
 }
