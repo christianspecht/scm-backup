@@ -7,9 +7,16 @@ namespace ScmBackup
 {
     internal class ScmBackup : IScmBackup
     {
+        private ILogger logger;
+
+        public ScmBackup(ILogger logger)
+        {
+            this.logger = logger;
+        }
+
         public void Run()
         {
-            throw new NotImplementedException();
+            this.logger.Log(LogLevel.Info, "SCM Backup");
         }
     }
 }
