@@ -8,6 +8,7 @@ namespace ScmBackup
         {
             var container = new Container();
             container.Register<IScmBackup, ScmBackup>();
+            container.RegisterDecorator<IScmBackup, ErrorHandlingScmBackup>();
 
             container.RegisterCollection<ILogger>(new[] {
                 typeof(ConsoleLogger)
