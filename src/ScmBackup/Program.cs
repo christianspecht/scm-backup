@@ -16,6 +16,11 @@ namespace ScmBackup
 
             container.Verify();
 
+
+            var logger = container.GetInstance<ILogger>();
+
+            logger.Log(LogLevel.Info, "SCM Backup");
+
             container.GetInstance<IScmBackup>().Run();
         }
     }

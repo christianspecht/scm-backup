@@ -5,18 +5,14 @@ using System.Threading.Tasks;
 
 namespace ScmBackup
 {
+    /// <summary>
+    /// main program execution
+    /// </summary>
     internal class ScmBackup : IScmBackup
     {
-        private ILogger logger;
-
-        public ScmBackup(ILogger logger)
-        {
-            this.logger = logger;
-        }
-
         public void Run()
         {
-            this.logger.Log(LogLevel.Info, "SCM Backup");
+            throw new NotImplementedException();
         }
     }
 }
