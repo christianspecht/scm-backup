@@ -1,7 +1,7 @@
 ﻿{
-  "version": "1.0.0-*",
-  "description": "ScmBackup.Tests Class Library",
-  "authors": [ "cs" ],
+  "version": "0.1.0-*",
+  "description": "Tests for SCM Backup",
+  "authors": [ "Christian Specht" ],
   "tags": [ "" ],
   "projectUrl": "",
   "licenseUrl": "",
