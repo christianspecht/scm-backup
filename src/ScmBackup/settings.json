@@ -1,0 +1,11 @@
+﻿{
+  "localFolder": "c:\\scm-backup",
+
+  "sources": [
+    {
+      "hoster": "github",
+      "type": "user",
+      "name": "foo"
+    }
+  ]
+}

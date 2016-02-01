@@ -15,8 +15,9 @@ namespace ScmBackup
             });
             container.Register<ILogger, CompositeLogger>();
 
-            container.Verify();
+            container.Register<IConfigReader, ConfigReader>();
 
+            container.Verify();
 
             var logger = container.GetInstance<ILogger>();
 
