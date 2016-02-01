@@ -7,12 +7,19 @@ namespace ScmBackup
     /// </summary>
     internal class ConfigReader : IConfigReader
     {
+        public string ConfigFileName { get; set; }
+
+        public ConfigReader()
+        {
+            this.ConfigFileName = "settings.json";
+        }
+
         public Config ReadConfig()
         {
             var config = new Config();
 
             var builder = new ConfigurationBuilder();
-            builder.AddJsonFile("settings.json");
+            builder.AddJsonFile(this.ConfigFileName);
             var settings = builder.Build();
 
             ConfigurationBinder.Bind(settings, config);

@@ -1,0 +1,16 @@
+﻿{
+  "localFolder": "localfolder",
+
+  "sources": [
+    {
+      "hoster": "hoster0",
+      "type": "type0",
+      "name": "name0"
+    },
+    {
+      "hoster": "hoster1",
+      "type": "type1",
+      "name": "name1"
+    }
+  ]
+}
