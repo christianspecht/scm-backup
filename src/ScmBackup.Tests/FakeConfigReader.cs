@@ -15,5 +15,13 @@ namespace ScmBackup.Tests
 
             return this.FakeConfig;
         }
+
+        public void SetDefaultFakeConfig()
+        {
+            var config = new Config();
+            config.LocalFolder = "foo";
+            config.WaitSecondsOnError = 0;
+            this.FakeConfig = config;
+        }
     }
 }

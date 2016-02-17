@@ -11,12 +11,8 @@ namespace ScmBackup.Tests
         public ValidatingConfigReaderTests()
         {
             reader = new FakeConfigReader();
+            reader.SetDefaultFakeConfig();
             logger = new FakeLogger();
-
-            var config = new Config();
-            config.LocalFolder = "foo";
-            config.WaitSecondsOnError = 1;
-            reader.FakeConfig = config;
 
             sut = new ValidatingConfigReader(reader, logger);
         }
