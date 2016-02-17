@@ -15,6 +15,7 @@ namespace ScmBackup.Tests
 
             var config = new Config();
             config.LocalFolder = "foo";
+            config.WaitSecondsOnError = 1;
             reader.FakeConfig = config;
 
             sut = new ValidatingConfigReader(reader, logger);
@@ -47,6 +48,16 @@ namespace ScmBackup.Tests
             var result = sut.ReadConfig();
 
             Assert.Null(result);
+        }
+
+        [Fact]
+        public void DoesntErrorWhenWaitSecondsIsMissing()
+        {
+            reader.FakeConfig.WaitSecondsOnError = 0;
+
+            var result = sut.ReadConfig();
+
+            Assert.False(logger.LoggedSomething);
         }
     }
 }
