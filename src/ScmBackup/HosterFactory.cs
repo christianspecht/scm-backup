@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace ScmBackup
 {
@@ -14,7 +15,14 @@ namespace ScmBackup
 
         public IHoster Create(string hosterName)
         {
-            return this[hosterName];
+            IHoster result;
+
+            if (!this.TryGetValue(hosterName, out result))
+            {
+                throw new InvalidOperationException(string.Format("Hoster {0} doesn't exist", hosterName));
+            }
+
+            return result;
         }
     }
 }
