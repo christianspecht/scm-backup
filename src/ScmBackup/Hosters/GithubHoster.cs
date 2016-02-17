@@ -3,7 +3,7 @@
     /// <summary>
     /// IHoster implementation for GitHub
     /// </summary>
-    public class GithubHoster : IHoster
+    internal class GithubHoster : IHoster
     {
         public string Name
         {

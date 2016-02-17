@@ -1,6 +1,6 @@
 ﻿namespace ScmBackup
 {
-    public interface IHoster
+    internal interface IHoster
     {
         string Name { get; }
     }

@@ -6,7 +6,7 @@ namespace ScmBackup
     /// <summary>
     /// factory which creates IHoster instances
     /// </summary>
-    public class HosterFactory : Dictionary<string, IHoster>, IHosterFactory
+    internal class HosterFactory : Dictionary<string, IHoster>, IHosterFactory
     {
         public void Add(IHoster hoster)
         {
