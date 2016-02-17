@@ -1,6 +1,8 @@
 ﻿{
   "localFolder": "localfolder",
 
+  "waitSecondsOnError": 5,
+
   "sources": [
     {
       "hoster": "hoster0",

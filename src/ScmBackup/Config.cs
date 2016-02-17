@@ -8,6 +8,9 @@ namespace ScmBackup
     internal class Config
     {
         public string LocalFolder { get; set; }
+
+        public int WaitSecondsOnError { get; set; }
+
         public List<Source> Sources { get; set; }
 
         public Config()

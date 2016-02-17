@@ -1,6 +1,8 @@
 ﻿{
   "localFolder": "c:\\scm-backup",
 
+  "waitSecondsOnError":  5,
+
   "sources": [
     {
       "hoster": "github",

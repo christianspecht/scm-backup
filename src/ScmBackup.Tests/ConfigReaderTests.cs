@@ -14,6 +14,7 @@ namespace ScmBackup.Tests
             var config = sut.ReadConfig();
 
             Assert.Equal("localfolder", config.LocalFolder);
+            Assert.Equal(5, config.WaitSecondsOnError);
             Assert.Equal(2, config.Sources.Count());
 
             var source0 = config.Sources[0];
