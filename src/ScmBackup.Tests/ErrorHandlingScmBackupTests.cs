@@ -10,17 +10,20 @@ namespace ScmBackup.Tests
         public void LogsWhenExceptionIsThrown()
         {
             var ex = new Exception("!!!");
-            var stub = new FakeScmBackup();
-            stub.ToThrow = ex;
+            var subBackup = new FakeScmBackup();
+            subBackup.ToThrow = ex;
 
-            var mock = new FakeLogger();
+            var conf = new FakeConfigReader();
+            conf.SetDefaultFakeConfig();
 
-            var backup = new ErrorHandlingScmBackup(stub, mock);
+            var logger = new FakeLogger();
+
+            var backup = new ErrorHandlingScmBackup(subBackup, logger, conf);
             backup.Run();
 
-            Assert.True(mock.LoggedSomething);
-            Assert.Equal<LogLevel>(LogLevel.Error, mock.LastLogLevel);
-            Assert.Equal(ex, mock.LastException);
+            Assert.True(logger.LoggedSomething);
+            Assert.Equal<LogLevel>(LogLevel.Error, logger.LastLogLevel);
+            Assert.Equal(ex, logger.LastException);
         }
     }
 }
