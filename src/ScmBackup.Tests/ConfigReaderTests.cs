@@ -35,8 +35,7 @@ namespace ScmBackup.Tests
             var sut = new ConfigReader();
             sut.ConfigFileName = "brokensettings.json";
 
-            // Assert.ThrowsAny<Exception>(() => sut.ReadConfig());
-            Assert.Throws<Exception>(() => sut.ReadConfig());
+            Assert.ThrowsAny<Exception>(() => sut.ReadConfig());
         }
     }
 }
