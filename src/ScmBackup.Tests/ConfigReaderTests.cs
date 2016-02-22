@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Xunit;
 
 namespace ScmBackup.Tests
@@ -26,6 +27,16 @@ namespace ScmBackup.Tests
             Assert.Equal("hoster1", source1.Hoster);
             Assert.Equal("type1", source1.Type);
             Assert.Equal("name1", source1.Name);
+        }
+
+        [Fact]
+        public void ThrowsExceptionWhenConfigFileIsNotVaildJson()
+        {
+            var sut = new ConfigReader();
+            sut.ConfigFileName = "brokensettings.json";
+
+            // Assert.ThrowsAny<Exception>(() => sut.ReadConfig());
+            Assert.Throws<Exception>(() => sut.ReadConfig());
         }
     }
 }
