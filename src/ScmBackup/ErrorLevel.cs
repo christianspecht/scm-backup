@@ -1,9 +1,9 @@
 ﻿namespace ScmBackup
 {
     /// <summary>
-    /// Log level for logging
+    /// Available error levels
     /// </summary>
-    internal enum LogLevel
+    internal enum ErrorLevel
     {
         Info = 1,
         Warn = 2,

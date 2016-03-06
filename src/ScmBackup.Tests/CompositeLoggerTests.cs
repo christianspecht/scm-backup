@@ -11,12 +11,12 @@ namespace ScmBackup.Tests
             var loggers = new List<FakeLogger> { new FakeLogger(), new FakeLogger() };
             var sut = new CompositeLogger(loggers);
 
-            sut.Log(LogLevel.Info, "foo");
+            sut.Log(ErrorLevel.Info, "foo");
 
             foreach(var mock in loggers)
             {
                 Assert.True(mock.LoggedSomething);
-                Assert.Equal(LogLevel.Info, mock.LastLogLevel);
+                Assert.Equal(ErrorLevel.Info, mock.LastErrorLevel);
                 Assert.Equal("foo", mock.LastMessage);
             }
 

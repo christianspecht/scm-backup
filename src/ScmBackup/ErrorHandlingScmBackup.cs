@@ -30,7 +30,7 @@ namespace ScmBackup
             }
             catch(Exception ex)
             {
-                this.logger.Log(LogLevel.Error, ex, "Backup failed!");
+                this.logger.Log(ErrorLevel.Error, ex, "Backup failed!");
 
                 // Wait as many seconds as defined in the config.
                 // If we don't have the config value because the exception was thrown while reading the config, use a fixed value

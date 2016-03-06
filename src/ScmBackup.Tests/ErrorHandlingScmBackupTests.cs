@@ -22,7 +22,7 @@ namespace ScmBackup.Tests
             backup.Run();
 
             Assert.True(logger.LoggedSomething);
-            Assert.Equal<LogLevel>(LogLevel.Error, logger.LastLogLevel);
+            Assert.Equal<ErrorLevel>(ErrorLevel.Error, logger.LastErrorLevel);
             Assert.Equal(ex, logger.LastException);
         }
     }

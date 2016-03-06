@@ -22,7 +22,7 @@ namespace ScmBackup
 
             if (String.IsNullOrWhiteSpace(config.LocalFolder))
             {
-                this.logger.Log(LogLevel.Error, "Local Folder is missing!");
+                this.logger.Log(ErrorLevel.Error, "Local Folder is missing!");
                 return null;
             }
 

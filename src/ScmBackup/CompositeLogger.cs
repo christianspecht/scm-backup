@@ -15,12 +15,12 @@ namespace ScmBackup
             this.loggers = loggers;
         }
 
-        public void Log(LogLevel level, string message, params object[] arg)
+        public void Log(ErrorLevel level, string message, params object[] arg)
         {
             this.Log(level, null, message, arg);
         }
 
-        public void Log(LogLevel level, Exception ex, string message, params object[] arg)
+        public void Log(ErrorLevel level, Exception ex, string message, params object[] arg)
         {
             foreach (var logger in this.loggers)
             {

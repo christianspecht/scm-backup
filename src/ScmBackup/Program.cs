@@ -22,7 +22,7 @@ namespace ScmBackup
 
             var logger = container.GetInstance<ILogger>();
 
-            logger.Log(LogLevel.Info, "SCM Backup");
+            logger.Log(ErrorLevel.Info, "SCM Backup");
 
             container.GetInstance<IScmBackup>().Run();
         }

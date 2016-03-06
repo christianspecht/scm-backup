@@ -7,19 +7,19 @@ namespace ScmBackup
     /// </summary>
     internal class ConsoleLogger : ILogger
     {
-        public void Log(LogLevel level, string message, params object[] arg)
+        public void Log(ErrorLevel level, string message, params object[] arg)
         {
             this.Log(level, null, message, arg);
         }
 
-        public void Log(LogLevel level, Exception ex, string message, params object[] arg)
+        public void Log(ErrorLevel level, Exception ex, string message, params object[] arg)
         {
             switch (level)
             {
-                case LogLevel.Warn:
+                case ErrorLevel.Warn:
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     break;
-                case LogLevel.Error:
+                case ErrorLevel.Error:
                     Console.ForegroundColor = ConsoleColor.Red;
                     break;
             }

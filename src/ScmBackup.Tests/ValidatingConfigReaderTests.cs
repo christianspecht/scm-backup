@@ -33,7 +33,7 @@ namespace ScmBackup.Tests
             sut.ReadConfig();
 
             Assert.True(logger.LoggedSomething);
-            Assert.Equal(LogLevel.Error, logger.LastLogLevel);
+            Assert.Equal(ErrorLevel.Error, logger.LastErrorLevel);
         }
 
         [Fact]

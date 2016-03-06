@@ -7,7 +7,7 @@ namespace ScmBackup
     /// </summary>
     internal interface ILogger
     {
-        void Log(LogLevel level, string message, params object[] arg);
-        void Log(LogLevel level, Exception ex, string message, params object[] arg);
+        void Log(ErrorLevel level, string message, params object[] arg);
+        void Log(ErrorLevel level, Exception ex, string message, params object[] arg);
     }
 }
