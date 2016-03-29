@@ -1,11 +1,11 @@
 ﻿namespace ScmBackup.Hosters
 {
     /// <summary>
-    /// IHoster implementation for GitHub
+    /// BaseHoster implementation for GitHub
     /// </summary>
-    internal class GithubHoster : IHoster
+    internal class GithubHoster : BaseHoster
     {
-        public string Name
+        public override string Name
         {
             get { return "github"; }
         }

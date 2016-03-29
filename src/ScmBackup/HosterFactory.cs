@@ -4,18 +4,18 @@ using System.Collections.Generic;
 namespace ScmBackup
 {
     /// <summary>
-    /// factory which creates IHoster instances
+    /// factory which creates BaseHoster instances
     /// </summary>
-    internal class HosterFactory : Dictionary<string, IHoster>, IHosterFactory
+    internal class HosterFactory : Dictionary<string, BaseHoster>, IHosterFactory
     {
-        public void Add(IHoster hoster)
+        public void Add(BaseHoster hoster)
         {
             this.Add(hoster.Name, hoster);
         }
 
-        public IHoster Create(string hosterName)
+        public BaseHoster Create(string hosterName)
         {
-            IHoster result;
+            BaseHoster result;
 
             if (!this.TryGetValue(hosterName, out result))
             {

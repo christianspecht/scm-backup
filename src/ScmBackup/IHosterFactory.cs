@@ -2,8 +2,8 @@
 {
     internal interface IHosterFactory
     {
-        void Add(IHoster hoster);
+        void Add(BaseHoster hoster);
 
-        IHoster Create(string hosterName);
+        BaseHoster Create(string hosterName);
     }
 }
