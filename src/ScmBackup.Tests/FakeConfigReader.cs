@@ -21,6 +21,11 @@ namespace ScmBackup.Tests
             var config = new Config();
             config.LocalFolder = "foo";
             config.WaitSecondsOnError = 0;
+
+            var source = new ConfigSource();
+
+            config.Sources.Add(source);
+
             this.FakeConfig = config;
         }
     }

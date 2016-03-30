@@ -26,6 +26,12 @@ namespace ScmBackup
                 return null;
             }
 
+            if (config.Sources.Count == 0)
+            {
+                this.logger.Log(ErrorLevel.Error, "No source configured");
+                return null;
+            }
+
             return config;
         }
     }

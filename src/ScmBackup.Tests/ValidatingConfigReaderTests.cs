@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using System.Collections.Generic;
+using Xunit;
 
 namespace ScmBackup.Tests
 {
@@ -54,6 +55,28 @@ namespace ScmBackup.Tests
             var result = sut.ReadConfig();
 
             Assert.False(logger.LoggedSomething);
+        }
+
+        [Fact]
+        public void LogsErrorAndReturnsNullWhenThereAreNoConfigSources()
+        {
+            reader.FakeConfig.Sources = new List<ConfigSource>();
+
+            var result = sut.ReadConfig();
+
+            Assert.True(logger.LoggedSomething);
+            Assert.Equal(ErrorLevel.Error, logger.LastErrorLevel);
+            Assert.Null(result);
+        }
+
+
+        [Fact]
+        public void DoesntErrorWhenThereIsOneConfigSource()
+        {
+            var result = sut.ReadConfig();
+
+            Assert.False(logger.LoggedSomething);
+            Assert.NotNull(result);
         }
     }
 }
