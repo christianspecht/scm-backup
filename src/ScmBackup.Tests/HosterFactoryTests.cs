@@ -1,4 +1,5 @@
 ﻿using ScmBackup.Hosters;
+using ScmBackup.Tests.Hosters;
 using System;
 using Xunit;
 
@@ -10,7 +11,7 @@ namespace ScmBackup.Tests
         public void NewHosterIsAdded()
         {
             var sut = new HosterFactory();
-            var hoster = new GithubHoster();
+            var hoster = new FakeHoster();
 
             sut.Add(hoster);
 
@@ -22,7 +23,7 @@ namespace ScmBackup.Tests
         public void CreateReturnsExistingHoster()
         {
             var sut = new HosterFactory();
-            var hoster = new GithubHoster();
+            var hoster = new FakeHoster();
             sut.Add(hoster);
 
             var result = sut.Create(hoster.Name);
@@ -35,7 +36,7 @@ namespace ScmBackup.Tests
         public void CreateThrowsWhenGivenNonExistingHoster()
         {
             var sut = new HosterFactory();
-            var hoster = new GithubHoster();
+            var hoster = new FakeHoster();
             sut.Add(hoster);
 
             Assert.ThrowsAny<Exception>(() => sut.Create("foo"));
