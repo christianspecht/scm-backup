@@ -9,7 +9,7 @@
 
         public override string Name
         {
-            get { return "fakehoster"; }
+            get { return "fake"; }
         }
     }
 }

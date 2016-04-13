@@ -9,11 +9,13 @@ namespace ScmBackup
     {
         private readonly IConfigReader configReader;
         private readonly ILogger logger;
+        private readonly IHosterFactory factory;
 
-        public ValidatingConfigReader(IConfigReader configReader, ILogger logger)
+        public ValidatingConfigReader(IConfigReader configReader, ILogger logger, IHosterFactory factory)
         {
             this.configReader = configReader;
             this.logger = logger;
+            this.factory = factory;
         }
 
         public Config ReadConfig()
@@ -30,6 +32,12 @@ namespace ScmBackup
             {
                 this.logger.Log(ErrorLevel.Error, "No source configured");
                 return null;
+            }
+
+            foreach (var source in config.Sources)
+            {
+                var hoster = this.factory.Create(source.Hoster);
+                var result = hoster.Validator.Validate(source);
             }
 
             return config;

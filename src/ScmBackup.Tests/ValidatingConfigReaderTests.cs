@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using ScmBackup.Tests.Hosters;
 using Xunit;
 
 namespace ScmBackup.Tests
@@ -6,6 +7,8 @@ namespace ScmBackup.Tests
     public class ValidatingConfigReaderTests
     {
         private readonly IConfigReader sut;
+        private readonly IHosterFactory factory;
+        private readonly FakeHoster hoster;
         private readonly FakeConfigReader reader;
         private readonly FakeLogger logger;
 
@@ -15,7 +18,11 @@ namespace ScmBackup.Tests
             reader.SetDefaultFakeConfig();
             logger = new FakeLogger();
 
-            sut = new ValidatingConfigReader(reader, logger);
+            hoster = new FakeHoster();
+            factory = new HosterFactory();
+            factory.Add(hoster);
+
+            sut = new ValidatingConfigReader(reader, logger, factory);
         }
 
         [Fact]
@@ -77,6 +84,15 @@ namespace ScmBackup.Tests
 
             Assert.False(logger.LoggedSomething);
             Assert.NotNull(result);
+        }
+
+        [Fact]
+        public void ExecutesConfigSourceValidation()
+        {
+            var result = sut.ReadConfig();
+
+            var validator = (FakeConfigSourceValidator)hoster.Validator;
+            Assert.True(validator.WasValidated);
         }
     }
 }
