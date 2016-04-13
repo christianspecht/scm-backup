@@ -91,8 +91,7 @@ namespace ScmBackup.Tests
         {
             var result = sut.ReadConfig();
 
-            var validator = (FakeConfigSourceValidator)hoster.Validator;
-            Assert.True(validator.WasValidated);
+            Assert.True(hoster.FakeValidator.WasValidated);
         }
     }
 }

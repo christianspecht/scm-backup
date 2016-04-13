@@ -7,6 +7,14 @@
             this.Validator = new FakeConfigSourceValidator();
         }
 
+        /// <summary>
+        /// easier access (without casting) to the fake validator
+        /// </summary>
+        public FakeConfigSourceValidator FakeValidator
+        {
+            get { return (FakeConfigSourceValidator)this.Validator; }
+        }
+
         public override string Name
         {
             get { return "fake"; }
