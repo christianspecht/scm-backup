@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace ScmBackup
 {
@@ -38,6 +39,19 @@ namespace ScmBackup
             {
                 var hoster = this.factory.Create(source.Hoster);
                 var result = hoster.Validator.Validate(source);
+
+                if (result.Messages.Any())
+                {
+                    foreach (var message in result.Messages)
+                    {
+                        this.logger.Log(message.Error, message.Message);
+                    }
+                }
+
+                if (!result.IsValid)
+                {
+                    return null;
+                }
             }
 
             return config;

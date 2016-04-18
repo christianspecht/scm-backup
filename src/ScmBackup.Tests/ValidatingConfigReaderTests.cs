@@ -93,5 +93,31 @@ namespace ScmBackup.Tests
 
             Assert.True(hoster.FakeValidator.WasValidated);
         }
+
+        [Fact]
+        public void ErrorsWhenConfigSourceValidationReturnsError()
+        {
+            hoster.FakeValidator.Result.AddMessage(ErrorLevel.Error, "foo");
+
+            var result = sut.ReadConfig();
+
+            Assert.True(logger.LoggedSomething);
+            Assert.Equal(ErrorLevel.Error, logger.LastErrorLevel);
+            Assert.Equal("foo", logger.LastMessage);
+            Assert.Null(result);
+        }
+
+        [Fact]
+        public void DoesntErrorWhenConfigSourceValidationReturnsWarning()
+        {
+            hoster.FakeValidator.Result.AddMessage(ErrorLevel.Warn, "foo");
+
+            var result = sut.ReadConfig();
+
+            Assert.True(logger.LoggedSomething);
+            Assert.Equal(ErrorLevel.Warn, logger.LastErrorLevel);
+            Assert.Equal("foo", logger.LastMessage);
+            Assert.NotNull(result);
+        }
     }
 }

@@ -5,6 +5,7 @@
         public FakeHoster()
         {
             this.Validator = new FakeConfigSourceValidator();
+            this.FakeValidator.Result = new ValidationResult();
         }
 
         /// <summary>
