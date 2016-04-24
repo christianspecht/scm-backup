@@ -26,10 +26,12 @@ namespace ScmBackup
 
             try
             {
+                this.logger.Log(ErrorLevel.Debug, "ErrorHandlingScmBackup: Reading config");
                 config = this.conf.ReadConfig();
 
                 if (config != null)
                 {
+                    this.logger.Log(ErrorLevel.Debug, "ErrorHandlingScmBackup: Starting backup");
                     this.backup.Run();
                     ok = true;
                 }

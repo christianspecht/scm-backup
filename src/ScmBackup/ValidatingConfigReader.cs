@@ -21,6 +21,7 @@ namespace ScmBackup
 
         public Config ReadConfig()
         {
+            this.logger.Log(ErrorLevel.Debug, "ValidatingConfigReader: ReadConfig");
             var config = this.configReader.ReadConfig();
 
             if (String.IsNullOrWhiteSpace(config.LocalFolder))
@@ -54,6 +55,7 @@ namespace ScmBackup
                 }
             }
 
+            this.logger.Log(ErrorLevel.Debug, "ValidatingConfigReader: Return");
             return config;
         }
     }
