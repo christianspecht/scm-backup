@@ -38,6 +38,7 @@ namespace ScmBackup.Tests
             var logger = new FakeLogger();
 
             var backup = new ErrorHandlingScmBackup(subBackup, logger, conf);
+            backup.WaitSecondsOnError = 0;
             backup.Run();
 
             Assert.True(logger.LoggedSomething);
