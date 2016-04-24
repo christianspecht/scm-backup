@@ -16,6 +16,8 @@ namespace ScmBackup
         {
             switch (level)
             {
+                case ErrorLevel.Debug:
+                    return;
                 case ErrorLevel.Warn:
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     break;
