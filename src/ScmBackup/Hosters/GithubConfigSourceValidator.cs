@@ -11,12 +11,12 @@
 
             if (config.Hoster != "github")
             {
-                result.AddMessage(ErrorLevel.Error, "wrong hoster");
+                result.AddMessage(ErrorLevel.Error, string.Format("wrong hoster: {0}", config.Hoster));
             }
 
             if (config.Type != "user" && config.Type != "org")
             {
-                result.AddMessage(ErrorLevel.Error, "wrong type");
+                result.AddMessage(ErrorLevel.Error, string.Format("wrong type: {0}", config.Type));
             }
 
             if (config.Name == "")
