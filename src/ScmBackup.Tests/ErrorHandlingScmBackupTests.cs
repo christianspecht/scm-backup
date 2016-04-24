@@ -23,7 +23,25 @@ namespace ScmBackup.Tests
 
             Assert.True(logger.LoggedSomething);
             Assert.Equal<ErrorLevel>(ErrorLevel.Error, logger.LastErrorLevel);
-            Assert.Equal(ex, logger.LastException);
+            // we can't check whether the last exception is the exception from above,
+            // because there are more logging outputs after the exception.
+        }
+
+        [Fact]
+        public void LogsWhenConfigIsNull()
+        {
+            var subBackup = new FakeScmBackup();
+
+            var conf = new FakeConfigReader();
+            conf.FakeConfig = null;
+
+            var logger = new FakeLogger();
+
+            var backup = new ErrorHandlingScmBackup(subBackup, logger, conf);
+            backup.Run();
+
+            Assert.True(logger.LoggedSomething);
+            Assert.Equal<ErrorLevel>(ErrorLevel.Error, logger.LastErrorLevel);
         }
     }
 }

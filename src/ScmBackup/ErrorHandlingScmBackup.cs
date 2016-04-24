@@ -22,16 +22,25 @@ namespace ScmBackup
         public void Run()
         {
             Config config = null;
+            bool ok = false;
 
             try
             {
                 config = this.conf.ReadConfig();
-                this.backup.Run();
+
+                if (config != null)
+                {
+                    this.backup.Run();
+                    ok = true;
+                }
             }
             catch(Exception ex)
             {
-                this.logger.Log(ErrorLevel.Error, ex, "Backup failed!");
+                this.logger.Log(ErrorLevel.Error, ex.Message);
+            }
 
+            if (!ok)
+            {
                 // Wait as many seconds as defined in the config.
                 // If we don't have the config value because the exception was thrown while reading the config, use a fixed value
                 int seconds = 5;
@@ -41,6 +50,8 @@ namespace ScmBackup
                     seconds = config.WaitSecondsOnError;
                 }
 
+                this.logger.Log(ErrorLevel.Error, "Backup failed!");
+                this.logger.Log(ErrorLevel.Error, "ScmBackup will end in {0} seconds!", seconds);
                 Task.Delay(TimeSpan.FromSeconds(seconds)).Wait();
             }
         }
