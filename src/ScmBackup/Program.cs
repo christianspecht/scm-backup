@@ -10,10 +10,8 @@ namespace ScmBackup
             container.Register<IScmBackup, ScmBackup>();
             container.RegisterDecorator<IScmBackup, ErrorHandlingScmBackup>();
 
-            container.RegisterCollection<ILogger>(new[] {
-                typeof(ConsoleLogger)
-            });
-            container.Register<ILogger, CompositeLogger>();
+            container.RegisterCollection<ILogger>(new ConsoleLogger());
+            container.Register<ILogger, CompositeLogger>(Lifestyle.Singleton);
 
             container.Register<IConfigReader, ConfigReader>();
             container.RegisterDecorator<IConfigReader, ValidatingConfigReader>();
