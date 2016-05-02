@@ -1,4 +1,5 @@
-﻿using SimpleInjector;
+﻿using ScmBackup.Hosters;
+using SimpleInjector;
 
 namespace ScmBackup
 {
@@ -12,6 +13,10 @@ namespace ScmBackup
 
             container.RegisterCollection<ILogger>(new ConsoleLogger());
             container.Register<ILogger, CompositeLogger>(Lifestyle.Singleton);
+
+            var hosterFactory = new HosterFactory();
+            hosterFactory.Add(new GithubHoster());
+            container.RegisterSingleton<IHosterFactory>(hosterFactory);
 
             container.Register<IConfigReader, ConfigReader>();
             container.RegisterDecorator<IConfigReader, ValidatingConfigReader>();
