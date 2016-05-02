@@ -11,7 +11,7 @@ namespace ScmBackup
             container.Register<IScmBackup, ScmBackup>();
             container.RegisterDecorator<IScmBackup, ErrorHandlingScmBackup>();
 
-            container.RegisterCollection<ILogger>(new ConsoleLogger());
+            container.RegisterCollection<ILogger>(new ConsoleLogger(), new NLogLogger());
             container.Register<ILogger, CompositeLogger>(Lifestyle.Singleton);
 
             var hosterFactory = new HosterFactory();
