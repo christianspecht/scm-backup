@@ -1,10 +1,20 @@
 ﻿using ScmBackup.Hosters;
+using ScmBackup.Resources;
 using SimpleInjector;
+using System.Globalization;
 
 namespace ScmBackup
 {
     public class Bootstrapper
     {
+        public static void SetupResources()
+        {
+            // TODO: determine current culture
+            var culture = new CultureInfo("en-US");
+
+            Resource.Initialize(new ResourceProvider(), culture);
+        }
+
         /// <summary>
         /// Registers IoC dependencies and returns the initialized container
         /// </summary>
