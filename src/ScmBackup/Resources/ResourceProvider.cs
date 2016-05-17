@@ -17,7 +17,18 @@ namespace ScmBackup.Resources
         /// </summary>
         private Dictionary<string, string> resources = new Dictionary<string, string>
         {
-            { "AppTitle", "SCM Backup" }
+            { "AppTitle", "SCM Backup" },
+            { "BackupFailed", "Backup failed!" },
+            { "EndSeconds", "The application will close in {0} seconds!" },
+            { "ReadingConfig", "{0}: Reading config" },
+            { "StartingBackup", "{0}: Starting backup" },
+            { "GithubNameEmpty", "name is empty (GitHub)" },
+            { "GithubWrongHoster", "wrong hoster (GitHub): {0}" },
+            { "GithubWrongType", "wrong type (GitHub): {0}" },
+            { "HosterDoesntExist", "Hoster {0} doesn't exist" },
+            { "LocalFolderMissing", "Local folder is missing!" },
+            { "NoSourceConfigured", "No source configured!" },
+            { "Return", "{0}: Return" },
         };
 
         public void Initialize(CultureInfo culture)

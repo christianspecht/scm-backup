@@ -34,17 +34,17 @@ namespace ScmBackup
 
             try
             {
-                this.logger.Log(ErrorLevel.Debug, "ErrorHandlingScmBackup: Reading config");
+                this.logger.Log(ErrorLevel.Debug, Resource.GetString("ReadingConfig"), "ErrorHandlingScmBackup");
                 config = this.conf.ReadConfig();
 
                 if (config != null)
                 {
-                    this.logger.Log(ErrorLevel.Debug, "ErrorHandlingScmBackup: Starting backup");
+                    this.logger.Log(ErrorLevel.Debug, Resource.GetString("StartingBackup"), "ErrorHandlingScmBackup");
                     this.backup.Run();
                     ok = true;
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 this.logger.Log(ErrorLevel.Error, ex.Message);
             }
@@ -60,8 +60,8 @@ namespace ScmBackup
                     seconds = config.WaitSecondsOnError;
                 }
 
-                this.logger.Log(ErrorLevel.Error, "Backup failed!");
-                this.logger.Log(ErrorLevel.Error, "ScmBackup will end in {0} seconds!", seconds);
+                this.logger.Log(ErrorLevel.Error, Resource.GetString("BackupFailed"));
+                this.logger.Log(ErrorLevel.Error, Resource.GetString("EndSeconds"), seconds);
                 Task.Delay(TimeSpan.FromSeconds(seconds)).Wait();
             }
         }

@@ -19,7 +19,7 @@ namespace ScmBackup
 
             if (!this.TryGetValue(hosterName, out result))
             {
-                throw new InvalidOperationException(string.Format("Hoster {0} doesn't exist", hosterName));
+                throw new InvalidOperationException(string.Format(Resource.GetString("HosterDoesntExist"), hosterName));
             }
 
             return result;

@@ -21,18 +21,18 @@ namespace ScmBackup
 
         public Config ReadConfig()
         {
-            this.logger.Log(ErrorLevel.Debug, "ValidatingConfigReader: ReadConfig");
+            this.logger.Log(ErrorLevel.Debug, Resource.GetString("ReadingConfig"), "ValidatingConfigReader");
             var config = this.configReader.ReadConfig();
 
             if (String.IsNullOrWhiteSpace(config.LocalFolder))
             {
-                this.logger.Log(ErrorLevel.Error, "Local Folder is missing!");
+                this.logger.Log(ErrorLevel.Error, Resource.GetString("LocalFolderMissing"));
                 return null;
             }
 
             if (config.Sources.Count == 0)
             {
-                this.logger.Log(ErrorLevel.Error, "No source configured");
+                this.logger.Log(ErrorLevel.Error, "NoSourceConfigured");
                 return null;
             }
 
@@ -55,7 +55,7 @@ namespace ScmBackup
                 }
             }
 
-            this.logger.Log(ErrorLevel.Debug, "ValidatingConfigReader: Return");
+            this.logger.Log(ErrorLevel.Debug, Resource.GetString("Return"), "ValidatingConfigReader");
             return config;
         }
     }

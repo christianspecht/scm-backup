@@ -11,17 +11,17 @@
 
             if (config.Hoster != "github")
             {
-                result.AddMessage(ErrorLevel.Error, string.Format("wrong hoster: {0}", config.Hoster));
+                result.AddMessage(ErrorLevel.Error, string.Format(Resource.GetString("GithubWrongHoster"), config.Hoster));
             }
 
             if (config.Type != "user" && config.Type != "org")
             {
-                result.AddMessage(ErrorLevel.Error, string.Format("wrong type: {0}", config.Type));
+                result.AddMessage(ErrorLevel.Error, string.Format(Resource.GetString("GithubWrongType"), config.Type));
             }
 
             if (config.Name == "")
             {
-                result.AddMessage(ErrorLevel.Error, "name is empty");
+                result.AddMessage(ErrorLevel.Error, Resource.GetString("GithubNameEmpty"));
             }
 
             return result;
