@@ -9,15 +9,7 @@ namespace ScmBackup.Tests.Resources
         [Fact]
         public void ThrowsWhenInitializedWithoutProvider()
         {
-            Resource.ResetProvider();
             Assert.Throws<ArgumentNullException>(() => Resource.Initialize(null, new CultureInfo("en-US")));
-        }
-
-        [Fact]
-        public void GetStringThrowsWhenNotInitialized()
-        {
-            Resource.ResetProvider();
-            Assert.Throws<ArgumentNullException>(() => Resource.GetString("foo"));
         }
 
         [Fact]

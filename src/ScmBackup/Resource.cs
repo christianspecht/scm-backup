@@ -10,10 +10,10 @@ namespace ScmBackup
     internal static class Resource
     {
         private static IResourceProvider internalProvider = null;
-        
-        public static void ResetProvider()
+
+        static Resource()
         {
-            internalProvider = null;
+            Initialize(new ResourceProvider(), new CultureInfo("en-US"));
         }
 
         public static void Initialize(IResourceProvider provider, CultureInfo culture)
@@ -31,7 +31,7 @@ namespace ScmBackup
         {
             if (internalProvider == null)
             {
-                throw new ArgumentNullException("internal provider is null");
+                throw new ArgumentNullException("internal provider is null (this should never happen)");
             }
 
             return internalProvider.GetString(key);
