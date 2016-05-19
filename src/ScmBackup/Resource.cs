@@ -39,7 +39,7 @@ namespace ScmBackup
                 throw new ArgumentNullException("internal provider is null (this should never happen)");
             }
 
-            return internalProvider.GetString(key);
+            return internalProvider.GetString(key) ?? string.Empty;
         }
     }
 }

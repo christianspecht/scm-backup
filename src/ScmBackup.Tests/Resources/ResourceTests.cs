@@ -42,5 +42,23 @@ namespace ScmBackup.Tests.Resources
 
             Resource.ResetToDefaultProvider();
         }
+
+        [Fact]
+        public void GetStringReturnsEmptyStringInsteadOfNull()
+        {
+            // ...when the key is not found or the resource string is actually Null.
+            // This would cause problems all over the place when formatting strings.
+            var provider = new FakeResourceProvider();
+            provider.StringToReturn = null;
+            var culture = new CultureInfo("en-US");
+            Resource.Initialize(provider, culture);
+
+            string result = Resource.GetString("bar");
+
+            Assert.NotNull(result);
+            Assert.Equal(string.Empty, result);
+
+            Resource.ResetToDefaultProvider();
+        }
     }
 }
