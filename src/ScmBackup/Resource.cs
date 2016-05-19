@@ -13,7 +13,7 @@ namespace ScmBackup
 
         static Resource()
         {
-            Initialize(new ResourceProvider(), new CultureInfo("en-US"));
+            ResetToDefaultProvider();
         }
 
         public static void Initialize(IResourceProvider provider, CultureInfo culture)
@@ -25,6 +25,11 @@ namespace ScmBackup
 
             internalProvider = provider;
             provider.Initialize(culture);
+        }
+
+        public static void ResetToDefaultProvider()
+        {
+            Initialize(new ResourceProvider(), new CultureInfo("en-US"));
         }
 
         public static string GetString(string key)

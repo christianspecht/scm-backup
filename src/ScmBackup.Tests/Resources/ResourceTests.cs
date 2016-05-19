@@ -22,6 +22,8 @@ namespace ScmBackup.Tests.Resources
 
             Assert.True(provider.InitializeWasCalled);
             Assert.Equal(culture, provider.LastCulture);
+
+            Resource.ResetToDefaultProvider();
         }
 
         [Fact]
@@ -37,6 +39,8 @@ namespace ScmBackup.Tests.Resources
             Assert.True(provider.GetStringWasCalled);
             Assert.Equal("bar", provider.LastKey);
             Assert.Equal(provider.StringToReturn, result);
+
+            Resource.ResetToDefaultProvider();
         }
     }
 }
