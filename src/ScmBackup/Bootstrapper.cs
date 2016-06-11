@@ -1,4 +1,5 @@
 ﻿using ScmBackup.Hosters;
+using ScmBackup.Http;
 using ScmBackup.Resources;
 using SimpleInjector;
 using System.Globalization;
@@ -34,6 +35,8 @@ namespace ScmBackup
 
             container.Register<IConfigReader, ConfigReader>();
             container.RegisterDecorator<IConfigReader, ValidatingConfigReader>();
+
+            container.Register<IHttpRequest, HttpRequest>();
 
             container.Verify();
 
