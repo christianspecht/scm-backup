@@ -4,8 +4,8 @@ namespace ScmBackup
 {
     internal interface IHosterFactory
     {
-        void Add(BaseHoster hoster);
+        void Add(IHoster hoster);
 
-        BaseHoster Create(string hosterName);
+        IHoster Create(string hosterName);
     }
 }

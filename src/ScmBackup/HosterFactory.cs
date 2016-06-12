@@ -7,16 +7,16 @@ namespace ScmBackup
     /// <summary>
     /// factory which creates BaseHoster instances
     /// </summary>
-    internal class HosterFactory : Dictionary<string, BaseHoster>, IHosterFactory
+    internal class HosterFactory : Dictionary<string, IHoster>, IHosterFactory
     {
-        public void Add(BaseHoster hoster)
+        public void Add(IHoster hoster)
         {
             this.Add(hoster.Name, hoster);
         }
 
-        public BaseHoster Create(string hosterName)
+        public IHoster Create(string hosterName)
         {
-            BaseHoster result;
+            IHoster result;
 
             if (!this.TryGetValue(hosterName, out result))
             {
