@@ -1,4 +1,4 @@
-﻿namespace ScmBackup
+﻿namespace ScmBackup.Hosters
 {
     /// <summary>
     /// base class for all hosters

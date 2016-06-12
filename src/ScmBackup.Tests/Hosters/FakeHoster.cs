@@ -1,4 +1,6 @@
-﻿namespace ScmBackup.Tests.Hosters
+﻿using ScmBackup.Hosters;
+
+namespace ScmBackup.Tests.Hosters
 {
     internal class FakeHoster : BaseHoster
     {
