@@ -5,8 +5,6 @@
     /// </summary>
     internal interface IHoster
     {
-        string Name { get; }
-
         IConfigSourceValidator Validator { get; }
     }
 }

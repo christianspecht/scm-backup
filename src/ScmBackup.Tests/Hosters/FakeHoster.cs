@@ -2,11 +2,11 @@
 
 namespace ScmBackup.Tests.Hosters
 {
+    [Hoster(Name = "fake")]
     internal class FakeHoster : IHoster
     {
         public FakeHoster()
         {
-            this.Name = "fake";
             this.Validator = new FakeConfigSourceValidator();
             this.FakeValidator.Result = new ValidationResult();
         }
@@ -19,7 +19,6 @@ namespace ScmBackup.Tests.Hosters
             get { return (FakeConfigSourceValidator)this.Validator; }
         }
 
-        public string Name { get; private set; }
         public IConfigSourceValidator Validator { get; private set; }
     }
 }

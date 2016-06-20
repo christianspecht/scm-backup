@@ -16,7 +16,7 @@ namespace ScmBackup.Tests
             sut.Add(hoster);
 
             Assert.Equal(1, sut.Count);
-            Assert.Equal(hoster, sut[hoster.Name]);
+            Assert.Equal(hoster, sut["fake"]);
         }
 
         [Fact]
@@ -26,7 +26,7 @@ namespace ScmBackup.Tests
             var hoster = new FakeHoster();
             sut.Add(hoster);
 
-            var result = sut.Create(hoster.Name);
+            var result = sut.Create("fake");
 
             Assert.NotNull(result);
             Assert.Equal(hoster, result);

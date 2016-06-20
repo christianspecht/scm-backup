@@ -1,19 +1,15 @@
-﻿using System;
-
-namespace ScmBackup.Hosters
+﻿namespace ScmBackup.Hosters
 {
     /// <summary>
     /// BaseHoster implementation for GitHub
     /// </summary>
+    [Hoster(Name = "github")]
     internal class GithubHoster : IHoster
     {
         public GithubHoster()
         {
-            this.Name = "github";
             this.Validator = new GithubConfigSourceValidator();
         }
-
-        public string Name { get; private set; }
 
         public IConfigSourceValidator Validator { get; private set; }
     }

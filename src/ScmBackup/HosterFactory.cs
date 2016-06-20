@@ -1,17 +1,20 @@
-﻿using System;
+﻿using ScmBackup.Hosters;
+using System;
 using System.Collections.Generic;
-using ScmBackup.Hosters;
+using System.Reflection;
 
 namespace ScmBackup
 {
     /// <summary>
-    /// factory which creates BaseHoster instances
+    /// factory which creates IHoster instances
     /// </summary>
     internal class HosterFactory : Dictionary<string, IHoster>, IHosterFactory
     {
         public void Add(IHoster hoster)
         {
-            this.Add(hoster.Name, hoster);
+            var attribute = hoster.GetType().GetTypeInfo().GetCustomAttribute<HosterAttribute>();
+
+            this.Add(attribute.Name, hoster);
         }
 
         public IHoster Create(string hosterName)
