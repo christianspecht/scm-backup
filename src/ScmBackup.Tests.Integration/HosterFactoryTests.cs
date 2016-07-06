@@ -3,7 +3,7 @@ using ScmBackup.Tests.Hosters;
 using System;
 using Xunit;
 
-namespace ScmBackup.Tests
+namespace ScmBackup.Tests.Integration
 {
     public class HosterFactoryTests
     {

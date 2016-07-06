@@ -1,7 +1,7 @@
 ﻿using System;
 using Xunit;
 
-namespace ScmBackup.Tests
+namespace ScmBackup.Tests.Integration
 {
     public class BootstrapperTests
     {
