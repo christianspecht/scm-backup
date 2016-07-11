@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace ScmBackup
+namespace ScmBackup.CompositionRoot
 {
     /// <summary>
     /// factory which creates IHoster instances

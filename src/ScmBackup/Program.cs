@@ -1,4 +1,6 @@
-﻿namespace ScmBackup
+﻿using ScmBackup.CompositionRoot;
+
+namespace ScmBackup
 {
     public class Program
     {

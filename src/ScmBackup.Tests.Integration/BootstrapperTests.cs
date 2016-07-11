@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ScmBackup.CompositionRoot;
+using System;
 using Xunit;
 
 namespace ScmBackup.Tests.Integration

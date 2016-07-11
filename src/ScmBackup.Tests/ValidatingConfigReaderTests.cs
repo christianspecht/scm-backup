@@ -1,5 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using ScmBackup.CompositionRoot;
 using ScmBackup.Tests.Hosters;
+using System.Collections.Generic;
 using Xunit;
 
 namespace ScmBackup.Tests

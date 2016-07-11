@@ -1,4 +1,5 @@
-﻿using ScmBackup.Hosters;
+﻿using ScmBackup.CompositionRoot;
+using ScmBackup.Hosters;
 using ScmBackup.Tests.Hosters;
 using System;
 using Xunit;

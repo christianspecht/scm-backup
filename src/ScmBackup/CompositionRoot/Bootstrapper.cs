@@ -4,7 +4,7 @@ using ScmBackup.Resources;
 using SimpleInjector;
 using System.Globalization;
 
-namespace ScmBackup
+namespace ScmBackup.CompositionRoot
 {
     public class Bootstrapper
     {
