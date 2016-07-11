@@ -7,14 +7,19 @@ namespace ScmBackup.Tests.Integration
 {
     public class HosterFactoryTests
     {
+        private readonly HosterFactory sut;
+        private readonly IHoster hoster;
+
+        public HosterFactoryTests()
+        {
+            sut = new HosterFactory();
+            hoster = new FakeHoster();
+            sut.Add(hoster);
+        }
+
         [Fact]
         public void NewHosterIsAdded()
         {
-            var sut = new HosterFactory();
-            var hoster = new FakeHoster();
-
-            sut.Add(hoster);
-
             Assert.Equal(1, sut.Count);
             Assert.Equal(hoster, sut["fake"]);
         }
@@ -22,10 +27,6 @@ namespace ScmBackup.Tests.Integration
         [Fact]
         public void CreateReturnsExistingHoster()
         {
-            var sut = new HosterFactory();
-            var hoster = new FakeHoster();
-            sut.Add(hoster);
-
             var result = sut.Create("fake");
 
             Assert.NotNull(result);
@@ -35,10 +36,6 @@ namespace ScmBackup.Tests.Integration
         [Fact]
         public void CreateThrowsWhenGivenNonExistingHoster()
         {
-            var sut = new HosterFactory();
-            var hoster = new FakeHoster();
-            sut.Add(hoster);
-
             Assert.ThrowsAny<Exception>(() => sut.Create("foo"));
         }
     }
