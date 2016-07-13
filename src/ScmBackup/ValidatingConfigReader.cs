@@ -10,13 +10,13 @@ namespace ScmBackup
     {
         private readonly IConfigReader configReader;
         private readonly ILogger logger;
-        private readonly IHosterFactory factory;
+        private readonly IHosterValidator validator;
 
-        public ValidatingConfigReader(IConfigReader configReader, ILogger logger, IHosterFactory factory)
+        public ValidatingConfigReader(IConfigReader configReader, ILogger logger, IHosterValidator validator)
         {
             this.configReader = configReader;
             this.logger = logger;
-            this.factory = factory;
+            this.validator = validator;
         }
 
         public Config ReadConfig()
@@ -38,8 +38,7 @@ namespace ScmBackup
 
             foreach (var source in config.Sources)
             {
-                var hoster = this.factory.Create(source.Hoster);
-                var result = hoster.Validator.Validate(source);
+                var result = this.validator.Validate(source);
 
                 if (result.Messages.Any())
                 {

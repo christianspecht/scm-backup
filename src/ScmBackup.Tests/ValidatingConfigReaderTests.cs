@@ -8,8 +8,7 @@ namespace ScmBackup.Tests
     public class ValidatingConfigReaderTests
     {
         private readonly IConfigReader sut;
-        private readonly IHosterFactory factory;
-        private readonly FakeHoster hoster;
+        private readonly FakeHosterValidator validator;
         private readonly FakeConfigReader reader;
         private readonly FakeLogger logger;
 
@@ -18,12 +17,9 @@ namespace ScmBackup.Tests
             reader = new FakeConfigReader();
             reader.SetDefaultFakeConfig();
             logger = new FakeLogger();
+            validator = new FakeHosterValidator();
 
-            hoster = new FakeHoster();
-            factory = new HosterFactory();
-            factory.Add(hoster);
-
-            sut = new ValidatingConfigReader(reader, logger, factory);
+            sut = new ValidatingConfigReader(reader, logger, validator);
         }
 
         [Fact]
@@ -92,13 +88,13 @@ namespace ScmBackup.Tests
         {
             var result = sut.ReadConfig();
 
-            Assert.True(hoster.FakeValidator.WasValidated);
+            Assert.True(validator.WasValidated);
         }
 
         [Fact]
         public void ErrorsWhenConfigSourceValidationReturnsError()
         {
-            hoster.FakeValidator.Result.AddMessage(ErrorLevel.Error, "foo");
+            validator.Result.AddMessage(ErrorLevel.Error, "foo");
 
             var result = sut.ReadConfig();
 
@@ -111,7 +107,7 @@ namespace ScmBackup.Tests
         [Fact]
         public void DoesntErrorWhenConfigSourceValidationReturnsWarning()
         {
-            hoster.FakeValidator.Result.AddMessage(ErrorLevel.Warn, "foo");
+            validator.Result.AddMessage(ErrorLevel.Warn, "foo");
 
             var result = sut.ReadConfig();
 

@@ -37,6 +37,7 @@ namespace ScmBackup.CompositionRoot
             container.RegisterDecorator<IConfigReader, ValidatingConfigReader>();
 
             container.Register<IHttpRequest, HttpRequest>();
+            container.Register<IHosterValidator, HosterValidator>();
 
             container.Verify();
 
