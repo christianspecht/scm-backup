@@ -31,13 +31,13 @@ namespace ScmBackup.CompositionRoot
 
             var hosterFactory = new HosterFactory();
             hosterFactory.Add(new GithubHoster());
-            container.RegisterSingleton<IHosterFactory>(hosterFactory);
+
+            container.RegisterSingleton<IHosterValidator>(new HosterValidator(hosterFactory));
 
             container.Register<IConfigReader, ConfigReader>();
             container.RegisterDecorator<IConfigReader, ValidatingConfigReader>();
 
             container.Register<IHttpRequest, HttpRequest>();
-            container.Register<IHosterValidator, HosterValidator>();
 
             container.Verify();
 

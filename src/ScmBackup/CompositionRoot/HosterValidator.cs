@@ -2,9 +2,9 @@
 {
     internal class HosterValidator : IHosterValidator
     {
-        private readonly IHosterFactory factory;
+        private readonly HosterFactory factory;
 
-        public HosterValidator(IHosterFactory factory)
+        public HosterValidator(HosterFactory factory)
         {
             this.factory = factory;
         }

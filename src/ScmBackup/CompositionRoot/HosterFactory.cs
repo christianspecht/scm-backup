@@ -8,7 +8,7 @@ namespace ScmBackup.CompositionRoot
     /// <summary>
     /// factory which creates IHoster instances
     /// </summary>
-    internal class HosterFactory : Dictionary<string, IHoster>, IHosterFactory
+    internal class HosterFactory : Dictionary<string, IHoster>
     {
         public void Add(IHoster hoster)
         {
