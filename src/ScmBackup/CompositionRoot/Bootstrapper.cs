@@ -29,15 +29,15 @@ namespace ScmBackup.CompositionRoot
             container.RegisterCollection<ILogger>(new ConsoleLogger(), new NLogLogger());
             container.Register<ILogger, CompositeLogger>(Lifestyle.Singleton);
 
-            var hosterFactory = new HosterFactory();
-            hosterFactory.Add(new GithubHoster());
-
-            container.RegisterSingleton<IHosterValidator>(new HosterValidator(hosterFactory));
-
             container.Register<IConfigReader, ConfigReader>();
             container.RegisterDecorator<IConfigReader, ValidatingConfigReader>();
 
             container.Register<IHttpRequest, HttpRequest>();
+
+            var hosterFactory = new HosterFactory(container);
+            hosterFactory.Register<GithubHoster>();
+
+            container.RegisterSingleton<IHosterValidator>(new HosterValidator(hosterFactory));
 
             container.Verify();
 

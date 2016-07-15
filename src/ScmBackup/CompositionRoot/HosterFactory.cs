@@ -1,4 +1,5 @@
 ﻿using ScmBackup.Hosters;
+using SimpleInjector;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
@@ -8,25 +9,33 @@ namespace ScmBackup.CompositionRoot
     /// <summary>
     /// factory which creates IHoster instances
     /// </summary>
-    internal class HosterFactory : Dictionary<string, IHoster>
+    internal class HosterFactory : Dictionary<string, Type>
     {
-        public void Add(IHoster hoster)
-        {
-            var attribute = hoster.GetType().GetTypeInfo().GetCustomAttribute<HosterAttribute>();
+        private readonly Container container;
 
-            this.Add(attribute.Name, hoster);
+        public HosterFactory(Container container)
+        {
+            this.container = container;
+        }
+
+        public void Register<T>() where T : IHoster
+        {
+            var attribute = typeof(T).GetTypeInfo().GetCustomAttribute<HosterAttribute>();
+
+            this.container.Register(typeof(T));
+            this.Add(attribute.Name, typeof(T));
         }
 
         public IHoster Create(string hosterName)
         {
-            IHoster result;
+            Type type;
 
-            if (!this.TryGetValue(hosterName, out result))
+            if (!this.TryGetValue(hosterName, out type))
             {
                 throw new InvalidOperationException(string.Format(Resource.GetString("HosterDoesntExist"), hosterName));
             }
 
-            return result;
+            return (IHoster)this.container.GetInstance(type);
         }
     }
 }
