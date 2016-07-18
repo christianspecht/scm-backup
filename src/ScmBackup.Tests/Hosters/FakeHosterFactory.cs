@@ -2,7 +2,7 @@
 using ScmBackup.Hosters;
 using System;
 
-namespace ScmBackup.Tests.Integration
+namespace ScmBackup.Tests.Hosters
 {
     internal class FakeHosterFactory : IHosterFactory
     {

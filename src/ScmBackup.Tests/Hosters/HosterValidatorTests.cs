@@ -1,9 +1,8 @@
 ﻿using ScmBackup.CompositionRoot;
-using ScmBackup.Tests.Hosters;
 using System.Linq;
 using Xunit;
 
-namespace ScmBackup.Tests.Integration
+namespace ScmBackup.Tests.Hosters
 {
     public class HosterValidatorTests
     {
