@@ -9,7 +9,7 @@ namespace ScmBackup.CompositionRoot
     /// <summary>
     /// factory which creates IHoster instances
     /// </summary>
-    internal class HosterFactory : Dictionary<string, Type>
+    internal class HosterFactory : Dictionary<string, Type>, IHosterFactory
     {
         private readonly Container container;
 

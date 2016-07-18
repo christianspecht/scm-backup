@@ -15,9 +15,9 @@ namespace ScmBackup.Tests.Integration
             var config = reader.ReadConfig();
             var source = config.Sources.First();
 
+            var factory = new FakeHosterFactory();
             var hoster = new FakeHoster();
-            var factory = new HosterFactory();
-            factory.Add(hoster);
+            factory.FakeHoster = hoster;
 
             var sut = new HosterValidator(factory);
             sut.Validate(source);
