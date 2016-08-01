@@ -2,7 +2,7 @@
 
 cd "%~dp0\src\ScmBackup.Tests"
 
-dnx test
+dotnet test
 
 echo .
 pause

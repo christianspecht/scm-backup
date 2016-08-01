@@ -1,9 +1,9 @@
 @echo off
 
 cd "%~dp0\src\ScmBackup.Tests"
-dnx test
+dotnet test
 cd "%~dp0\src\ScmBackup.Tests.Integration"
-dnx test
+dotnet test
 
 echo .
 pause
