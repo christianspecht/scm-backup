@@ -1,30 +1,20 @@
-{
-  "version": "1.0.0-*",
-  "description": "Integration Tests for SCM Backup",
-  "authors": [ "Christian Specht" ],
-  "tags": [ "" ],
-  "projectUrl": "",
-  "licenseUrl": "",
-  "frameworks": {
-    "dnxcore50": {
-      "dependencies": {
-        "Microsoft.CSharp": "4.0.1-beta-23516",
-        "System.Collections": "4.0.11-beta-23516",
-        "System.Linq": "4.0.1-beta-23516",
-        "System.Runtime": "4.0.21-beta-23516",
-        "System.Threading": "4.0.11-beta-23516"
-      }
-    }
-  },
-
+﻿{
+    "version": "0.1.0-*",
+    "testRunner": "xunit",
   "dependencies": {
-    "ScmBackup": "0.1.0-*",
+    "xunit": "2.2.0-beta2-build3300",
     "ScmBackup.Tests": "0.1.0-*",
-    "xunit": "2.1.0",
-    "xunit.runner.dnx": "2.1.0-rc1-build204"
+    "ScmBackup": "0.1.0-*",
+    "dotnet-test-xunit": "2.2.0-preview2-build1029"
   },
-
-  "commands": {
-    "test": "xunit.runner.dnx"
-  }
+    "frameworks": {
+        "netcoreapp1.0": {
+            "dependencies": {
+                "Microsoft.NETCore.App": {
+                    "type": "platform",
+                    "version": "1.0.0"
+                }
+            }
+        }
+    }
 }

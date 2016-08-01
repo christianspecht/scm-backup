@@ -1,36 +1,24 @@
-{
+﻿{
   "version": "0.1.0-*",
-  "description": "Backup repositories from cloud hosters to your local machine",
-  "authors": [ "Christian Specht" ],
-  "tags": [ "" ],
-  "projectUrl": "",
-  "licenseUrl": "",
-
-  "compilationOptions": {
+  "buildOptions": {
     "emitEntryPoint": true
   },
 
   "dependencies": {
-    "Microsoft.Extensions.Configuration": "1.0.0-rc1-final",
-    "Microsoft.Extensions.Configuration.Binder": "1.0.0-rc1-final",
-    "Microsoft.Extensions.Configuration.Json": "1.0.0-rc1-final",
-    "NLog": "4.4.0-beta5",
-    "SimpleInjector": "3.1.2"
-  },
-
-  "commands": {
-    "ScmBackup": "ScmBackup"
+    "Microsoft.Extensions.Configuration": "1.0.0",
+    "Microsoft.Extensions.Configuration.Binder": "1.0.0",
+    "Microsoft.Extensions.Configuration.Json": "1.0.0",
+    "Microsoft.NETCore.App": {
+      "type": "platform",
+      "version": "1.0.0"
+    },
+    "NLog": "4.4.0-betaV15",
+    "SimpleInjector": "3.2.0"
   },
 
   "frameworks": {
-    "dnxcore50": {
-      "dependencies": {
-        "Microsoft.CSharp": "4.0.1-beta-23516",
-        "System.Collections": "4.0.11-beta-23516",
-        "System.Console": "4.0.0-beta-23516",
-        "System.Linq": "4.0.1-beta-23516",
-        "System.Threading": "4.0.11-beta-23516"
-      }
+    "netcoreapp1.0": {
+      "imports": "dnxcore50"
     }
   }
 }
