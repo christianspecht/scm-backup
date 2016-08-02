@@ -1,7 +1,8 @@
 ﻿{
   "version": "0.1.0-*",
   "buildOptions": {
-    "emitEntryPoint": true
+    "emitEntryPoint": true,
+    "copyToOutput": { "includeFiles": [ "settings.json" ] }
   },
 
   "dependencies": {
