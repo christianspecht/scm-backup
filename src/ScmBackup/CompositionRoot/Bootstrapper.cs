@@ -3,6 +3,7 @@ using ScmBackup.Http;
 using ScmBackup.Resources;
 using SimpleInjector;
 using System.Globalization;
+using System.Reflection;
 
 namespace ScmBackup.CompositionRoot
 {
@@ -22,6 +23,8 @@ namespace ScmBackup.CompositionRoot
         /// <returns></returns>
         public static Container BuildContainer()
         {
+            var thisAssembly = typeof(ScmBackup).GetTypeInfo().Assembly;
+
             var container = new Container();
             container.Register<IScmBackup, ScmBackup>();
             container.RegisterDecorator<IScmBackup, ErrorHandlingScmBackup>();
@@ -35,7 +38,11 @@ namespace ScmBackup.CompositionRoot
             container.Register<IHttpRequest, HttpRequest>();
 
             var hosterFactory = new HosterFactory(container);
-            hosterFactory.Register<GithubHoster>();
+            var hosters = container.GetTypesToRegister(typeof(IHoster), new[] { thisAssembly });
+            foreach (var hoster in hosters)
+            {
+                hosterFactory.Register(hoster);
+            }
 
             container.RegisterSingleton<IHosterValidator>(new HosterValidator(hosterFactory));
 

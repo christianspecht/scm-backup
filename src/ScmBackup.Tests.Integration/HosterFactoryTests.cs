@@ -14,7 +14,7 @@ namespace ScmBackup.Tests.Integration
         public HosterFactoryTests()
         {
             sut = new HosterFactory(new Container());
-            sut.Register<FakeHoster>();
+            sut.Register(typeof(FakeHoster));
         }
 
         [Fact]
@@ -36,6 +36,12 @@ namespace ScmBackup.Tests.Integration
         public void CreateThrowsWhenGivenNonExistingHoster()
         {
             Assert.ThrowsAny<Exception>(() => sut.Create("foo"));
+        }
+
+        [Fact]
+        public void RegisterThrowsIfRegisteredTypeIsNotIHoster()
+        {
+            Assert.Throws<InvalidOperationException>(() => sut.Register(typeof(ScmBackup)));
         }
     }
 }

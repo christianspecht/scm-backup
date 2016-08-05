@@ -29,6 +29,7 @@ namespace ScmBackup.Resources
             { "LocalFolderMissing", "Local folder is missing!" },
             { "NoSourceConfigured", "No source configured!" },
             { "Return", "{0}: Return" },
+            { "TypeIsNoIHoster", "Can't register {0} in the HosterFactory because it doesn't implement IHoster" },
         };
 
         public void Initialize(CultureInfo culture)

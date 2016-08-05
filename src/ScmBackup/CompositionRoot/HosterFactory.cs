@@ -18,12 +18,17 @@ namespace ScmBackup.CompositionRoot
             this.container = container;
         }
 
-        public void Register<T>() where T : IHoster
+        public void Register(Type type)
         {
-            var attribute = typeof(T).GetTypeInfo().GetCustomAttribute<HosterAttribute>();
+            if (!typeof(IHoster).IsAssignableFrom(type))
+            {
+                throw new InvalidOperationException(string.Format(Resource.GetString("TypeIsNoIHoster"), type.ToString()));
+            }
 
-            this.container.Register(typeof(T));
-            this.Add(attribute.Name, typeof(T));
+            var attribute = type.GetTypeInfo().GetCustomAttribute<HosterAttribute>();
+
+            this.container.Register(type);
+            this.Add(attribute.Name, type);
         }
 
         public IHoster Create(string hosterName)
