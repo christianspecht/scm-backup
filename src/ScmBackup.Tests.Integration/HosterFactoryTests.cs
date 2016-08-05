@@ -35,7 +35,7 @@ namespace ScmBackup.Tests.Integration
         [Fact]
         public void CreateThrowsWhenGivenNonExistingHoster()
         {
-            Assert.ThrowsAny<Exception>(() => sut.Create("foo"));
+            Assert.ThrowsAny<InvalidOperationException>(() => sut.Create("foo"));
         }
 
         [Fact]
