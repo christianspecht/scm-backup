@@ -1,4 +1,4 @@
-﻿namespace ScmBackup
+﻿namespace ScmBackup.Hosters
 {
     /// <summary>
     /// marker interface for ConfigSource validators
