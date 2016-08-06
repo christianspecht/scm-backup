@@ -3,6 +3,7 @@ using ScmBackup.Http;
 using ScmBackup.Resources;
 using SimpleInjector;
 using System.Globalization;
+using System.Linq;
 using System.Reflection;
 
 namespace ScmBackup.CompositionRoot
@@ -37,6 +38,15 @@ namespace ScmBackup.CompositionRoot
 
             container.Register<IHttpRequest, HttpRequest>();
 
+            // auto-register validators
+            var validators = container.GetTypesToRegister(typeof(IConfigSourceValidator), new[] { thisAssembly });
+            foreach (var validator in validators)
+            {
+                var validatorInterface = validator.GetInterfaces().Except(new[] { (typeof(IConfigSourceValidator)) }).First();
+                container.Register(validatorInterface, validator);
+            }
+
+            // auto-register hosters
             var hosterFactory = new HosterFactory(container);
             var hosters = container.GetTypesToRegister(typeof(IHoster), new[] { thisAssembly });
             foreach (var hoster in hosters)

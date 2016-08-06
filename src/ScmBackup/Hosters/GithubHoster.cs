@@ -6,9 +6,9 @@
     [Hoster(Name = "github")]
     internal class GithubHoster : IHoster
     {
-        public GithubHoster()
+        public GithubHoster(IGithubConfigSourceValidator validator)
         {
-            this.Validator = new GithubConfigSourceValidator();
+            this.Validator = validator;
         }
 
         public IConfigSourceValidator Validator { get; private set; }
