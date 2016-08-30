@@ -31,15 +31,16 @@ namespace ScmBackup
         {
             Config config = null;
             bool ok = false;
+            string className = this.GetType().Name;
 
             try
             {
-                this.logger.Log(ErrorLevel.Debug, Resource.GetString("ReadingConfig"), "ErrorHandlingScmBackup");
+                this.logger.Log(ErrorLevel.Debug, Resource.GetString("ReadingConfig"), className);
                 config = this.conf.ReadConfig();
 
                 if (config != null)
                 {
-                    this.logger.Log(ErrorLevel.Debug, Resource.GetString("StartingBackup"), "ErrorHandlingScmBackup");
+                    this.logger.Log(ErrorLevel.Debug, Resource.GetString("StartingBackup"), className);
                     this.backup.Run();
                     ok = true;
                 }
