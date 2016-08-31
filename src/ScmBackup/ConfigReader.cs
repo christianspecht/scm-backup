@@ -9,6 +9,8 @@ namespace ScmBackup
     {
         public string ConfigFileName { get; set; }
 
+        private Config config = null;
+
         public ConfigReader()
         {
             this.ConfigFileName = "settings.json";
@@ -16,15 +18,18 @@ namespace ScmBackup
 
         public Config ReadConfig()
         {
-            var config = new Config();
+            if (this.config == null)
+            {
+                this.config = new Config();
 
-            var builder = new ConfigurationBuilder();
-            builder.AddJsonFile(this.ConfigFileName);
-            var settings = builder.Build();
+                var builder = new ConfigurationBuilder();
+                builder.AddJsonFile(this.ConfigFileName);
+                var settings = builder.Build();
 
-            ConfigurationBinder.Bind(settings, config);
+                ConfigurationBinder.Bind(settings, this.config);
+            }
 
-            return config;
+            return this.config;
         }
     }
 }

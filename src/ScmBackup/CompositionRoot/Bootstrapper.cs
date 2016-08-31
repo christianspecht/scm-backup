@@ -33,7 +33,7 @@ namespace ScmBackup.CompositionRoot
             container.RegisterCollection<ILogger>(new ConsoleLogger(), new NLogLogger());
             container.Register<ILogger, CompositeLogger>(Lifestyle.Singleton);
 
-            container.Register<IConfigReader, ConfigReader>();
+            container.RegisterSingleton<IConfigReader, ConfigReader>();
             container.RegisterDecorator<IConfigReader, ValidatingConfigReader>();
 
             container.Register<IHttpRequest, HttpRequest>();
