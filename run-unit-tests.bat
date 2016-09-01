@@ -1,8 +1,4 @@
 @echo off
 
-cd "%~dp0\src\ScmBackup.Tests"
-
-dotnet test
-
-echo .
+dotnet test "%~dp0\src\ScmBackup.Tests"
 pause
