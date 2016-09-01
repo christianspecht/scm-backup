@@ -4,3 +4,4 @@ bin
 obj
 project.lock.json
 .vs
+release/
