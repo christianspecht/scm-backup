@@ -24,7 +24,7 @@ namespace ScmBackup.CompositionRoot
         /// <returns></returns>
         public static Container BuildContainer()
         {
-            var thisAssembly = typeof(ScmBackup).GetTypeInfo().Assembly;
+            var thisAssembly = new[] { typeof(ScmBackup).GetTypeInfo().Assembly };
 
             var container = new Container();
             container.Register<IScmBackup, ScmBackup>();
@@ -39,7 +39,7 @@ namespace ScmBackup.CompositionRoot
             container.Register<IHttpRequest, HttpRequest>();
 
             // auto-register validators
-            var validators = container.GetTypesToRegister(typeof(IConfigSourceValidator), new[] { thisAssembly });
+            var validators = container.GetTypesToRegister(typeof(IConfigSourceValidator), thisAssembly);
             foreach (var validator in validators)
             {
                 var validatorInterface = validator.GetInterfaces().Except(new[] { (typeof(IConfigSourceValidator)) }).First();
@@ -47,7 +47,7 @@ namespace ScmBackup.CompositionRoot
             }
 
             // auto-register hoster APIs
-            var apis = container.GetTypesToRegister(typeof(IHosterApi), new[] { thisAssembly });
+            var apis = container.GetTypesToRegister(typeof(IHosterApi), thisAssembly);
             foreach (var api in apis)
             {
                 var apiInterface = api.GetInterfaces().Except(new[] { typeof(IHosterApi) }).First();
@@ -56,7 +56,7 @@ namespace ScmBackup.CompositionRoot
 
             // auto-register hosters
             var hosterFactory = new HosterFactory(container);
-            var hosters = container.GetTypesToRegister(typeof(IHoster), new[] { thisAssembly });
+            var hosters = container.GetTypesToRegister(typeof(IHoster), thisAssembly);
             foreach (var hoster in hosters)
             {
                 hosterFactory.Register(hoster);
