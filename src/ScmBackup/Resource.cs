@@ -29,7 +29,7 @@ namespace ScmBackup
 
         public static void ResetToDefaultProvider()
         {
-            Initialize(new ResourceProvider(), new CultureInfo("en-US"));
+            Initialize(new EmptyResourceProvider(), new CultureInfo("en-US"));
         }
 
         public static string GetString(string key)
