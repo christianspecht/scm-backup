@@ -1,4 +1,5 @@
 ﻿using ScmBackup.Hosters;
+using System;
 using System.Collections.Generic;
 
 namespace ScmBackup.CompositionRoot
@@ -14,6 +15,11 @@ namespace ScmBackup.CompositionRoot
 
         public List<HosterRepository> GetRepositoryList(ConfigSource config)
         {
+            if (config == null)
+            {
+                throw new ArgumentNullException(Resource.GetString("ConfigSourceIsNull"));
+            }
+
             var hoster = this.factory.Create(config.Hoster);
             return hoster.Api.GetRepositoryList(config);
         }

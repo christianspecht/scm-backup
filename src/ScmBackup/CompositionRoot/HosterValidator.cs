@@ -1,4 +1,6 @@
-﻿namespace ScmBackup.CompositionRoot
+﻿using System;
+
+namespace ScmBackup.CompositionRoot
 {
     internal class HosterValidator : IHosterValidator
     {
@@ -11,6 +13,11 @@
 
         public ValidationResult Validate(ConfigSource source)
         {
+            if (source == null)
+            {
+                throw new ArgumentNullException(Resource.GetString("ConfigSourceIsNull"));
+            }
+
             var hoster = this.factory.Create(source.Hoster);
             return hoster.Validator.Validate(source);
         }

@@ -19,6 +19,7 @@ namespace ScmBackup.Resources
         {
             { "AppTitle", "SCM Backup" },
             { "BackupFailed", "Backup failed!" },
+            { "ConfigSourceIsNull", "ConfigSource must not be NULL" },
             { "EndSeconds", "The application will close in {0} seconds!" },
             { "ReadingConfig", "{0}: Reading config" },
             { "StartingBackup", "{0}: Starting backup" },

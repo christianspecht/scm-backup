@@ -1,4 +1,5 @@
 ﻿using ScmBackup.CompositionRoot;
+using System;
 using System.Linq;
 using Xunit;
 
@@ -22,6 +23,17 @@ namespace ScmBackup.Tests.Hosters
             sut.GetRepositoryList(source);
 
             Assert.True(hoster.FakeApi.WasCalled);
+        }
+
+        [Fact]
+        public void ThrowsWhenConfigSourceIsNull()
+        {
+            var factory = new FakeHosterFactory();
+            var hoster = new FakeHoster();
+            factory.FakeHoster = hoster;
+
+            var sut = new HosterApiCaller(factory);
+            Assert.Throws<ArgumentNullException>(() => sut.GetRepositoryList(null));
         }
     }
 }
