@@ -1,4 +1,5 @@
 ﻿using ScmBackup.Hosters;
+using System.Collections.Generic;
 
 namespace ScmBackup.Tests.Hosters
 {
@@ -9,6 +10,9 @@ namespace ScmBackup.Tests.Hosters
         {
             this.Validator = new FakeConfigSourceValidator();
             this.FakeValidator.Result = new ValidationResult();
+
+            this.Api = new FakeHosterApi();
+            this.FakeApi.RepoList = new List<HosterRepository>();
         }
 
         /// <summary>
@@ -19,6 +23,15 @@ namespace ScmBackup.Tests.Hosters
             get { return (FakeConfigSourceValidator)this.Validator; }
         }
 
+        /// <summary>
+        /// easier access (without casting) to the fake API
+        /// </summary>
+        public FakeHosterApi FakeApi
+        {
+            get { return (FakeHosterApi)this.Api; }
+        }
+
         public IConfigSourceValidator Validator { get; private set; }
+        public IHosterApi Api { get; private set; }
     }
 }

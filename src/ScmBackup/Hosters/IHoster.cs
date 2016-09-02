@@ -6,5 +6,6 @@
     internal interface IHoster
     {
         IConfigSourceValidator Validator { get; }
+        IHosterApi Api { get; }
     }
 }

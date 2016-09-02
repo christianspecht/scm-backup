@@ -46,6 +46,14 @@ namespace ScmBackup.CompositionRoot
                 container.Register(validatorInterface, validator);
             }
 
+            // auto-register hoster APIs
+            var apis = container.GetTypesToRegister(typeof(IHosterApi), new[] { thisAssembly });
+            foreach (var api in apis)
+            {
+                var apiInterface = api.GetInterfaces().Except(new[] { typeof(IHosterApi) }).First();
+                container.Register(apiInterface, api);
+            }
+
             // auto-register hosters
             var hosterFactory = new HosterFactory(container);
             var hosters = container.GetTypesToRegister(typeof(IHoster), new[] { thisAssembly });
