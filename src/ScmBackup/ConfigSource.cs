@@ -20,5 +20,16 @@
         /// user name
         /// </summary>
         public string Name { get; set; }
+
+        /// <summary>
+        /// user name for authentication
+        /// (can be a different than the user whose repositories are backed up)
+        /// </summary>
+        public string AuthName { get; set; }
+
+        /// <summary>
+        /// password for authentication
+        /// </summary>
+        public string Password { get; set; }
     }
 }
