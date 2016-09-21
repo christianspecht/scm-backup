@@ -19,7 +19,7 @@
                 result.AddMessage(ErrorLevel.Error, string.Format(Resource.GetString("GithubWrongType"), config.Type));
             }
 
-            if (config.Name == "")
+            if (string.IsNullOrWhiteSpace(config.Name))
             {
                 result.AddMessage(ErrorLevel.Error, Resource.GetString("GithubNameEmpty"));
             }

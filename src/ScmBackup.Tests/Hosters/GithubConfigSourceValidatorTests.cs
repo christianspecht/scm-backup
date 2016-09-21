@@ -58,10 +58,13 @@ namespace ScmBackup.Tests.Hosters
             Assert.False(result.Messages.Any());
         }
 
-        [Fact]
-        public void ReturnsErrorWhenNameIsEmpty()
+        [Theory]
+        [InlineData(null)]
+        [InlineData("")]
+        [InlineData(" ")]
+        public void ReturnsErrorWhenNameIsEmpty(string value)
         {
-            config.Name = "";
+            config.Name = value;
 
             var sut = new GithubConfigSourceValidator();
             var result = sut.Validate(config);
