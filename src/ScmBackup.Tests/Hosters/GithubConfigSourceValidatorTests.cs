@@ -61,7 +61,7 @@ namespace ScmBackup.Tests.Hosters
         [Fact]
         public void ReturnsErrorWhenNameIsEmpty()
         {
-            config.Type = "";
+            config.Name = "";
 
             var sut = new GithubConfigSourceValidator();
             var result = sut.Validate(config);
