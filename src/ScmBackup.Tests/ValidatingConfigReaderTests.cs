@@ -116,5 +116,13 @@ namespace ScmBackup.Tests
             Assert.Equal("foo", logger.LastMessage);
             Assert.NotNull(result);
         }
+
+        [Fact]
+        public void ValidatesOnlyOnceWhenCalledMultipleTimes()
+        {
+            sut.ReadConfig();
+            sut.ReadConfig();
+            Assert.Equal(1, validator.ValidationCounter);
+        }
     }
 }

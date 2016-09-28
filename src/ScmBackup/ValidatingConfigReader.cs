@@ -12,6 +12,8 @@ namespace ScmBackup
         private readonly ILogger logger;
         private readonly IHosterValidator validator;
 
+        private Config config = null;
+
         public ValidatingConfigReader(IConfigReader configReader, ILogger logger, IHosterValidator validator)
         {
             this.configReader = configReader;
@@ -21,6 +23,11 @@ namespace ScmBackup
 
         public Config ReadConfig()
         {
+            if (this.config != null)
+            {
+                return this.config;
+            }
+
             string className = this.GetType().Name;
             this.logger.Log(ErrorLevel.Debug, Resource.GetString("ReadingConfig"), className);
             var config = this.configReader.ReadConfig();
@@ -56,6 +63,7 @@ namespace ScmBackup
             }
 
             this.logger.Log(ErrorLevel.Debug, Resource.GetString("Return"), className);
+            this.config = config;
             return config;
         }
     }
