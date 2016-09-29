@@ -1,4 +1,5 @@
 ﻿using ScmBackup.Hosters;
+using ScmBackup.Http;
 using System.Collections.Generic;
 
 namespace ScmBackup.Tests.Hosters
@@ -8,6 +9,8 @@ namespace ScmBackup.Tests.Hosters
         public bool WasCalled { get; private set;}
 
         public List<HosterRepository> RepoList { get; set; }
+
+        public HttpResult LastResult { get; set; }
 
         public List<HosterRepository> GetRepositoryList(ConfigSource config)
         {

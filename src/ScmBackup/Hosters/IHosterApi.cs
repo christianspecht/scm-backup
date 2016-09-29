@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using ScmBackup.Http;
+using System.Collections.Generic;
 
 namespace ScmBackup.Hosters
 {
@@ -7,6 +8,11 @@ namespace ScmBackup.Hosters
     /// </summary>
     internal interface IHosterApi
     {
+        /// <summary>
+        /// result of last API call for testing
+        /// </summary>
+        HttpResult LastResult { get; }
+
         List<HosterRepository> GetRepositoryList(ConfigSource config);
     }
 }
