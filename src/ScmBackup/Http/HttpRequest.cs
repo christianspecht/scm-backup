@@ -34,6 +34,7 @@ namespace ScmBackup.Http
             var result = new HttpResult();
             var response = await this.HttpClient.GetAsync(url);
             result.Status = response.StatusCode;
+            result.Headers = response.Headers;
 
             if (response.IsSuccessStatusCode)
             {

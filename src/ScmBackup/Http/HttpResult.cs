@@ -1,4 +1,5 @@
 ﻿using System.Net;
+using System.Net.Http.Headers;
 
 namespace ScmBackup.Http
 {
@@ -9,5 +10,6 @@ namespace ScmBackup.Http
     {
         public string Content { get; set; }
         public HttpStatusCode Status { get; set; }
+        public HttpResponseHeaders Headers { get; set; }
     }
 }

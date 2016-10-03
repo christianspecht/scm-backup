@@ -18,6 +18,7 @@ namespace ScmBackup.Resources
         private Dictionary<string, string> resources = new Dictionary<string, string>
         {
             { "ApiGettingUrl", "{0}: Getting {1}" },
+            { "ApiHeaders", "{0} headers: {1}" },
             { "ApiResult", "{0} result: {1}" },
             { "AppTitle", "SCM Backup" },
             { "BackupFailed", "Backup failed!" },
