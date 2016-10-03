@@ -1,5 +1,6 @@
 ﻿using ScmBackup.Hosters;
 using ScmBackup.Http;
+using System.Linq;
 using System.Net;
 using Xunit;
 
@@ -28,6 +29,11 @@ namespace ScmBackup.Tests.Integration.Hosters
             // at least one result?
             Assert.NotNull(repoList);
             Assert.True(repoList.Count > 0);
+
+            // specific repo exists?
+            var repo = repoList.Where(r => r.Name == "christianspecht#scm-backup").FirstOrDefault();
+            Assert.NotNull(repo);
+            Assert.False(string.IsNullOrWhiteSpace(repo.CloneUrl));
         }
     }
 }
