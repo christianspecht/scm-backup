@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace ScmBackup.Http
@@ -27,6 +29,12 @@ namespace ScmBackup.Http
         public void AddHeader(string name, string value)
         {
             this.HttpClient.DefaultRequestHeaders.Add(name, value);
+        }
+
+        public void AddBasicAuthHeader(string username, string password)
+        {
+            var byteArray = Encoding.ASCII.GetBytes(username + ":" + password);
+            this.HttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(byteArray));
         }
 
         public async Task<HttpResult> Execute(string url)

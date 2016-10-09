@@ -37,5 +37,20 @@ namespace ScmBackup.Tests.Http
             Assert.Equal(HttpStatusCode.OK, result.Status);
             Assert.Equal("content", result.Content);
         }
+        
+        [Fact]
+        public void AddBasicAuthHeader_AddsHeaderWithValues()
+        {
+            var logger = new FakeLogger();
+            var sut = new HttpRequest(logger);
+            sut.HttpClient = new HttpClient();
+
+            sut.AddBasicAuthHeader("user", "pass");
+
+            var authHeader = sut.HttpClient.DefaultRequestHeaders.Authorization;
+            Assert.NotNull(authHeader);
+            Assert.Equal("Basic", authHeader.Scheme);
+            Assert.Equal("dXNlcjpwYXNz", authHeader.Parameter);
+        }
     }
 }
