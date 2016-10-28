@@ -17,4 +17,6 @@ dotnet publish "%~dp0\src\ScmBackup" -c Release -o "%~dp0\release"
 if errorlevel 1 goto end
 
 :end
-pause
+IF [%APPVEYOR%] == [] (
+    pause
+)
