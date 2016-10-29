@@ -1,0 +1,9 @@
+version: 1.0.{build}
+branches:
+  only:
+  - appveyor
+build_script:
+- cmd: C:\projects\scm-backup\build-release.bat
+test: off
+artifacts:
+- path: release\scm-backup-*.zip
