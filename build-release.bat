@@ -7,6 +7,8 @@ if [%APPVEYOR%] == [] (
     choco install 7zip.commandline -version 15.12
 )
 
+for /f "tokens=*" %%i in ('git rev-parse --short HEAD') do set COMMITID=%%i 
+
 dotnet restore
 
 
@@ -29,7 +31,7 @@ if errorlevel 1 goto end
 
 echo .
 echo ###### ZIP ######
-call 7za a -r -tzip release\scm-backup.zip .\release\bin\*
+call 7za a -r -tzip release\scm-backup-%COMMITID%.zip .\release\bin\*
 
 
 
