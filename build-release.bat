@@ -1,5 +1,7 @@
 @echo off
 
+rd /s /q release
+
 dotnet restore
 
 echo ###### UNIT TESTS ######
@@ -13,8 +15,18 @@ if errorlevel 1 goto end
 
 echo .
 echo ###### PUBLISH ######
-dotnet publish "%~dp0\src\ScmBackup" -c Release -o "%~dp0\release"
+dotnet publish "%~dp0\src\ScmBackup" -c Release -o "%~dp0\release\bin"
 if errorlevel 1 goto end
+
+
+echo .
+echo ###### ZIP ######
+if [%APPVEYOR%] == [True] (
+    choco install 7zip.commandline -version 15.12
+)
+call 7za a -r -tzip release\scm-backup.zip .\release\bin\*
+
+
 
 :end
 IF [%APPVEYOR%] == [] (
