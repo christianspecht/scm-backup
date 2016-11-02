@@ -1,13 +1,21 @@
 @echo off
 
 echo ###### INITIALIZE ######
+for /f "tokens=*" %%i in ('git rev-parse --short HEAD') do set COMMITID=%%i 
+
 if [%APPVEYOR%] == [] (
+
     rd /s /q release
+    
+    set RELEASE_FILENAME=scm-backup-%COMMITID%
+    
 ) else (
+
     choco install 7zip.commandline -version 15.12
+    
+    set RELEASE_FILENAME=scm-backup-%APPVEYOR_BUILD_VERSION%-%COMMITID%
 )
 
-for /f "tokens=*" %%i in ('git rev-parse --short HEAD') do set COMMITID=%%i 
 
 dotnet restore
 
@@ -37,7 +45,7 @@ if errorlevel 1 goto end
 
 echo .
 echo ###### ZIP ######
-call 7za a -r -tzip release\scm-backup-%COMMITID%.zip .\release\bin\*
+call 7za a -r -tzip release\%RELEASE_FILENAME%.zip .\release\bin\*
 
 
 
