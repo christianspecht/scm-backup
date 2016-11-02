@@ -45,7 +45,7 @@ if errorlevel 1 goto end
 
 echo .
 echo ###### ZIP ######
-call 7za a -r -tzip release\%RELEASE_FILENAME%.zip .\release\bin\*
+call 7za a -r -tzip "release\%RELEASE_FILENAME%.zip" .\release\bin\*
 
 
 
