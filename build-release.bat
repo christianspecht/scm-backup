@@ -12,6 +12,12 @@ for /f "tokens=*" %%i in ('git rev-parse --short HEAD') do set COMMITID=%%i
 dotnet restore
 
 
+echo .
+echo ###### BUILD SOLUTION ######
+dotnet build */**/project.json -c Release
+
+
+echo .
 echo ###### UNIT TESTS ######
 dotnet test "%~dp0\src\ScmBackup.Tests" -c Release
 if errorlevel 1 goto end
