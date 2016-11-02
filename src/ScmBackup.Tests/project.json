@@ -1,12 +1,11 @@
 ﻿{
-  "version": "0.1.0-*",
   "testRunner": "xunit",
   "buildOptions": {
     "copyToOutput": { "includeFiles": [ "testsettings.json", "brokensettings.json" ] }
   },
   "dependencies": {
     "xunit": "2.2.0-beta2-build3300",
-    "ScmBackup": "0.1.0-*",
+    "ScmBackup": { "target": "project" },
     "RichardSzalay.MockHttp": "1.3.0",
     "dotnet-test-xunit": "2.2.0-preview2-build1029"
   },
