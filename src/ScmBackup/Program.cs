@@ -10,10 +10,11 @@ namespace ScmBackup
 
             var container = Bootstrapper.BuildContainer();
 
+            var context = container.GetInstance<IContext>();
             var logger = container.GetInstance<ILogger>();
 
-            logger.Log(ErrorLevel.Info, Resource.GetString("AppTitle"));
-
+            logger.Log(ErrorLevel.Info, context.AppTitle);
+            
             container.GetInstance<IScmBackup>().Run();
         }
     }
