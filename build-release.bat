@@ -1,7 +1,7 @@
 @echo off
 
 echo ###### INITIALIZE ######
-for /f "tokens=*" %%i in ('git rev-parse --short HEAD') do set COMMITID=%%i 
+for /f "tokens=*" %%i in ('git rev-parse --short HEAD') do set COMMITID=%%i
 
 if [%APPVEYOR%] == [] (
 
