@@ -14,7 +14,7 @@ namespace ScmBackup.Tests.Integration.Hosters
             var config = new ConfigSource();
             config.Hoster = "github";
             config.Type = "user";
-            config.Name = "christianspecht";
+            config.Name = "scm-backup-testuser";
 
             var logger = new FakeLogger();
             var request = new HttpRequest(logger);
@@ -31,7 +31,7 @@ namespace ScmBackup.Tests.Integration.Hosters
             Assert.True(repoList.Count > 0);
 
             // specific repo exists?
-            var repo = repoList.Where(r => r.Name == "christianspecht#scm-backup").FirstOrDefault();
+            var repo = repoList.Where(r => r.Name == "scm-backup-testuser#scm-backup").FirstOrDefault();
             Assert.NotNull(repo);
             Assert.False(string.IsNullOrWhiteSpace(repo.CloneUrl));
         }
