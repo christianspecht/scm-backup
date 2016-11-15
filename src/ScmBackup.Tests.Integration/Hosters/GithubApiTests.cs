@@ -17,7 +17,7 @@ namespace ScmBackup.Tests.Integration.Hosters
             config.Name = "scm-backup-testuser";
 
             var logger = new FakeLogger();
-            var request = new HttpRequest(logger);
+            var request = new HttpRequest();
 
             var sut = new GithubApi(request, logger);
 

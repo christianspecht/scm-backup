@@ -53,9 +53,6 @@ namespace ScmBackup.Hosters
             this.logger.Log(ErrorLevel.Info, Resource.GetString("ApiGettingUrl"), className, request.HttpClient.BaseAddress.ToString() + url);
             this.LastResult = request.Execute(url).Result;
 
-            this.logger.Log(ErrorLevel.Debug, Resource.GetString("ApiHeaders"), className, this.LastResult.Headers.ToString());
-            this.logger.Log(ErrorLevel.Debug, Resource.GetString("ApiResult"), className, this.LastResult.Content);
-
             var apiResponse = JsonConvert.DeserializeObject<List<GithubApiResponse>>(this.LastResult.Content);
             foreach (var apiRepo in apiResponse)
             {

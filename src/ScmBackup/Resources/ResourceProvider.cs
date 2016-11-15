@@ -18,12 +18,13 @@ namespace ScmBackup.Resources
         private Dictionary<string, string> resources = new Dictionary<string, string>
         {
             { "ApiGettingUrl", "{0}: Getting {1}" },
-            { "ApiHeaders", "{0} headers: {1}" },
-            { "ApiResult", "{0} result: {1}" },
             { "AppTitle", "SCM Backup" },
             { "BackupFailed", "Backup failed!" },
             { "ConfigSourceIsNull", "ConfigSource must not be NULL" },
             { "EndSeconds", "The application will close in {0} seconds!" },
+            { "HttpRequest", "Http Request: {0}" },
+            { "HttpHeaders", "Http Headers: {0}" },
+            { "HttpResult", "Http Result: {0}" },
             { "ReadingConfig", "{0}: Reading config" },
             { "StartingBackup", "{0}: Starting backup" },
             { "GithubAuthNameEmpty", "AuthName is empty (GitHub)" },

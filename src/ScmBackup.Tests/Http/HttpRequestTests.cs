@@ -21,9 +21,8 @@ namespace ScmBackup.Tests.Http
                     { "h2", "v2" }
                 })
                 .Respond(HttpStatusCode.OK, "application/json", "content");
-
-            var logger = new FakeLogger();
-            var sut = new HttpRequest(logger);
+            
+            var sut = new HttpRequest();
             sut.HttpClient = new HttpClient(mockHttp);
 
 
@@ -41,8 +40,7 @@ namespace ScmBackup.Tests.Http
         [Fact]
         public void AddBasicAuthHeader_AddsHeaderWithValues()
         {
-            var logger = new FakeLogger();
-            var sut = new HttpRequest(logger);
+            var sut = new HttpRequest();
             sut.HttpClient = new HttpClient();
 
             sut.AddBasicAuthHeader("user", "pass");

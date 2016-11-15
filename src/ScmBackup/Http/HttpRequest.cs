@@ -11,13 +11,10 @@ namespace ScmBackup.Http
     /// </summary>
     internal class HttpRequest : IHttpRequest
     {
-        private ILogger logger;
-
         public HttpClient HttpClient { get; set; }
 
-        public HttpRequest(ILogger logger)
+        public HttpRequest()
         {
-            this.logger = logger;
             this.HttpClient = new HttpClient();
         }
 
