@@ -10,6 +10,7 @@ namespace ScmBackup.Http
     {
         public string Content { get; set; }
         public HttpStatusCode Status { get; set; }
+        public bool IsSuccessStatusCode { get; set; }
         public HttpResponseHeaders Headers { get; set; }
     }
 }

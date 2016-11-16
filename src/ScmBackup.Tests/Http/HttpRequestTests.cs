@@ -34,6 +34,7 @@ namespace ScmBackup.Tests.Http
 
             Assert.NotNull(result);
             Assert.Equal(HttpStatusCode.OK, result.Status);
+            Assert.True(result.IsSuccessStatusCode);
             Assert.Equal("content", result.Content);
         }
         
