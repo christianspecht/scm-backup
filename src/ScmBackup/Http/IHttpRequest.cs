@@ -14,6 +14,8 @@ namespace ScmBackup.Http
 
         void AddHeader(string name, string value);
 
+        void AddBasicAuthHeader(string username, string password);
+
         Task<HttpResult> Execute(string url);
     }
 }

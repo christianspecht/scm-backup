@@ -28,6 +28,11 @@ namespace ScmBackup.Http
             this.request.AddHeader(name, value);
         }
 
+        public void AddBasicAuthHeader(string username, string password)
+        {
+            this.request.AddBasicAuthHeader(username, password);
+        }
+
         public async Task<HttpResult> Execute(string url)
         {
             string className = this.GetType().Name;
