@@ -3,7 +3,7 @@ using ScmBackup.Http;
 using System;
 using System.Collections.Generic;
 
-namespace ScmBackup.Hosters
+namespace ScmBackup.Hosters.Github
 {
     /// <summary>
     /// Calls the GitHub API

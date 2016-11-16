@@ -1,4 +1,4 @@
-﻿namespace ScmBackup.Hosters
+﻿namespace ScmBackup.Hosters.Github
 {
     /// <summary>
     /// validator for GitHub repositories

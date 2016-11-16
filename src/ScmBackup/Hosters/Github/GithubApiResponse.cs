@@ -1,4 +1,4 @@
-﻿namespace ScmBackup.Hosters
+﻿namespace ScmBackup.Hosters.Github
 {
     public class GithubApiResponse
     {

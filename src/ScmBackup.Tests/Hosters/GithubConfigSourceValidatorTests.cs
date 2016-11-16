@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using ScmBackup.Hosters;
 using Xunit;
+using ScmBackup.Hosters.Github;
 
 namespace ScmBackup.Tests.Hosters
 {

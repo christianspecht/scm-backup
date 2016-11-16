@@ -1,4 +1,4 @@
-﻿namespace ScmBackup.Hosters
+﻿namespace ScmBackup.Hosters.Github
 {
     /// <summary>
     /// BaseHoster implementation for GitHub

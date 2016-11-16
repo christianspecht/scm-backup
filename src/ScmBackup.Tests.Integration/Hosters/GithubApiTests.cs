@@ -1,4 +1,5 @@
 ﻿using ScmBackup.Hosters;
+using ScmBackup.Hosters.Github;
 using ScmBackup.Http;
 using System.Linq;
 using System.Net;
