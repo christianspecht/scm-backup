@@ -11,12 +11,16 @@ namespace ScmBackup.Tests
         public object[] LastArg { get; set; }
 
         public bool IgnoreDebugLogs { get; set; }
+        public bool ConsoleOutput { get; set; }
 
         public FakeLogger()
         {
             // default setting: ignore all debug logs, because they "get in the way" 
             // when checking whether the last log was an error, for example
             this.IgnoreDebugLogs = true;
+
+            // default setting: don't actually output log messages
+            this.ConsoleOutput = false;
         }
 
         public void Log(ErrorLevel level, string message, params object[] arg)
@@ -29,6 +33,11 @@ namespace ScmBackup.Tests
             if (level == ErrorLevel.Debug && this.IgnoreDebugLogs)
             {
                 return;
+            }
+
+            if (this.ConsoleOutput)
+            {
+                Console.WriteLine(string.Format("[{0}] ", level) + string.Format(message, arg));
             }
 
             this.LoggedSomething = true;
