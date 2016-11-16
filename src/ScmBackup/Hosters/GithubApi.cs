@@ -56,10 +56,7 @@ namespace ScmBackup.Hosters
             var apiResponse = JsonConvert.DeserializeObject<List<GithubApiResponse>>(this.LastResult.Content);
             foreach (var apiRepo in apiResponse)
             {
-                var repo = new HosterRepository();
-                repo.CloneUrl = apiRepo.clone_url;
-                repo.Name = apiRepo.full_name.Replace('/', '#');
-                repo.Scm = ScmType.Git;
+                var repo = new HosterRepository(apiRepo.full_name, apiRepo.clone_url, ScmType.Git);
                 list.Add(repo);
             }
 
