@@ -39,8 +39,8 @@ namespace ScmBackup.CompositionRoot
             container.Register<IConfigReader, ConfigReader>(Lifestyle.Singleton);
             container.RegisterDecorator<IConfigReader, ValidatingConfigReader>(Lifestyle.Singleton);
 
-            container.Register<IHttpRequest, HttpRequest>();
-            container.RegisterDecorator<IHttpRequest, LoggingHttpRequest>();
+            container.Register<IHttpRequest, HttpRequest>(Lifestyle.Singleton);
+            container.RegisterDecorator<IHttpRequest, LoggingHttpRequest>(Lifestyle.Singleton);
 
             // auto-register validators
             var validators = container.GetTypesToRegister(typeof(IConfigSourceValidator), thisAssembly);
