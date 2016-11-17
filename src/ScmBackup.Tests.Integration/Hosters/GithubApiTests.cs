@@ -1,8 +1,11 @@
 ﻿using ScmBackup.Hosters;
 using ScmBackup.Hosters.Github;
 using ScmBackup.Http;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Security.Authentication;
 using Xunit;
 
 namespace ScmBackup.Tests.Integration.Hosters
@@ -35,6 +38,42 @@ namespace ScmBackup.Tests.Integration.Hosters
             var repo = repoList.Where(r => r.Name == "scm-backup-testuser#scm-backup").FirstOrDefault();
             Assert.NotNull(repo);
             Assert.False(string.IsNullOrWhiteSpace(repo.CloneUrl));
+        }
+
+        [Fact]
+        public void CallsGithubApi_NonExistingUser_ThrowsException()
+        {
+            var config = new ConfigSource();
+            config.Hoster = "github";
+            config.Type = "user";
+            config.Name = "scm-backup-testuser-does-not-exist";
+
+            var logger = new FakeLogger();
+            var request = new HttpRequest();
+
+            var sut = new GithubApi(request, logger);
+
+            List<HosterRepository> repoList;
+            Assert.Throws<InvalidOperationException>(() => repoList = sut.GetRepositoryList(config));
+        }
+
+        [Fact]
+        public void CallsGithubApi_AuthenticatedUser_InvalidPasswordThrowsException()
+        {
+            var config = new ConfigSource();
+            config.Hoster = "github";
+            config.Type = "user";
+            config.Name = "scm-backup-testuser";
+            config.AuthName = config.Name;
+            config.Password = "invalid-password";
+
+            var logger = new FakeLogger();
+            var request = new HttpRequest();
+
+            var sut = new GithubApi(request, logger);
+
+            List<HosterRepository> repoList;
+            Assert.Throws<AuthenticationException>(() => repoList = sut.GetRepositoryList(config)); 
         }
     }
 }
