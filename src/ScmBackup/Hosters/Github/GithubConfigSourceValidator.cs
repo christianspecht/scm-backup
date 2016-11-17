@@ -24,14 +24,16 @@
                 result.AddMessage(ErrorLevel.Error, Resource.GetString("GithubNameEmpty"));
             }
 
-            if (string.IsNullOrWhiteSpace(config.AuthName))
-            {
-                result.AddMessage(ErrorLevel.Warn, Resource.GetString("GithubAuthNameEmpty"));
-            }
+            bool authNameEmpty = string.IsNullOrWhiteSpace(config.AuthName);
+            bool passwordEmpty = string.IsNullOrWhiteSpace(config.Password);
 
-            if (string.IsNullOrWhiteSpace(config.Password))
+            if (authNameEmpty != passwordEmpty)
             {
-                result.AddMessage(ErrorLevel.Warn, Resource.GetString("GithubPasswordEmpty"));
+                result.AddMessage(ErrorLevel.Error, Resource.GetString("GithubAuthNameOrPasswortEmpty"));
+            }
+            else if (authNameEmpty && passwordEmpty)
+            {
+                result.AddMessage(ErrorLevel.Warn, Resource.GetString("GithubAuthNameAndPasswortEmpty"));
             }
 
             return result;

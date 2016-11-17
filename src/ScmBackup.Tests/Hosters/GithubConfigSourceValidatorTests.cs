@@ -78,27 +78,30 @@ namespace ScmBackup.Tests.Hosters
         }
 
         [Theory]
-        [InlineData(null)]
-        [InlineData("")]
-        [InlineData(" ")]
-        public void ReturnsWarningWhenAuthNameIsEmpty(string value)
+        [InlineData("user", "")]
+        [InlineData("user", null)]
+        [InlineData("", "password")]
+        [InlineData("", "null")]
+        public void ReturnsErrorWhenAuthNameORPasswordAreSet(string user, string password)
         {
-            config.AuthName = value;
+            config.AuthName = user;
+            config.Password = password;
 
             var sut = new GithubConfigSourceValidator();
             var result = sut.Validate(config);
 
-            Assert.True(result.IsValid);
+            Assert.False(result.IsValid);
             Assert.Equal(1, result.Messages.Count);
-            Assert.Equal(ErrorLevel.Warn, result.Messages[0].Error);
+            Assert.Equal(ErrorLevel.Error, result.Messages[0].Error);
         }
 
         [Theory]
         [InlineData(null)]
         [InlineData("")]
         [InlineData(" ")]
-        public void ReturnsWarningWhenPasswordIsEmpty(string value)
+        public void ReturnsWarningWhenAuthNameAndPasswordAreEmpty(string value)
         {
+            config.AuthName = value;
             config.Password = value;
 
             var sut = new GithubConfigSourceValidator();
