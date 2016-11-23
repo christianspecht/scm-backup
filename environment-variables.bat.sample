@@ -1,0 +1,7 @@
+rem copy/rename this file to environment-variables.bat
+
+echo Setting environment variables for integration tests...
+
+set GithubApiTests_Name=scm-backup-testuser
+set GithubApiTests_PW=not-the-real-password
+set GithubApiTests_Repo=scm-backup

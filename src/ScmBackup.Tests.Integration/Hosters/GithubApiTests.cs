@@ -75,5 +75,36 @@ namespace ScmBackup.Tests.Integration.Hosters
             List<HosterRepository> repoList;
             Assert.Throws<AuthenticationException>(() => repoList = sut.GetRepositoryList(config)); 
         }
+
+        [Fact]
+        public void CallsGithubApi_AuthenticatedUser()
+        {
+            var config = new ConfigSource();
+            config.Hoster = "github";
+            config.Type = "user";
+            config.Name = TestHelper.EnvVar("GithubApiTests_Name");
+            config.AuthName = config.Name;
+            config.Password = TestHelper.EnvVar("GithubApiTests_PW");
+
+            var logger = new FakeLogger();
+            var request = new HttpRequest();
+
+            var sut = new GithubApi(request, logger);
+
+            var repoList = sut.GetRepositoryList(config);
+
+            // HTTP status ok?
+            Assert.Equal(HttpStatusCode.OK, sut.LastResult.Status);
+
+            // at least one result?
+            Assert.NotNull(repoList);
+            Assert.True(repoList.Count > 0);
+
+            // specific repo exists?
+            string expectedName = (config.Name + '#' + TestHelper.EnvVar("GithubApiTests_Repo")).ToLower();
+            var repo = repoList.Where(r => r.Name == expectedName).FirstOrDefault();
+            Assert.NotNull(repo);
+            Assert.False(string.IsNullOrWhiteSpace(repo.CloneUrl));
+        }
     }
 }
