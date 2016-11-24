@@ -18,7 +18,7 @@ namespace ScmBackup.Tests.Integration.Hosters
             var config = new ConfigSource();
             config.Hoster = "github";
             config.Type = "user";
-            config.Name = "scm-backup-testuser";
+            config.Name = TestHelper.EnvVar("GithubApiTests_Name");
 
             var logger = new FakeLogger();
             var request = new HttpRequest();
@@ -35,7 +35,8 @@ namespace ScmBackup.Tests.Integration.Hosters
             Assert.True(repoList.Count > 0);
 
             // specific repo exists?
-            var repo = repoList.Where(r => r.Name == "scm-backup-testuser#scm-backup").FirstOrDefault();
+            string expectedName = TestHelper.BuildRepositoryName(config.Name, TestHelper.EnvVar("GithubApiTests_Repo"));
+            var repo = repoList.Where(r => r.Name == expectedName).FirstOrDefault();
             Assert.NotNull(repo);
             Assert.False(string.IsNullOrWhiteSpace(repo.CloneUrl));
         }
@@ -63,7 +64,7 @@ namespace ScmBackup.Tests.Integration.Hosters
             var config = new ConfigSource();
             config.Hoster = "github";
             config.Type = "user";
-            config.Name = "scm-backup-testuser";
+            config.Name = TestHelper.EnvVar("GithubApiTests_Name");
             config.AuthName = config.Name;
             config.Password = "invalid-password";
 
@@ -101,7 +102,7 @@ namespace ScmBackup.Tests.Integration.Hosters
             Assert.True(repoList.Count > 0);
 
             // specific repo exists?
-            string expectedName = (config.Name + '#' + TestHelper.EnvVar("GithubApiTests_Repo")).ToLower();
+            string expectedName = TestHelper.BuildRepositoryName(config.Name, TestHelper.EnvVar("GithubApiTests_Repo"));
             var repo = repoList.Where(r => r.Name == expectedName).FirstOrDefault();
             Assert.NotNull(repo);
             Assert.False(string.IsNullOrWhiteSpace(repo.CloneUrl));
