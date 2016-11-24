@@ -23,5 +23,26 @@ namespace ScmBackup.Tests
 
             return result;
         }
+
+        /// <summary>
+        /// Helper to build the repository name created in ScmBackup.Hosters.HosterRepository
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <param name="repoName"></param>
+        /// <returns></returns>
+        public static string BuildRepositoryName(string userName, string repoName)
+        {
+            if (string.IsNullOrWhiteSpace(userName))
+            {
+                throw new ArgumentException("userName is missing");
+            }
+
+            if (string.IsNullOrWhiteSpace(repoName))
+            {
+                throw new ArgumentException("repoName is missing");
+            }
+
+            return userName + "#" + repoName;
+        }
     }
 }

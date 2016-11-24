@@ -18,5 +18,24 @@ namespace ScmBackup.Tests
         {
             Assert.Throws<ArgumentException>(() => TestHelper.EnvVar("ThisVariableDoesNotExist"));
         }
+
+        [Fact]
+        public void BuildRepositoryName_BuildsName()
+        {
+            Assert.Equal("user#repo", TestHelper.BuildRepositoryName("user", "repo"));
+        }
+
+        [Theory]
+        [InlineData("user", null)]
+        [InlineData("user", "")]
+        [InlineData("user", " ")]
+        [InlineData(null, "repo")]
+        [InlineData("", "repo")]
+        [InlineData(" ", "repo")]
+        [InlineData("", "")]
+        public void BuildRepositoryName_ThrowsWhenParameterIsEmpty(string userName, string repoName)
+        {
+            Assert.Throws<ArgumentException>(() => TestHelper.BuildRepositoryName(userName, repoName));
+        }
     }
 }
