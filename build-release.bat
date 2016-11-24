@@ -5,6 +5,14 @@ for /f "tokens=*" %%i in ('git rev-parse --short HEAD') do set COMMITID=%%i
 
 if [%APPVEYOR%] == [] (
 
+    if exist "%~dp0\environment-variables.bat" (
+        call "%~dp0\environment-variables.bat"
+    ) else (
+        echo environment-variables.bat is missing. Build will be canceled!
+        pause
+        exit /b
+    )
+
     rd /s /q release
     
     set RELEASE_FILENAME=scm-backup-%COMMITID%
