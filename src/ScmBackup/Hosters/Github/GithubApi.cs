@@ -64,8 +64,9 @@ namespace ScmBackup.Hosters.Github
 
                 case "org":
 
-                    throw new NotImplementedException();
-
+                    // https://developer.github.com/v3/repos/#list-organization-repositories
+                    url = string.Format("/orgs/{0}/repos", config.Name);
+                    break;
             }
 
             this.logger.Log(ErrorLevel.Info, Resource.GetString("ApiGettingUrl"), className, request.HttpClient.BaseAddress.ToString() + url);
