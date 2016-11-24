@@ -30,6 +30,7 @@ dotnet restore
 echo .
 echo ###### BUILD SOLUTION ######
 dotnet build */**/project.json -c Release
+if errorlevel 1 goto end
 
 
 echo .
