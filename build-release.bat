@@ -9,8 +9,7 @@ if [%APPVEYOR%] == [] (
         call "%~dp0\environment-variables.bat"
     ) else (
         echo environment-variables.bat is missing. Build will be canceled!
-        pause
-        exit /b
+        goto end
     )
 
     rd /s /q release
