@@ -6,7 +6,7 @@ namespace ScmBackup.Tests
     public class TestHelperTests
     {
         [Fact]
-        public void ReturnsExistingVariable()
+        public void EnvVar_ReturnsExistingVariable()
         {
             Environment.SetEnvironmentVariable("ThisVariableExists", "foo");
 
@@ -14,7 +14,7 @@ namespace ScmBackup.Tests
         }
 
         [Fact]
-        public void ThrowsWhenRequestedVariableDoesNotExist()
+        public void EnvVar_ThrowsWhenRequestedVariableDoesNotExist()
         {
             Assert.Throws<ArgumentException>(() => TestHelper.EnvVar("ThisVariableDoesNotExist"));
         }
