@@ -40,7 +40,7 @@ namespace ScmBackup
 
             if (config.Sources.Count == 0)
             {
-                this.logger.Log(ErrorLevel.Error, "NoSourceConfigured");
+                this.logger.Log(ErrorLevel.Error, Resource.GetString("NoSourceConfigured"));
                 return null;
             }
 
