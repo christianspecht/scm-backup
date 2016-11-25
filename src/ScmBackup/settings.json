@@ -5,6 +5,7 @@
 
   "sources": [
     {
+      "title":  "github_singleuser",
       "hoster": "github",
       "type": "user",
       "name": "scm-backup-testuser"

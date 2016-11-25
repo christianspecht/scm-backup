@@ -23,6 +23,7 @@ namespace ScmBackup.Tests
             config.WaitSecondsOnError = 0;
 
             var source = new ConfigSource();
+            source.Title = "title";
             source.Hoster = "fake";
 
             config.Sources.Add(source);

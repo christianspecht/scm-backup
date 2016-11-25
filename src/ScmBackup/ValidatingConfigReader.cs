@@ -44,6 +44,13 @@ namespace ScmBackup
                 return null;
             }
 
+            var sourceWithoutTitle = config.Sources.FirstOrDefault(s => string.IsNullOrWhiteSpace(s.Title));
+            if (sourceWithoutTitle != null)
+            {
+                this.logger.Log(ErrorLevel.Error, Resource.GetString("ConfigSourceWithoutTitle"));
+                return null;
+            }
+
             foreach (var source in config.Sources)
             {
                 var result = this.validator.Validate(source);

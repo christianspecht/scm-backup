@@ -21,6 +21,7 @@ namespace ScmBackup.Resources
             { "AppTitle", "SCM Backup" },
             { "BackupFailed", "Backup failed!" },
             { "ConfigSourceIsNull", "ConfigSource must not be NULL" },
+            { "ConfigSourceWithoutTitle", "All sources must have a title" },
             { "EndSeconds", "The application will close in {0} seconds!" },
             { "HttpRequest", "Http Request: {0}" },
             { "HttpHeaders", "Http Headers: {0}" },

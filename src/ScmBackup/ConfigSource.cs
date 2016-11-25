@@ -7,6 +7,11 @@
     internal class ConfigSource
     {
         /// <summary>
+        /// title of this config source (must be unique)
+        /// </summary>
+        public string Title { get; set; }
+
+        /// <summary>
         /// name of the hoster
         /// </summary>
         public string Hoster { get; set; }

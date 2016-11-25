@@ -1,6 +1,7 @@
 ﻿using ScmBackup.CompositionRoot;
 using ScmBackup.Tests.Hosters;
 using System.Collections.Generic;
+using System.Linq;
 using Xunit;
 
 namespace ScmBackup.Tests
@@ -123,6 +124,18 @@ namespace ScmBackup.Tests
             sut.ReadConfig();
             sut.ReadConfig();
             Assert.Equal(1, validator.ValidationCounter);
+        }
+
+        [Fact]
+        public void LogsErrorWhenAConfigSourceHasNoTitle()
+        {
+            reader.FakeConfig.Sources.First().Title = "";
+
+            var result = sut.ReadConfig();
+
+            Assert.True(logger.LoggedSomething);
+            Assert.Equal(ErrorLevel.Error, logger.LastErrorLevel);
+            Assert.Null(result);
         }
     }
 }
