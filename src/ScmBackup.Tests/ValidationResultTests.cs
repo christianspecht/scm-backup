@@ -5,10 +5,16 @@ namespace ScmBackup.Tests
 {
     public class ValidationResultTests
     {
+        private readonly ValidationResult sut;
+
+        public ValidationResultTests()
+        {
+            sut = new ValidationResult();
+        }
+
         [Fact]
         public void AddMessageAddsSingleMessage()
         {
-            var sut = new ValidationResult();
             sut.AddMessage(ErrorLevel.Info, "i");
 
             Assert.Equal(1, sut.Messages.Count);
@@ -17,8 +23,6 @@ namespace ScmBackup.Tests
         [Fact]
         public void IsValidIsTrueWithNoMessages()
         {
-            var sut = new ValidationResult();
-
             Assert.False(sut.Messages.Any());
             Assert.True(sut.IsValid);
         }
@@ -26,7 +30,6 @@ namespace ScmBackup.Tests
         [Fact]
         public void IsValidIsTrueWithInfoAndWarnMessage()
         {
-            var sut = new ValidationResult();
             sut.AddMessage(ErrorLevel.Info, "i");
             sut.AddMessage(ErrorLevel.Warn, "w");
 
@@ -37,7 +40,6 @@ namespace ScmBackup.Tests
         [Fact]
         public void IsValidIsFalseWithErrorMessage()
         {
-            var sut = new ValidationResult();
             sut.AddMessage(ErrorLevel.Error, "e");
 
             Assert.Equal(1, sut.Messages.Count);
@@ -47,7 +49,6 @@ namespace ScmBackup.Tests
         [Fact]
         public void IsValidIsFalseWithAllMessages()
         {
-            var sut = new ValidationResult();
             sut.AddMessage(ErrorLevel.Info, "i");
             sut.AddMessage(ErrorLevel.Warn, "w");
             sut.AddMessage(ErrorLevel.Error, "e");
