@@ -8,9 +8,16 @@ namespace ScmBackup
     /// </summary>
     internal class ValidationResult
     {
-        public ValidationResult()
+        private readonly ConfigSource source;
+
+        public ValidationResult() : this(null)
+        {
+        }
+
+        public ValidationResult(ConfigSource configSource)
         {
             this.Messages = new List<ValidationMessage>();
+            this.source = configSource;
         }
 
         public bool IsValid
@@ -25,6 +32,11 @@ namespace ScmBackup
 
         public void AddMessage(ErrorLevel error, string message)
         {
+            if (this.source != null)
+            {
+                message = this.source.Title + ": " + message;
+            }
+
             this.Messages.Add(new ValidationMessage(error, message));
         }
 

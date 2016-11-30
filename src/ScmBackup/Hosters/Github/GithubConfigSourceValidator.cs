@@ -7,7 +7,7 @@
     {
         public ValidationResult Validate(ConfigSource config)
         {
-            var result = new ValidationResult();
+            var result = new ValidationResult(config);
 
             if (config.Hoster != "github")
             {
