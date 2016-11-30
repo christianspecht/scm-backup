@@ -22,7 +22,7 @@ namespace ScmBackup.CompositionRoot
         {
             if (!typeof(IHoster).IsAssignableFrom(type))
             {
-                throw new InvalidOperationException(string.Format(Resource.GetString("TypeIsNoIHoster"), type.ToString()));
+                throw new InvalidOperationException(string.Format(Resource.TypeIsNoIHoster, type.ToString()));
             }
 
             var attribute = type.GetTypeInfo().GetCustomAttribute<HosterAttribute>();
@@ -37,7 +37,7 @@ namespace ScmBackup.CompositionRoot
 
             if (!this.TryGetValue(hosterName, out type))
             {
-                throw new InvalidOperationException(string.Format(Resource.GetString("HosterDoesntExist"), hosterName));
+                throw new InvalidOperationException(string.Format(Resource.HosterDoesntExist, hosterName));
             }
 
             return (IHoster)this.container.GetInstance(type);

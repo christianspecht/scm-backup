@@ -6,8 +6,6 @@ namespace ScmBackup
     {
         public static void Main(string[] args)
         {
-            Bootstrapper.SetupResources();
-
             var container = Bootstrapper.BuildContainer();            
             container.GetInstance<IScmBackup>().Run();
         }

@@ -36,7 +36,7 @@ namespace ScmBackup.Hosters.Github
             request.AddHeader("Accept", "application/vnd.github.v3+json");
 
             // https://developer.github.com/v3/#user-agent-required
-            request.AddHeader("User-Agent", Resource.GetString("AppTitle"));
+            request.AddHeader("User-Agent", Resource.AppTitle);
             
             bool isAuthenticated = !String.IsNullOrWhiteSpace(config.AuthName) && !String.IsNullOrWhiteSpace(config.Password);
             if (isAuthenticated)
@@ -69,7 +69,7 @@ namespace ScmBackup.Hosters.Github
                     break;
             }
 
-            this.logger.Log(ErrorLevel.Info, Resource.GetString("ApiGettingUrl"), className, request.HttpClient.BaseAddress.ToString() + url);
+            this.logger.Log(ErrorLevel.Info, Resource.ApiGettingUrl, className, request.HttpClient.BaseAddress.ToString() + url);
             this.LastResult = request.Execute(url).Result;
 
             if (this.LastResult.IsSuccessStatusCode)
@@ -86,11 +86,11 @@ namespace ScmBackup.Hosters.Github
                 switch (this.LastResult.Status)
                 {
                     case HttpStatusCode.Unauthorized:
-                        throw new AuthenticationException(string.Format(Resource.GetString("ApiAuthenticationFailed"), config.AuthName));
+                        throw new AuthenticationException(string.Format(Resource.ApiAuthenticationFailed, config.AuthName));
                     case HttpStatusCode.Forbidden:
-                        throw new SecurityException(Resource.GetString("ApiMissingPermissions"));
+                        throw new SecurityException(Resource.ApiMissingPermissions);
                     case HttpStatusCode.NotFound:
-                        throw new InvalidOperationException(string.Format(Resource.GetString("ApiInvalidUsername"), config.Name));
+                        throw new InvalidOperationException(string.Format(Resource.ApiInvalidUsername, config.Name));
                 }
             }
 

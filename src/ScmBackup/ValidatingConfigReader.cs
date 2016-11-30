@@ -29,25 +29,25 @@ namespace ScmBackup
             }
 
             string className = this.GetType().Name;
-            this.logger.Log(ErrorLevel.Debug, Resource.GetString("ReadingConfig"), className);
+            this.logger.Log(ErrorLevel.Debug, Resource.ReadingConfig, className);
             var config = this.configReader.ReadConfig();
 
             if (String.IsNullOrWhiteSpace(config.LocalFolder))
             {
-                this.logger.Log(ErrorLevel.Error, Resource.GetString("LocalFolderMissing"));
+                this.logger.Log(ErrorLevel.Error, Resource.LocalFolderMissing);
                 return null;
             }
 
             if (config.Sources.Count == 0)
             {
-                this.logger.Log(ErrorLevel.Error, Resource.GetString("NoSourceConfigured"));
+                this.logger.Log(ErrorLevel.Error, Resource.NoSourceConfigured);
                 return null;
             }
 
             var sourceWithoutTitle = config.Sources.FirstOrDefault(s => string.IsNullOrWhiteSpace(s.Title));
             if (sourceWithoutTitle != null)
             {
-                this.logger.Log(ErrorLevel.Error, Resource.GetString("ConfigSourceWithoutTitle"));
+                this.logger.Log(ErrorLevel.Error, Resource.ConfigSourceWithoutTitle);
                 return null;
             }
 
@@ -69,7 +69,7 @@ namespace ScmBackup
                 }
             }
 
-            this.logger.Log(ErrorLevel.Debug, Resource.GetString("Return"), className);
+            this.logger.Log(ErrorLevel.Debug, Resource.Return, className);
             this.config = config;
             return config;
         }

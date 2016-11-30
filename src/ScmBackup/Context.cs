@@ -13,7 +13,7 @@ namespace ScmBackup
             var assembly = typeof(ScmBackup).GetTypeInfo().Assembly;
             this.VersionNumber = assembly.GetName().Version;
             this.VersionNumberString= assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion;
-            this.AppTitle = Resource.GetString("AppTitle") + " " + this.VersionNumberString;
+            this.AppTitle = Resource.AppTitle + " " + this.VersionNumberString;
         }
 
         public Version VersionNumber { get; private set; }

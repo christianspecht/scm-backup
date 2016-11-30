@@ -17,7 +17,7 @@ namespace ScmBackup.CompositionRoot
         {
             if (config == null)
             {
-                throw new ArgumentNullException(Resource.GetString("ConfigSourceIsNull"));
+                throw new ArgumentNullException(Resource.ConfigSourceIsNull);
             }
 
             var hoster = this.factory.Create(config.Hoster);

@@ -11,17 +11,17 @@
 
             if (config.Hoster != "github")
             {
-                result.AddMessage(ErrorLevel.Error, string.Format(Resource.GetString("WrongHoster"), config.Hoster));
+                result.AddMessage(ErrorLevel.Error, string.Format(Resource.WrongHoster, config.Hoster));
             }
 
             if (config.Type != "user" && config.Type != "org")
             {
-                result.AddMessage(ErrorLevel.Error, string.Format(Resource.GetString("WrongType"), config.Type));
+                result.AddMessage(ErrorLevel.Error, string.Format(Resource.WrongType, config.Type));
             }
 
             if (string.IsNullOrWhiteSpace(config.Name))
             {
-                result.AddMessage(ErrorLevel.Error, Resource.GetString("NameEmpty"));
+                result.AddMessage(ErrorLevel.Error, Resource.NameEmpty);
             }
 
             bool authNameEmpty = string.IsNullOrWhiteSpace(config.AuthName);
@@ -29,11 +29,11 @@
 
             if (authNameEmpty != passwordEmpty)
             {
-                result.AddMessage(ErrorLevel.Error, Resource.GetString("AuthNameOrPasswortEmpty"));
+                result.AddMessage(ErrorLevel.Error, Resource.AuthNameOrPasswortEmpty);
             }
             else if (authNameEmpty && passwordEmpty)
             {
-                result.AddMessage(ErrorLevel.Warn, Resource.GetString("AuthNameAndPasswortEmpty"));
+                result.AddMessage(ErrorLevel.Warn, Resource.AuthNameAndPasswortEmpty);
             }
 
             return result;

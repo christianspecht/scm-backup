@@ -37,11 +37,11 @@ namespace ScmBackup.Http
         {
             string className = this.GetType().Name;
 
-            this.logger.Log(ErrorLevel.Debug, Resource.GetString("HttpRequest"), url);
+            this.logger.Log(ErrorLevel.Debug, Resource.HttpRequest, url);
             var result = await this.request.Execute(url);
 
-            this.logger.Log(ErrorLevel.Debug, Resource.GetString("HttpHeaders"), result.Headers.ToString());
-            this.logger.Log(ErrorLevel.Debug, Resource.GetString("HttpResult"), result.Content);
+            this.logger.Log(ErrorLevel.Debug, Resource.HttpHeaders, result.Headers.ToString());
+            this.logger.Log(ErrorLevel.Debug, Resource.HttpResult, result.Content);
 
             return result;
         }
