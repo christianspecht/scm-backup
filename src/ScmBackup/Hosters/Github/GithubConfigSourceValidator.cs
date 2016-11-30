@@ -11,17 +11,17 @@
 
             if (config.Hoster != "github")
             {
-                result.AddMessage(ErrorLevel.Error, string.Format(Resource.GetString("GithubWrongHoster"), config.Hoster));
+                result.AddMessage(ErrorLevel.Error, string.Format(Resource.GetString("WrongHoster"), config.Hoster));
             }
 
             if (config.Type != "user" && config.Type != "org")
             {
-                result.AddMessage(ErrorLevel.Error, string.Format(Resource.GetString("GithubWrongType"), config.Type));
+                result.AddMessage(ErrorLevel.Error, string.Format(Resource.GetString("WrongType"), config.Type));
             }
 
             if (string.IsNullOrWhiteSpace(config.Name))
             {
-                result.AddMessage(ErrorLevel.Error, Resource.GetString("GithubNameEmpty"));
+                result.AddMessage(ErrorLevel.Error, Resource.GetString("NameEmpty"));
             }
 
             bool authNameEmpty = string.IsNullOrWhiteSpace(config.AuthName);
@@ -29,11 +29,11 @@
 
             if (authNameEmpty != passwordEmpty)
             {
-                result.AddMessage(ErrorLevel.Error, Resource.GetString("GithubAuthNameOrPasswortEmpty"));
+                result.AddMessage(ErrorLevel.Error, Resource.GetString("AuthNameOrPasswortEmpty"));
             }
             else if (authNameEmpty && passwordEmpty)
             {
-                result.AddMessage(ErrorLevel.Warn, Resource.GetString("GithubAuthNameAndPasswortEmpty"));
+                result.AddMessage(ErrorLevel.Warn, Resource.GetString("AuthNameAndPasswortEmpty"));
             }
 
             return result;

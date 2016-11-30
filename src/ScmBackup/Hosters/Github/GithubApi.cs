@@ -86,11 +86,11 @@ namespace ScmBackup.Hosters.Github
                 switch (this.LastResult.Status)
                 {
                     case HttpStatusCode.Unauthorized:
-                        throw new AuthenticationException(string.Format(Resource.GetString("GithubApiAuthenticationFailed"), config.AuthName));
+                        throw new AuthenticationException(string.Format(Resource.GetString("ApiAuthenticationFailed"), config.AuthName));
                     case HttpStatusCode.Forbidden:
-                        throw new SecurityException(Resource.GetString("GithubApiMissingPermissions"));
+                        throw new SecurityException(Resource.GetString("ApiMissingPermissions"));
                     case HttpStatusCode.NotFound:
-                        throw new InvalidOperationException(string.Format(Resource.GetString("GithubApiInvalidUsername"), config.Name));
+                        throw new InvalidOperationException(string.Format(Resource.GetString("ApiInvalidUsername"), config.Name));
                 }
             }
 
