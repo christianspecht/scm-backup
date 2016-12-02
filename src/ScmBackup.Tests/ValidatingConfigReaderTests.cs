@@ -8,10 +8,10 @@ namespace ScmBackup.Tests
 {
     public class ValidatingConfigReaderTests
     {
-        private readonly IConfigReader sut;
-        private readonly FakeHosterValidator validator;
-        private readonly FakeConfigReader reader;
-        private readonly FakeLogger logger;
+        private IConfigReader sut;
+        private FakeHosterValidator validator;
+        private FakeConfigReader reader;
+        private FakeLogger logger;
 
         public ValidatingConfigReaderTests()
         {
@@ -131,6 +131,28 @@ namespace ScmBackup.Tests
         {
             reader.FakeConfig.Sources.First().Title = "";
 
+            var result = sut.ReadConfig();
+
+            Assert.True(logger.LoggedSomething);
+            Assert.Equal(ErrorLevel.Error, logger.LastErrorLevel);
+            Assert.Null(result);
+        }
+
+        [Fact]
+        public void LogsErrorWhenConfigSourceTitlesContainDuplicates()
+        {
+            reader = new FakeConfigReader();
+            reader.SetDefaultFakeConfig();
+            var source = new ConfigSource();
+            source.Title = "title";
+            source.Type = "fake";
+
+            reader.FakeConfig.Sources.Add(source);
+
+            logger = new FakeLogger();
+            validator = new FakeHosterValidator();
+
+            sut = new ValidatingConfigReader(reader, logger, validator);
             var result = sut.ReadConfig();
 
             Assert.True(logger.LoggedSomething);

@@ -141,6 +141,9 @@
   <data name="BackupFailed" xml:space="preserve">
     <value>Backup failed!</value>
   </data>
+  <data name="ConfigSourceDuplicateTitle" xml:space="preserve">
+    <value>Sources in the settings file must have unique titles. Title "{0}" appears more than once!</value>
+  </data>
   <data name="ConfigSourceIsNull" xml:space="preserve">
     <value>ConfigSource must not be NULL</value>
   </data>

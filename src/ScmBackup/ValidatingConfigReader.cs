@@ -51,6 +51,18 @@ namespace ScmBackup
                 return null;
             }
 
+            string lastTitle = string.Empty;
+            foreach (var source in config.Sources.OrderBy(s=>s.Title))
+            {
+                if (lastTitle == source.Title)
+                {
+                    this.logger.Log(ErrorLevel.Error, Resource.ConfigSourceDuplicateTitle, lastTitle);
+                    return null;
+                }
+
+                lastTitle = source.Title;
+            }
+            
             foreach (var source in config.Sources)
             {
                 var result = this.validator.Validate(source);
