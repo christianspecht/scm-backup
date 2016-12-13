@@ -1,5 +1,7 @@
 # SCM Backup
 
+![SCM Backup logo](https://raw.githubusercontent.com/christianspecht/scm-backup/master/img/logo128x128.png)
+
 [![Build status](https://ci.appveyor.com/api/projects/status/a28uyjw91iim9wv9?svg=true)](https://ci.appveyor.com/project/ChristianSpecht/scm-backup)
 
 A backup tool which clones all your repositories to your local machine.
