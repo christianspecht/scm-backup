@@ -36,5 +36,27 @@
         /// password for authentication
         /// </summary>
         public string Password { get; set; }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            var source = obj as ConfigSource;
+
+            if (source == null)
+            {
+                return false;
+            }
+
+            return (source.Name == this.Name);
+        }
+
+        public override int GetHashCode()
+        {
+            return this.Name.GetHashCode();
+        }
     }
 }
