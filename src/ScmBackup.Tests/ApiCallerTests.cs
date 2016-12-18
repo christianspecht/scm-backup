@@ -1,5 +1,6 @@
 ﻿using ScmBackup.Hosters;
 using ScmBackup.Tests.Hosters;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Xunit;
@@ -54,6 +55,19 @@ namespace ScmBackup.Tests
 
             var resultList2 = result.GetReposForSource(source2);
             Assert.Equal(list2, resultList2);
+        }
+
+        [Fact]
+        public void ThrowsWhenNoHosterApiCallerIsPassed()
+        {
+            Assert.ThrowsAny<Exception>(() => new ApiCaller(null));
+        }
+
+        [Fact]
+        public void ThrowswhenNoConfigIsPassed()
+        {
+            var sut = new ApiCaller(hac);
+            Assert.ThrowsAny<Exception>(() => sut.CallApis(null));
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace ScmBackup
+﻿using System;
+
+namespace ScmBackup
 {
     /// <summary>
     /// Gets the list of repositories for each ConfigSource
@@ -9,11 +11,21 @@
 
         public ApiCaller(IHosterApiCaller apiCaller)
         {
+            if (apiCaller == null)
+            {
+                throw new InvalidOperationException("apiCaller is null");
+            }
+
             this.apiCaller = apiCaller;
         }
 
         public ApiRepositories CallApis(Config config)
         {
+            if (config == null)
+            {
+                throw new InvalidOperationException("config is null");
+            }
+
             var repos = new ApiRepositories();
 
             foreach (var source in config.Sources)
