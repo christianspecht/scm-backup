@@ -32,6 +32,8 @@ namespace ScmBackup.CompositionRoot
             container.Register<IHttpRequest, HttpRequest>();
             container.RegisterDecorator<IHttpRequest, LoggingHttpRequest>();
 
+            container.Register<IApiCaller, ApiCaller>();
+
             // auto-register validators
             var validators = container.GetTypesToRegister(typeof(IConfigSourceValidator), thisAssembly);
             foreach (var validator in validators)
