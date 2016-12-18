@@ -11,7 +11,7 @@ namespace ScmBackup.Tests
         public void AddAddsItem()
         {
             var source = new ConfigSource();
-            source.Name = "foo";
+            source.Title = "title";
 
             var list = new List<HosterRepository>();
 
@@ -25,7 +25,7 @@ namespace ScmBackup.Tests
         public void GetReposForSourceReturnsList()
         {
             var source = new ConfigSource();
-            source.Name = "foo";
+            source.Title = "title";
 
             var list = new List<HosterRepository>();
             list.Add(new HosterRepository("foo", "http://foo", ScmType.Git));

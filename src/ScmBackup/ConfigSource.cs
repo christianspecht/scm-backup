@@ -51,12 +51,12 @@
                 return false;
             }
 
-            return (source.Name == this.Name);
+            return (source.Title == this.Title);
         }
 
         public override int GetHashCode()
         {
-            return this.Name.GetHashCode();
+            return this.Title.GetHashCode();
         }
     }
 }
