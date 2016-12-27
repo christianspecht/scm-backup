@@ -5,6 +5,9 @@
     /// </summary>
     internal enum ScmType
     {
+        /// <summary>
+        /// Git
+        /// </summary>
         Git
     }
 }

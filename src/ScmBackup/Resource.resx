@@ -180,11 +180,17 @@
   <data name="Return" xml:space="preserve">
     <value>{0}: Return</value>
   </data>
+  <data name="ScmDoesntExist" xml:space="preserve">
+    <value>SCM {0} doesn't exist</value>
+  </data>
   <data name="StartingBackup" xml:space="preserve">
     <value>{0}: Starting backup</value>
   </data>
   <data name="TypeIsNoIHoster" xml:space="preserve">
     <value>Can't register {0} in the HosterFactory because it doesn't implement IHoster</value>
+  </data>
+  <data name="TypeIsNoIScm" xml:space="preserve">
+    <value>Can't register {0} in the ScmFactory because it doesn't implement IScm</value>
   </data>
   <data name="WrongHoster" xml:space="preserve">
     <value>wrong hoster: {0}</value>

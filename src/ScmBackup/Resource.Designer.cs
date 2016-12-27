@@ -249,6 +249,15 @@ namespace ScmBackup {
         }
         
         /// <summary>
+        ///    Looks up a localized string similar to SCM {0} doesn&apos;t exist.
+        /// </summary>
+        public static string ScmDoesntExist {
+            get {
+                return ResourceManager.GetString("ScmDoesntExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///    Looks up a localized string similar to {0}: Starting backup.
         /// </summary>
         public static string StartingBackup {
@@ -263,6 +272,15 @@ namespace ScmBackup {
         public static string TypeIsNoIHoster {
             get {
                 return ResourceManager.GetString("TypeIsNoIHoster", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///    Looks up a localized string similar to Can&apos;t register {0} in the ScmFactory because it doesn&apos;t implement IScm.
+        /// </summary>
+        public static string TypeIsNoIScm {
+            get {
+                return ResourceManager.GetString("TypeIsNoIScm", resourceCulture);
             }
         }
         

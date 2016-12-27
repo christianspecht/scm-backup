@@ -1,5 +1,6 @@
 ﻿using ScmBackup.Hosters;
 using ScmBackup.Http;
+using ScmBackup.Scm;
 using SimpleInjector;
 using System.Linq;
 using System.Reflection;
@@ -58,8 +59,17 @@ namespace ScmBackup.CompositionRoot
                 hosterFactory.Register(hoster);
             }
 
+            // auto-register SCMs
+            var scmFactory = new ScmFactory(container);
+            var scms = container.GetTypesToRegister(typeof(IScm), thisAssembly);
+            foreach (var scm in scms)
+            {
+                scmFactory.Register(scm);
+            }
+
             container.RegisterSingleton<IHosterValidator>(new HosterValidator(hosterFactory));
             container.RegisterSingleton<IHosterApiCaller>(new HosterApiCaller(hosterFactory));
+            container.RegisterSingleton<IScmFactory>(scmFactory);
             container.Verify();
 
             return container;
