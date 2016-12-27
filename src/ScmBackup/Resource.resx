@@ -129,6 +129,9 @@
   <data name="ApiMissingPermissions" xml:space="preserve">
     <value>Required permissions are missing. Make sure you have set the right scopes!</value>
   </data>
+  <data name="ApiRepositoriesContainsNoHosterRepos" xml:space="preserve">
+    <value>ApiRepositories doesn't contain any HosterRepositories</value>
+  </data>
   <data name="AppTitle" xml:space="preserve">
     <value>SCM Backup</value>
   </data>

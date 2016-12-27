@@ -1,5 +1,7 @@
 ﻿using ScmBackup.Hosters;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ScmBackup
 {
@@ -20,6 +22,29 @@ namespace ScmBackup
         public List<HosterRepository> GetReposForSource(ConfigSource config)
         {
             return this.Dic[config];
+        }
+
+        /// <summary>
+        /// Returns a unique list of all ScmTypes from all HosterRepositories
+        /// </summary>
+        public HashSet<ScmType> GetScmTypes()
+        {
+            if (!this.Dic.Any())
+            {
+                throw new InvalidOperationException(Resource.ApiRepositoriesContainsNoHosterRepos);
+            }
+
+            var result = new HashSet<ScmType>();
+
+            foreach (var item in this.Dic)
+            {
+                foreach (var repo in item.Value)
+                {
+                    result.Add(repo.Scm);
+                }
+            }
+
+            return result;
         }
     }
 }

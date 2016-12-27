@@ -1,4 +1,5 @@
 ﻿using ScmBackup.Hosters;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Xunit;
@@ -38,6 +39,37 @@ namespace ScmBackup.Tests
 
             Assert.Equal(2, result.Count);
             Assert.Equal("foo", result.First().Name);
+        }
+
+        [Fact]
+        public void GetScmTypesReturnsHashSet()
+        {
+            // TODO: use different ScmTypes when more are supported
+            var repos = new List<HosterRepository>();
+            repos.Add(new HosterRepository("testrepo", "http://clone.url", ScmType.Git));
+            repos.Add(new HosterRepository("testrepo2", "http://clone2.url", ScmType.Git));
+
+            var source1 = new ConfigSource();
+            source1.Title = "testsource";
+            var source2 = new ConfigSource();
+            source2.Title = "testsource2";
+
+            var sut = new ApiRepositories();
+            sut.AddItem(source1, repos);
+            sut.AddItem(source2, repos);
+
+            var result = sut.GetScmTypes();
+
+            Assert.Equal(1, result.Count);
+            Assert.Equal(ScmType.Git, result.First());
+        }
+
+        [Fact]
+        public void GetScmTypesThrowsWhenEmpty()
+        {
+            var sut = new ApiRepositories();
+
+            Assert.Throws<InvalidOperationException>(() => sut.GetScmTypes());
         }
     }
 }

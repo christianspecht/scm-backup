@@ -96,6 +96,15 @@ namespace ScmBackup {
         }
         
         /// <summary>
+        ///    Looks up a localized string similar to ApiRepositories doesn&apos;t contain any HosterRepositories.
+        /// </summary>
+        public static string ApiRepositoriesContainsNoHosterRepos {
+            get {
+                return ResourceManager.GetString("ApiRepositoriesContainsNoHosterRepos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///    Looks up a localized string similar to SCM Backup.
         /// </summary>
         public static string AppTitle {
