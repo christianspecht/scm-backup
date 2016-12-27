@@ -11,6 +11,8 @@ namespace ScmBackup
 
         public int WaitSecondsOnError { get; set; }
 
+        public List<ConfigScm> Scms { get; set; }
+
         public List<ConfigSource> Sources { get; set; }
 
         public Config()

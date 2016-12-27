@@ -3,6 +3,18 @@
 
   "waitSecondsOnError": 5,
 
+  "scms": [
+    {
+      "name": "git",
+      "path": "path/to/git"
+    },
+    {
+      "name": "hg",
+      "path": "path/to/hg"
+    }
+  ],
+
+
   "sources": [
     {
       "hoster": "hoster0",

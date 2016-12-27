@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using Xunit;
 
 namespace ScmBackup.Tests.Integration
@@ -16,7 +15,8 @@ namespace ScmBackup.Tests.Integration
 
             Assert.Equal("localfolder", config.LocalFolder);
             Assert.Equal(5, config.WaitSecondsOnError);
-            Assert.Equal(2, config.Sources.Count());
+            Assert.Equal(2, config.Sources.Count);
+            Assert.Equal(2, config.Scms.Count);
 
             var source0 = config.Sources[0];
             Assert.Equal("hoster0", source0.Hoster);
@@ -27,6 +27,14 @@ namespace ScmBackup.Tests.Integration
             Assert.Equal("hoster1", source1.Hoster);
             Assert.Equal("type1", source1.Type);
             Assert.Equal("name1", source1.Name);
+
+            var scm1 = config.Scms[0];
+            Assert.Equal("git", scm1.Name);
+            Assert.Equal("path/to/git", scm1.Path);
+
+            var scm2 = config.Scms[1];
+            Assert.Equal("hg", scm2.Name);
+            Assert.Equal("path/to/hg", scm2.Path);
         }
 
         [Fact]
