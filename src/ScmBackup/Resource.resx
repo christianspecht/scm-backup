@@ -186,6 +186,12 @@
   <data name="ScmDoesntExist" xml:space="preserve">
     <value>SCM {0} doesn't exist</value>
   </data>
+  <data name="ScmNotOnThisComputer" xml:space="preserve">
+    <value>{0} was NOT found on this computer</value>
+  </data>
+  <data name="ScmOnThisComputer" xml:space="preserve">
+    <value>{0} was found on this computer</value>
+  </data>
   <data name="StartingBackup" xml:space="preserve">
     <value>{0}: Starting backup</value>
   </data>

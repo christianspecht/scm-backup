@@ -267,6 +267,24 @@ namespace ScmBackup {
         }
         
         /// <summary>
+        ///    Looks up a localized string similar to {0} was NOT found on this computer.
+        /// </summary>
+        public static string ScmNotOnThisComputer {
+            get {
+                return ResourceManager.GetString("ScmNotOnThisComputer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///    Looks up a localized string similar to {0} was found on this computer.
+        /// </summary>
+        public static string ScmOnThisComputer {
+            get {
+                return ResourceManager.GetString("ScmOnThisComputer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///    Looks up a localized string similar to {0}: Starting backup.
         /// </summary>
         public static string StartingBackup {

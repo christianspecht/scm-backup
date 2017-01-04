@@ -12,5 +12,10 @@ namespace ScmBackup.Scm
         {
             get { return "git"; }
         }
+
+        public bool IsOnThisComputer()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
