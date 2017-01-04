@@ -17,7 +17,7 @@ namespace ScmBackup
             this.logger = logger;
         }
 
-        public bool ValidateScms(HashSet<ScmType> scms)
+        public bool ValidateScms(HashSet<ScmType> scms, Config config)
         {
             bool ok = true;
 
@@ -25,7 +25,7 @@ namespace ScmBackup
             {
                 var scm = this.factory.Create(scmType);
                 
-                if (scm.IsOnThisComputer())
+                if (scm.IsOnThisComputer(config))
                 {
                     this.logger.Log(ErrorLevel.Info, Resource.ScmOnThisComputer, scm.ShortName);
                 }

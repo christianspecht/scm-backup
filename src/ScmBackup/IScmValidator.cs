@@ -7,6 +7,6 @@ namespace ScmBackup
     /// </summary>
     internal interface IScmValidator
     {
-        bool ValidateScms(HashSet<ScmType> scms);
+        bool ValidateScms(HashSet<ScmType> scms, Config config);
     }
 }

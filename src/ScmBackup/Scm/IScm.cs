@@ -15,6 +15,6 @@ namespace ScmBackup.Scm
         /// <summary>
         /// check whether the SCM is present on this computer
         /// </summary>
-        bool IsOnThisComputer();
+        bool IsOnThisComputer(Config config);
     }
 }
