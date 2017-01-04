@@ -1,7 +1,7 @@
 ﻿using ScmBackup.Scm;
 using System.Collections.Generic;
 
-namespace ScmBackup
+namespace ScmBackup.Scm
 {
     /// <summary>
     /// Verifies that all passed SCMs are present on this machine

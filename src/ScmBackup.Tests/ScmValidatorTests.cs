@@ -1,4 +1,5 @@
-﻿using ScmBackup.Tests.Scm;
+﻿using ScmBackup.Scm;
+using ScmBackup.Tests.Scm;
 using System.Collections.Generic;
 using Xunit;
 
