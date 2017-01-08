@@ -11,7 +11,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("ScmBackup.Tests.Integration")]
 [assembly: AssemblyDescription("Integration test library for SCM Backup")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("christianspecht.de")]
+[assembly: AssemblyCompany("scm-backup.org")]
 [assembly: AssemblyProduct("SCM Backup")]
 [assembly: AssemblyCopyright("Copyright © Christian Specht 2016")]
 [assembly: AssemblyTrademark("")]

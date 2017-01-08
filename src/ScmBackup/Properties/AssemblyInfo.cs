@@ -11,7 +11,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("SCM Backup")]
 [assembly: AssemblyDescription("Backup repositories from cloud hosters to your local machine")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("christianspecht.de")]
+[assembly: AssemblyCompany("scm-backup.org")]
 [assembly: AssemblyProduct("SCM Backup")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

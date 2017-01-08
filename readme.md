@@ -10,10 +10,9 @@ It's similar to [Bitbucket Backup](http://christianspecht.de/bitbucket-backup/),
 And it's written in [.NET Core](https://dotnet.github.io/), which means that it's supposed to run on Windows, Linux **and** MacOS.
 
 
-## Documentation
-
-...doesn't exist yet because right now, SCM Backup is still a work in progress.  
-Proper documentation will follow later, as soon as SCM Backup is in a usable state.
+- [Website](http://scm-backup.org)
+- [Documentation](http://docs.scm-backup.org)
+- [Download latest build](https://ci.appveyor.com/project/ChristianSpecht/scm-backup/build/artifacts)
 
 
 ## License
