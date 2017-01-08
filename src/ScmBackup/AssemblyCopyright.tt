@@ -1,0 +1,4 @@
+﻿<#@ template language="C#" #>
+using System.Reflection;
+
+[assembly: AssemblyCopyright("Copyright © Christian Specht 2016-<#=DateTime.Now.Year#>")]

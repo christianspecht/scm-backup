@@ -13,7 +13,6 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("christianspecht.de")]
 [assembly: AssemblyProduct("SCM Backup")]
-[assembly: AssemblyCopyright("Copyright © Christian Specht 2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: InternalsVisibleTo("ScmBackup.Tests")]
