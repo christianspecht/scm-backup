@@ -17,8 +17,6 @@ if [%APPVEYOR%] == [] (
     set RELEASE_FILENAME=scm-backup-%COMMITID%
     
 ) else (
-
-    choco install 7zip.commandline -version 15.12
     
     set RELEASE_FILENAME=scm-backup-%APPVEYOR_BUILD_VERSION%-%COMMITID%
 )
@@ -53,7 +51,7 @@ if errorlevel 1 goto end
 
 echo .
 echo ###### ZIP ######
-call 7za a -r -tzip "release\%RELEASE_FILENAME%.zip" .\release\bin\*
+call 7z a -r "release\%RELEASE_FILENAME%.zip" .\release\bin\*
 
 
 
