@@ -27,11 +27,11 @@ namespace ScmBackup.Scm
                 
                 if (scm.IsOnThisComputer(config))
                 {
-                    this.logger.Log(ErrorLevel.Info, Resource.ScmOnThisComputer, scm.ShortName);
+                    this.logger.Log(ErrorLevel.Info, Resource.ScmOnThisComputer, scm.DisplayName);
                 }
                 else
                 {
-                    this.logger.Log(ErrorLevel.Error, Resource.ScmNotOnThisComputer, scm.ShortName);
+                    this.logger.Log(ErrorLevel.Error, Resource.ScmNotOnThisComputer, scm.DisplayName);
                     ok = false;
                 }
             }

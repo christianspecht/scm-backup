@@ -13,6 +13,11 @@ namespace ScmBackup.Scm
             get { return "git"; }
         }
 
+        public string DisplayName
+        {
+            get { return "Git"; }
+        }
+
         public bool IsOnThisComputer(Config config)
         {
             throw new NotImplementedException();

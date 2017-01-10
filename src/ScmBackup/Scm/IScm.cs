@@ -13,6 +13,11 @@ namespace ScmBackup.Scm
         string ShortName { get; }
 
         /// <summary>
+        /// "Pretty" name for displaying
+        /// </summary>
+        string DisplayName { get; }
+
+        /// <summary>
         /// check whether the SCM is present on this computer
         /// </summary>
         bool IsOnThisComputer(Config config);

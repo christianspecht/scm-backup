@@ -14,6 +14,11 @@ namespace ScmBackup.Tests.Scm
             get { return "fake"; }
         }
 
+        public string DisplayName
+        {
+            get { return "Fake"; }
+        }
+
         public bool IsOnThisComputer(Config config)
         {
             return this.IsOnThisComputerResult;
