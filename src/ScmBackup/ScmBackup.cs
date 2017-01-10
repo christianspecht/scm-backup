@@ -28,7 +28,7 @@ namespace ScmBackup
 
             var repos = this.apiCaller.CallApis(config);
 
-            if (this.validator.ValidateScms(repos.GetScmTypes(), config))
+            if (!this.validator.ValidateScms(repos.GetScmTypes(), config))
             {
                 throw new InvalidOperationException(Resource.ScmValidatorError);
             }
