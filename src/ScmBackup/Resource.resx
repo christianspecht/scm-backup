@@ -192,6 +192,9 @@
   <data name="ScmOnThisComputer" xml:space="preserve">
     <value>{0} was found on this computer</value>
   </data>
+  <data name="ScmValidatorError" xml:space="preserve">
+    <value>At least one SCM is missing on this machine!</value>
+  </data>
   <data name="StartingBackup" xml:space="preserve">
     <value>{0}: Starting backup</value>
   </data>

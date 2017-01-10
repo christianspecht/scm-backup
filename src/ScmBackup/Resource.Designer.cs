@@ -285,6 +285,15 @@ namespace ScmBackup {
         }
         
         /// <summary>
+        ///    Looks up a localized string similar to At least one SCM is missing on this machine!.
+        /// </summary>
+        public static string ScmValidatorError {
+            get {
+                return ResourceManager.GetString("ScmValidatorError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///    Looks up a localized string similar to {0}: Starting backup.
         /// </summary>
         public static string StartingBackup {
