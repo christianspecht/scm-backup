@@ -135,6 +135,9 @@
   <data name="AppTitle" xml:space="preserve">
     <value>SCM Backup</value>
   </data>
+  <data name="AppWebsite" xml:space="preserve">
+    <value>http://scm-backup.org/</value>
+  </data>
   <data name="AuthNameAndPasswortEmpty" xml:space="preserve">
     <value>AuthName and Password are empty</value>
   </data>

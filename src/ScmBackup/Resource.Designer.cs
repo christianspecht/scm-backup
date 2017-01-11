@@ -114,6 +114,15 @@ namespace ScmBackup {
         }
         
         /// <summary>
+        ///    Looks up a localized string similar to http://scm-backup.org/.
+        /// </summary>
+        public static string AppWebsite {
+            get {
+                return ResourceManager.GetString("AppWebsite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///    Looks up a localized string similar to AuthName and Password are empty.
         /// </summary>
         public static string AuthNameAndPasswortEmpty {

@@ -16,6 +16,7 @@
         public void Run()
         {
             logger.Log(ErrorLevel.Info, this.context.AppTitle);
+            logger.Log(ErrorLevel.Info, Resource.AppWebsite);
 
             // TODO: log more stuff (operating system, configuration...)
 
