@@ -190,13 +190,16 @@
     <value>SCM {0} doesn't exist</value>
   </data>
   <data name="ScmNotOnThisComputer" xml:space="preserve">
-    <value>{0} was NOT found on this computer</value>
+    <value>{0} was NOT found</value>
   </data>
   <data name="ScmOnThisComputer" xml:space="preserve">
-    <value>{0} was found on this computer</value>
+    <value>{0} was found</value>
   </data>
   <data name="ScmValidatorError" xml:space="preserve">
     <value>At least one SCM is missing on this machine!</value>
+  </data>
+  <data name="ScmValidatorStarting" xml:space="preserve">
+    <value>Trying to find SCMs on this machine...</value>
   </data>
   <data name="StartingBackup" xml:space="preserve">
     <value>{0}: Starting backup</value>

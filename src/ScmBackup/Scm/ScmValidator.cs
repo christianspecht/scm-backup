@@ -20,6 +20,7 @@ namespace ScmBackup.Scm
         public bool ValidateScms(HashSet<ScmType> scms, Config config)
         {
             bool ok = true;
+            this.logger.Log(ErrorLevel.Info, Resource.ScmValidatorStarting);
 
             foreach (var scmType in scms)
             {

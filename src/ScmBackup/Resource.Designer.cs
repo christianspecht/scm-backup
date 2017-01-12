@@ -276,7 +276,7 @@ namespace ScmBackup {
         }
         
         /// <summary>
-        ///    Looks up a localized string similar to {0} was NOT found on this computer.
+        ///    Looks up a localized string similar to {0} was NOT found.
         /// </summary>
         public static string ScmNotOnThisComputer {
             get {
@@ -285,7 +285,7 @@ namespace ScmBackup {
         }
         
         /// <summary>
-        ///    Looks up a localized string similar to {0} was found on this computer.
+        ///    Looks up a localized string similar to {0} was found.
         /// </summary>
         public static string ScmOnThisComputer {
             get {
@@ -299,6 +299,15 @@ namespace ScmBackup {
         public static string ScmValidatorError {
             get {
                 return ResourceManager.GetString("ScmValidatorError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///    Looks up a localized string similar to Trying to find SCMs on this machine....
+        /// </summary>
+        public static string ScmValidatorStarting {
+            get {
+                return ResourceManager.GetString("ScmValidatorStarting", resourceCulture);
             }
         }
         
