@@ -1,26 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace ScmBackup.Scm
+﻿namespace ScmBackup.Scm
 {
     [Scm(Type = ScmType.Git)]
-    internal class GitScm : IScm
+    internal class GitScm : CommandLineScm, IScm
     {
-        public string ShortName
+        public override string ShortName
         {
             get { return "git"; }
         }
 
-        public string DisplayName
+        public override string DisplayName
         {
             get { return "Git"; }
         }
 
-        public bool IsOnThisComputer(Config config)
+        protected override string CommandName
         {
-            throw new NotImplementedException();
+            get { return "git"; }
+        }
+
+        protected override bool IsOnThisComputer()
+        {
+            string result = this.ExecuteCommand("--version");
+            return result.ToLower().Contains("git version");
         }
     }
 }
