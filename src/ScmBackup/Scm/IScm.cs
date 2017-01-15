@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace ScmBackup.Scm
+﻿namespace ScmBackup.Scm
 {
     internal interface IScm
     {
         /// <summary>
-        /// Short name of the SCM
+        /// Short name of the SCM (used to find settings in the config)
         /// </summary>
         string ShortName { get; }
 
@@ -18,7 +13,7 @@ namespace ScmBackup.Scm
         string DisplayName { get; }
 
         /// <summary>
-        /// check whether the SCM is present on this computer
+        /// Checks whether the SCM is present on this computer
         /// </summary>
         bool IsOnThisComputer(Config config);
     }

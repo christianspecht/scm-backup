@@ -18,6 +18,7 @@ namespace ScmBackup
         public Config()
         {
             this.Sources = new List<ConfigSource>();
+            this.Scms = new List<ConfigScm>();
         }
     }
 }
