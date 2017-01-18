@@ -1,5 +1,6 @@
 ﻿using ScmBackup.Scm;
 using ScmBackup.Tests.Scm;
+using System;
 using System.Collections.Generic;
 using Xunit;
 
@@ -49,6 +50,17 @@ namespace ScmBackup.Tests
         public void ReturnsFalseWhenScmsDontValidate()
         {
             this.scm.IsOnThisComputerResult = false;
+
+            var result = this.sut.ValidateScms(this.scmlist, config);
+
+            Assert.False(result);
+            Assert.Equal(ErrorLevel.Error, this.logger.LastErrorLevel);
+        }
+
+        [Fact]
+        public void DoesNotThrowExceptionAndReturnsFalseWhenScmThrowsException()
+        {
+            this.scm.IsOnThisComputerException = new Exception("boom");
 
             var result = this.sut.ValidateScms(this.scmlist, config);
 

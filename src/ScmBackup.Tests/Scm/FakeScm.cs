@@ -1,4 +1,5 @@
 ﻿using ScmBackup.Scm;
+using System;
 
 namespace ScmBackup.Tests.Scm
 {
@@ -8,6 +9,11 @@ namespace ScmBackup.Tests.Scm
         /// Value returned by IsOnThisComputer()
         /// </summary>
         public bool IsOnThisComputerResult { get; set; }
+
+        /// <summary>
+        /// Exception to be thrown by IsOnThisComputer
+        /// </summary>
+        public Exception IsOnThisComputerException { get; set; }
 
         public string ShortName
         {
@@ -21,6 +27,11 @@ namespace ScmBackup.Tests.Scm
 
         public bool IsOnThisComputer(Config config)
         {
+            if (this.IsOnThisComputerException != null)
+            {
+                throw this.IsOnThisComputerException;
+            }
+
             return this.IsOnThisComputerResult;
         }
     }

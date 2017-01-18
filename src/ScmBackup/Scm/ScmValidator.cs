@@ -1,4 +1,5 @@
 ﻿using ScmBackup.Scm;
+using System;
 using System.Collections.Generic;
 
 namespace ScmBackup.Scm
@@ -25,8 +26,18 @@ namespace ScmBackup.Scm
             foreach (var scmType in scms)
             {
                 var scm = this.factory.Create(scmType);
-                
-                if (scm.IsOnThisComputer(config))
+
+                bool onComputer = false;
+                try
+                {
+                    onComputer = scm.IsOnThisComputer(config);
+                }
+                catch (Exception ex)
+                {
+                    this.logger.Log(ErrorLevel.Debug, ex, scm.DisplayName);
+                }
+
+                if (onComputer)
                 {
                     this.logger.Log(ErrorLevel.Info, Resource.ScmOnThisComputer, scm.DisplayName);
                 }
