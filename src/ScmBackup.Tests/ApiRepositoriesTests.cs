@@ -59,7 +59,7 @@ namespace ScmBackup.Tests
 
             var result = sut.GetReposForSource(source);
 
-            Assert.Equal(2, result.Count);
+            Assert.Equal(2, result.Count());
             Assert.Equal("foo", result.First().Name);
         }
 
