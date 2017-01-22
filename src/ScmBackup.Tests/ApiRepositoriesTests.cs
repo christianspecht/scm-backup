@@ -23,6 +23,28 @@ namespace ScmBackup.Tests
         }
 
         [Fact]
+        public void GetSourcesReturnsSources()
+        {
+            var source1 = new ConfigSource();
+            source1.Title = "testsource";
+            var source2 = new ConfigSource();
+            source2.Title = "testsource2";
+
+            var list = new List<HosterRepository>();
+            list.Add(new HosterRepository("foo", "http://foo", ScmType.Git));
+
+            var sut = new ApiRepositories();
+            sut.AddItem(source1, list);
+            sut.AddItem(source2, list);
+
+            var result = sut.GetSources();
+
+            Assert.Equal(2, result.Count());
+            Assert.True(result.Contains(source1));
+            Assert.True(result.Contains(source2));
+        }
+
+        [Fact]
         public void GetReposForSourceReturnsList()
         {
             var source = new ConfigSource();
