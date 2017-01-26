@@ -1,4 +1,5 @@
 ﻿using ScmBackup.Scm;
+using System.IO;
 using Xunit;
 
 namespace ScmBackup.Tests.Integration.Scm
@@ -27,6 +28,43 @@ namespace ScmBackup.Tests.Integration.Scm
             var result = sut.IsOnThisComputer(this.config);
 
             Assert.True(result);
+        }
+
+        [Fact]
+        public void DirectoryIsRepositoryReturnsFalseForEmptyDir()
+        {
+            string dir = TempDirectoryHelper.CreateTempDirectory();
+
+            var sut = new GitScm();
+            sut.IsOnThisComputer(this.config);
+
+            Assert.False(sut.DirectoryIsRepository(dir));
+        }
+
+        [Fact]
+        public void DirectoryIsRepositoryReturnsFalseForNonEmptyDir()
+        {
+            string dir = TempDirectoryHelper.CreateTempDirectory();
+            string subDir = Path.Combine(dir, "sub");
+            Directory.CreateDirectory(subDir);
+            File.WriteAllText(Path.Combine(dir, "foo.txt"), "foo");
+
+            var sut = new GitScm();
+            sut.IsOnThisComputer(this.config);
+
+            Assert.False(sut.DirectoryIsRepository(dir));
+        }
+
+        [Fact]
+        public void CreateRepositoryCreatesNewRepository()
+        {
+            string dir = TempDirectoryHelper.CreateTempDirectory();
+
+            var sut = new GitScm();
+            sut.IsOnThisComputer(this.config);
+            sut.CreateRepository(dir);
+
+            Assert.True(sut.DirectoryIsRepository(dir));
         }
     }
 }

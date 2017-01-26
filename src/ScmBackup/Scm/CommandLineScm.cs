@@ -60,6 +60,16 @@ namespace ScmBackup.Scm
         }
 
         /// <summary>
+        /// Checks whether the given directory is a repository
+        /// </summary>
+        public abstract bool DirectoryIsRepository(string directory);
+
+        /// <summary>
+        /// Creates a repository in the given directory
+        /// </summary>
+        public abstract void CreateRepository(string directory);
+
+        /// <summary>
         /// Gets the file to execute
         /// (either a complete path from the config, or this.CommandName)
         /// </summary>

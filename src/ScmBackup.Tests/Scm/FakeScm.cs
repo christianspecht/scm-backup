@@ -34,5 +34,15 @@ namespace ScmBackup.Tests.Scm
 
             return this.IsOnThisComputerResult;
         }
+
+        public bool DirectoryIsRepository(string directory)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void CreateRepository(string directory)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

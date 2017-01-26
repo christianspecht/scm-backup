@@ -67,5 +67,15 @@ namespace ScmBackup.Tests.Integration.Scm
             string result = this.ExecuteCommand(this.FakeCommandArgs);
             return result.ToLower().Contains(this.FakeCommandResult.ToLower());
         }
+
+        public override bool DirectoryIsRepository(string directory)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void CreateRepository(string directory)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

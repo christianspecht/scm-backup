@@ -16,5 +16,15 @@
         /// Checks whether the SCM is present on this computer
         /// </summary>
         bool IsOnThisComputer(Config config);
+
+        /// <summary>
+        /// Checks whether the given directory is a repository
+        /// </summary>
+        bool DirectoryIsRepository(string directory);
+
+        /// <summary>
+        /// Creates a repository in the given directory
+        /// </summary>
+        void CreateRepository(string directory);
     }
 }
