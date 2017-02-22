@@ -156,6 +156,9 @@
   <data name="ConfigSourceWithoutTitle" xml:space="preserve">
     <value>All sources in the settings file must have a title.</value>
   </data>
+  <data name="CouldntGetHosterName" xml:space="preserve">
+    <value>Could not get hoster name from type {0}</value>
+  </data>
   <data name="EndSeconds" xml:space="preserve">
     <value>The application will close in {0} seconds!</value>
   </data>

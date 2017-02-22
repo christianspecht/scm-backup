@@ -177,6 +177,15 @@ namespace ScmBackup {
         }
         
         /// <summary>
+        ///    Looks up a localized string similar to Could not get hoster name from type {0}.
+        /// </summary>
+        public static string CouldntGetHosterName {
+            get {
+                return ResourceManager.GetString("CouldntGetHosterName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///    Looks up a localized string similar to The application will close in {0} seconds!.
         /// </summary>
         public static string EndSeconds {
