@@ -11,7 +11,7 @@ namespace ScmBackup.Hosters.Github
     /// <summary>
     /// Calls the GitHub API
     /// </summary>
-    internal class GithubApi : IGithubApi
+    internal class GithubApi : IHosterApi
     {
         private readonly IHttpRequest request;
         private readonly ILogger logger;

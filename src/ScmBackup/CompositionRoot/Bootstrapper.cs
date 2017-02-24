@@ -2,7 +2,6 @@
 using ScmBackup.Http;
 using ScmBackup.Scm;
 using SimpleInjector;
-using System.Linq;
 using System.Reflection;
 
 namespace ScmBackup.CompositionRoot
@@ -40,16 +39,20 @@ namespace ScmBackup.CompositionRoot
             var validators = container.GetTypesToRegister(typeof(IConfigSourceValidator), thisAssembly);
             foreach (var validator in validators)
             {
-                var validatorInterface = validator.GetInterfaces().Except(new[] { (typeof(IConfigSourceValidator)) }).First();
-                container.Register(validatorInterface, validator);
+                string hosterName = HosterNameHelper.GetHosterName(validator, "configsourcevalidator");
+
+                container.RegisterConditional(typeof(IConfigSourceValidator), validator, 
+                    c => HosterNameHelper.GetHosterName(c.Consumer.ImplementationType, "hoster") == hosterName && !c.Handled);
             }
 
             // auto-register hoster APIs
             var apis = container.GetTypesToRegister(typeof(IHosterApi), thisAssembly);
             foreach (var api in apis)
             {
-                var apiInterface = api.GetInterfaces().Except(new[] { typeof(IHosterApi) }).First();
-                container.Register(apiInterface, api);
+                string hosterName = HosterNameHelper.GetHosterName(api, "api");
+
+                container.RegisterConditional(typeof(IHosterApi), api,
+                    c => HosterNameHelper.GetHosterName(c.Consumer.ImplementationType, "hoster") == hosterName && !c.Handled);
             }
 
             // auto-register hosters

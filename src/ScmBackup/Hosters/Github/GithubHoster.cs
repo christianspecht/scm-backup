@@ -6,7 +6,7 @@
     [Hoster(Name = "github")]
     internal class GithubHoster : IHoster
     {
-        public GithubHoster(IGithubConfigSourceValidator validator, IGithubApi api)
+        public GithubHoster(IConfigSourceValidator validator, IHosterApi api)
         {
             this.Validator = validator;
             this.Api = api;

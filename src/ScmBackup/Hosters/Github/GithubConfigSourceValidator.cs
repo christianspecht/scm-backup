@@ -3,7 +3,7 @@
     /// <summary>
     /// validator for GitHub repositories
     /// </summary>
-    internal class GithubConfigSourceValidator : IGithubConfigSourceValidator
+    internal class GithubConfigSourceValidator : IConfigSourceValidator
     {
         public ValidationResult Validate(ConfigSource config)
         {
