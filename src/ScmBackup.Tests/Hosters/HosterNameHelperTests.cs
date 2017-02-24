@@ -23,5 +23,21 @@ namespace ScmBackup.Tests.Hosters
 
             Assert.Throws<InvalidOperationException>(() => HosterNameHelper.GetHosterName(t, "hoster"));
         }
+
+        [Fact]
+        public void ThrowsWhenTypeNameDoesntContainSuffix()
+        {
+            var t = typeof(FooBarBar);
+
+            Assert.Throws<InvalidOperationException>(() => HosterNameHelper.GetHosterName(t, "hoster"));
+        }
+
+        [Fact]
+        public void ThrowsWhenTypeNameContainsSuffixMoreThanOnce()
+        {
+            var t = typeof(FooBarBar);
+
+            Assert.Throws<InvalidOperationException>(() => HosterNameHelper.GetHosterName(t, "bar"));
+        }
     }
 }

@@ -156,14 +156,23 @@
   <data name="ConfigSourceWithoutTitle" xml:space="preserve">
     <value>All sources in the settings file must have a title.</value>
   </data>
-  <data name="CouldntGetHosterName" xml:space="preserve">
-    <value>Could not get hoster name from type {0}</value>
-  </data>
   <data name="EndSeconds" xml:space="preserve">
     <value>The application will close in {0} seconds!</value>
   </data>
   <data name="HosterDoesntExist" xml:space="preserve">
     <value>Hoster {0} doesn't exist</value>
+  </data>
+  <data name="HosterNameError" xml:space="preserve">
+    <value>Could not get hoster name from type '{0}' / suffix '{1}': </value>
+  </data>
+  <data name="HosterNameError_End" xml:space="preserve">
+    <value>Type name doesn't end with suffix</value>
+  </data>
+  <data name="HosterNameError_MultiSuffix" xml:space="preserve">
+    <value>Type name contains suffix multiple times</value>
+  </data>
+  <data name="HosterNameError_NoSuffix" xml:space="preserve">
+    <value>Type name doesn't contain suffix</value>
   </data>
   <data name="HttpHeaders" xml:space="preserve">
     <value>Http Headers: {0}</value>

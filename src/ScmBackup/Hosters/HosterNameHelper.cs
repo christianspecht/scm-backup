@@ -12,12 +12,24 @@ namespace ScmBackup.Hosters
             var name = type.Name.ToLower();
             suffix = suffix.ToLower();
 
-            if (!name.EndsWith(suffix))
+            int n = name.IndexOf(suffix);
+            int n2 = name.LastIndexOf(suffix);
+
+            if (n == 0)
             {
-                throw new InvalidOperationException(string.Format(Resource.CouldntGetHosterName, type.Name));
+                throw new InvalidOperationException(string.Format(Resource.HosterNameError, type.Name, suffix) + Resource.HosterNameError_NoSuffix);
             }
 
-            int n = name.IndexOf(suffix);
+            if (!name.EndsWith(suffix))
+            {
+                throw new InvalidOperationException(string.Format(Resource.HosterNameError, type.Name, suffix)+ Resource.HosterNameError_End);
+            }
+
+            if (n != n2)
+            {
+                throw new InvalidOperationException(string.Format(Resource.HosterNameError, type.Name, suffix) + Resource.HosterNameError_MultiSuffix);
+            }
+            
             return name.Substring(0, n);
         }
     }

@@ -177,15 +177,6 @@ namespace ScmBackup {
         }
         
         /// <summary>
-        ///    Looks up a localized string similar to Could not get hoster name from type {0}.
-        /// </summary>
-        public static string CouldntGetHosterName {
-            get {
-                return ResourceManager.GetString("CouldntGetHosterName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///    Looks up a localized string similar to The application will close in {0} seconds!.
         /// </summary>
         public static string EndSeconds {
@@ -200,6 +191,42 @@ namespace ScmBackup {
         public static string HosterDoesntExist {
             get {
                 return ResourceManager.GetString("HosterDoesntExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///    Looks up a localized string similar to Could not get hoster name from type &apos;{0}&apos; / suffix &apos;{1}&apos;: .
+        /// </summary>
+        public static string HosterNameError {
+            get {
+                return ResourceManager.GetString("HosterNameError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///    Looks up a localized string similar to Type name doesn&apos;t end with suffix.
+        /// </summary>
+        public static string HosterNameError_End {
+            get {
+                return ResourceManager.GetString("HosterNameError_End", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///    Looks up a localized string similar to Type name contains suffix multiple times.
+        /// </summary>
+        public static string HosterNameError_MultiSuffix {
+            get {
+                return ResourceManager.GetString("HosterNameError_MultiSuffix", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///    Looks up a localized string similar to Type name doesn&apos;t contain suffix.
+        /// </summary>
+        public static string HosterNameError_NoSuffix {
+            get {
+                return ResourceManager.GetString("HosterNameError_NoSuffix", resourceCulture);
             }
         }
         
