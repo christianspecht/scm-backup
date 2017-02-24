@@ -3,7 +3,6 @@ using System.Collections.Generic;
 
 namespace ScmBackup.Tests.Hosters
 {
-    [Hoster(Name = "fake")]
     internal class FakeHoster : IHoster
     {
         public FakeHoster()

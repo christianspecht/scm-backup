@@ -1,6 +1,5 @@
 ﻿namespace ScmBackup.Hosters.Bitbucket
 {
-    [Hoster(Name = "bitbucket")]
     internal class BitbucketHoster : IHoster
     {
         public BitbucketHoster(IConfigSourceValidator validator, IHosterApi api)

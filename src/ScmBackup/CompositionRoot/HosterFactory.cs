@@ -25,10 +25,10 @@ namespace ScmBackup.CompositionRoot
                 throw new InvalidOperationException(string.Format(Resource.TypeIsNoIHoster, type.ToString()));
             }
 
-            var attribute = type.GetTypeInfo().GetCustomAttribute<HosterAttribute>();
+            string hosterName = HosterNameHelper.GetHosterName(type, "hoster");
 
             this.container.Register(type);
-            this.Add(attribute.Name, type);
+            this.Add(hosterName, type);
         }
 
         public IHoster Create(string hosterName)

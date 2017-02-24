@@ -3,7 +3,6 @@
     /// <summary>
     /// BaseHoster implementation for GitHub
     /// </summary>
-    [Hoster(Name = "github")]
     internal class GithubHoster : IHoster
     {
         public GithubHoster(IConfigSourceValidator validator, IHosterApi api)
