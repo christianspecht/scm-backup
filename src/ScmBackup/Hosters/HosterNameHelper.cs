@@ -2,12 +2,12 @@
 
 namespace ScmBackup.Hosters
 {
-    public class HosterNameHelper
+    public static class HosterNameHelper
     {
         /// <summary>
         /// Gets a hoster name from a type name via convention (the part before the suffix is the hoster name)
         /// </summary>
-        public string GetHosterName(Type type, string suffix)
+        public static string GetHosterName(Type type, string suffix)
         {
             var name = type.Name.ToLower();
             suffix = suffix.ToLower();

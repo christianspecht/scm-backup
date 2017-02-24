@@ -11,9 +11,7 @@ namespace ScmBackup.Tests.Hosters
         {
             var t = typeof(FakeHoster);
 
-            var sut = new HosterNameHelper();
-
-            var result = sut.GetHosterName(t, "hoster");
+            var result = HosterNameHelper.GetHosterName(t, "hoster");
 
             Assert.Equal("fake", result);
         }
@@ -23,9 +21,7 @@ namespace ScmBackup.Tests.Hosters
         {
             var t = typeof(FakeHosterApi);
 
-            var sut = new HosterNameHelper();
-
-            Assert.Throws<InvalidOperationException>(() => sut.GetHosterName(t, "hoster"));
+            Assert.Throws<InvalidOperationException>(() => HosterNameHelper.GetHosterName(t, "hoster"));
         }
     }
 }
