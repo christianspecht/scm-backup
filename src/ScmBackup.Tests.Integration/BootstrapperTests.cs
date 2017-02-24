@@ -38,11 +38,15 @@ namespace ScmBackup.Tests.Integration
         {
             var container = Bootstrapper.BuildContainer();
 
-            var gh = container.GetInstance<GithubHoster>();
+            var factory = container.GetInstance<IHosterFactory>();
+
+            var gh = factory.Create("github");
+            Assert.Equal(typeof(GithubHoster), gh.GetType());
             Assert.Equal(typeof(GithubApi), gh.Api.GetType());
             Assert.Equal(typeof(GithubConfigSourceValidator), gh.Validator.GetType());
 
-            var bb = container.GetInstance<BitbucketHoster>();
+            var bb = factory.Create("bitbucket");
+            Assert.Equal(typeof(BitbucketHoster), bb.GetType());
             Assert.Equal(typeof(BitbucketApi), bb.Api.GetType());
             Assert.Equal(typeof(BitbucketConfigSourceValidator), bb.Validator.GetType());
         }

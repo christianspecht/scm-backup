@@ -73,6 +73,7 @@ namespace ScmBackup.CompositionRoot
 
             container.RegisterSingleton<IHosterValidator>(new HosterValidator(hosterFactory));
             container.RegisterSingleton<IHosterApiCaller>(new HosterApiCaller(hosterFactory));
+            container.RegisterSingleton<IHosterFactory>(hosterFactory); // only needed for integration tests!
             container.RegisterSingleton<IScmFactory>(scmFactory);
             container.Verify();
 
