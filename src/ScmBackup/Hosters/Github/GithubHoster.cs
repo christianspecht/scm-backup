@@ -1,8 +1,5 @@
 ﻿namespace ScmBackup.Hosters.Github
 {
-    /// <summary>
-    /// BaseHoster implementation for GitHub
-    /// </summary>
     internal class GithubHoster : IHoster
     {
         public GithubHoster(IConfigSourceValidator validator, IHosterApi api)
