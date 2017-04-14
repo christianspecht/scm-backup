@@ -27,19 +27,19 @@ dotnet restore
 
 echo .
 echo ###### BUILD SOLUTION ######
-dotnet build */**/project.json -c Release
+dotnet build -c Release
 if errorlevel 1 goto end
 
 
 echo .
 echo ###### UNIT TESTS ######
-dotnet test "%~dp0\src\ScmBackup.Tests" -c Release
+dotnet test "%~dp0\src\ScmBackup.Tests\ScmBackup.Tests.csproj" -c Release
 if errorlevel 1 goto end
 
 
 echo .
 echo ###### INTEGRATION TESTS ######
-dotnet test "%~dp0\src\ScmBackup.Tests.Integration" -c Release
+dotnet test "%~dp0\src\ScmBackup.Tests.Integration\ScmBackup.Tests.Integration.csproj" -c Release
 if errorlevel 1 goto end
 
 

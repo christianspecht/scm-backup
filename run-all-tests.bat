@@ -7,7 +7,7 @@ if exist "%~dp0\environment-variables.bat" (
     pause
 )
 
-dotnet test "%~dp0\src\ScmBackup.Tests"
-dotnet test "%~dp0\src\ScmBackup.Tests.Integration"
+dotnet test "%~dp0\src\ScmBackup.Tests\ScmBackup.Tests.csproj"
+dotnet test "%~dp0\src\ScmBackup.Tests.Integration\ScmBackup.Tests.Integration.csproj"
 
 pause
