@@ -35,8 +35,7 @@ namespace ScmBackup.Tests.Integration.Scm
             Assert.Throws<FileNotFoundException>(() => sut.IsOnThisComputer(config));
         }
 
-        //[Fact]
-        // TODO: find out the actual path to the command
+        [Fact(Skip = "TODO: find out the actual path to the command")]
         public void ReallyExecutesWithPathFromConfig()
         {
             var sut = new FakeCommandLineScm();
