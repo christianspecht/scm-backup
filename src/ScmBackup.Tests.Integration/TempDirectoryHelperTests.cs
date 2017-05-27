@@ -13,5 +13,17 @@ namespace ScmBackup.Tests.Integration
             Assert.False(string.IsNullOrWhiteSpace(result));
             Assert.True(Directory.Exists(result));
         }
+
+        [Fact]
+        public void DirectoryWithSuffixIsCreated()
+        {
+            string suffix = "foo";
+
+            var result = TempDirectoryHelper.CreateTempDirectory(suffix);
+
+            Assert.False(string.IsNullOrWhiteSpace(result));
+            Assert.True(Directory.Exists(result));
+            Assert.True(result.EndsWith(suffix));
+        }
     }
 }
