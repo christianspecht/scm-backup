@@ -31,6 +31,18 @@ namespace ScmBackup.Tests.Integration.Scm
         }
 
         [Fact]
+        public void DirectoryIsRepositoryReturnsFalseForNonExistingDir()
+        {
+            string dir = TempDirectoryHelper.CreateTempDirectory();
+            string subDir = Path.Combine(dir, "sub");
+
+            var sut = new GitScm();
+            sut.IsOnThisComputer(this.config);
+
+            Assert.False(sut.DirectoryIsRepository(subDir));
+        }
+
+        [Fact]
         public void DirectoryIsRepositoryReturnsFalseForEmptyDir()
         {
             string dir = TempDirectoryHelper.CreateTempDirectory();
