@@ -7,6 +7,9 @@ if exist "%~dp0\environment-variables.bat" (
     pause
 )
 
+echo Deleting old temp folders...
+for /d %%a in (%temp%\scm-backup-temp-*) do rd /s /q "%%a"
+
 dotnet test "%~dp0\src\ScmBackup.Tests\ScmBackup.Tests.csproj"
 dotnet test "%~dp0\src\ScmBackup.Tests.Integration\ScmBackup.Tests.Integration.csproj"
 
