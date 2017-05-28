@@ -2,9 +2,9 @@
 
 namespace ScmBackup.Tests.Integration.Scm
 {
-    public class GitScm_Tests : IScmTests
+    public class GitScmTests : IScmTests
     {
-        public GitScm_Tests()
+        public GitScmTests()
         {
             this.sut = new GitScm();
         }
