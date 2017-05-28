@@ -4,27 +4,32 @@ using Xunit;
 
 namespace ScmBackup.Tests.Integration.Scm
 {
-    public class GitScmTests
+    public abstract class IScmTests
     {
-        public GitScmTests()
+        internal Config config;
+        internal IScm sut;
+
+        public IScmTests()
         {
             this.config = new Config();
         }
 
-        private readonly Config config;
+        [Fact]
+        public void SutWasSetInChildClass()
+        {
+            Assert.NotNull(this.sut);
+        }
 
         [Fact]
         public void IsOnThisComputerExecutes()
         {
-            var sut = new GitScm();
             sut.IsOnThisComputer(this.config);
         }
 
         [Fact]
         public void IsOnThisComputerReturnsTrue()
         {
-            // Some of the other integration tests will need to use Git -> make sure that the machine running the tests has Git installed
-            var sut = new GitScm();
+            // Some of the other integration tests will need to use the SCM -> make sure that it's installed on the machine running the tests
             var result = sut.IsOnThisComputer(this.config);
 
             Assert.True(result);
@@ -35,8 +40,7 @@ namespace ScmBackup.Tests.Integration.Scm
         {
             string dir = TempDirectoryHelper.CreateTempDirectory();
             string subDir = Path.Combine(dir, "sub");
-
-            var sut = new GitScm();
+            
             sut.IsOnThisComputer(this.config);
 
             Assert.False(sut.DirectoryIsRepository(subDir));
@@ -46,8 +50,7 @@ namespace ScmBackup.Tests.Integration.Scm
         public void DirectoryIsRepositoryReturnsFalseForEmptyDir()
         {
             string dir = TempDirectoryHelper.CreateTempDirectory();
-
-            var sut = new GitScm();
+            
             sut.IsOnThisComputer(this.config);
 
             Assert.False(sut.DirectoryIsRepository(dir));
@@ -60,8 +63,7 @@ namespace ScmBackup.Tests.Integration.Scm
             string subDir = Path.Combine(dir, "sub");
             Directory.CreateDirectory(subDir);
             File.WriteAllText(Path.Combine(dir, "foo.txt"), "foo");
-
-            var sut = new GitScm();
+            
             sut.IsOnThisComputer(this.config);
 
             Assert.False(sut.DirectoryIsRepository(dir));
@@ -71,8 +73,7 @@ namespace ScmBackup.Tests.Integration.Scm
         public void CreateRepositoryCreatesNewRepository()
         {
             string dir = TempDirectoryHelper.CreateTempDirectory();
-
-            var sut = new GitScm();
+            
             sut.IsOnThisComputer(this.config);
             sut.CreateRepository(dir);
 
