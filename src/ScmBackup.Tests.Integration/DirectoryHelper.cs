@@ -7,11 +7,11 @@ namespace ScmBackup.Tests.Integration
     /// <summary>
     /// helper class to create unique temp directories for integration tests
     /// </summary>
-    public class TempDirectoryHelper
+    public class DirectoryHelper
     {
         public static string CreateTempDirectory()
         {
-            return TempDirectoryHelper.CreateTempDirectory(string.Empty);
+            return DirectoryHelper.CreateTempDirectory(string.Empty);
         }
 
         public static string CreateTempDirectory(string suffix)

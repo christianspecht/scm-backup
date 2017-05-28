@@ -38,7 +38,7 @@ namespace ScmBackup.Tests.Integration.Scm
         [Fact]
         public void DirectoryIsRepositoryReturnsFalseForNonExistingDir()
         {
-            string dir = TempDirectoryHelper.CreateTempDirectory();
+            string dir = DirectoryHelper.CreateTempDirectory();
             string subDir = Path.Combine(dir, "sub");
             
             sut.IsOnThisComputer(this.config);
@@ -49,7 +49,7 @@ namespace ScmBackup.Tests.Integration.Scm
         [Fact]
         public void DirectoryIsRepositoryReturnsFalseForEmptyDir()
         {
-            string dir = TempDirectoryHelper.CreateTempDirectory();
+            string dir = DirectoryHelper.CreateTempDirectory();
             
             sut.IsOnThisComputer(this.config);
 
@@ -59,7 +59,7 @@ namespace ScmBackup.Tests.Integration.Scm
         [Fact]
         public void DirectoryIsRepositoryReturnsFalseForNonEmptyDir()
         {
-            string dir = TempDirectoryHelper.CreateTempDirectory();
+            string dir = DirectoryHelper.CreateTempDirectory();
             string subDir = Path.Combine(dir, "sub");
             Directory.CreateDirectory(subDir);
             File.WriteAllText(Path.Combine(dir, "foo.txt"), "foo");
@@ -72,7 +72,7 @@ namespace ScmBackup.Tests.Integration.Scm
         [Fact]
         public void CreateRepositoryCreatesNewRepository()
         {
-            string dir = TempDirectoryHelper.CreateTempDirectory();
+            string dir = DirectoryHelper.CreateTempDirectory();
             
             sut.IsOnThisComputer(this.config);
             sut.CreateRepository(dir);

@@ -3,12 +3,12 @@ using Xunit;
 
 namespace ScmBackup.Tests.Integration
 {
-    public class TempDirectoryHelperTests
+    public class DirectoryHelperTests
     {
         [Fact]
         public void DirectoryIsCreated()
         {
-            var result = TempDirectoryHelper.CreateTempDirectory();
+            var result = DirectoryHelper.CreateTempDirectory();
 
             Assert.False(string.IsNullOrWhiteSpace(result));
             Assert.True(Directory.Exists(result));
@@ -19,7 +19,7 @@ namespace ScmBackup.Tests.Integration
         {
             string suffix = "foo";
 
-            var result = TempDirectoryHelper.CreateTempDirectory(suffix);
+            var result = DirectoryHelper.CreateTempDirectory(suffix);
 
             Assert.False(string.IsNullOrWhiteSpace(result));
             Assert.True(Directory.Exists(result));
