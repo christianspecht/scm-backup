@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.IO;
+using System.Reflection;
 
 namespace ScmBackup.Tests.Integration
 {
@@ -32,6 +33,20 @@ namespace ScmBackup.Tests.Integration
             }
 
             return string.Empty;
+        }
+
+        /// <summary>
+        /// Returns the directory of the current test assembly (usually bin/debug)
+        /// </summary>
+        public static string TestAssemblyDirectory()
+        {
+            string unc = typeof(DirectoryHelper).GetTypeInfo().Assembly.CodeBase;
+
+            // convert from UNC path to "real" path
+            var uri = new Uri(unc);
+            string file = uri.LocalPath;
+
+            return Path.GetDirectoryName(file);
         }
     }
 }

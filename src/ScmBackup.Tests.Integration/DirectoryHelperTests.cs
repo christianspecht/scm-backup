@@ -25,5 +25,18 @@ namespace ScmBackup.Tests.Integration
             Assert.True(Directory.Exists(result));
             Assert.True(result.EndsWith(suffix));
         }
+
+        [Fact]
+        public void TestAssemblyDirectoryWorks()
+        {
+            // Difficult to test, because it's hard to determine the path *without* using the method under test.
+            // -> at least make sure it doesn't throw and it's a real path
+            string result = DirectoryHelper.TestAssemblyDirectory();
+
+            Assert.False(string.IsNullOrWhiteSpace(result), result);
+            Assert.True(Directory.Exists(result), result);
+
+            System.Console.WriteLine(result);
+        }
     }
 }
