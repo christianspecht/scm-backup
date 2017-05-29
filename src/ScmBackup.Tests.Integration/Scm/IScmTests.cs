@@ -38,7 +38,7 @@ namespace ScmBackup.Tests.Integration.Scm
         [Fact]
         public void DirectoryIsRepositoryReturnsFalseForNonExistingDir()
         {
-            string dir = DirectoryHelper.CreateTempDirectory();
+            string dir = DirectoryHelper.CreateTempDirectory(DirSuffix("non-existing"));
             string subDir = Path.Combine(dir, "sub");
             
             sut.IsOnThisComputer(this.config);
@@ -49,7 +49,7 @@ namespace ScmBackup.Tests.Integration.Scm
         [Fact]
         public void DirectoryIsRepositoryReturnsFalseForEmptyDir()
         {
-            string dir = DirectoryHelper.CreateTempDirectory();
+            string dir = DirectoryHelper.CreateTempDirectory(DirSuffix("empty"));
             
             sut.IsOnThisComputer(this.config);
 
@@ -59,7 +59,7 @@ namespace ScmBackup.Tests.Integration.Scm
         [Fact]
         public void DirectoryIsRepositoryReturnsFalseForNonEmptyDir()
         {
-            string dir = DirectoryHelper.CreateTempDirectory();
+            string dir = DirectoryHelper.CreateTempDirectory(DirSuffix("non-empty"));
             string subDir = Path.Combine(dir, "sub");
             Directory.CreateDirectory(subDir);
             File.WriteAllText(Path.Combine(dir, "foo.txt"), "foo");
@@ -72,12 +72,20 @@ namespace ScmBackup.Tests.Integration.Scm
         [Fact]
         public void CreateRepositoryCreatesNewRepository()
         {
-            string dir = DirectoryHelper.CreateTempDirectory();
+            string dir = DirectoryHelper.CreateTempDirectory(DirSuffix("create"));
             
             sut.IsOnThisComputer(this.config);
             sut.CreateRepository(dir);
 
             Assert.True(sut.DirectoryIsRepository(dir));
+        }
+
+        /// <summary>
+        /// helper for directory suffixes
+        /// </summary>
+        private string DirSuffix(string suffix)
+        {
+            return "iscm-" + this.sut.ShortName + "-" + suffix;
         }
     }
 }
