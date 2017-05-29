@@ -77,6 +77,11 @@ namespace ScmBackup.Tests.Integration.Scm
             return result.ToLower().Contains(this.FakeCommandResult.ToLower());
         }
 
+        public override string GetVersionNumber()
+        {
+            throw new NotImplementedException();
+        }
+
         public override bool DirectoryIsRepository(string directory)
         {
             throw new NotImplementedException();

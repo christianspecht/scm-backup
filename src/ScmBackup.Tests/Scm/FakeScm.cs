@@ -35,6 +35,11 @@ namespace ScmBackup.Tests.Scm
             return this.IsOnThisComputerResult;
         }
 
+        public string GetVersionNumber()
+        {
+            throw new NotImplementedException();
+        }
+
         public bool DirectoryIsRepository(string directory)
         {
             throw new NotImplementedException();

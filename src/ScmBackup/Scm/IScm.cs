@@ -18,6 +18,12 @@
         bool IsOnThisComputer(Config config);
 
         /// <summary>
+        /// Gets the SCM's version number.
+        /// Should throw exceptions if the version number can't be determined.
+        /// </summary>
+        string GetVersionNumber();
+
+        /// <summary>
         /// Checks whether the given directory is a repository
         /// </summary>
         bool DirectoryIsRepository(string directory);

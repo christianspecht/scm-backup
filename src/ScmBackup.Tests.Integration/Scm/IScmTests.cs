@@ -1,4 +1,5 @@
 ﻿using ScmBackup.Scm;
+using System;
 using System.IO;
 using Xunit;
 
@@ -33,6 +34,20 @@ namespace ScmBackup.Tests.Integration.Scm
             var result = sut.IsOnThisComputer(this.config);
 
             Assert.True(result);
+        }
+
+        [Fact]
+        public void GetVersionNumberReturnsVersionNumber()
+        {
+            sut.IsOnThisComputer(this.config);
+
+            // Getting the SCM's version number without the method under test is difficult -> just check whether it executes and returns something
+            var result = sut.GetVersionNumber();
+
+            Assert.False(string.IsNullOrWhiteSpace(result));
+
+            // output version number to be sure
+            Console.WriteLine("{0} version {1}", sut.DisplayName, result);
         }
 
         [Fact]

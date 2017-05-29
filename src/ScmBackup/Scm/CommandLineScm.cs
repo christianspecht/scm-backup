@@ -25,6 +25,13 @@ namespace ScmBackup.Scm
         protected abstract bool IsOnThisComputer();
 
         /// <summary>
+        /// Gets the SCM's version number.
+        /// Must be implemented in the child classes by calling ExecuteCommand and checking the result.
+        /// Should throw exceptions if the version number can't be determined.
+        /// </summary>
+        public abstract string GetVersionNumber();
+
+        /// <summary>
         /// Executes the command line tool.
         /// GetExecutable must already have been called before (usually by calling IsOnThisComputer)
         /// </summary>

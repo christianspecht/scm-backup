@@ -1,4 +1,6 @@
-﻿namespace ScmBackup.Scm
+﻿using System;
+
+namespace ScmBackup.Scm
 {
     [Scm(Type = ScmType.Git)]
     internal class GitScm : CommandLineScm, IScm
@@ -22,6 +24,14 @@
         {
             string result = this.ExecuteCommand("--version");
             return result.ToLower().Contains("git version");
+        }
+
+        public override string GetVersionNumber()
+        {
+            string result = this.ExecuteCommand("--version");
+
+            const string search = "git version ";
+            return result.Substring(result.IndexOf(search) + search.Length);
         }
 
         public override bool DirectoryIsRepository(string directory)
