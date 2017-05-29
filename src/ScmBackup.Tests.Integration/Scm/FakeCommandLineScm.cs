@@ -1,5 +1,6 @@
 ﻿using ScmBackup.Scm;
 using System;
+using System.IO;
 using System.Runtime.InteropServices;
 
 namespace ScmBackup.Tests.Integration.Scm
@@ -8,14 +9,17 @@ namespace ScmBackup.Tests.Integration.Scm
     {
         public FakeCommandLineScm()
         {
+            string testAssemblyDir = DirectoryHelper.TestAssemblyDirectory();
+
             // some simple command with predictable result, to execute for testing
             // (probably different for each OS)
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
-                // https://en.wikipedia.org/wiki/Whoami
-                this.FakeCommandName = "whoami";
+                this.FakeCommandName = Path.Combine(testAssemblyDir, @"Scm\FakeCommandLineScmTools\FakeCommandLineScm-Command-Windows.bat");
                 this.FakeCommandArgs = "";
-                this.FakeCommandResult = Environment.MachineName;
+                this.FakeCommandResult = "Windows";
+
+                this.FakeCommandNameNotExisting = Path.Combine(testAssemblyDir, "doesnt-exist");
             }
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
             {
@@ -41,6 +45,11 @@ namespace ScmBackup.Tests.Integration.Scm
         /// the result should contain this string
         /// </summary>
         public string FakeCommandResult { get; private set; }
+
+        /// <summary>
+        /// "wrong" command which doesn't exist (to test error handling)
+        /// </summary>
+        public string FakeCommandNameNotExisting { get; private set; }
 
         public override string DisplayName
         {

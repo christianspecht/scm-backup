@@ -18,6 +18,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Update="Scm\FakeCommandLineScmTools\FakeCommandLineScm-Command-Windows.bat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="testsettings.json;brokensettings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

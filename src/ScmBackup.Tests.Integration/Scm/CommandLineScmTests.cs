@@ -30,12 +30,12 @@ namespace ScmBackup.Tests.Integration.Scm
             var sut = new FakeCommandLineScm();
 
             var config = new Config();
-            config.Scms.Add(new ConfigScm { Name = sut.ShortName, Path = sut.FakeCommandName });
+            config.Scms.Add(new ConfigScm { Name = sut.ShortName, Path = sut.FakeCommandNameNotExisting });
 
             Assert.Throws<FileNotFoundException>(() => sut.IsOnThisComputer(config));
         }
 
-        [Fact(Skip = "TODO: find out the actual path to the command")]
+        [Fact]
         public void ReallyExecutesWithPathFromConfig()
         {
             var sut = new FakeCommandLineScm();
