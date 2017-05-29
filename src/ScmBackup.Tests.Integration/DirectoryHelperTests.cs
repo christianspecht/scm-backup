@@ -35,8 +35,6 @@ namespace ScmBackup.Tests.Integration
 
             Assert.False(string.IsNullOrWhiteSpace(result), result);
             Assert.True(Directory.Exists(result), result);
-
-            System.Console.WriteLine(result);
         }
     }
 }
