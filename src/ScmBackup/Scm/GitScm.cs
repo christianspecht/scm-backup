@@ -31,7 +31,7 @@ namespace ScmBackup.Scm
             string result = this.ExecuteCommand("--version");
 
             const string search = "git version ";
-            return result.Substring(result.IndexOf(search) + search.Length);
+            return result.Substring(result.IndexOf(search) + search.Length).Replace("\n", "");
         }
 
         public override bool DirectoryIsRepository(string directory)

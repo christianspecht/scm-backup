@@ -51,6 +51,17 @@ namespace ScmBackup.Tests.Integration.Scm
         }
 
         [Fact]
+        public void GetVersionNumberDoesntContainSpecialCharacters()
+        {
+            sut.IsOnThisComputer(this.config);
+            var result = sut.GetVersionNumber();
+
+            Assert.False(result.Contains("\r"), "contains \\r");
+            Assert.False(result.Contains("\n"), "contains \\n");
+            Assert.False(result.Contains("\t"), "contains \\t");
+        }
+
+        [Fact]
         public void DirectoryIsRepositoryReturnsFalseForNonExistingDir()
         {
             string dir = DirectoryHelper.CreateTempDirectory(DirSuffix("non-existing"));
