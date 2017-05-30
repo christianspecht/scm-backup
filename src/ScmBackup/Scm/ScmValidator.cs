@@ -39,7 +39,7 @@ namespace ScmBackup.Scm
 
                 if (onComputer)
                 {
-                    this.logger.Log(ErrorLevel.Info, Resource.ScmOnThisComputer, scm.DisplayName);
+                    this.logger.Log(ErrorLevel.Info, Resource.ScmOnThisComputer, scm.DisplayName + " "  + scm.GetVersionNumber());
                 }
                 else
                 {

@@ -37,7 +37,7 @@ namespace ScmBackup.Tests.Scm
 
         public string GetVersionNumber()
         {
-            throw new NotImplementedException();
+            return "fake";
         }
 
         public bool DirectoryIsRepository(string directory)
