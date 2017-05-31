@@ -205,7 +205,7 @@
     <value>{0} was NOT found</value>
   </data>
   <data name="ScmOnThisComputer" xml:space="preserve">
-    <value>{0} was found</value>
+    <value>Found {0} </value>
   </data>
   <data name="ScmValidatorError" xml:space="preserve">
     <value>At least one SCM is missing on this machine!</value>
