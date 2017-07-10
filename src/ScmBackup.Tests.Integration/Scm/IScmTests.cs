@@ -10,6 +10,10 @@ namespace ScmBackup.Tests.Integration.Scm
         internal Config config;
         internal IScm sut;
 
+        // public and private test repositories
+        internal abstract string PublicRepoUrl { get; }
+        internal abstract string PrivateRepoUrl { get; }
+
         public IScmTests()
         {
             this.config = new Config();
@@ -104,6 +108,44 @@ namespace ScmBackup.Tests.Integration.Scm
             sut.CreateRepository(dir);
 
             Assert.True(sut.DirectoryIsRepository(dir));
+        }
+
+        [Fact]
+        public void PullFromRemote_PublicUrl_CreatesNewRepo()
+        {
+            sut.IsOnThisComputer(this.config);
+            string dir = DirectoryHelper.CreateTempDirectory(DirSuffix("pull-new"));
+            string subDir = Path.Combine(dir, "sub");
+
+            sut.PullFromRemote(this.PublicRepoUrl, subDir);
+
+            Assert.True(Directory.Exists(subDir));
+            Assert.True(sut.DirectoryIsRepository(subDir));
+        }
+
+        [Fact]
+        public void PullFromRemote_PublicUrl_UpdatesExistingRepo()
+        {
+            sut.IsOnThisComputer(this.config);
+
+            string dir = DirectoryHelper.CreateTempDirectory(DirSuffix("pull-existing"));
+            sut.CreateRepository(dir);
+
+            sut.PullFromRemote(this.PublicRepoUrl, dir);
+
+            Assert.True(sut.DirectoryIsRepository(dir));
+            // TODO: find out whether the local repo contains commits from the remote repo
+        }
+
+        [Fact]
+        public void PullFromRemote_PublicUrl_ThrowsWhenDirIsNotEmpty()
+        {
+            sut.IsOnThisComputer(this.config);
+
+            string dir = DirectoryHelper.CreateTempDirectory(DirSuffix("pull-not-empty"));
+            File.WriteAllText(Path.Combine(dir, "foo.txt"), "foo");
+
+            Assert.Throws<InvalidOperationException>(() => sut.PullFromRemote(this.PublicRepoUrl, dir)); 
         }
 
         /// <summary>
