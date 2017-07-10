@@ -111,6 +111,20 @@ namespace ScmBackup.Tests.Integration.Scm
         }
 
         [Fact]
+        public void CreateRepositoryDoesNothingWhenDirectoryIsARepository()
+        {
+            string dir = DirectoryHelper.CreateTempDirectory(DirSuffix("create-2"));
+
+            sut.IsOnThisComputer(this.config);
+            sut.CreateRepository(dir);
+
+            // this should do nothing
+            sut.CreateRepository(dir);
+
+            Assert.True(sut.DirectoryIsRepository(dir));
+        }
+
+        [Fact]
         public void PullFromRemote_PublicUrl_CreatesNewRepo()
         {
             sut.IsOnThisComputer(this.config);
