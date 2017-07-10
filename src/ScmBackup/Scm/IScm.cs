@@ -32,5 +32,11 @@
         /// Creates a repository in the given directory
         /// </summary>
         void CreateRepository(string directory);
+
+        /// <summary>
+        /// Pulls from a remote repository into a local folder.
+        /// If the folder doesn't exist or is not a repository, it's created first.
+        /// </summary>
+        void PullFromRemote(string remoteUrl, string directory);
     }
 }

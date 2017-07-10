@@ -77,6 +77,12 @@ namespace ScmBackup.Scm
         public abstract void CreateRepository(string directory);
 
         /// <summary>
+        /// Pulls from a remote repository into a local folder.
+        /// If the folder doesn't exist or is not a repository, it's created first.
+        /// </summary>
+        public abstract void PullFromRemote(string remoteUrl, string directory);
+
+        /// <summary>
         /// Gets the file to execute
         /// (either a complete path from the config, or this.CommandName)
         /// </summary>

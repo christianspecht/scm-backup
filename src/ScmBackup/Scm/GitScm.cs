@@ -50,5 +50,10 @@ namespace ScmBackup.Scm
                 this.ExecuteCommand(cmd);
             }
         }
+
+        public override void PullFromRemote(string remoteUrl, string directory)
+        {
+            throw new NotImplementedException(); // TODO
+        }
     }
 }

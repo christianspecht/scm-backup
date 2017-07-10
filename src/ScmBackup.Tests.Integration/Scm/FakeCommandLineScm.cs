@@ -91,5 +91,10 @@ namespace ScmBackup.Tests.Integration.Scm
         {
             throw new NotImplementedException();
         }
+
+        public override void PullFromRemote(string remoteUrl, string directory)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
