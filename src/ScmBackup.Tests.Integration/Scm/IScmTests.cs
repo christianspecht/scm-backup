@@ -125,6 +125,18 @@ namespace ScmBackup.Tests.Integration.Scm
         }
 
         [Fact]
+        public void CreateRepositoryCreatesNonExistingDirectory()
+        {
+            string dir = DirectoryHelper.CreateTempDirectory(DirSuffix("create-3"));
+            string subDir = Path.Combine(dir, "sub");
+
+            sut.IsOnThisComputer(this.config);
+            sut.CreateRepository(subDir);
+
+            Assert.True(Directory.Exists(subDir));
+        }
+
+        [Fact]
         public void PullFromRemote_PublicUrl_CreatesNewRepo()
         {
             sut.IsOnThisComputer(this.config);

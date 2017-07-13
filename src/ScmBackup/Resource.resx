@@ -207,6 +207,9 @@
   <data name="ScmOnThisComputer" xml:space="preserve">
     <value>Found {0} </value>
   </data>
+  <data name="ScmTargetDirectoryNotEmpty" xml:space="preserve">
+    <value>Target directory is not empty: {0}</value>
+  </data>
   <data name="ScmValidatorError" xml:space="preserve">
     <value>At least one SCM is missing on this machine!</value>
   </data>

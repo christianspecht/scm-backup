@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace ScmBackup.Scm
 {
@@ -53,7 +54,19 @@ namespace ScmBackup.Scm
 
         public override void PullFromRemote(string remoteUrl, string directory)
         {
-            throw new NotImplementedException(); // TODO
+            if (!this.DirectoryIsRepository(directory))
+            {
+                if (Directory.Exists(directory) && !FileSystemHelper.DirectoryIsEmpty(directory))
+                {
+                    // TODO: change to Resource.ScmTargetDirectoryNotEmpty when Visual Studio starts updating Resource.Designer.cs again
+                    throw new InvalidOperationException(string.Format("Target directory is not empty: {0}", directory));
+                }
+                
+                this.CreateRepository(directory);
+            }
+            
+            string cmd = string.Format("fetch --force --prune {0} refs/heads/*:refs/heads/* refs/tags/*:refs/tags/*", remoteUrl);
+            this.ExecuteCommand(cmd);
         }
     }
 }
