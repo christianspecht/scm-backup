@@ -41,11 +41,7 @@ namespace ScmBackup.Http
             result.Status = response.StatusCode;
             result.IsSuccessStatusCode = response.IsSuccessStatusCode;
             result.Headers = response.Headers;
-
-            if (response.IsSuccessStatusCode)
-            {
-                result.Content = await response.Content.ReadAsStringAsync();
-            }
+            result.Content = await response.Content.ReadAsStringAsync();
 
             return result;
         }
