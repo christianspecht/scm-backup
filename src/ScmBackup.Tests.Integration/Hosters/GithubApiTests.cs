@@ -20,8 +20,8 @@ namespace ScmBackup.Tests.Integration.Hosters
             config.Type = "user";
             config.Name = TestHelper.EnvVar("GithubApiTests_Name");
 
-            var logger = new FakeLogger();
-            var request = new HttpRequest();
+            var logger = new TestLogger("CallsGithubApi_UnauthenticatedUser");
+            var request = HttpLogHelper.GetRequest(logger);
 
             var sut = new GithubApi(request, logger);
 
@@ -49,8 +49,8 @@ namespace ScmBackup.Tests.Integration.Hosters
             config.Type = "user";
             config.Name = "scm-backup-testuser-does-not-exist";
 
-            var logger = new FakeLogger();
-            var request = new HttpRequest();
+            var logger = new TestLogger("CallsGithubApi_NonExistingUser_ThrowsException");
+            var request = HttpLogHelper.GetRequest(logger);
 
             var sut = new GithubApi(request, logger);
 
@@ -68,8 +68,8 @@ namespace ScmBackup.Tests.Integration.Hosters
             config.AuthName = config.Name;
             config.Password = "invalid-password";
 
-            var logger = new FakeLogger();
-            var request = new HttpRequest();
+            var logger = new TestLogger("CallsGithubApi_AuthenticatedUser_InvalidPasswordThrowsException");
+            var request = HttpLogHelper.GetRequest(logger);
 
             var sut = new GithubApi(request, logger);
 
@@ -87,8 +87,8 @@ namespace ScmBackup.Tests.Integration.Hosters
             config.AuthName = config.Name;
             config.Password = TestHelper.EnvVar("GithubApiTests_PW");
 
-            var logger = new FakeLogger();
-            var request = new HttpRequest();
+            var logger = new TestLogger("CallsGithubApi_AuthenticatedUser");
+            var request = HttpLogHelper.GetRequest(logger);
 
             var sut = new GithubApi(request, logger);
 
@@ -116,8 +116,8 @@ namespace ScmBackup.Tests.Integration.Hosters
             config.Type = "org";
             config.Name = TestHelper.EnvVar("GithubApiTests_OrgName");
 
-            var logger = new FakeLogger();
-            var request = new HttpRequest();
+            var logger = new TestLogger("CallsGithubApi_Organization_Unauthenticated");
+            var request = HttpLogHelper.GetRequest(logger);
 
             var sut = new GithubApi(request, logger);
 
@@ -145,8 +145,8 @@ namespace ScmBackup.Tests.Integration.Hosters
             config.Type = "org";
             config.Name = "scm-backup-testorg-does-not-exist";
 
-            var logger = new FakeLogger();
-            var request = new HttpRequest();
+            var logger = new TestLogger("CallsGithubApi_Organization_Unauthenticated");
+            var request = HttpLogHelper.GetRequest(logger);
 
             var sut = new GithubApi(request, logger);
 
@@ -164,8 +164,8 @@ namespace ScmBackup.Tests.Integration.Hosters
             config.AuthName = TestHelper.EnvVar("GithubApiTests_Name");
             config.Password = TestHelper.EnvVar("GithubApiTests_PW");
             
-            var logger = new FakeLogger();
-            var request = new HttpRequest();
+            var logger = new TestLogger("CallsGithubApi_Organization_Authenticated");
+            var request = HttpLogHelper.GetRequest(logger);
 
             var sut = new GithubApi(request, logger);
 
