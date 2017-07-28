@@ -41,6 +41,8 @@ echo .
 echo ###### INTEGRATION TESTS ######
 dotnet test "%~dp0\src\ScmBackup.Tests.Integration\ScmBackup.Tests.Integration.csproj" -c Release
 if errorlevel 1 goto end
+md "%~dp0\release"
+copy "%~dp0\src\ScmBackup.Tests.Integration\bin\Release\netcoreapp1.1\*.log" "%~dp0\release\test.log" /y
 
 
 echo .

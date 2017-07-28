@@ -8,6 +8,9 @@ build_script:
 test: off
 artifacts:
 - path: release\scm-backup-*.zip
+  name: Release Version
+- path: release\test.log
+  name: Integration Test Logfile
 assembly_info:
   patch: true
   file: AssemblyInfo.cs
