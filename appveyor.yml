@@ -9,7 +9,7 @@ test: off
 artifacts:
 - path: release\scm-backup-*.zip
   name: Release Version
-- path: release\test.log
+- path: src\ScmBackup.Tests.Integration\bin\Release\netcoreapp1.1\*.log
   name: Integration Test Logfile
 assembly_info:
   patch: true

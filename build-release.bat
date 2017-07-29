@@ -56,8 +56,6 @@ call 7z a -r "release\%RELEASE_FILENAME%.zip" .\release\bin\*
 
 
 :end
-md "%~dp0\release"
-copy "%~dp0\src\ScmBackup.Tests.Integration\bin\Release\netcoreapp1.1\*.log" "%~dp0\release\test.log" /y
 
 if [%APPVEYOR%] == [] (
     pause
