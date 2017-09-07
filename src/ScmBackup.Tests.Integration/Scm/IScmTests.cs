@@ -183,7 +183,7 @@ namespace ScmBackup.Tests.Integration.Scm
         {
             sut.IsOnThisComputer(this.config);
 
-            string dir = DirectoryHelper.CreateTempDirectory(DirSuffix("dir-doesnt-exist"));
+            string dir = DirectoryHelper.CreateTempDirectory(DirSuffix("contains-nodir"));
             string subDir = Path.Combine(dir, "sub");
 
             Assert.Throws<DirectoryNotFoundException>(() => sut.RepositoryContainsCommit(subDir, "foo"));
