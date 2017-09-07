@@ -14,6 +14,10 @@ namespace ScmBackup.Tests.Integration.Scm
         internal abstract string PublicRepoUrl { get; }
         internal abstract string PrivateRepoUrl { get; }
 
+        // commit ids that do/do not exist in the public repo
+        internal abstract string PublicRepoExistingCommitId { get; }
+        internal abstract string PublicRepoNonExistingCommitId{get;}
+
         public IScmTests()
         {
             this.config = new Config();
@@ -172,6 +176,27 @@ namespace ScmBackup.Tests.Integration.Scm
             File.WriteAllText(Path.Combine(dir, "foo.txt"), "foo");
 
             Assert.Throws<InvalidOperationException>(() => sut.PullFromRemote(this.PublicRepoUrl, dir)); 
+        }
+
+        [Fact]
+        public void RepositoryContainsCommit_ThrowsWhenDirDoesntExist()
+        {
+            sut.IsOnThisComputer(this.config);
+
+            string dir = DirectoryHelper.CreateTempDirectory(DirSuffix("dir-doesnt-exist"));
+            string subDir = Path.Combine(dir, "sub");
+
+            Assert.Throws<DirectoryNotFoundException>(() => sut.RepositoryContainsCommit(subDir, "foo"));
+        }
+
+        [Fact]
+        public void RepositoryContainsCommit_ThrowsWhenDirIsNoRepo()
+        {
+            sut.IsOnThisComputer(this.config);
+
+            string dir = DirectoryHelper.CreateTempDirectory(DirSuffix("contains-norepo"));
+
+            Assert.Throws<InvalidOperationException>(() => sut.RepositoryContainsCommit(dir, "foo"));
         }
 
         /// <summary>

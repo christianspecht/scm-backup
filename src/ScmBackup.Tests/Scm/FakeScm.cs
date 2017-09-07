@@ -54,5 +54,10 @@ namespace ScmBackup.Tests.Scm
         {
             throw new NotImplementedException();
         }
+
+        public bool RepositoryContainsCommit(string directory, string commitid)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

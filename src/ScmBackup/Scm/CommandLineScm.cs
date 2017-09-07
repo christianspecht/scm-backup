@@ -83,6 +83,11 @@ namespace ScmBackup.Scm
         public abstract void PullFromRemote(string remoteUrl, string directory);
 
         /// <summary>
+        /// Checks whether the repo in this directory contains a commit with this ID
+        /// </summary>
+        public abstract bool RepositoryContainsCommit(string directory, string commitid);
+
+        /// <summary>
         /// Gets the file to execute
         /// (either a complete path from the config, or this.CommandName)
         /// </summary>

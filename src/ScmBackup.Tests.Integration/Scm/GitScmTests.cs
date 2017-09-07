@@ -19,5 +19,15 @@ namespace ScmBackup.Tests.Integration.Scm
         {
             get { throw new NotImplementedException(); }
         }
+
+        internal override string PublicRepoExistingCommitId
+        {
+            get { return "3a91f6409f0cef7a3bd2c80cad389fa844b41e3c"; }
+        }
+
+        internal override string PublicRepoNonExistingCommitId
+        {
+            get { return "00000"; }
+        }
     }
 }

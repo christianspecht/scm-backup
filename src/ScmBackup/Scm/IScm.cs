@@ -38,5 +38,10 @@
         /// If the folder doesn't exist or is not a repository, it's created first.
         /// </summary>
         void PullFromRemote(string remoteUrl, string directory);
+
+        /// <summary>
+        /// Checks whether the repo in this directory contains a commit with this ID
+        /// </summary>
+        bool RepositoryContainsCommit(string directory, string commitid);
     }
 }

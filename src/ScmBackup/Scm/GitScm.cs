@@ -68,5 +68,20 @@ namespace ScmBackup.Scm
             string cmd = string.Format("fetch --force --prune {0} refs/heads/*:refs/heads/* refs/tags/*:refs/tags/*", remoteUrl);
             this.ExecuteCommand(cmd);
         }
+
+        public override bool RepositoryContainsCommit(string directory, string commitid)
+        {
+            if (!Directory.Exists(directory))
+            {
+                throw new DirectoryNotFoundException();
+            }
+
+            if (!this.DirectoryIsRepository(directory))
+            {
+                throw new InvalidOperationException();
+            }
+
+            return false;
+        }
     }
 }
