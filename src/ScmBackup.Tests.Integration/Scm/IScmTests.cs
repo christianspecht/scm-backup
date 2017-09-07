@@ -199,6 +199,30 @@ namespace ScmBackup.Tests.Integration.Scm
             Assert.Throws<InvalidOperationException>(() => sut.RepositoryContainsCommit(dir, "foo"));
         }
 
+        [Fact]
+        public void RepositoryContainsCommit_ReturnsTrueWhenCommitExists()
+        {
+            sut.IsOnThisComputer(this.config);
+
+            string dir = DirectoryHelper.CreateTempDirectory(DirSuffix("contains-commit"));
+
+            sut.PullFromRemote(this.PublicRepoUrl, dir);
+
+            Assert.True(sut.RepositoryContainsCommit(dir, this.PublicRepoExistingCommitId));
+        }
+
+        [Fact]
+        public void RepositoryContainsCommit_ReturnsFalseWhenCommitDoesntExist()
+        {
+            sut.IsOnThisComputer(this.config);
+
+            string dir = DirectoryHelper.CreateTempDirectory(DirSuffix("contains-nocommit"));
+
+            sut.PullFromRemote(this.PublicRepoUrl, dir);
+
+            Assert.False(sut.RepositoryContainsCommit(dir, this.PublicRepoNonExistingCommitId));
+        }
+
         /// <summary>
         /// helper for directory suffixes
         /// </summary>

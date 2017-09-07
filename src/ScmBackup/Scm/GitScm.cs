@@ -81,6 +81,15 @@ namespace ScmBackup.Scm
                 throw new InvalidOperationException();
             }
 
+            // https://stackoverflow.com/a/21878920/6884
+            string cmd = "rev-parse --quiet --verify " + commitid + "^{commit}";
+            string result = this.ExecuteCommand(cmd);
+
+            if (result.StartsWith(commitid))
+            {
+                return true;
+            }
+
             return false;
         }
     }
