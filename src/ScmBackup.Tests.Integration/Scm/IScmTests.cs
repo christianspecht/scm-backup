@@ -164,7 +164,9 @@ namespace ScmBackup.Tests.Integration.Scm
             sut.PullFromRemote(this.PublicRepoUrl, dir);
 
             Assert.True(sut.DirectoryIsRepository(dir));
-            // TODO: find out whether the local repo contains commits from the remote repo
+
+            // does the local repo contain commits from the remote repo?
+            Assert.True(sut.RepositoryContainsCommit(dir, this.PublicRepoExistingCommitId));
         }
 
         [Fact]
