@@ -23,24 +23,41 @@ namespace ScmBackup.Scm
 
         protected override bool IsOnThisComputer()
         {
-            string result = this.ExecuteCommand("--version");
-            return result.ToLower().Contains("git version");
+            var result = this.ExecuteCommand("--version");
+
+            if (result.Successful && result.StandardOutput.ToLower().Contains("git version"))
+            {
+                return true;
+            }
+
+            return false;
         }
 
         public override string GetVersionNumber()
         {
-            string result = this.ExecuteCommand("--version");
+            var result = this.ExecuteCommand("--version");
 
-            const string search = "git version ";
-            return result.Substring(result.IndexOf(search) + search.Length).Replace("\n", "");
+            if (result.Successful)
+            {
+                const string search = "git version ";
+                return result.StandardOutput.Substring(result.StandardOutput.IndexOf(search) + search.Length).Replace("\n", "");
+            }
+
+            throw new InvalidOperationException(result.Output);
         }
 
         public override bool DirectoryIsRepository(string directory)
         {
             // SCM Backup uses bare repos only, so we don't need to check for non-bare repos at all
             string cmd = string.Format("-C \"{0}\" rev-parse --is-bare-repository", directory);
-            string result = this.ExecuteCommand(cmd);
-            return result.ToLower().StartsWith("true");
+            var result = this.ExecuteCommand(cmd);
+
+            if (result.Successful && result.StandardOutput.ToLower().StartsWith("true"))
+            {
+                return true;
+            }
+
+            return false;
         }
 
         public override void CreateRepository(string directory)
@@ -48,7 +65,12 @@ namespace ScmBackup.Scm
             if (!this.DirectoryIsRepository(directory))
             {
                 string cmd = string.Format("init --bare \"{0}\"", directory);
-                this.ExecuteCommand(cmd);
+                var result = this.ExecuteCommand(cmd);
+
+                if (!result.Successful)
+                {
+                    throw new InvalidOperationException(result.Output);
+                }
             }
         }
 
@@ -66,7 +88,12 @@ namespace ScmBackup.Scm
             }
             
             string cmd = string.Format("fetch --force --prune {0} refs/heads/*:refs/heads/* refs/tags/*:refs/tags/*", remoteUrl);
-            this.ExecuteCommand(cmd);
+            var result = this.ExecuteCommand(cmd);
+
+            if (!result.Successful)
+            {
+                throw new InvalidOperationException(result.Output);
+            }
         }
 
         public override bool RepositoryContainsCommit(string directory, string commitid)
@@ -83,9 +110,9 @@ namespace ScmBackup.Scm
 
             // https://stackoverflow.com/a/21878920/6884
             string cmd = "rev-parse --quiet --verify " + commitid + "^{commit}";
-            string result = this.ExecuteCommand(cmd);
+            var result = this.ExecuteCommand(cmd);
 
-            if (result.StartsWith(commitid))
+            if (result.Successful && result.Output.StartsWith(commitid))
             {
                 return true;
             }

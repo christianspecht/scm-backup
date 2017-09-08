@@ -35,7 +35,7 @@ namespace ScmBackup.Scm
         /// Executes the command line tool.
         /// GetExecutable must already have been called before (usually by calling IsOnThisComputer)
         /// </summary>
-        protected string ExecuteCommand(string args)
+        protected CommandLineResult ExecuteCommand(string args)
         {
             if (string.IsNullOrWhiteSpace(this.executable))
             {
@@ -48,13 +48,15 @@ namespace ScmBackup.Scm
             info.CreateNoWindow = true;
             info.RedirectStandardError = true;
             info.RedirectStandardOutput = true;
-            
+
             var proc = Process.Start(info);
-            string error = proc.StandardError.ReadToEnd();
-            string output = proc.StandardOutput.ReadToEnd();
+            var result = new CommandLineResult();
+            result.StandardError = proc.StandardError.ReadToEnd();
+            result.StandardOutput = proc.StandardOutput.ReadToEnd();
             proc.WaitForExit();
 
-            return string.IsNullOrWhiteSpace(error) ? output : error;
+            result.ExitCode = proc.ExitCode;
+            return result;
         }
 
         /// <summary>
