@@ -47,5 +47,16 @@ namespace ScmBackup.Tests.Integration.Scm
 
             Assert.True(result);
         }
+
+        [Fact]
+        public void ExecuteReturnsOutput()
+        {
+            var sut = new FakeCommandLineScm();
+            sut.IsOnThisComputer(new Config());
+
+            var result = sut.ExecuteCommandDirectly();
+
+            Assert.Equal(sut.FakeCommandResult, result);
+        }
     }
 }
