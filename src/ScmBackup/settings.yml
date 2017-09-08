@@ -1,0 +1,12 @@
+﻿# all backups go here
+localFolder: "c:\\scm-backup"
+
+# when an error occurs, wait that many seconds before exiting the application
+waitSecondsOnError: 5
+
+sources:
+
+  - title:  github_singleuser
+    hoster: github
+    type: user
+    name: scm-backup-testuser

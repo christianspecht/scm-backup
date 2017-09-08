@@ -18,10 +18,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Update="brokensettings.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Scm\FakeCommandLineScmTools\FakeCommandLineScm-Command-Windows.bat">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="testsettings.json;brokensettings.json">
+    <None Update="testsettings.yml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

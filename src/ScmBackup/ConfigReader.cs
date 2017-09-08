@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using System.IO;
+using YamlDotNet.Serialization;
+using YamlDotNet.Serialization.NamingConventions;
 
 namespace ScmBackup
 {
@@ -13,7 +15,7 @@ namespace ScmBackup
 
         public ConfigReader()
         {
-            this.ConfigFileName = "settings.json";
+            this.ConfigFileName = "settings.yml";
         }
 
         public Config ReadConfig()
@@ -22,11 +24,9 @@ namespace ScmBackup
             {
                 this.config = new Config();
 
-                var builder = new ConfigurationBuilder();
-                builder.AddJsonFile(this.ConfigFileName);
-                var settings = builder.Build();
-
-                ConfigurationBinder.Bind(settings, this.config);
+                var input = File.ReadAllText(this.ConfigFileName);
+                var deserializer = new DeserializerBuilder().WithNamingConvention(new CamelCaseNamingConvention()).Build();
+                this.config = deserializer.Deserialize<Config>(input);
             }
 
             return this.config;

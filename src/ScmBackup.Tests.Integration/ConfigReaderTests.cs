@@ -1,5 +1,5 @@
-﻿using System;
-using Xunit;
+﻿using Xunit;
+using YamlDotNet.Core;
 
 namespace ScmBackup.Tests.Integration
 {
@@ -9,7 +9,7 @@ namespace ScmBackup.Tests.Integration
         public void ReadsTestConfigFile()
         {
             var sut = new ConfigReader();
-            sut.ConfigFileName = "testsettings.json";
+            sut.ConfigFileName = "testsettings.yml";
 
             var config = sut.ReadConfig();
 
@@ -38,12 +38,12 @@ namespace ScmBackup.Tests.Integration
         }
 
         [Fact]
-        public void ThrowsExceptionWhenConfigFileIsNotVaildJson()
+        public void ThrowsExceptionWhenConfigFileIsNotVaild()
         {
             var sut = new ConfigReader();
-            sut.ConfigFileName = "brokensettings.json";
+            sut.ConfigFileName = "brokensettings.yml";
 
-            Assert.ThrowsAny<FormatException>(() => sut.ReadConfig());
+            Assert.ThrowsAny<YamlException>(() => sut.ReadConfig());
         }
     }
 }
