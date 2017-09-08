@@ -68,22 +68,26 @@ namespace ScmBackup.Scm
 
         /// <summary>
         /// Checks whether the given directory is a repository
+        /// Must be implemented in the child classes by calling ExecuteCommand and checking the result.
         /// </summary>
         public abstract bool DirectoryIsRepository(string directory);
 
         /// <summary>
         /// Creates a repository in the given directory
+        /// Must be implemented in the child classes by calling ExecuteCommand and checking the result.
         /// </summary>
         public abstract void CreateRepository(string directory);
 
         /// <summary>
         /// Pulls from a remote repository into a local folder.
         /// If the folder doesn't exist or is not a repository, it's created first.
+        /// Must be implemented in the child classes by calling ExecuteCommand and checking the result.
         /// </summary>
         public abstract void PullFromRemote(string remoteUrl, string directory);
 
         /// <summary>
         /// Checks whether the repo in this directory contains a commit with this ID
+        /// Must be implemented in the child classes by calling ExecuteCommand and checking the result.
         /// </summary>
         public abstract bool RepositoryContainsCommit(string directory, string commitid);
 
