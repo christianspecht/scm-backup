@@ -87,7 +87,7 @@ namespace ScmBackup.Scm
                 this.CreateRepository(directory);
             }
             
-            string cmd = string.Format("fetch --force --prune {0} refs/heads/*:refs/heads/* refs/tags/*:refs/tags/*", remoteUrl);
+            string cmd = string.Format("-C \"{0}\" fetch --force --prune {1} refs/heads/*:refs/heads/* refs/tags/*:refs/tags/*", directory, remoteUrl);
             var result = this.ExecuteCommand(cmd);
 
             if (!result.Successful)
@@ -109,7 +109,7 @@ namespace ScmBackup.Scm
             }
 
             // https://stackoverflow.com/a/21878920/6884
-            string cmd = "rev-parse --quiet --verify " + commitid + "^{commit}";
+            string cmd = string.Format("-C \"{0}\" rev-parse --quiet --verify {1}^{{commit}}", directory, commitid);
             var result = this.ExecuteCommand(cmd);
 
             if (result.Successful && result.Output.StartsWith(commitid))
