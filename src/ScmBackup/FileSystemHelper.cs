@@ -6,12 +6,12 @@ namespace ScmBackup
     /// <summary>
     /// helper class for file system operations
     /// </summary>
-    public class FileSystemHelper
+    public class FileSystemHelper : IFileSystemHelper
     {
         /// <summary>
         /// Checks whether the given directory is empty
         /// </summary>
-        public static bool DirectoryIsEmpty(string path)
+        public bool DirectoryIsEmpty(string path)
         {
             if (Directory.GetFiles(path).Any() || Directory.GetDirectories(path).Any())
             {

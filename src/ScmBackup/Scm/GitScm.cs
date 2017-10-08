@@ -6,6 +6,13 @@ namespace ScmBackup.Scm
     [Scm(Type = ScmType.Git)]
     internal class GitScm : CommandLineScm, IScm
     {
+        public GitScm()
+        {
+            this.FileSystemHelper = new FileSystemHelper();
+        }
+
+        public IFileSystemHelper FileSystemHelper { get; set; }
+
         public override string ShortName
         {
             get { return "git"; }
@@ -78,7 +85,7 @@ namespace ScmBackup.Scm
         {
             if (!this.DirectoryIsRepository(directory))
             {
-                if (Directory.Exists(directory) && !FileSystemHelper.DirectoryIsEmpty(directory))
+                if (Directory.Exists(directory) && !this.FileSystemHelper.DirectoryIsEmpty(directory))
                 {
                     // TODO: change to Resource.ScmTargetDirectoryNotEmpty when Visual Studio starts updating Resource.Designer.cs again
                     throw new InvalidOperationException(string.Format("Target directory is not empty: {0}", directory));
