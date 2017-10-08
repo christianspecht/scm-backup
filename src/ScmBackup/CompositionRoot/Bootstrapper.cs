@@ -23,6 +23,7 @@ namespace ScmBackup.CompositionRoot
 
             container.RegisterCollection<ILogger>(new ConsoleLogger(), new NLogLogger());
             container.Register<ILogger, CompositeLogger>(Lifestyle.Singleton);
+            container.Register<IFileSystemHelper, FileSystemHelper>();
 
             container.RegisterSingleton<IContext, Context>();
 
@@ -34,6 +35,7 @@ namespace ScmBackup.CompositionRoot
 
             container.Register<IApiCaller, ApiCaller>();
             container.Register<IScmValidator, ScmValidator>();
+            container.Register<IBackupMaker, BackupMaker>();
 
             // auto-register validators
             var validators = container.GetTypesToRegister(typeof(IConfigSourceValidator), thisAssembly);
