@@ -18,7 +18,7 @@ namespace ScmBackup.Tests.Integration
         public static string CreateTempDirectory(string suffix)
         {
             string tempDir = Path.GetTempPath();
-            string newDir = "scm-backup-temp-" + DateTime.UtcNow.ToString("yyyyMMddHHmmssfff", CultureInfo.InvariantCulture);
+            string newDir = "_scm-backup-temp-" + DateTime.UtcNow.ToString("yyyyMMddHHmmssfff", CultureInfo.InvariantCulture);
 
             if (!string.IsNullOrWhiteSpace(suffix))
             {
