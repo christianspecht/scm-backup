@@ -147,6 +147,12 @@
   <data name="BackupFailed" xml:space="preserve">
     <value>Backup failed!</value>
   </data>
+  <data name="BackupMaker_Repo" xml:space="preserve">
+    <value>  {0}: {1}</value>
+  </data>
+  <data name="BackupMaker_Source" xml:space="preserve">
+    <value>Backing up source: {0}</value>
+  </data>
   <data name="ConfigSourceDuplicateTitle" xml:space="preserve">
     <value>Sources in the settings file must have unique titles. Title "{0}" appears more than once!</value>
   </data>
@@ -158,6 +164,9 @@
   </data>
   <data name="DirectoryDoesntExist" xml:space="preserve">
     <value>Directory {0} doesn't exist!</value>
+  </data>
+  <data name="DirectoryNoRepo" xml:space="preserve">
+    <value>Directory is not a valid repository: {0}</value>
   </data>
   <data name="EndSeconds" xml:space="preserve">
     <value>The application will close in {0} seconds!</value>
