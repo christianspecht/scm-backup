@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Linq;
 
 namespace ScmBackup
@@ -19,6 +20,21 @@ namespace ScmBackup
             }
 
             return true;
+        }
+
+        /// <summary>
+        /// Creates a subdirectory inside the given directory and returns the path
+        /// </summary>
+        public string CreateSubDirectory(string mainDir, string subDir)
+        {
+            if (!Directory.Exists(mainDir))
+            {
+                throw new DirectoryNotFoundException(string.Format("Directory {0} doesn't exist!", mainDir));
+            }
+
+            string newDir = Path.Combine(mainDir, subDir);
+            Directory.CreateDirectory(newDir);
+            return newDir;
         }
     }
 }

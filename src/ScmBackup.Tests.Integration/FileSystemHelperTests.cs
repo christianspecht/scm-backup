@@ -52,5 +52,26 @@ namespace ScmBackup.Tests.Integration
             Assert.Throws<ArgumentNullException>(() => sut.DirectoryIsEmpty(null));
             Assert.Throws<ArgumentException>(() => sut.DirectoryIsEmpty(string.Empty));
         }
+
+        [Fact]
+        public void CreateSubDirectory_CreatesAndReturnsPath()
+        {
+            string dir = DirectoryHelper.CreateTempDirectory("fsh-5");
+
+            var sut = new FileSystemHelper();
+            var result = sut.CreateSubDirectory(dir, "sub");
+
+            Assert.False(string.IsNullOrWhiteSpace(result));
+            Assert.True(Directory.Exists(result));
+        }
+
+        [Fact]
+        public void CreateSubDirectory_ThrowsWhenMainDirDoesntExist()
+        {
+            string dir = Path.Combine(DirectoryHelper.CreateTempDirectory("fsh-6"), "doesnt-exist");
+
+            var sut = new FileSystemHelper();
+            Assert.Throws<DirectoryNotFoundException>(() => sut.CreateSubDirectory(dir, "sub"));
+        }
     }
 }
