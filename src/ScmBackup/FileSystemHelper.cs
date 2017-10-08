@@ -36,5 +36,13 @@ namespace ScmBackup
             Directory.CreateDirectory(newDir);
             return newDir;
         }
+
+        /// <summary>
+        /// wrapper for Path.Combine
+        /// </summary>
+        public string PathCombine(string path1, string path2)
+        {
+            return Path.Combine(path1, path2);
+        }
     }
 }
