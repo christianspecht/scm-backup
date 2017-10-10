@@ -21,6 +21,8 @@
             // TODO: log more stuff (operating system, configuration...)
 
             this.backup.Run();
+
+            logger.Log(ErrorLevel.Info, Resource.BackupFinished);
         }
     }
 }

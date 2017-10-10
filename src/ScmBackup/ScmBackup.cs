@@ -36,8 +36,6 @@ namespace ScmBackup
             {
                 this.backupMaker.Backup(config, source, repos.GetReposForSource(source));
             }
-
-            throw new NotImplementedException();
         }
     }
 }

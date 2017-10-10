@@ -147,6 +147,9 @@
   <data name="BackupFailed" xml:space="preserve">
     <value>Backup failed!</value>
   </data>
+  <data name="BackupFinished" xml:space="preserve">
+    <value>Backup finished!</value>
+  </data>
   <data name="BackupMaker_Repo" xml:space="preserve">
     <value>  {0}: {1}</value>
   </data>
