@@ -87,8 +87,7 @@ namespace ScmBackup.Scm
             {
                 if (Directory.Exists(directory) && !this.FileSystemHelper.DirectoryIsEmpty(directory))
                 {
-                    // TODO: change to Resource.ScmTargetDirectoryNotEmpty when Visual Studio starts updating Resource.Designer.cs again
-                    throw new InvalidOperationException(string.Format("Target directory is not empty: {0}", directory));
+                    throw new InvalidOperationException(string.Format(Resource.ScmTargetDirectoryNotEmpty, directory));
                 }
                 
                 this.CreateRepository(directory);
@@ -107,12 +106,12 @@ namespace ScmBackup.Scm
         {
             if (!Directory.Exists(directory))
             {
-                throw new DirectoryNotFoundException();
+                throw new DirectoryNotFoundException(string.Format(Resource.DirectoryDoesntExist, directory));
             }
 
             if (!this.DirectoryIsRepository(directory))
             {
-                throw new InvalidOperationException();
+                throw new InvalidOperationException(string.Format(Resource.DirectoryNoRepo, directory));
             }
 
             // https://stackoverflow.com/a/21878920/6884

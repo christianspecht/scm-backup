@@ -29,7 +29,7 @@ namespace ScmBackup
         {
             if (!Directory.Exists(mainDir))
             {
-                throw new DirectoryNotFoundException(string.Format("Directory {0} doesn't exist!", mainDir));
+                throw new DirectoryNotFoundException(string.Format(Resource.DirectoryDoesntExist, mainDir));
             }
 
             string newDir = Path.Combine(mainDir, subDir);

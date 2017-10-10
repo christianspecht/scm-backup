@@ -23,7 +23,7 @@ namespace ScmBackup
 
         public void Backup(Config config, ConfigSource source, IEnumerable<HosterRepository> repos)
         {
-            this.logger.Log(ErrorLevel.Info, "Backing up source: {0}", source.Title); // TODO: Resource.BackupMaker_Source
+            this.logger.Log(ErrorLevel.Info, Resource.BackupMaker_Source, source.Title);
 
             string sourceFolder = this.fileHelper.CreateSubDirectory(config.LocalFolder, source.Title);
 
@@ -37,7 +37,7 @@ namespace ScmBackup
                     throw new InvalidOperationException(string.Format(Resource.ScmNotOnThisComputer, repo.Scm.ToString()));
                 }
 
-                this.logger.Log(ErrorLevel.Info, "  {0}: {1}", scm.ShortName, repo.CloneUrl); // TODO: Resource.BackupMaker_Repo
+                this.logger.Log(ErrorLevel.Info, Resource.BackupMaker_Repo, scm.ShortName, repo.CloneUrl);
 
                 string repoFolder = this.fileHelper.PathCombine(sourceFolder, repo.Name);
 
@@ -45,7 +45,7 @@ namespace ScmBackup
 
                 if (!scm.DirectoryIsRepository(repoFolder))
                 {
-                    throw new InvalidOperationException("Directory is not a valid repository: {0}"); // TODO: Resource.DirectoryNoRepo
+                    throw new InvalidOperationException(Resource.DirectoryNoRepo);
                 }
             }
         }
