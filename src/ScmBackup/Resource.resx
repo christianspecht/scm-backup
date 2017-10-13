@@ -150,6 +150,9 @@
   <data name="BackupFinished" xml:space="preserve">
     <value>Backup finished!</value>
   </data>
+  <data name="BackupFinishedDirectory" xml:space="preserve">
+    <value>The backups are in this directory: {0}</value>
+  </data>
   <data name="BackupMaker_Repo" xml:space="preserve">
     <value>  {0}: {1}</value>
   </data>

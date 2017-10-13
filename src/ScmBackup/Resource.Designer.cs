@@ -161,6 +161,15 @@ namespace ScmBackup {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The backups are in this directory: {0}.
+        /// </summary>
+        internal static string BackupFinishedDirectory {
+            get {
+                return ResourceManager.GetString("BackupFinishedDirectory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to   {0}: {1}.
         /// </summary>
         internal static string BackupMaker_Repo {
