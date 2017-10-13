@@ -21,6 +21,9 @@
     <None Update="brokensettings.yml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="NLog.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Scm\FakeCommandLineScmTools\FakeCommandLineScm-Command-Windows.bat">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
