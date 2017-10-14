@@ -8,7 +8,13 @@ if not os.path.exists(dir):
 
 
 # empty image
-img = Image.new('RGB', (600,500), 'white')
+img = Image.new('RGBA', (600,500), 'white')
+
+
+# logo
+logo = Image.open('../img/logo200x200.png').convert("RGBA")
+img.paste(logo, (35,35), logo)
+
 
 # blue box
 dr = ImageDraw.Draw(img)
