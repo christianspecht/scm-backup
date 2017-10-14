@@ -15,6 +15,11 @@ dr = ImageDraw.Draw(img)
 dr.rectangle(((0, 250), (600, 350)), fill='#239FE6')
 
 
+# 2px black border
+dr.rectangle(((0, 0), (599, 499)), outline='black')
+dr.rectangle(((1, 1), (598, 498)), outline='black')
+
+
 img.save(dir + '/ad.png')
 
 
