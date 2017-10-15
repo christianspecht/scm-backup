@@ -7,4 +7,3 @@ project.lock.json
 release/
 environment-variables.bat
 src/ScmBackup/AssemblyCopyright.cs
-stack-ad/img/

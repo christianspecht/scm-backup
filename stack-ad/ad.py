@@ -1,11 +1,4 @@
 from PIL import Image, ImageFont, ImageDraw, ImageEnhance
-import os
-
-
-# create dir for images
-dir = 'img'
-if not os.path.exists(dir):
-    os.makedirs(dir)
 
 
 # define fonts
@@ -45,6 +38,6 @@ dr.rectangle(((0, 0), (599, 499)), outline='black')
 dr.rectangle(((1, 1), (598, 498)), outline='black')
 
 
-img.save(dir + '/ad.png')
+img.save('ad.png')
 
 
