@@ -57,6 +57,16 @@ namespace ScmBackup.CompositionRoot
                     c => HosterNameHelper.GetHosterName(c.Consumer.ImplementationType, "hoster") == hosterName && !c.Handled);
             }
 
+            // auto-register hoster backuppers
+            var backups = container.GetTypesToRegister(typeof(IBackup), thisAssembly);
+            foreach (var backup in backups)
+            {
+                string hosterName = HosterNameHelper.GetHosterName(backup, "backup");
+
+                container.RegisterConditional(typeof(IBackup), backup,
+                c => HosterNameHelper.GetHosterName(c.Consumer.ImplementationType, "hoster") == hosterName && !c.Handled);
+            }
+
             // auto-register hosters
             var hosterFactory = new HosterFactory(container);
             var hosters = container.GetTypesToRegister(typeof(IHoster), thisAssembly);

@@ -2,10 +2,11 @@
 {
     internal class GithubHoster : IHoster
     {
-        public GithubHoster(IConfigSourceValidator validator, IHosterApi api)
+        public GithubHoster(IConfigSourceValidator validator, IHosterApi api, IBackup backup)
         {
             this.Validator = validator;
             this.Api = api;
+            this.Backup = backup;
         }
 
         public IConfigSourceValidator Validator { get; private set; }
