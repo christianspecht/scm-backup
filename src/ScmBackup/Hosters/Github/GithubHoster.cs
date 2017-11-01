@@ -10,5 +10,6 @@
 
         public IConfigSourceValidator Validator { get; private set; }
         public IHosterApi Api { get; private set; }
+        public IBackup Backup { get; private set; }
     }
 }

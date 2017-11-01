@@ -7,5 +7,6 @@
     {
         IConfigSourceValidator Validator { get; }
         IHosterApi Api { get; }
+        IBackup Backup { get; }
     }
 }
