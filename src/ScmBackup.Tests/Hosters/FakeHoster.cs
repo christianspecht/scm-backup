@@ -12,6 +12,8 @@ namespace ScmBackup.Tests.Hosters
 
             this.Api = new FakeHosterApi();
             this.FakeApi.RepoList = new List<HosterRepository>();
+
+            this.Backup = new FakeHosterBackup();
         }
 
         /// <summary>
@@ -28,6 +30,14 @@ namespace ScmBackup.Tests.Hosters
         public FakeHosterApi FakeApi
         {
             get { return (FakeHosterApi)this.Api; }
+        }
+
+        /// <summary>
+        /// easier access (without casting) to the fake backupper
+        /// </summary>
+        public FakeHosterBackup FakeBackup
+        {
+            get { return (FakeHosterBackup)this.Backup; }
         }
 
         public IConfigSourceValidator Validator { get; private set; }

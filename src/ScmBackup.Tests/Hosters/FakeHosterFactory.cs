@@ -10,6 +10,13 @@ namespace ScmBackup.Tests.Hosters
         public string LastHosterName { get; private set; }
         public bool CreateWasCalled { get; private set; }
 
+        public FakeHosterFactory() { }
+
+        public FakeHosterFactory(IHoster hoster)
+        {
+            this.FakeHoster = hoster;
+        }
+
         public IHoster Create(string hosterName)
         {
             this.CreateWasCalled = true;

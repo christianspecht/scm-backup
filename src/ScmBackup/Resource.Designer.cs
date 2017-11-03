@@ -188,6 +188,15 @@ namespace ScmBackup {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Config must not be NULL.
+        /// </summary>
+        internal static string ConfigIsNull {
+            get {
+                return ResourceManager.GetString("ConfigIsNull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sources in the settings file must have unique titles. Title &quot;{0}&quot; appears more than once!.
         /// </summary>
         internal static string ConfigSourceDuplicateTitle {
