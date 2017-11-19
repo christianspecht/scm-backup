@@ -38,7 +38,7 @@ namespace ScmBackup.Tests.Integration.Hosters
             string expectedName = TestHelper.BuildRepositoryName(config.Name, TestHelper.EnvVar("GithubApiTests_Repo"));
             var repo = repoList.Where(r => r.Name == expectedName).FirstOrDefault();
             Assert.NotNull(repo);
-            Assert.False(string.IsNullOrWhiteSpace(repo.CloneUrl));
+            Assert.True(ValidateUrls(repo));
         }
 
         [Fact]
@@ -105,7 +105,7 @@ namespace ScmBackup.Tests.Integration.Hosters
             string expectedName = TestHelper.BuildRepositoryName(config.Name, TestHelper.EnvVar("GithubApiTests_Repo"));
             var repo = repoList.Where(r => r.Name == expectedName).FirstOrDefault();
             Assert.NotNull(repo);
-            Assert.False(string.IsNullOrWhiteSpace(repo.CloneUrl));
+            Assert.True(ValidateUrls(repo));
         }
 
         [Fact]
@@ -134,7 +134,7 @@ namespace ScmBackup.Tests.Integration.Hosters
             string expectedName = TestHelper.BuildRepositoryName(config.Name, TestHelper.EnvVar("GithubApiTests_Repo"));
             var repo = repoList.Where(r => r.Name == expectedName).FirstOrDefault();
             Assert.NotNull(repo);
-            Assert.False(string.IsNullOrWhiteSpace(repo.CloneUrl));
+            Assert.True(ValidateUrls(repo));
         }
 
         [Fact]
@@ -182,7 +182,36 @@ namespace ScmBackup.Tests.Integration.Hosters
             string expectedName = TestHelper.BuildRepositoryName(config.Name, TestHelper.EnvVar("GithubApiTests_Repo"));
             var repo = repoList.Where(r => r.Name == expectedName).FirstOrDefault();
             Assert.NotNull(repo);
-            Assert.False(string.IsNullOrWhiteSpace(repo.CloneUrl));
+            Assert.True(ValidateUrls(repo));
+        }
+
+        private bool ValidateUrls(HosterRepository repo)
+        {
+            bool result = true;
+
+            var validator = new UrlValidator();
+            if (!validator.UrlIsValid(repo.CloneUrl))
+            {
+                return false;
+            }
+
+            if (repo.HasWiki)
+            {
+                if (!validator.UrlIsValid(repo.WikiUrl))
+                {
+                    return false;
+                }
+            }
+
+            if (repo.HasIssues)
+            {
+                if (!validator.UrlIsValid(repo.IssueUrl))
+                {
+                    return false;
+                }
+            }
+
+            return result;
         }
     }
 }

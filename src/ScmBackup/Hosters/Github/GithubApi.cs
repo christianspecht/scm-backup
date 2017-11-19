@@ -78,6 +78,22 @@ namespace ScmBackup.Hosters.Github
                 foreach (var apiRepo in apiResponse)
                 {
                     var repo = new HosterRepository(apiRepo.full_name, apiRepo.clone_url, ScmType.Git);
+
+                    if (apiRepo.has_wiki && apiRepo.clone_url.EndsWith(".git"))
+                    {
+                        // build wiki clone URL, because API doesn't return it
+                        string wikiUrl = apiRepo.clone_url.Substring(0, apiRepo.clone_url.Length - ".git".Length) + ".wiki.git";
+
+                        repo.SetWiki(true, wikiUrl);
+                    }
+
+                    if (apiRepo.has_issues)
+                    {
+                        // GitHub has no clone URL for the issues, it's only possible to get them in JSON format via the API.
+                        // The API has only a URL for one issue (with a placeholder at the end, so we need to remove the placeholder).
+                        repo.SetIssues(true, apiRepo.issues_url.Replace("{/number}", ""));
+                    }
+
                     list.Add(repo);
                 }
             }
