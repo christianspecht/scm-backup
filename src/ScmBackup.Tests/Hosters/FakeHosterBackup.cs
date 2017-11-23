@@ -6,12 +6,9 @@ namespace ScmBackup.Tests.Hosters
     {
         public bool WasExecuted { get; private set; }
 
-        public bool Result { get; set; }
-
-        public bool MakeBackup(HosterRepository repo, Config config, string repoFolder)
+        public void MakeBackup(HosterRepository repo, Config config, string repoFolder)
         {
             this.WasExecuted = true;
-            return this.Result;
         }
     }
 }

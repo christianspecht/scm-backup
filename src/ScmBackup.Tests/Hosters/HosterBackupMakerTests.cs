@@ -12,7 +12,6 @@ namespace ScmBackup.Tests.Hosters
         public void MakeBackupCallsUnderlyingMethod()
         {
             var hoster = new FakeHoster();
-            hoster.FakeBackup.Result = true;
 
             var factory = new FakeHosterFactory(hoster);
             var repo = new HosterRepository("foo", "http://clone", ScmType.Git);
@@ -24,10 +23,9 @@ namespace ScmBackup.Tests.Hosters
 
 
             var sut = new HosterBackupMaker(factory);
-            var result = sut.MakeBackup(source, repo, config, "foo");
+            sut.MakeBackup(source, repo, config, "foo");
 
             Assert.True(hoster.FakeBackup.WasExecuted);
-            Assert.Equal(hoster.FakeBackup.Result, result);
         }
 
         [Fact]

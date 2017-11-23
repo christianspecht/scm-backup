@@ -6,7 +6,7 @@ namespace ScmBackup.Hosters.Github
 {
     internal class GithubBackup : IBackup
     {
-        public bool MakeBackup(HosterRepository repo, Config config, string repoFolder)
+        public void MakeBackup(HosterRepository repo, Config config, string repoFolder)
         {
             throw new NotImplementedException();
         }

@@ -6,7 +6,7 @@ namespace ScmBackup.Hosters.Bitbucket
 {
     internal class BitbucketBackup : IBackup
     {
-        public bool MakeBackup(HosterRepository repo, Config config, string repoFolder)
+        public void MakeBackup(HosterRepository repo, Config config, string repoFolder)
         {
             throw new NotImplementedException();
         }
