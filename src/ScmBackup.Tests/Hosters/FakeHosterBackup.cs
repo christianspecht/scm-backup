@@ -1,14 +1,35 @@
 ﻿using ScmBackup.Hosters;
+using System;
 
 namespace ScmBackup.Tests.Hosters
 {
-    internal class FakeHosterBackup : IBackup
+    internal class FakeHosterBackup : BackupBase
     {
-        public bool WasExecuted { get; private set; }
+        private bool issuesWasExecuted;
+        private bool repoWasExecuted;
+        private bool wikiWasExecuted;
 
-        public void MakeBackup(HosterRepository repo, Config config, string repoFolder)
+        public bool WasExecuted
         {
-            this.WasExecuted = true;
+            get
+            {
+                return this.issuesWasExecuted && this.repoWasExecuted && this.wikiWasExecuted;
+            }
+        }
+
+        public override void BackupIssues(string subdir)
+        {
+            this.issuesWasExecuted = true;
+        }
+
+        public override void BackupRepo(string subdir)
+        {
+            this.repoWasExecuted = true;
+        }
+
+        public override void BackupWiki(string subdir)
+        {
+            this.wikiWasExecuted = true;
         }
     }
 }
