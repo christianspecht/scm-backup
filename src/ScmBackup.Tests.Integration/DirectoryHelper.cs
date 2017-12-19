@@ -18,14 +18,15 @@ namespace ScmBackup.Tests.Integration
         public static string CreateTempDirectory(string suffix)
         {
             string tempDir = Path.GetTempPath();
-            string newDir = "_scm-backup-temp-" + DateTime.UtcNow.ToString("yyyyMMddHHmmssfff", CultureInfo.InvariantCulture);
+            string subDir = "_scm-backup-tests";
+            string newDir =  DateTime.UtcNow.ToString("yyyyMMddHHmmssfff", CultureInfo.InvariantCulture);
 
             if (!string.IsNullOrWhiteSpace(suffix))
             {
                 newDir += '-' + suffix;
             }
 
-            string finalDir = Path.Combine(tempDir, newDir);
+            string finalDir = Path.Combine(tempDir, subDir, newDir);
 
             if (Directory.CreateDirectory(finalDir) != null)
             {
