@@ -6,3 +6,5 @@ set GithubApiTests_Name=scm-backup-testuser
 set GithubApiTests_OrgName=scm-backup-testorg
 set GithubApiTests_PW=not-the-real-password
 set GithubApiTests_Repo=scm-backup
+set GithubApiTests_Commit=7be29139f4cdc4037647fc2f21d9d82c42a96e88
+set GithubApiTests_WikiCommit=714ddb8c48cebc70ff2ae74be98ac7cdf91ade6e

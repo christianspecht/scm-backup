@@ -1,6 +1,5 @@
 ﻿using ScmBackup.Hosters;
 using ScmBackup.Scm;
-using System;
 using System.Collections.Generic;
 
 namespace ScmBackup
@@ -11,14 +10,14 @@ namespace ScmBackup
     internal class BackupMaker : IBackupMaker
     {
         private readonly ILogger logger;
-        private readonly IScmFactory scmFactory;
         private readonly IFileSystemHelper fileHelper;
+        private readonly IHosterBackupMaker backupMaker;
 
-        public BackupMaker(ILogger logger, IScmFactory scmfactory, IFileSystemHelper fileHelper)
+        public BackupMaker(ILogger logger, IFileSystemHelper fileHelper, IHosterBackupMaker backupMaker)
         {
             this.logger = logger;
-            this.scmFactory = scmfactory;
             this.fileHelper = fileHelper;
+            this.backupMaker = backupMaker;
         }
 
         public void Backup(Config config, ConfigSource source, IEnumerable<HosterRepository> repos)
@@ -29,24 +28,11 @@ namespace ScmBackup
 
             foreach (var repo in repos)
             {
-                string tmp = repo.Scm.ToString();
+                string repoFolder = this.fileHelper.CreateSubDirectory(sourceFolder, repo.Name);
 
-                var scm = this.scmFactory.Create(repo.Scm);
-                if (!scm.IsOnThisComputer(config))
-                {
-                    throw new InvalidOperationException(string.Format(Resource.ScmNotOnThisComputer, repo.Scm.ToString()));
-                }
+                this.logger.Log(ErrorLevel.Info, Resource.BackupMaker_Repo, repo.Scm.ToString(), repo.CloneUrl);
 
-                this.logger.Log(ErrorLevel.Info, Resource.BackupMaker_Repo, scm.ShortName, repo.CloneUrl);
-
-                string repoFolder = this.fileHelper.PathCombine(sourceFolder, repo.Name);
-
-                scm.PullFromRemote(repo.CloneUrl, repoFolder);
-
-                if (!scm.DirectoryIsRepository(repoFolder))
-                {
-                    throw new InvalidOperationException(Resource.DirectoryNoRepo);
-                }
+                this.backupMaker.MakeBackup(source, repo, config, repoFolder);
             }
         }
     }

@@ -4,21 +4,25 @@ namespace ScmBackup.Hosters
 {
     internal abstract class BackupBase : IBackup
     {
-        private HosterRepository repo;
-        private Config config;
+        public readonly string SubDirRepo = "repo";
+        public readonly string SubDirWiki = "wiki";
+        public readonly string SubDirIssues = "issues";
+
+        protected HosterRepository repo;
+        protected Config config;
 
         public void MakeBackup(HosterRepository repo, Config config, string repoFolder)
         {
             this.repo = repo;
             this.config = config;
 
-            string subdir = Path.Combine(repoFolder, "repo");
+            string subdir = Path.Combine(repoFolder, this.SubDirRepo);
             this.BackupRepo(subdir);
 
-            subdir = Path.Combine(repoFolder, "wiki");
+            subdir = Path.Combine(repoFolder,this.SubDirWiki);
             this.BackupWiki(subdir);
 
-            subdir = Path.Combine(repoFolder, "issues");
+            subdir = Path.Combine(repoFolder, this.SubDirIssues);
             this.BackupIssues(subdir);
         }
 
