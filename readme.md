@@ -12,7 +12,7 @@ And it's written in [.NET Core](https://dotnet.github.io/), which means that it'
 
 - [Website](http://scm-backup.org)
 - [Documentation](http://docs.scm-backup.org)
-- [Download latest build](https://ci.appveyor.com/project/ChristianSpecht/scm-backup/build/artifacts)
+- [Download](http://scm-backup.org/downloads/)
 
 
 ## License
