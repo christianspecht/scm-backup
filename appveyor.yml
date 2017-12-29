@@ -1,8 +1,10 @@
-version: 0.1.{build}
+version: {build}
 image: Visual Studio 2017
 branches:
   only:
   - master
+install:
+- ps: C:\projects\scm-backup\version-number.ps1
 build_script:
 - cmd: C:\projects\scm-backup\build-release.bat
 test: off
@@ -14,6 +16,17 @@ artifacts:
 assembly_info:
   patch: true
   file: AssemblyInfo.cs
-  assembly_version: '{version}'
-  assembly_file_version: '{version}'
-  assembly_informational_version: '{version}-$(APPVEYOR_REPO_COMMIT)'
+  assembly_version: '$(ScmBackupShortVersion)'
+  assembly_file_version: '$(ScmBackupShortVersion)'
+  assembly_informational_version: '$(ScmBackupLongVersion)'
+deploy:
+  description: ''
+  provider: GitHub
+  auth_token:
+    secure: jSFkl4pbQUbrR2Yqh8MEAUmJ8uP6/Pm6sca+pd6HYB04B/zi4Y92WF0FG6d1/PdF
+  artifact: Release Version
+  draft: false
+  prerelease: false
+  on:
+    branch: master
+    appveyor_repo_tag: true

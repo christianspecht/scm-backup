@@ -5,5 +5,5 @@ obj
 project.lock.json
 .vs
 release/
-environment-variables.bat
+environment-variables.ps1
 src/ScmBackup/AssemblyCopyright.cs
