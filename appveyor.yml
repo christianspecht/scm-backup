@@ -6,7 +6,7 @@ branches:
 install:
 - ps: C:\projects\scm-backup\version-number.ps1
 build_script:
-- cmd: C:\projects\scm-backup\build-release.bat
+- ps: C:\projects\scm-backup\build-release.ps1
 test: off
 artifacts:
 - path: release\scm-backup-*.zip
