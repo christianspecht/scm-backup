@@ -12,5 +12,7 @@ namespace ScmBackup
         string VersionNumberString { get; }
 
         string AppTitle { get; }
+
+        Config Config { get; }
     }
 }

@@ -8,8 +8,13 @@ namespace ScmBackup
     /// </summary>
     internal class Context : IContext
     {
-        public Context()
+        private readonly IConfigReader reader;
+
+        public Context(IConfigReader reader)
         {
+            this.reader = reader;
+            this.Config = this.reader.ReadConfig();
+
             var assembly = typeof(ScmBackup).GetTypeInfo().Assembly;
             this.VersionNumber = assembly.GetName().Version;
             this.VersionNumberString= assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion;
@@ -21,5 +26,7 @@ namespace ScmBackup
         public string VersionNumberString { get; private set; }
 
         public string AppTitle { get; private set; }
+
+        public Config Config { get; private set; }
     }
 }
