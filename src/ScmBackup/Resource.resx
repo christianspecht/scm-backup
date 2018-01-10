@@ -139,7 +139,7 @@
     <value>http://scm-backup.org/</value>
   </data>
   <data name="AuthNameAndPasswortEmpty" xml:space="preserve">
-    <value>AuthName and Password are empty</value>
+    <value>AuthName and Password are empty. Without authentication, SCM Backup will backup public repositories only!</value>
   </data>
   <data name="AuthNameOrPasswortEmpty" xml:space="preserve">
     <value>Only one of AuthName/Password is filled. Make sure you fill both or none!</value>

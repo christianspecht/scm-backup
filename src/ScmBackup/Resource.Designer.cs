@@ -125,7 +125,7 @@ namespace ScmBackup {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AuthName and Password are empty.
+        ///   Looks up a localized string similar to AuthName and Password are empty. Without authentication, SCM Backup will backup public repositories only!.
         /// </summary>
         internal static string AuthNameAndPasswortEmpty {
             get {
