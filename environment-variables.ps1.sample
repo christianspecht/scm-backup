@@ -2,9 +2,9 @@
 
 Write-Host 'Setting environment variables for integration tests...'
 
-$env:GithubApiTests_Name = 'scm-backup-testuser'
-$env:GithubApiTests_OrgName = 'scm-backup-testorg'
-$env:GithubApiTests_PW = 'not-the-real-password'
-$env:GithubApiTests_Repo = 'scm-backup'
-$env:GithubApiTests_Commit = '7be29139f4cdc4037647fc2f21d9d82c42a96e88'
-$env:GithubApiTests_WikiCommit = '714ddb8c48cebc70ff2ae74be98ac7cdf91ade6e'
+$env:GithubApiTests_Name = 'scm-backup-testuser'                                # GitHub user
+$env:GithubApiTests_OrgName = 'scm-backup-testorg'                              # GitHub organization
+$env:GithubApiTests_PW = 'not-the-real-password'                                # the user's password/personal access token
+$env:GithubApiTests_Repo = 'scm-backup'                                         # a repository with wiki (must exist under user AND organization)
+$env:GithubApiTests_Commit = '7be29139f4cdc4037647fc2f21d9d82c42a96e88'         # a commit in the repository
+$env:GithubApiTests_WikiCommit = '714ddb8c48cebc70ff2ae74be98ac7cdf91ade6e'     # a commit in the wiki
