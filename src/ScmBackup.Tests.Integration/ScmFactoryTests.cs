@@ -12,7 +12,10 @@ namespace ScmBackup.Tests.Integration
 
         public ScmFactoryTests()
         {
-            sut = new ScmFactory(new Container());
+            var container = new Container();
+            container.Register<IFileSystemHelper, FileSystemHelper>();
+
+            sut = new ScmFactory(container);
             sut.Register(typeof(GitScm));
         }
 

@@ -7,7 +7,7 @@ namespace ScmBackup.Tests.Integration.Scm
     {
         public GitScmTests()
         {
-            this.sut = new GitScm();
+            this.sut = new GitScm(new FileSystemHelper());
         }
 
         internal override string PublicRepoUrl

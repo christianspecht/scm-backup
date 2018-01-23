@@ -25,7 +25,7 @@ namespace ScmBackup.Tests.Integration.Hosters
             var api = new GithubApi(new HttpRequest(), new FakeLogger());
             this.repo = api.GetRepositoryList(source).First();
             
-            this.scm = new GitScm();
+            this.scm = new GitScm(new FileSystemHelper());
             Assert.True(this.scm.IsOnThisComputer(this.config));
 
             var scmFactory = new FakeScmFactory();
