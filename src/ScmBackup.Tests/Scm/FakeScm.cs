@@ -25,6 +25,11 @@ namespace ScmBackup.Tests.Scm
             get { return "Fake"; }
         }
 
+        public bool IsOnThisComputer()
+        {
+            return this.IsOnThisComputer(null);
+        }
+
         public bool IsOnThisComputer(Config config)
         {
             if (this.IsOnThisComputerException != null)

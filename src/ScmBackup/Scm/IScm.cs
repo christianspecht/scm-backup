@@ -1,4 +1,6 @@
-﻿namespace ScmBackup.Scm
+﻿using System;
+
+namespace ScmBackup.Scm
 {
     internal interface IScm
     {
@@ -15,7 +17,13 @@
         /// <summary>
         /// Checks whether the SCM is present on this computer
         /// </summary>
+        [Obsolete("Use the parameterless version instead")]
         bool IsOnThisComputer(Config config);
+
+        /// <summary>
+        /// Checks whether the SCM is present on this computer
+        /// </summary>
+        bool IsOnThisComputer();
 
         /// <summary>
         /// Gets the SCM's version number.

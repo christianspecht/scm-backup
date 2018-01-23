@@ -22,7 +22,7 @@ namespace ScmBackup.Scm
         /// Check whether the SCM exists on this computer
         /// Must be implemented in the child classes by calling ExecuteCommand and checking the result.
         /// </summary>
-        protected abstract bool IsOnThisComputer();
+        public abstract bool IsOnThisComputer();
 
         /// <summary>
         /// Gets the SCM's version number.
