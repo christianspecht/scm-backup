@@ -6,12 +6,15 @@ namespace ScmBackup.Scm
     [Scm(Type = ScmType.Git)]
     internal class GitScm : CommandLineScm, IScm
     {
-        public GitScm(IFileSystemHelper filesystemhelper)
+        public GitScm(IFileSystemHelper filesystemhelper, IContext context)
         {
             this.FileSystemHelper = filesystemhelper;
+            this.context = context;
         }
 
         public IFileSystemHelper FileSystemHelper { get; set; }
+
+        protected override IContext context { get; set; }
 
         public override string ShortName
         {

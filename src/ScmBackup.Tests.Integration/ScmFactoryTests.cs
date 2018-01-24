@@ -14,6 +14,7 @@ namespace ScmBackup.Tests.Integration
         {
             var container = new Container();
             container.Register<IFileSystemHelper, FileSystemHelper>();
+            container.Register<IContext, FakeContext>();
 
             sut = new ScmFactory(container);
             sut.Register(typeof(GitScm));

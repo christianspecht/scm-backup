@@ -51,6 +51,8 @@ namespace ScmBackup.Tests.Integration.Scm
         /// </summary>
         public string FakeCommandNameNotExisting { get; private set; }
 
+        protected override IContext context { get; set; }
+
         public override string DisplayName
         {
             get { return "FakeDisplayName"; }

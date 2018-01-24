@@ -22,10 +22,13 @@ namespace ScmBackup.Tests.Integration.Hosters
             this.config = new Config();
             this.config.Sources.Add(source);
 
+            var context = new FakeContext();
+            context.Config = this.config;
+
             var api = new GithubApi(new HttpRequest(), new FakeLogger());
             this.repo = api.GetRepositoryList(source).First();
             
-            this.scm = new GitScm(new FileSystemHelper());
+            this.scm = new GitScm(new FileSystemHelper(), context);
             Assert.True(this.scm.IsOnThisComputer(this.config));
 
             var scmFactory = new FakeScmFactory();
