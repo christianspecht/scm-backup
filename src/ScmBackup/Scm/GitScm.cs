@@ -31,7 +31,7 @@ namespace ScmBackup.Scm
             get { return "git"; }
         }
 
-        public override bool IsOnThisComputer()
+        protected override bool IsOnThisComputerImpl()
         {
             var result = this.ExecuteCommand("--version");
 

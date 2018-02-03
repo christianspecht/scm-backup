@@ -16,10 +16,8 @@ namespace ScmBackup.Tests.Integration.Scm
         [Fact]
         public void ReallyExecutes()
         {
-            var config = new Config();
-
             var sut = new FakeCommandLineScm();
-            var result = sut.IsOnThisComputer(config);
+            var result = sut.IsOnThisComputer();
 
             Assert.True(result);
         }
@@ -32,7 +30,9 @@ namespace ScmBackup.Tests.Integration.Scm
             var config = new Config();
             config.Scms.Add(new ConfigScm { Name = sut.ShortName, Path = sut.FakeCommandNameNotExisting });
 
-            Assert.Throws<FileNotFoundException>(() => sut.IsOnThisComputer(config));
+            sut.Context = FakeContext.BuildFakeContextWithConfig(config);
+
+            Assert.Throws<FileNotFoundException>(() => sut.IsOnThisComputer());
         }
 
         [Fact]
@@ -43,7 +43,9 @@ namespace ScmBackup.Tests.Integration.Scm
             var config = new Config();
             config.Scms.Add(new ConfigScm { Name = sut.ShortName, Path = sut.FakeCommandName });
 
-            var result = sut.IsOnThisComputer(config);
+            sut.Context = FakeContext.BuildFakeContextWithConfig(config);
+
+            var result = sut.IsOnThisComputer();
 
             Assert.True(result);
         }
@@ -52,7 +54,7 @@ namespace ScmBackup.Tests.Integration.Scm
         public void ExecuteReturnsOutput()
         {
             var sut = new FakeCommandLineScm();
-            sut.IsOnThisComputer(new Config());
+            sut.IsOnThisComputer();
 
             var result = sut.ExecuteCommandDirectly();
 

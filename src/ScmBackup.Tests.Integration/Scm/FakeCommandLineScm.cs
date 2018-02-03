@@ -29,6 +29,8 @@ namespace ScmBackup.Tests.Integration.Scm
             {
                 throw new NotImplementedException();
             }
+
+            this.context = new FakeContext();
         }
 
         /// <summary>
@@ -50,6 +52,12 @@ namespace ScmBackup.Tests.Integration.Scm
         /// "wrong" command which doesn't exist (to test error handling)
         /// </summary>
         public string FakeCommandNameNotExisting { get; private set; }
+
+        public IContext Context
+        {
+            get { return this.context; }
+            set { this.context = value; }
+        }
 
         protected override IContext context { get; set; }
 
@@ -74,7 +82,7 @@ namespace ScmBackup.Tests.Integration.Scm
             return result.Output;
         }
 
-        public override bool IsOnThisComputer()
+        protected override bool IsOnThisComputerImpl()
         {
             var result = this.ExecuteCommand(this.FakeCommandArgs);
             return result.Output.ToLower().Contains(this.FakeCommandResult.ToLower());

@@ -22,5 +22,12 @@ namespace ScmBackup.Tests
         public string AppTitle { get; set; }
 
         public Config Config { get; set; }
+
+        public static FakeContext BuildFakeContextWithConfig(Config config)
+        {
+            var context = new FakeContext();
+            context.Config = config;
+            return context;
+        }
     }
 }

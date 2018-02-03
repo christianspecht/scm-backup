@@ -24,7 +24,7 @@ namespace ScmBackup.Scm
         /// Check whether the SCM exists on this computer
         /// Must be implemented in the child classes by calling ExecuteCommand and checking the result.
         /// </summary>
-        public abstract bool IsOnThisComputer();
+        protected abstract bool IsOnThisComputerImpl();
 
         /// <summary>
         /// Gets the SCM's version number.
@@ -64,9 +64,18 @@ namespace ScmBackup.Scm
         /// <summary>
         /// Checks whether the SCM is present on this computer
         /// </summary>
+        public bool IsOnThisComputer()
+        {
+            this.GetExecutable(this.context.Config);
+            return this.IsOnThisComputerImpl();
+        }
+
+        /// <summary>
+        /// Checks whether the SCM is present on this computer
+        /// </summary>
+        [Obsolete("Use the parameterless version instead")]
         public bool IsOnThisComputer(Config config)
         {
-            this.GetExecutable(config);
             return this.IsOnThisComputer();
         }
 
