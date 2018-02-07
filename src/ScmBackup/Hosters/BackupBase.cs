@@ -9,12 +9,10 @@ namespace ScmBackup.Hosters
         public readonly string SubDirIssues = "issues";
 
         protected HosterRepository repo;
-        protected Config config;
 
-        public void MakeBackup(HosterRepository repo, Config config, string repoFolder)
+        public void MakeBackup(HosterRepository repo, string repoFolder)
         {
             this.repo = repo;
-            this.config = config;
 
             string subdir = Path.Combine(repoFolder, this.SubDirRepo);
             this.BackupRepo(subdir);

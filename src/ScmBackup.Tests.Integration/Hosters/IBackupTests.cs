@@ -7,7 +7,6 @@ namespace ScmBackup.Tests.Integration.Hosters
 {
     public abstract class IBackupTests
     {
-        internal Config config;
         internal BackupBase sut;
         internal HosterRepository repo;
         internal IScm scm;
@@ -29,12 +28,11 @@ namespace ScmBackup.Tests.Integration.Hosters
             this.Setup();
 
             // these should have been filled by the child classes' Setup() method
-            Assert.NotNull(this.config);
             Assert.NotNull(this.sut);
             Assert.NotNull(this.repo);
             Assert.NotNull(this.scm);
 
-            sut.MakeBackup(this.repo, this.config, dir);
+            sut.MakeBackup(this.repo, dir);
 
             this.AssertRepo(Path.Combine(dir, this.sut.SubDirRepo));
             this.AssertWiki(Path.Combine(dir, this.sut.SubDirWiki));

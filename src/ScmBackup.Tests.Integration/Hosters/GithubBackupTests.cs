@@ -19,11 +19,11 @@ namespace ScmBackup.Tests.Integration.Hosters
             source.AuthName = source.Name;
             source.Password = TestHelper.EnvVar("GithubApiTests_PW");
 
-            this.config = new Config();
-            this.config.Sources.Add(source);
+            var config = new Config();
+            config.Sources.Add(source);
 
             var context = new FakeContext();
-            context.Config = this.config;
+            context.Config = config;
 
             var api = new GithubApi(new HttpRequest(), new FakeLogger());
             this.repo = api.GetRepositoryList(source).First();

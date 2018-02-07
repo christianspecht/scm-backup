@@ -9,7 +9,7 @@ namespace ScmBackup.Tests.Hosters
         public void BackupBaseExecutesAllSubMethods()
         {
             var sut = new FakeHosterBackup();
-            sut.MakeBackup(new HosterRepository("foo", "http://clone", ScmType.Git), new Config(), @"c:\foo");
+            sut.MakeBackup(new HosterRepository("foo", "http://clone", ScmType.Git), @"c:\foo");
 
             Assert.True(sut.WasExecuted);
         }
