@@ -18,7 +18,7 @@ namespace ScmBackup.Hosters.Github
             if (this.scm == null)
             {
                 this.scm = this.scmFactory.Create(this.repo.Scm);
-                if (!this.scm.IsOnThisComputer(this.config))
+                if (!this.scm.IsOnThisComputer())
                 {
                     throw new InvalidOperationException(string.Format(Resource.ScmNotOnThisComputer, this.repo.Scm.ToString()));
                 }

@@ -29,7 +29,7 @@ namespace ScmBackup.Tests.Integration.Hosters
             this.repo = api.GetRepositoryList(source).First();
             
             this.scm = new GitScm(new FileSystemHelper(), context);
-            Assert.True(this.scm.IsOnThisComputer(this.config));
+            Assert.True(this.scm.IsOnThisComputer());
 
             var scmFactory = new FakeScmFactory();
             scmFactory.Register(ScmType.Git, this.scm);
