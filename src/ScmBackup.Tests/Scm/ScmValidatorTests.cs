@@ -11,8 +11,6 @@ namespace ScmBackup.Tests
         private FakeScmFactory factory;
         private FakeLogger logger;
 
-        private Config config;
-
         private HashSet<ScmType> scmlist;
         private FakeScm scm;
 
@@ -21,8 +19,6 @@ namespace ScmBackup.Tests
         public ScmValidatorTests()
         {
             this.logger = new FakeLogger();
-
-            this.config = new Config();
 
             this.scmlist = new HashSet<ScmType>();
             this.scmlist.Add(ScmType.Git);
@@ -40,7 +36,7 @@ namespace ScmBackup.Tests
         {
             this.scm.IsOnThisComputerResult = true;
 
-            var result = this.sut.ValidateScms(this.scmlist, config);
+            var result = this.sut.ValidateScms(this.scmlist);
 
             Assert.True(result);
             Assert.NotEqual(ErrorLevel.Error, this.logger.LastErrorLevel);
@@ -51,7 +47,7 @@ namespace ScmBackup.Tests
         {
             this.scm.IsOnThisComputerResult = false;
 
-            var result = this.sut.ValidateScms(this.scmlist, config);
+            var result = this.sut.ValidateScms(this.scmlist);
 
             Assert.False(result);
             Assert.Equal(ErrorLevel.Error, this.logger.LastErrorLevel);
@@ -62,7 +58,7 @@ namespace ScmBackup.Tests
         {
             this.scm.IsOnThisComputerException = new Exception("boom");
 
-            var result = this.sut.ValidateScms(this.scmlist, config);
+            var result = this.sut.ValidateScms(this.scmlist);
 
             Assert.False(result);
             Assert.Equal(ErrorLevel.Error, this.logger.LastErrorLevel);

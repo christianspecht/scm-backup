@@ -18,7 +18,7 @@ namespace ScmBackup.Scm
             this.logger = logger;
         }
 
-        public bool ValidateScms(HashSet<ScmType> scms, Config config)
+        public bool ValidateScms(HashSet<ScmType> scms)
         {
             bool ok = true;
             this.logger.Log(ErrorLevel.Info, Resource.ScmValidatorStarting);
@@ -30,7 +30,7 @@ namespace ScmBackup.Scm
                 bool onComputer = false;
                 try
                 {
-                    onComputer = scm.IsOnThisComputer(config);
+                    onComputer = scm.IsOnThisComputer();
                 }
                 catch (Exception ex)
                 {
