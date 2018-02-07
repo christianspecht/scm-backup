@@ -32,7 +32,7 @@ namespace ScmBackup
 
                 this.logger.Log(ErrorLevel.Info, Resource.BackupMaker_Repo, repo.Scm.ToString(), repo.CloneUrl);
 
-                this.backupMaker.MakeBackup(source, repo, config, repoFolder);
+                this.backupMaker.MakeBackup(source, repo, repoFolder);
             }
         }
     }

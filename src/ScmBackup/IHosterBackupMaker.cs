@@ -7,6 +7,6 @@ namespace ScmBackup
     /// </summary>
     internal interface IHosterBackupMaker
     {
-        void MakeBackup(ConfigSource source, HosterRepository repo, Config config, string repoFolder);
+        void MakeBackup(ConfigSource source, HosterRepository repo, string repoFolder);
     }
 }

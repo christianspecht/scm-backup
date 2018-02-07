@@ -15,16 +15,11 @@ namespace ScmBackup.CompositionRoot
             this.factory = factory;
         }
 
-        public void MakeBackup(ConfigSource source, HosterRepository repo, Config config, string repoFolder)
+        public void MakeBackup(ConfigSource source, HosterRepository repo,string repoFolder)
         {
             if (source == null)
             {
                 throw new ArgumentNullException(Resource.ConfigSourceIsNull);
-            }
-
-            if (config == null)
-            {
-                throw new ArgumentNullException(Resource.ConfigIsNull);
             }
 
             var hoster = factory.Create(source.Hoster);

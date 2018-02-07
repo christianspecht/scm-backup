@@ -23,7 +23,7 @@ namespace ScmBackup.Tests.Hosters
 
 
             var sut = new HosterBackupMaker(factory);
-            sut.MakeBackup(source, repo, config, "foo");
+            sut.MakeBackup(source, repo, "foo");
 
             Assert.True(hoster.FakeBackup.WasExecuted);
         }
@@ -35,17 +35,7 @@ namespace ScmBackup.Tests.Hosters
             var repo = new HosterRepository("foo", "http://clone", ScmType.Git);
 
             var sut = new HosterBackupMaker(factory);
-            Assert.Throws<ArgumentNullException>(() => sut.MakeBackup(null, repo, new Config(), "foo"));
-        }
-
-        [Fact]
-        public void ThrowsWhenConfigIsNull()
-        {
-            var factory = new FakeHosterFactory(new FakeHoster());
-            var repo = new HosterRepository("foo", "http://clone", ScmType.Git);
-
-            var sut = new HosterBackupMaker(factory);
-            Assert.Throws<ArgumentNullException>(() => sut.MakeBackup(new ConfigSource(), repo, null, "foo"));
+            Assert.Throws<ArgumentNullException>(() => sut.MakeBackup(null, repo, "foo"));
         }
     }
 }
