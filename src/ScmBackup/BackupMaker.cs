@@ -12,19 +12,21 @@ namespace ScmBackup
         private readonly ILogger logger;
         private readonly IFileSystemHelper fileHelper;
         private readonly IHosterBackupMaker backupMaker;
+        private readonly IContext context;
 
-        public BackupMaker(ILogger logger, IFileSystemHelper fileHelper, IHosterBackupMaker backupMaker)
+        public BackupMaker(ILogger logger, IFileSystemHelper fileHelper, IHosterBackupMaker backupMaker, IContext context)
         {
             this.logger = logger;
             this.fileHelper = fileHelper;
             this.backupMaker = backupMaker;
+            this.context = context;
         }
 
-        public void Backup(Config config, ConfigSource source, IEnumerable<HosterRepository> repos)
+        public void Backup(ConfigSource source, IEnumerable<HosterRepository> repos)
         {
             this.logger.Log(ErrorLevel.Info, Resource.BackupMaker_Source, source.Title);
 
-            string sourceFolder = this.fileHelper.CreateSubDirectory(config.LocalFolder, source.Title);
+            string sourceFolder = this.fileHelper.CreateSubDirectory(context.Config.LocalFolder, source.Title);
 
             foreach (var repo in repos)
             {

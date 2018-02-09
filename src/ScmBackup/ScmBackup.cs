@@ -34,7 +34,7 @@ namespace ScmBackup
             
             foreach (var source in repos.GetSources())
             {
-                this.backupMaker.Backup(config, source, repos.GetReposForSource(source));
+                this.backupMaker.Backup(source, repos.GetReposForSource(source));
             }
         }
     }
