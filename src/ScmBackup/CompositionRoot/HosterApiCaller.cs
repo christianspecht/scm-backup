@@ -13,15 +13,15 @@ namespace ScmBackup.CompositionRoot
             this.factory = factory;
         }
 
-        public List<HosterRepository> GetRepositoryList(ConfigSource config)
+        public List<HosterRepository> GetRepositoryList(ConfigSource source)
         {
-            if (config == null)
+            if (source == null)
             {
                 throw new ArgumentNullException(Resource.ConfigSourceIsNull);
             }
 
-            var hoster = this.factory.Create(config.Hoster);
-            return hoster.Api.GetRepositoryList(config);
+            var hoster = this.factory.Create(source.Hoster);
+            return hoster.Api.GetRepositoryList(source);
         }
     }
 }

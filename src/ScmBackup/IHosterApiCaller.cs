@@ -5,6 +5,6 @@ namespace ScmBackup
 {
     internal interface IHosterApiCaller
     {
-        List<HosterRepository> GetRepositoryList(ConfigSource config);
+        List<HosterRepository> GetRepositoryList(ConfigSource source);
     }
 }
