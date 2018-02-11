@@ -9,11 +9,11 @@ namespace ScmBackup
     internal class Context : IContext
     {
         private readonly IConfigReader reader;
+        private Config config;
 
         public Context(IConfigReader reader)
         {
             this.reader = reader;
-            this.Config = this.reader.ReadConfig();
 
             var assembly = typeof(ScmBackup).GetTypeInfo().Assembly;
             this.VersionNumber = assembly.GetName().Version;
@@ -27,6 +27,21 @@ namespace ScmBackup
 
         public string AppTitle { get; private set; }
 
-        public Config Config { get; private set; }
+        public Config Config
+        {
+            get
+            {
+                if (this.config == null)
+                {
+                    this.Config = this.reader.ReadConfig();
+                }
+
+                return this.config;
+            }
+            private set
+            {
+                this.config = value;
+            }
+        }
     }
 }
