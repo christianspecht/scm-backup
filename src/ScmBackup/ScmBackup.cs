@@ -8,14 +8,12 @@ namespace ScmBackup
     /// </summary>
     internal class ScmBackup : IScmBackup
     {
-        private readonly IContext context;
         private readonly IApiCaller apiCaller;
         private readonly IScmValidator validator;
         private readonly IBackupMaker backupMaker;
 
-        public ScmBackup(IContext context, IApiCaller apiCaller, IScmValidator validator, IBackupMaker backupMaker)
+        public ScmBackup(IApiCaller apiCaller, IScmValidator validator, IBackupMaker backupMaker)
         {
-            this.context = context;
             this.apiCaller = apiCaller;
             this.validator = validator;
             this.backupMaker = backupMaker;
@@ -23,9 +21,7 @@ namespace ScmBackup
 
         public void Run()
         {
-            var config = this.context.Config;
-
-            var repos = this.apiCaller.CallApis(config);
+            var repos = this.apiCaller.CallApis();
 
             if (!this.validator.ValidateScms(repos.GetScmTypes()))
             {

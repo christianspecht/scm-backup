@@ -11,7 +11,7 @@ namespace ScmBackup.Tests
     {
         private ConfigSource source1;
         private ConfigSource source2;
-        private Config config;
+        private FakeContext context;
 
         private List<HosterRepository> list1;
         private List<HosterRepository> list2;
@@ -28,7 +28,8 @@ namespace ScmBackup.Tests
             source2.Hoster = "fake";
             reader.FakeConfig.Sources.Add(source2);
 
-            this.config = reader.ReadConfig();
+            this.context = new FakeContext();
+            this.context.Config = reader.ReadConfig();
 
             list1 = new List<HosterRepository>();
             list1.Add(new HosterRepository("foo1", "http://foo1", ScmType.Git));
@@ -44,8 +45,8 @@ namespace ScmBackup.Tests
         [Fact]
         public void ExecutesHosterApiCallerForEachConfigSource()
         {
-            var sut = new ApiCaller(hac);
-            var result = sut.CallApis(config);
+            var sut = new ApiCaller(hac, context);
+            var result = sut.CallApis();
 
             Assert.Equal(2, hac.PassedConfigSources.Count);
             Assert.Equal(2, result.Dic.Count());
@@ -60,14 +61,13 @@ namespace ScmBackup.Tests
         [Fact]
         public void ThrowsWhenNoHosterApiCallerIsPassed()
         {
-            Assert.ThrowsAny<Exception>(() => new ApiCaller(null));
+            Assert.ThrowsAny<Exception>(() => new ApiCaller(null, context));
         }
 
         [Fact]
-        public void ThrowswhenNoConfigIsPassed()
+        public void ThrowsWhenNoContextIsPassed()
         {
-            var sut = new ApiCaller(hac);
-            Assert.ThrowsAny<Exception>(() => sut.CallApis(null));
+            Assert.ThrowsAny<Exception>(() => new ApiCaller(hac, null));
         }
     }
 }

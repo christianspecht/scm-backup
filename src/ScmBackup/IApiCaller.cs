@@ -5,6 +5,6 @@
     /// </summary>
     internal interface IApiCaller
     {
-        ApiRepositories CallApis(Config config);
+        ApiRepositories CallApis();
     }
 }
