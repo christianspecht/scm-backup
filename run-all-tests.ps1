@@ -13,7 +13,7 @@ else {
 Write-Host '###### DELETING OLD TEMP FOLDERS ######'
 $temppath = "$env:TEMP\_scm-backup-tests\"
 if (Test-Path -Path $temppath) {
-    Get-ChildItem -Path $temppath -Recurse| Foreach-object {Remove-item -Recurse -path $_.FullName }
+    Get-ChildItem -Path $temppath -Recurse| Foreach-object {Remove-item -Recurse -Force -path $_.FullName }
 }
 
 
