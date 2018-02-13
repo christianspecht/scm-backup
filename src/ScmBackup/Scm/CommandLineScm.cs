@@ -71,15 +71,6 @@ namespace ScmBackup.Scm
         }
 
         /// <summary>
-        /// Checks whether the SCM is present on this computer
-        /// </summary>
-        [Obsolete("Use the parameterless version instead")]
-        public bool IsOnThisComputer(Config config)
-        {
-            return this.IsOnThisComputer();
-        }
-
-        /// <summary>
         /// Checks whether the given directory is a repository
         /// Must be implemented in the child classes by calling ExecuteCommand and checking the result.
         /// </summary>

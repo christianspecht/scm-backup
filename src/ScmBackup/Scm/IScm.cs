@@ -17,12 +17,6 @@ namespace ScmBackup.Scm
         /// <summary>
         /// Checks whether the SCM is present on this computer
         /// </summary>
-        [Obsolete("Use the parameterless version instead")]
-        bool IsOnThisComputer(Config config);
-
-        /// <summary>
-        /// Checks whether the SCM is present on this computer
-        /// </summary>
         bool IsOnThisComputer();
 
         /// <summary>
