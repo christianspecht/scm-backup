@@ -10,7 +10,7 @@ namespace ScmBackup
     {
         private readonly IScmBackup backup;
         private readonly ILogger logger;
-        private readonly IConfigReader conf;
+        private readonly IContext context;
 
         /// <summary>
         /// default wait time after an error occurs 
@@ -18,11 +18,11 @@ namespace ScmBackup
         /// </summary>
         public int WaitSecondsOnError { get; set; }
 
-        public ErrorHandlingScmBackup(IScmBackup backup, ILogger logger, IConfigReader conf)
+        public ErrorHandlingScmBackup(IScmBackup backup, ILogger logger, IContext context)
         {
             this.backup = backup;
             this.logger = logger;
-            this.conf = conf;
+            this.context = context;
 
             this.WaitSecondsOnError = 5;
         }
@@ -35,8 +35,7 @@ namespace ScmBackup
 
             try
             {
-                this.logger.Log(ErrorLevel.Debug, Resource.ReadingConfig, className);
-                config = this.conf.ReadConfig();
+                config = this.context.Config;
 
                 if (config != null)
                 {

@@ -16,9 +16,11 @@ namespace ScmBackup.Tests
             var conf = new FakeConfigReader();
             conf.SetDefaultFakeConfig();
 
+            var context = new FakeContext();
+
             var logger = new FakeLogger();
 
-            var backup = new ErrorHandlingScmBackup(subBackup, logger, conf);
+            var backup = new ErrorHandlingScmBackup(subBackup, logger, context);
             backup.Run();
 
             Assert.True(logger.LoggedSomething);
@@ -32,12 +34,12 @@ namespace ScmBackup.Tests
         {
             var subBackup = new FakeScmBackup();
 
-            var conf = new FakeConfigReader();
-            conf.FakeConfig = null;
+            var context = new FakeContext();
+            context.Config = null;
 
             var logger = new FakeLogger();
 
-            var backup = new ErrorHandlingScmBackup(subBackup, logger, conf);
+            var backup = new ErrorHandlingScmBackup(subBackup, logger, context);
             backup.WaitSecondsOnError = 0;
             backup.Run();
 
