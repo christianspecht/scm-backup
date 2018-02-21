@@ -5,27 +5,27 @@
     /// </summary>
     internal class GithubConfigSourceValidator : IConfigSourceValidator
     {
-        public ValidationResult Validate(ConfigSource config)
+        public ValidationResult Validate(ConfigSource source)
         {
-            var result = new ValidationResult(config);
+            var result = new ValidationResult(source);
 
-            if (config.Hoster != "github")
+            if (source.Hoster != "github")
             {
-                result.AddMessage(ErrorLevel.Error, string.Format(Resource.WrongHoster, config.Hoster));
+                result.AddMessage(ErrorLevel.Error, string.Format(Resource.WrongHoster, source.Hoster));
             }
 
-            if (config.Type != "user" && config.Type != "org")
+            if (source.Type != "user" && source.Type != "org")
             {
-                result.AddMessage(ErrorLevel.Error, string.Format(Resource.WrongType, config.Type));
+                result.AddMessage(ErrorLevel.Error, string.Format(Resource.WrongType, source.Type));
             }
 
-            if (string.IsNullOrWhiteSpace(config.Name))
+            if (string.IsNullOrWhiteSpace(source.Name))
             {
                 result.AddMessage(ErrorLevel.Error, Resource.NameEmpty);
             }
 
-            bool authNameEmpty = string.IsNullOrWhiteSpace(config.AuthName);
-            bool passwordEmpty = string.IsNullOrWhiteSpace(config.Password);
+            bool authNameEmpty = string.IsNullOrWhiteSpace(source.AuthName);
+            bool passwordEmpty = string.IsNullOrWhiteSpace(source.Password);
 
             if (authNameEmpty != passwordEmpty)
             {
