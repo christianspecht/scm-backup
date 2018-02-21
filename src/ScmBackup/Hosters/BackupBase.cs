@@ -17,7 +17,7 @@ namespace ScmBackup.Hosters
             string subdir = Path.Combine(repoFolder, this.SubDirRepo);
             this.BackupRepo(subdir);
 
-            subdir = Path.Combine(repoFolder,this.SubDirWiki);
+            subdir = Path.Combine(repoFolder, this.SubDirWiki);
             this.BackupWiki(subdir);
 
             subdir = Path.Combine(repoFolder, this.SubDirIssues);
