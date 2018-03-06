@@ -1,14 +1,14 @@
-﻿localFolder: "localfolder"
+﻿localFolder: 'localfolder'
 
 waitSecondsOnError: 5
 
 scms:
 
   - name: git
-    path: "path/to/git"
+    path: 'path/to/git'
 
   - name: hg
-    path: "path/to/hg"
+    path: 'path/to/hg'
 
 sources:
 
