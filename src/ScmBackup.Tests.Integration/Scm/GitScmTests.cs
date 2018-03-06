@@ -12,7 +12,11 @@ namespace ScmBackup.Tests.Integration.Scm
 
         internal override string PublicRepoUrl
         {
-            get { return "https://github.com/scm-backup-testuser/scm-backup"; }
+            get
+            {
+                string url = string.Format("https://github.com/{0}/{1}", TestHelper.EnvVar("GithubApiTests_Name"), TestHelper.EnvVar("GithubApiTests_Repo"));
+                return url;
+            }
         }
 
         internal override string PrivateRepoUrl
@@ -22,7 +26,10 @@ namespace ScmBackup.Tests.Integration.Scm
 
         internal override string PublicRepoExistingCommitId
         {
-            get { return "3a91f6409f0cef7a3bd2c80cad389fa844b41e3c"; }
+            get
+            {
+                return TestHelper.EnvVar("GithubApiTests_Commit");
+            }
         }
 
         internal override string PublicRepoNonExistingCommitId
