@@ -80,7 +80,7 @@ namespace ScmBackup.Tests.Integration.Scm
             return result.Output;
         }
 
-        protected override bool IsOnThisComputerImpl()
+        public override bool IsOnThisComputer()
         {
             var result = this.ExecuteCommand(this.FakeCommandArgs);
             return result.Output.ToLower().Contains(this.FakeCommandResult.ToLower());

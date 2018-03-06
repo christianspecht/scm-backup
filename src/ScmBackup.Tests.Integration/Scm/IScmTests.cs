@@ -41,8 +41,6 @@ namespace ScmBackup.Tests.Integration.Scm
         [Fact]
         public void GetVersionNumberReturnsVersionNumber()
         {
-            sut.IsOnThisComputer();
-
             // Getting the SCM's version number without the method under test is difficult -> just check whether it executes and returns something
             var result = sut.GetVersionNumber();
 
@@ -55,7 +53,6 @@ namespace ScmBackup.Tests.Integration.Scm
         [Fact]
         public void GetVersionNumberDoesntContainSpecialCharacters()
         {
-            sut.IsOnThisComputer();
             var result = sut.GetVersionNumber();
 
             Assert.False(result.Contains("\r"), "contains \\r");
@@ -68,8 +65,6 @@ namespace ScmBackup.Tests.Integration.Scm
         {
             string dir = DirectoryHelper.CreateTempDirectory(DirSuffix("non-existing"));
             string subDir = Path.Combine(dir, "sub");
-            
-            sut.IsOnThisComputer();
 
             Assert.False(sut.DirectoryIsRepository(subDir));
         }
@@ -78,8 +73,6 @@ namespace ScmBackup.Tests.Integration.Scm
         public void DirectoryIsRepositoryReturnsFalseForEmptyDir()
         {
             string dir = DirectoryHelper.CreateTempDirectory(DirSuffix("empty"));
-            
-            sut.IsOnThisComputer();
 
             Assert.False(sut.DirectoryIsRepository(dir));
         }
@@ -91,8 +84,6 @@ namespace ScmBackup.Tests.Integration.Scm
             string subDir = Path.Combine(dir, "sub");
             Directory.CreateDirectory(subDir);
             File.WriteAllText(Path.Combine(dir, "foo.txt"), "foo");
-            
-            sut.IsOnThisComputer();
 
             Assert.False(sut.DirectoryIsRepository(dir));
         }
@@ -112,8 +103,7 @@ namespace ScmBackup.Tests.Integration.Scm
         public void CreateRepositoryDoesNothingWhenDirectoryIsARepository()
         {
             string dir = DirectoryHelper.CreateTempDirectory(DirSuffix("create-2"));
-
-            sut.IsOnThisComputer();
+            
             sut.CreateRepository(dir);
 
             // this should do nothing
@@ -127,8 +117,7 @@ namespace ScmBackup.Tests.Integration.Scm
         {
             string dir = DirectoryHelper.CreateTempDirectory(DirSuffix("create-3"));
             string subDir = Path.Combine(dir, "sub");
-
-            sut.IsOnThisComputer();
+            
             sut.CreateRepository(subDir);
 
             Assert.True(Directory.Exists(subDir));
@@ -137,7 +126,6 @@ namespace ScmBackup.Tests.Integration.Scm
         [Fact]
         public void PullFromRemote_PublicUrl_CreatesNewRepo()
         {
-            sut.IsOnThisComputer();
             string dir = DirectoryHelper.CreateTempDirectory(DirSuffix("pull-new"));
             string subDir = Path.Combine(dir, "sub");
 
@@ -150,8 +138,6 @@ namespace ScmBackup.Tests.Integration.Scm
         [Fact]
         public void PullFromRemote_PublicUrl_UpdatesExistingRepo()
         {
-            sut.IsOnThisComputer();
-
             string dir = DirectoryHelper.CreateTempDirectory(DirSuffix("pull-existing"));
             sut.CreateRepository(dir);
 
@@ -166,8 +152,6 @@ namespace ScmBackup.Tests.Integration.Scm
         [Fact]
         public void PullFromRemote_PublicUrl_ThrowsWhenDirIsNotEmpty()
         {
-            sut.IsOnThisComputer();
-
             string dir = DirectoryHelper.CreateTempDirectory(DirSuffix("pull-not-empty"));
             File.WriteAllText(Path.Combine(dir, "foo.txt"), "foo");
 
@@ -177,8 +161,6 @@ namespace ScmBackup.Tests.Integration.Scm
         [Fact]
         public void RepositoryContainsCommit_ThrowsWhenDirDoesntExist()
         {
-            sut.IsOnThisComputer();
-
             string dir = DirectoryHelper.CreateTempDirectory(DirSuffix("contains-nodir"));
             string subDir = Path.Combine(dir, "sub");
 
@@ -188,8 +170,6 @@ namespace ScmBackup.Tests.Integration.Scm
         [Fact]
         public void RepositoryContainsCommit_ThrowsWhenDirIsNoRepo()
         {
-            sut.IsOnThisComputer();
-
             string dir = DirectoryHelper.CreateTempDirectory(DirSuffix("contains-norepo"));
 
             Assert.Throws<InvalidOperationException>(() => sut.RepositoryContainsCommit(dir, "foo"));
@@ -198,8 +178,6 @@ namespace ScmBackup.Tests.Integration.Scm
         [Fact]
         public void RepositoryContainsCommit_ReturnsTrueWhenCommitExists()
         {
-            sut.IsOnThisComputer();
-
             string dir = DirectoryHelper.CreateTempDirectory(DirSuffix("contains-commit"));
 
             sut.PullFromRemote(this.PublicRepoUrl, dir);
@@ -210,8 +188,6 @@ namespace ScmBackup.Tests.Integration.Scm
         [Fact]
         public void RepositoryContainsCommit_ReturnsFalseWhenCommitDoesntExist()
         {
-            sut.IsOnThisComputer();
-
             string dir = DirectoryHelper.CreateTempDirectory(DirSuffix("contains-nocommit"));
 
             sut.PullFromRemote(this.PublicRepoUrl, dir);

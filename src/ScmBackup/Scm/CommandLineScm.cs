@@ -24,7 +24,7 @@ namespace ScmBackup.Scm
         /// Check whether the SCM exists on this computer
         /// Must be implemented in the child classes by calling ExecuteCommand and checking the result.
         /// </summary>
-        protected abstract bool IsOnThisComputerImpl();
+        public abstract bool IsOnThisComputer();
 
         /// <summary>
         /// Gets the SCM's version number.
@@ -35,13 +35,12 @@ namespace ScmBackup.Scm
 
         /// <summary>
         /// Executes the command line tool.
-        /// GetExecutable must already have been called before (usually by calling IsOnThisComputer)
         /// </summary>
         protected CommandLineResult ExecuteCommand(string args)
         {
             if (string.IsNullOrWhiteSpace(this.executable))
             {
-                throw new InvalidOperationException("run GetExecutable() first");
+                this.GetExecutable();
             }
 
             var info = new ProcessStartInfo();
@@ -59,15 +58,6 @@ namespace ScmBackup.Scm
 
             result.ExitCode = proc.ExitCode;
             return result;
-        }
-
-        /// <summary>
-        /// Checks whether the SCM is present on this computer
-        /// </summary>
-        public bool IsOnThisComputer()
-        {
-            this.GetExecutable(this.context.Config);
-            return this.IsOnThisComputerImpl();
         }
 
         /// <summary>
@@ -99,12 +89,13 @@ namespace ScmBackup.Scm
         /// Gets the file to execute
         /// (either a complete path from the config, or this.CommandName)
         /// </summary>
-        private void GetExecutable(Config config)
+        private void GetExecutable()
         {
             this.executable = this.CommandName;
 
             // check if there's an path in the "Scms" section in the config
             // (if it's there, the file MUST exist!)
+            var config = this.context.Config;
             if (config.Scms != null)
             {
                 var configValue = config.Scms.FirstOrDefault(s => s.Name.ToLower() == this.ShortName.ToLower());

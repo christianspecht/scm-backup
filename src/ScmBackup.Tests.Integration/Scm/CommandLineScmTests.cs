@@ -7,13 +7,6 @@ namespace ScmBackup.Tests.Integration.Scm
     public class CommandLineScmTests
     {
         [Fact]
-        public void ThrowsExceptionWhenIsOnThisComputerWasNotCalledBefore()
-        {
-            var sut = new FakeCommandLineScm();
-            Assert.Throws<InvalidOperationException>(() => sut.ExecuteCommandDirectly());
-        }
-
-        [Fact]
         public void ReallyExecutes()
         {
             var sut = new FakeCommandLineScm();
@@ -54,7 +47,6 @@ namespace ScmBackup.Tests.Integration.Scm
         public void ExecuteReturnsOutput()
         {
             var sut = new FakeCommandLineScm();
-            sut.IsOnThisComputer();
 
             var result = sut.ExecuteCommandDirectly();
 
