@@ -59,8 +59,6 @@ namespace ScmBackup.Tests.Integration.Scm
             set { this.context = value; }
         }
 
-        protected override IContext context { get; set; }
-
         public override string DisplayName
         {
             get { return "FakeDisplayName"; }

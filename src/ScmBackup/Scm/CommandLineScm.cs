@@ -13,7 +13,7 @@ namespace ScmBackup.Scm
 
         public abstract string DisplayName { get; }
 
-        protected abstract IContext context { get; set; }
+        protected IContext context { get; set; }
 
         /// <summary>
         /// The command that needs to be called

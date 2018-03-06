@@ -14,8 +14,6 @@ namespace ScmBackup.Scm
 
         public IFileSystemHelper FileSystemHelper { get; set; }
 
-        protected override IContext context { get; set; }
-
         public override string ShortName
         {
             get { return "git"; }
