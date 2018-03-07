@@ -25,7 +25,7 @@ namespace ScmBackup.Tests.Integration
         {
             var config = new Config();
             config.LocalFolder = DirectoryHelper.CreateTempDirectory("configbackupmaker1");
-        
+
             var context = new FakeContext();
             context.Config = config;
 
@@ -38,6 +38,20 @@ namespace ScmBackup.Tests.Integration
 
                 Assert.True(File.Exists(path), file);
             }
+        }
+
+        [Fact]
+        public void ExecutesMultipleTimes()
+        {
+            var config = new Config();
+            config.LocalFolder = DirectoryHelper.CreateTempDirectory("configbackupmaker2");
+
+            var context = new FakeContext();
+            context.Config = config;
+
+            var sut = new ConfigBackupMaker(context);
+            sut.BackupConfigs();
+            sut.BackupConfigs();
         }
     }
 }

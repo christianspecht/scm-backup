@@ -38,7 +38,7 @@ namespace ScmBackup
 
             foreach (var file in this.ConfigFileNames)
             {
-                File.Copy(file, Path.Combine(backupDir, file));
+                File.Copy(file, Path.Combine(backupDir, file), true);
             }
         }
     }
