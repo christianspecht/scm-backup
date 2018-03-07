@@ -9,14 +9,14 @@ namespace ScmBackup.Tests.Integration
         [Fact]
         public void SubfolderIsSet()
         {
-            var sut = new ConfigBackupMaker(new FakeContext());
+            var sut = new ConfigBackupMaker(new FakeContext(), new FakeLogger());
             Assert.True(!string.IsNullOrWhiteSpace(sut.SubFolder));
         }
 
         [Fact]
         public void ConfigFileNamesAreSet()
         {
-            var sut = new ConfigBackupMaker(new FakeContext());
+            var sut = new ConfigBackupMaker(new FakeContext(), new FakeLogger());
             Assert.True(sut.ConfigFileNames.Any());
         }
         
@@ -29,7 +29,7 @@ namespace ScmBackup.Tests.Integration
             var context = new FakeContext();
             context.Config = config;
 
-            var sut = new ConfigBackupMaker(context);
+            var sut = new ConfigBackupMaker(context, new FakeLogger());
             sut.BackupConfigs();
 
             foreach (var file in sut.ConfigFileNames)
@@ -49,7 +49,7 @@ namespace ScmBackup.Tests.Integration
             var context = new FakeContext();
             context.Config = config;
 
-            var sut = new ConfigBackupMaker(context);
+            var sut = new ConfigBackupMaker(context, new FakeLogger());
             sut.BackupConfigs();
             sut.BackupConfigs();
         }

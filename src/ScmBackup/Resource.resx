@@ -144,6 +144,9 @@
   <data name="AuthNameOrPasswortEmpty" xml:space="preserve">
     <value>Only one of AuthName/Password is filled. Make sure you fill both or none!</value>
   </data>
+  <data name="BackingUpConfigs" xml:space="preserve">
+    <value>Backing up config files</value>
+  </data>
   <data name="BackupFailed" xml:space="preserve">
     <value>Backup failed!</value>
   </data>

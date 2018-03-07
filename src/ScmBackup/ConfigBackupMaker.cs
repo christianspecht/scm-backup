@@ -6,10 +6,12 @@ namespace ScmBackup
     internal class ConfigBackupMaker : IConfigBackupMaker
     {
         private readonly IContext context;
+        private readonly ILogger logger;
 
-        public ConfigBackupMaker(IContext context)
+        public ConfigBackupMaker(IContext context, ILogger logger)
         {
             this.context = context;
+            this.logger = logger;
         }
 
         /// <summary>
@@ -40,6 +42,8 @@ namespace ScmBackup
             {
                 File.Copy(file, Path.Combine(backupDir, file), true);
             }
+
+            this.logger.Log(ErrorLevel.Info, Resource.BackingUpConfigs);
         }
     }
 }

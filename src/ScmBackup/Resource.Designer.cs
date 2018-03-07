@@ -143,6 +143,15 @@ namespace ScmBackup {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Backing up config files.
+        /// </summary>
+        internal static string BackingUpConfigs {
+            get {
+                return ResourceManager.GetString("BackingUpConfigs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Backup failed!.
         /// </summary>
         internal static string BackupFailed {
