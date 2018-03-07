@@ -26,6 +26,7 @@ namespace ScmBackup.CompositionRoot
             container.Register<IFileSystemHelper, FileSystemHelper>();
 
             container.RegisterSingleton<IContext, Context>();
+            container.Register<IConfigBackupMaker, ConfigBackupMaker>();
 
             container.Register<IConfigReader, ConfigReader>(Lifestyle.Singleton);
             container.RegisterDecorator<IConfigReader, ValidatingConfigReader>(Lifestyle.Singleton);
