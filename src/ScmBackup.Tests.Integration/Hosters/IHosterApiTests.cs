@@ -35,9 +35,6 @@ namespace ScmBackup.Tests.Integration.Hosters
 
             var repoList = this.sut.GetRepositoryList(source);
 
-            // HTTP status ok?
-            Assert.Equal(HttpStatusCode.OK, sut.LastResult.Status);
-
             // at least one result?
             Assert.NotNull(repoList);
             Assert.True(repoList.Count > 0);
@@ -88,9 +85,6 @@ namespace ScmBackup.Tests.Integration.Hosters
 
             var repoList = sut.GetRepositoryList(source);
 
-            // HTTP status ok?
-            Assert.Equal(HttpStatusCode.OK, sut.LastResult.Status);
-
             // at least one result?
             Assert.NotNull(repoList);
             Assert.True(repoList.Count > 0);
@@ -111,9 +105,6 @@ namespace ScmBackup.Tests.Integration.Hosters
             source.Name = TestHelper.EnvVar(this.EnvVarPrefix, "OrgName");
 
             var repoList = sut.GetRepositoryList(source);
-
-            // HTTP status ok?
-            Assert.Equal(HttpStatusCode.OK, sut.LastResult.Status);
 
             // at least one result?
             Assert.NotNull(repoList);
@@ -149,9 +140,6 @@ namespace ScmBackup.Tests.Integration.Hosters
             source.Password = TestHelper.EnvVar(this.EnvVarPrefix, "PW");
 
             var repoList = sut.GetRepositoryList(source);
-
-            // HTTP status ok?
-            Assert.Equal(HttpStatusCode.OK, sut.LastResult.Status);
 
             // at least one result?
             Assert.NotNull(repoList);

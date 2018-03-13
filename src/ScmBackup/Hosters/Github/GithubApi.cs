@@ -16,8 +16,6 @@ namespace ScmBackup.Hosters.Github
         private readonly IHttpRequest request;
         private readonly ILogger logger;
 
-        public HttpResult LastResult { get; private set; }
-
         public GithubApi(IHttpRequest request, ILogger logger)
         {
             this.request = request;
@@ -70,11 +68,11 @@ namespace ScmBackup.Hosters.Github
             }
 
             this.logger.Log(ErrorLevel.Info, Resource.ApiGettingUrl, className, request.HttpClient.BaseAddress.ToString() + url);
-            this.LastResult = request.Execute(url).Result;
+            var result = request.Execute(url).Result;
 
-            if (this.LastResult.IsSuccessStatusCode)
+            if (result.IsSuccessStatusCode)
             {
-                var apiResponse = JsonConvert.DeserializeObject<List<GithubApiResponse>>(this.LastResult.Content);
+                var apiResponse = JsonConvert.DeserializeObject<List<GithubApiResponse>>(result.Content);
                 foreach (var apiRepo in apiResponse)
                 {
                     var repo = new HosterRepository(apiRepo.full_name, apiRepo.clone_url, ScmType.Git);
@@ -99,7 +97,7 @@ namespace ScmBackup.Hosters.Github
             }
             else
             {
-                switch (this.LastResult.Status)
+                switch (result.Status)
                 {
                     case HttpStatusCode.Unauthorized:
                         throw new AuthenticationException(string.Format(Resource.ApiAuthenticationFailed, config.AuthName));

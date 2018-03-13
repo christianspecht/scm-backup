@@ -8,11 +8,6 @@ namespace ScmBackup.Hosters
     /// </summary>
     internal interface IHosterApi
     {
-        /// <summary>
-        /// result of last API call for testing
-        /// </summary>
-        HttpResult LastResult { get; }
-
         List<HosterRepository> GetRepositoryList(ConfigSource config);
     }
 }
