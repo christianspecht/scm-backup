@@ -20,6 +20,14 @@ namespace ScmBackup.Tests
         }
 
         [Fact]
+        public void EnvVar_WithPrefix_ReturnsExistingVariable()
+        {
+            Environment.SetEnvironmentVariable("prefix_name", "foo");
+
+            Assert.Equal("foo", TestHelper.EnvVar("prefix", "name"));
+        }
+
+        [Fact]
         public void BuildRepositoryName_BuildsName()
         {
             Assert.Equal("user#repo", TestHelper.BuildRepositoryName("user", "repo"));
