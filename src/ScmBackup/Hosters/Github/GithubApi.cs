@@ -22,7 +22,7 @@ namespace ScmBackup.Hosters.Github
             this.logger = logger;
         }
 
-        public List<HosterRepository> GetRepositoryList(ConfigSource config)
+        public List<HosterRepository> GetRepositoryList(ConfigSource source)
         {
             var list = new List<HosterRepository>();
             string className = this.GetType().Name;
@@ -36,15 +36,15 @@ namespace ScmBackup.Hosters.Github
             // https://developer.github.com/v3/#user-agent-required
             request.AddHeader("User-Agent", Resource.AppTitle);
             
-            bool isAuthenticated = !String.IsNullOrWhiteSpace(config.AuthName) && !String.IsNullOrWhiteSpace(config.Password);
+            bool isAuthenticated = !String.IsNullOrWhiteSpace(source.AuthName) && !String.IsNullOrWhiteSpace(source.Password);
             if (isAuthenticated)
             {
                 // https://developer.github.com/v3/auth/#basic-authentication
-                request.AddBasicAuthHeader(config.AuthName, config.Password);
+                request.AddBasicAuthHeader(source.AuthName, source.Password);
             }
 
             string url = string.Empty;
-            switch (config.Type.ToLower())
+            switch (source.Type.ToLower())
             {
                 case "user":
 
@@ -56,14 +56,14 @@ namespace ScmBackup.Hosters.Github
                     else
                     {
                         // https://developer.github.com/v3/repos/#list-user-repositories
-                        url = string.Format("/users/{0}/repos", config.Name);
+                        url = string.Format("/users/{0}/repos", source.Name);
                     }
                     break;
 
                 case "org":
 
                     // https://developer.github.com/v3/repos/#list-organization-repositories
-                    url = string.Format("/orgs/{0}/repos", config.Name);
+                    url = string.Format("/orgs/{0}/repos", source.Name);
                     break;
             }
 
@@ -100,11 +100,11 @@ namespace ScmBackup.Hosters.Github
                 switch (result.Status)
                 {
                     case HttpStatusCode.Unauthorized:
-                        throw new AuthenticationException(string.Format(Resource.ApiAuthenticationFailed, config.AuthName));
+                        throw new AuthenticationException(string.Format(Resource.ApiAuthenticationFailed, source.AuthName));
                     case HttpStatusCode.Forbidden:
                         throw new SecurityException(Resource.ApiMissingPermissions);
                     case HttpStatusCode.NotFound:
-                        throw new InvalidOperationException(string.Format(Resource.ApiInvalidUsername, config.Name));
+                        throw new InvalidOperationException(string.Format(Resource.ApiInvalidUsername, source.Name));
                 }
             }
 
