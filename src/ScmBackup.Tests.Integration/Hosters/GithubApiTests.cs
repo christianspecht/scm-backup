@@ -17,9 +17,8 @@ namespace ScmBackup.Tests.Integration.Hosters
         public GithubApiTests()
         {
             var logger = new TestLogger(this.EnvVarPrefix);
-            var request = HttpLogHelper.GetRequest(logger);
 
-            this.sut = new GithubApi(request, logger);
+            this.sut = new GithubApi( logger);
         }
     }
 }

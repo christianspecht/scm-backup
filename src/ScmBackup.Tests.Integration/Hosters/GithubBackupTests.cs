@@ -25,7 +25,7 @@ namespace ScmBackup.Tests.Integration.Hosters
             var context = new FakeContext();
             context.Config = config;
 
-            var api = new GithubApi(new HttpRequest(), new FakeLogger());
+            var api = new GithubApi(new FakeLogger());
             this.repo = api.GetRepositoryList(source).First();
             
             this.scm = new GitScm(new FileSystemHelper(), context);
