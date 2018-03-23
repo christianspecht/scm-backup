@@ -29,20 +29,14 @@ namespace ScmBackup
 
         public void Run()
         {
-            Config config = null;
             bool ok = false;
             string className = this.GetType().Name;
 
             try
             {
-                config = this.context.Config;
-
-                if (config != null)
-                {
-                    this.logger.Log(ErrorLevel.Debug, Resource.StartingBackup, className);
-                    this.backup.Run();
-                    ok = true;
-                }
+                this.logger.Log(ErrorLevel.Debug, Resource.StartingBackup, className);
+                this.backup.Run();
+                ok = true;
             }
             catch (Exception ex)
             {
@@ -55,9 +49,9 @@ namespace ScmBackup
                 // If we don't have the config value because the exception was thrown while reading the config, use the default value defined in this class
                 int seconds = this.WaitSecondsOnError;
 
-                if (config != null)
+                if (this.context.Config != null)
                 {
-                    seconds = config.WaitSecondsOnError;
+                    seconds = this.context.Config.WaitSecondsOnError;
                 }
 
                 this.logger.Log(ErrorLevel.Error, Resource.BackupFailed);

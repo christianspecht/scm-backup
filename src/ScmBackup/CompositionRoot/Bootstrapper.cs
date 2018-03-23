@@ -18,8 +18,8 @@ namespace ScmBackup.CompositionRoot
 
             var container = new Container();
             container.Register<IScmBackup, ScmBackup>();
-            container.RegisterDecorator<IScmBackup, ErrorHandlingScmBackup>();
             container.RegisterDecorator<IScmBackup, LoggingScmBackup>();
+            container.RegisterDecorator<IScmBackup, ErrorHandlingScmBackup>();
 
             container.RegisterCollection<ILogger>(new ConsoleLogger(), new NLogLogger());
             container.Register<ILogger, CompositeLogger>(Lifestyle.Singleton);
