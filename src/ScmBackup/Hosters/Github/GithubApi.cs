@@ -1,10 +1,6 @@
 ﻿using Octokit;
-using ScmBackup.Http;
 using System;
 using System.Collections.Generic;
-using System.Net;
-using System.Security;
-using System.Security.Authentication;
 
 namespace ScmBackup.Hosters.Github
 {
@@ -24,6 +20,8 @@ namespace ScmBackup.Hosters.Github
         {
             var list = new List<HosterRepository>();
             string className = this.GetType().Name;
+
+            this.logger.Log(ErrorLevel.Info, Resource.ApiGettingUrl, className, source.Title);
 
             var product = new ProductHeaderValue("SCM_Backup");
             var client = new GitHubClient(product);
@@ -58,20 +56,25 @@ namespace ScmBackup.Hosters.Github
                         break;
                 }
             }
-            catch (ApiException e)
+            catch (Exception e)
             {
-                switch (e.StatusCode)
-                {
-                    case HttpStatusCode.Unauthorized:
-                        throw new AuthenticationException(string.Format(Resource.ApiAuthenticationFailed, source.AuthName));
-                    case HttpStatusCode.Forbidden:
-                        throw new SecurityException(Resource.ApiMissingPermissions);
-                    case HttpStatusCode.NotFound:
-                        throw new InvalidOperationException(string.Format(Resource.ApiInvalidUsername, source.Title));
-                }
-            }
+                string message = e.Message;
 
-            this.logger.Log(ErrorLevel.Info, Resource.ApiGettingUrl, className, source.Title);
+                if (e.InnerException is AuthorizationException)
+                {
+                    message = string.Format(Resource.ApiAuthenticationFailed, source.AuthName);
+                }
+                else if (e.InnerException is ForbiddenException)
+                {
+                    message = Resource.ApiMissingPermissions;
+                }
+                else if (e.InnerException is NotFoundException)
+                {
+                    message = string.Format(Resource.ApiInvalidUsername, source.Name);
+                }
+
+                throw new ApiException(message, e);
+            }
 
             if (repos != null)
             {
