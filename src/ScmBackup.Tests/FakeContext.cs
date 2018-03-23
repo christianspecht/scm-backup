@@ -9,6 +9,7 @@ namespace ScmBackup.Tests
             this.VersionNumber = new Version(0, 0, 0);
             this.VersionNumberString = this.VersionNumber.ToString();
             this.AppTitle = "SCM Backup";
+            this.UserAgent = "SCM-Backup";
 
             var reader = new FakeConfigReader();
             reader.SetDefaultFakeConfig();
@@ -20,6 +21,8 @@ namespace ScmBackup.Tests
         public string VersionNumberString { get; set; }
 
         public string AppTitle { get; set; }
+
+        public string UserAgent { get; set; }
 
         public Config Config { get; set; }
 

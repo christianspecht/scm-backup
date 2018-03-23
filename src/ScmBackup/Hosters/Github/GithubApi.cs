@@ -9,12 +9,19 @@ namespace ScmBackup.Hosters.Github
     /// </summary>
     internal class GithubApi : IHosterApi
     {
+        private readonly IContext context;
+
+        public GithubApi(IContext context)
+        {
+            this.context = context;
+        }
+
         public List<HosterRepository> GetRepositoryList(ConfigSource source)
         {
             var list = new List<HosterRepository>();
             string className = this.GetType().Name;
 
-            var product = new ProductHeaderValue("SCM_Backup");
+            var product = new ProductHeaderValue(this.context.UserAgent, this.context.VersionNumberString);
             var client = new GitHubClient(product);
 
             bool isAuthenticated = !String.IsNullOrWhiteSpace(source.AuthName) && !String.IsNullOrWhiteSpace(source.Password);
