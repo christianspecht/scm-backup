@@ -1,0 +1,2 @@
+Create image ad for [Stack Overflow OSS Advertising](https://meta.stackoverflow.com/questions/349017/open-source-advertising-2017?noredirect=1&lq=1)  
+(like [this one](https://gist.github.com/cormullion/8880c53bcb7766f50aca6c024ea845f8))
