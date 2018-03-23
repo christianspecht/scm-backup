@@ -9,19 +9,10 @@ namespace ScmBackup.Hosters.Github
     /// </summary>
     internal class GithubApi : IHosterApi
     {
-        private readonly ILogger logger;
-
-        public GithubApi(ILogger logger)
-        {
-            this.logger = logger;
-        }
-
         public List<HosterRepository> GetRepositoryList(ConfigSource source)
         {
             var list = new List<HosterRepository>();
             string className = this.GetType().Name;
-
-            this.logger.Log(ErrorLevel.Info, Resource.ApiGettingUrl, className, source.Title);
 
             var product = new ProductHeaderValue("SCM_Backup");
             var client = new GitHubClient(product);

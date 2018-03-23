@@ -71,11 +71,11 @@ namespace ScmBackup {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0}: Getting {1}.
+        ///   Looks up a localized string similar to Getting repositories for source &apos;{0}&apos; from hoster &apos;{1}&apos;.
         /// </summary>
-        internal static string ApiGettingUrl {
+        internal static string ApiGettingRepos {
             get {
-                return ResourceManager.GetString("ApiGettingUrl", resourceCulture);
+                return ResourceManager.GetString("ApiGettingRepos", resourceCulture);
             }
         }
         
