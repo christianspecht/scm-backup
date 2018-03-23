@@ -40,14 +40,7 @@ namespace ScmBackup.Hosters.Github
                 {
                     case "user":
 
-                        if (isAuthenticated)
-                        {
-                            repos = client.Repository.GetAllForCurrent().Result;
-                        }
-                        else
-                        {
-                            repos = client.Repository.GetAllForUser(source.Name).Result;
-                        }
+                        repos = client.Repository.GetAllForUser(source.Name).Result;
                         break;
 
                     case "org":
