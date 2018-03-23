@@ -19,6 +19,7 @@ namespace ScmBackup
             this.VersionNumber = assembly.GetName().Version;
             this.VersionNumberString= assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion;
             this.AppTitle = Resource.AppTitle + " " + this.VersionNumberString;
+            this.UserAgent = Resource.AppTitle.Replace(" ", "-");
         }
 
         public Version VersionNumber { get; private set; }
@@ -26,6 +27,8 @@ namespace ScmBackup
         public string VersionNumberString { get; private set; }
 
         public string AppTitle { get; private set; }
+
+        public string UserAgent { get; private set; }
 
         public Config Config
         {

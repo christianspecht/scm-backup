@@ -25,6 +25,15 @@ namespace ScmBackup.Tests
         }
 
         /// <summary>
+        /// Returns the value of an environment variable. Throws an exception when the variable doesn't exist.
+        /// </summary>
+        public static string EnvVar(string prefix, string name)
+        {
+            string variableName = prefix + "_" + name;
+            return EnvVar(variableName);
+        }
+
+        /// <summary>
         /// Helper to build the repository name created in ScmBackup.Hosters.HosterRepository
         /// </summary>
         /// <param name="userName"></param>

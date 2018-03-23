@@ -1,10 +1,6 @@
-﻿using Newtonsoft.Json;
-using ScmBackup.Http;
+﻿using Octokit;
 using System;
 using System.Collections.Generic;
-using System.Net;
-using System.Security;
-using System.Security.Authentication;
 
 namespace ScmBackup.Hosters.Github
 {
@@ -13,100 +9,86 @@ namespace ScmBackup.Hosters.Github
     /// </summary>
     internal class GithubApi : IHosterApi
     {
-        private readonly IHttpRequest request;
-        private readonly ILogger logger;
+        private readonly IContext context;
 
-        public HttpResult LastResult { get; private set; }
-
-        public GithubApi(IHttpRequest request, ILogger logger)
+        public GithubApi(IContext context)
         {
-            this.request = request;
-            this.logger = logger;
+            this.context = context;
         }
 
-        public List<HosterRepository> GetRepositoryList(ConfigSource config)
+        public List<HosterRepository> GetRepositoryList(ConfigSource source)
         {
             var list = new List<HosterRepository>();
             string className = this.GetType().Name;
 
-            // https://developer.github.com/v3/#schema
-            request.SetBaseUrl("https://api.github.com");
+            var product = new ProductHeaderValue(this.context.UserAgent, this.context.VersionNumberString);
+            var client = new GitHubClient(product);
 
-            // https://developer.github.com/v3/#current-version
-            request.AddHeader("Accept", "application/vnd.github.v3+json");
-
-            // https://developer.github.com/v3/#user-agent-required
-            request.AddHeader("User-Agent", Resource.AppTitle);
-            
-            bool isAuthenticated = !String.IsNullOrWhiteSpace(config.AuthName) && !String.IsNullOrWhiteSpace(config.Password);
+            bool isAuthenticated = !String.IsNullOrWhiteSpace(source.AuthName) && !String.IsNullOrWhiteSpace(source.Password);
             if (isAuthenticated)
             {
-                // https://developer.github.com/v3/auth/#basic-authentication
-                request.AddBasicAuthHeader(config.AuthName, config.Password);
+                var basicAuth = new Credentials(source.AuthName, source.Password);
+                client.Credentials = basicAuth;
             }
 
-            string url = string.Empty;
-            switch (config.Type.ToLower())
+            IReadOnlyList<Repository> repos = null;
+            try
             {
-                case "user":
-
-                    if (isAuthenticated)
-                    {
-                        // https://developer.github.com/v3/repos/#list-your-repositories
-                        url = "/user/repos";
-                    }
-                    else
-                    {
-                        // https://developer.github.com/v3/repos/#list-user-repositories
-                        url = string.Format("/users/{0}/repos", config.Name);
-                    }
-                    break;
-
-                case "org":
-
-                    // https://developer.github.com/v3/repos/#list-organization-repositories
-                    url = string.Format("/orgs/{0}/repos", config.Name);
-                    break;
-            }
-
-            this.logger.Log(ErrorLevel.Info, Resource.ApiGettingUrl, className, request.HttpClient.BaseAddress.ToString() + url);
-            this.LastResult = request.Execute(url).Result;
-
-            if (this.LastResult.IsSuccessStatusCode)
-            {
-                var apiResponse = JsonConvert.DeserializeObject<List<GithubApiResponse>>(this.LastResult.Content);
-                foreach (var apiRepo in apiResponse)
+                switch (source.Type.ToLower())
                 {
-                    var repo = new HosterRepository(apiRepo.full_name, apiRepo.clone_url, ScmType.Git);
+                    case "user":
 
-                    if (apiRepo.has_wiki && apiRepo.clone_url.EndsWith(".git"))
+                        repos = client.Repository.GetAllForUser(source.Name).Result;
+                        break;
+
+                    case "org":
+
+                        repos = client.Repository.GetAllForOrg(source.Name).Result;
+                        break;
+                }
+            }
+            catch (Exception e)
+            {
+                string message = e.Message;
+
+                if (e.InnerException is AuthorizationException)
+                {
+                    message = string.Format(Resource.ApiAuthenticationFailed, source.AuthName);
+                }
+                else if (e.InnerException is ForbiddenException)
+                {
+                    message = Resource.ApiMissingPermissions;
+                }
+                else if (e.InnerException is NotFoundException)
+                {
+                    message = string.Format(Resource.ApiInvalidUsername, source.Name);
+                }
+
+                throw new ApiException(message, e);
+            }
+
+            if (repos != null)
+            {
+                foreach(var apiRepo in repos)
+                {
+                    var repo = new HosterRepository(apiRepo.FullName, apiRepo.CloneUrl, ScmType.Git);
+
+                    if (apiRepo.HasWiki && apiRepo.CloneUrl.EndsWith(".git"))
                     {
                         // build wiki clone URL, because API doesn't return it
-                        string wikiUrl = apiRepo.clone_url.Substring(0, apiRepo.clone_url.Length - ".git".Length) + ".wiki.git";
+                        string wikiUrl = apiRepo.CloneUrl.Substring(0, apiRepo.CloneUrl.Length - ".git".Length) + ".wiki.git";
 
                         repo.SetWiki(true, wikiUrl);
                     }
 
-                    if (apiRepo.has_issues)
+                    if (apiRepo.HasIssues)
                     {
-                        // GitHub has no clone URL for the issues, it's only possible to get them in JSON format via the API.
-                        // The API has only a URL for one issue (with a placeholder at the end, so we need to remove the placeholder).
-                        repo.SetIssues(true, apiRepo.issues_url.Replace("{/number}", ""));
+                        // The API has only a URL for one issue (with a placeholder at the end), but this URL isn't in Octokit.
+                        // So we have to build it manually:
+                        repo.SetIssues(true, apiRepo.Url + "/issues/");
                     }
 
                     list.Add(repo);
-                }
-            }
-            else
-            {
-                switch (this.LastResult.Status)
-                {
-                    case HttpStatusCode.Unauthorized:
-                        throw new AuthenticationException(string.Format(Resource.ApiAuthenticationFailed, config.AuthName));
-                    case HttpStatusCode.Forbidden:
-                        throw new SecurityException(Resource.ApiMissingPermissions);
-                    case HttpStatusCode.NotFound:
-                        throw new InvalidOperationException(string.Format(Resource.ApiInvalidUsername, config.Name));
                 }
             }
 

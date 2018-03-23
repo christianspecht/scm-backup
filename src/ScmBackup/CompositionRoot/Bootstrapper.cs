@@ -18,8 +18,8 @@ namespace ScmBackup.CompositionRoot
 
             var container = new Container();
             container.Register<IScmBackup, ScmBackup>();
-            container.RegisterDecorator<IScmBackup, ErrorHandlingScmBackup>();
             container.RegisterDecorator<IScmBackup, LoggingScmBackup>();
+            container.RegisterDecorator<IScmBackup, ErrorHandlingScmBackup>();
 
             container.RegisterCollection<ILogger>(new ConsoleLogger(), new NLogLogger());
             container.Register<ILogger, CompositeLogger>(Lifestyle.Singleton);
@@ -85,7 +85,10 @@ namespace ScmBackup.CompositionRoot
             }
 
             container.RegisterSingleton<IHosterValidator>(new HosterValidator(hosterFactory));
+
             container.RegisterSingleton<IHosterApiCaller>(new HosterApiCaller(hosterFactory));
+            container.RegisterDecorator<IHosterApiCaller, LoggingHosterApiCaller>();
+
             container.RegisterSingleton<IHosterBackupMaker>(new HosterBackupMaker(hosterFactory));
             container.RegisterSingleton<IHosterFactory>(hosterFactory); // only needed for integration tests!
             container.RegisterSingleton<IScmFactory>(scmFactory);
