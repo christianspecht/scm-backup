@@ -41,7 +41,7 @@ namespace ScmBackup.Tests.Integration.Hosters
 
             // specific repo exists?
             string expectedName = TestHelper.BuildRepositoryName(source.Name, TestHelper.EnvVar(this.EnvVarPrefix, "Repo"));
-            var repo = repoList.Where(r => r.Name == expectedName).FirstOrDefault();
+            var repo = repoList.Where(r => r.FullName == expectedName).FirstOrDefault();
             Assert.NotNull(repo);
             Assert.True(ValidateUrls(repo));
         }
@@ -91,7 +91,7 @@ namespace ScmBackup.Tests.Integration.Hosters
 
             // specific repo exists?
             string expectedName = TestHelper.BuildRepositoryName(source.Name, TestHelper.EnvVar(this.EnvVarPrefix, "Repo"));
-            var repo = repoList.Where(r => r.Name == expectedName).FirstOrDefault();
+            var repo = repoList.Where(r => r.FullName == expectedName).FirstOrDefault();
             Assert.NotNull(repo);
             Assert.True(ValidateUrls(repo));
         }
@@ -112,7 +112,7 @@ namespace ScmBackup.Tests.Integration.Hosters
 
             // specific repo exists?
             string expectedName = TestHelper.BuildRepositoryName(source.Name, TestHelper.EnvVar(this.EnvVarPrefix, "Repo"));
-            var repo = repoList.Where(r => r.Name == expectedName).FirstOrDefault();
+            var repo = repoList.Where(r => r.FullName == expectedName).FirstOrDefault();
             Assert.NotNull(repo);
             Assert.True(ValidateUrls(repo));
         }
@@ -147,7 +147,7 @@ namespace ScmBackup.Tests.Integration.Hosters
 
             // specific repo exists?
             string expectedName = TestHelper.BuildRepositoryName(source.Name, TestHelper.EnvVar(this.EnvVarPrefix, "Repo"));
-            var repo = repoList.Where(r => r.Name == expectedName).FirstOrDefault();
+            var repo = repoList.Where(r => r.FullName == expectedName).FirstOrDefault();
             Assert.NotNull(repo);
             Assert.True(ValidateUrls(repo));
         }

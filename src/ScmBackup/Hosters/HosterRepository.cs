@@ -5,17 +5,17 @@
     /// </summary>
     internal class HosterRepository
     {
-        public HosterRepository(string name, string shortName, string cloneUrl, ScmType scm)
+        public HosterRepository(string fullName, string shortName, string cloneUrl, ScmType scm)
         {
-            SetFullName(name);
+            SetFullName(fullName);
             this.ShortName = shortName;
             this.CloneUrl = cloneUrl;
             this.Scm = scm;
         }
 
-        public HosterRepository(string name, string shortName, string cloneUrl, ScmType scm, bool haswiki, string wikiurl, bool hasissues, string issueurl)
+        public HosterRepository(string fullName, string shortName, string cloneUrl, ScmType scm, bool haswiki, string wikiurl, bool hasissues, string issueurl)
         {
-            SetFullName(name);
+            SetFullName(fullName);
             this.ShortName = shortName;
             this.CloneUrl = cloneUrl;
             this.Scm = scm;
@@ -26,7 +26,7 @@
         /// <summary>
         /// Full name of the repository (e.g. "username/reponame")
         /// </summary>
-        public string Name { get; private set; }
+        public string FullName { get; private set; }
 
         /// <summary>
         /// "short name" of the repository (e.g. "reponame")
@@ -65,7 +65,7 @@
 
         public void SetFullName(string name)
         {
-            this.Name = name.Replace('/', '#');
+            this.FullName = name.Replace('/', '#');
         }
 
         public void SetWiki(bool haswiki, string wikiurl)

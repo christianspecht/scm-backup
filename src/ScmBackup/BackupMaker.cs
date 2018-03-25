@@ -30,7 +30,7 @@ namespace ScmBackup
 
             foreach (var repo in repos)
             {
-                string repoFolder = this.fileHelper.CreateSubDirectory(sourceFolder, repo.Name);
+                string repoFolder = this.fileHelper.CreateSubDirectory(sourceFolder, repo.FullName);
 
                 this.logger.Log(ErrorLevel.Info, Resource.BackupMaker_Repo, repo.Scm.ToString(), repo.CloneUrl);
 

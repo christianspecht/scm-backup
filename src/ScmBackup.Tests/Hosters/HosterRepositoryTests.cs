@@ -11,10 +11,10 @@ namespace ScmBackup.Tests.Hosters
         public void InvalidCharsInRepoNameAreReplaced(string inputName, string savedName)
         {
             var sut = new HosterRepository(inputName, "name", "http://clone", ScmType.Git);
-            Assert.Equal(savedName, sut.Name);
+            Assert.Equal(savedName, sut.FullName);
 
             sut = new HosterRepository(inputName, "name", "http://clone", ScmType.Git, false, "", false, "");
-            Assert.Equal(savedName, sut.Name);
+            Assert.Equal(savedName, sut.FullName);
         }
 
         [Fact]
