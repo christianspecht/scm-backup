@@ -5,6 +5,8 @@ namespace ScmBackup.Tests.Integration.Scm
 {
     public class GitScmTests : IScmTests
     {
+        private string baseurl = "https://github.com/{0}/{1}";
+
         public GitScmTests()
         {
             this.sut = new GitScm(new FileSystemHelper(), new FakeContext());
@@ -14,7 +16,7 @@ namespace ScmBackup.Tests.Integration.Scm
         {
             get
             {
-                string url = string.Format("https://github.com/{0}/{1}", TestHelper.EnvVar("GithubApiTests_Name"), TestHelper.EnvVar("GithubApiTests_Repo"));
+                string url = string.Format(this.baseurl, TestHelper.EnvVar("GithubApiTests_Name"), TestHelper.EnvVar("GithubApiTests_Repo"));
                 return url;
             }
         }
@@ -22,6 +24,11 @@ namespace ScmBackup.Tests.Integration.Scm
         internal override string PrivateRepoUrl
         {
             get { throw new NotImplementedException(); }
+        }
+
+        internal override string NonExistingRepoUrl
+        {
+            get { return string.Format(this.baseurl, TestHelper.EnvVar("GithubApiTests_Name"), "repo-does-not-exist"); }
         }
 
         internal override string PublicRepoExistingCommitId

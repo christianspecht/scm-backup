@@ -12,6 +12,7 @@ namespace ScmBackup.Tests.Integration.Scm
         // public and private test repositories
         internal abstract string PublicRepoUrl { get; }
         internal abstract string PrivateRepoUrl { get; }
+        internal abstract string NonExistingRepoUrl { get; }
 
         // commit ids that do/do not exist in the public repo
         internal abstract string PublicRepoExistingCommitId { get; }
@@ -193,6 +194,20 @@ namespace ScmBackup.Tests.Integration.Scm
             sut.PullFromRemote(this.PublicRepoUrl, dir);
 
             Assert.False(sut.RepositoryContainsCommit(dir, this.PublicRepoNonExistingCommitId));
+        }
+
+        [Fact]
+        public void RemoteRepositoryExists_ReturnsTrueForExistingRepo()
+        {
+            var result = sut.RemoteRepositoryExists(this.PublicRepoUrl);
+            Assert.True(result);
+        }
+
+        [Fact]
+        public void RemoteRepositoryExists_ReturnsFalseForNonExistingRepo()
+        {
+            var result = sut.RemoteRepositoryExists(this.NonExistingRepoUrl);
+            Assert.False(result);
         }
 
         /// <summary>

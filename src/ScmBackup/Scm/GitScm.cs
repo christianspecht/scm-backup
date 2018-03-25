@@ -82,6 +82,14 @@ namespace ScmBackup.Scm
             }
         }
 
+        public override bool RemoteRepositoryExists(string remoteUrl)
+        {
+            string cmd = "ls-remote " + remoteUrl;
+            var result = this.ExecuteCommand(cmd);
+
+            return result.Successful;
+        }
+
         public override void PullFromRemote(string remoteUrl, string directory)
         {
             if (!this.DirectoryIsRepository(directory))

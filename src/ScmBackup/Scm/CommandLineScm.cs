@@ -73,6 +73,11 @@ namespace ScmBackup.Scm
         public abstract void CreateRepository(string directory);
 
         /// <summary>
+        /// Checks whether a repository exists under the given URL
+        /// </summary>
+        public abstract bool RemoteRepositoryExists(string remoteUrl);
+
+        /// <summary>
         /// Pulls from a remote repository into a local folder.
         /// If the folder doesn't exist or is not a repository, it's created first.
         /// Must be implemented in the child classes by calling ExecuteCommand and checking the result.
