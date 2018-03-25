@@ -14,7 +14,7 @@ namespace ScmBackup.Tests.Hosters
             var hoster = new FakeHoster();
 
             var factory = new FakeHosterFactory(hoster);
-            var repo = new HosterRepository("foo", "http://clone", ScmType.Git);
+            var repo = new HosterRepository("foo", "foo", "http://clone", ScmType.Git);
 
             var reader = new FakeConfigReader();
             reader.SetDefaultFakeConfig();
@@ -32,7 +32,7 @@ namespace ScmBackup.Tests.Hosters
         public void ThrowsWhenConfigSourceIsNull()
         {
             var factory = new FakeHosterFactory(new FakeHoster());
-            var repo = new HosterRepository("foo", "http://clone", ScmType.Git);
+            var repo = new HosterRepository("foo", "foo", "http://clone", ScmType.Git);
 
             var sut = new HosterBackupMaker(factory);
             Assert.Throws<ArgumentNullException>(() => sut.MakeBackup(null, repo, "foo"));

@@ -31,7 +31,7 @@ namespace ScmBackup.Tests
             source2.Title = "testsource2";
 
             var list = new List<HosterRepository>();
-            list.Add(new HosterRepository("foo", "http://foo", ScmType.Git));
+            list.Add(new HosterRepository("foo", "foo", "http://foo", ScmType.Git));
 
             var sut = new ApiRepositories();
             sut.AddItem(source1, list);
@@ -51,8 +51,8 @@ namespace ScmBackup.Tests
             source.Title = "title";
 
             var list = new List<HosterRepository>();
-            list.Add(new HosterRepository("foo", "http://foo", ScmType.Git));
-            list.Add(new HosterRepository("bar", "http://bar", ScmType.Git));
+            list.Add(new HosterRepository("foo", "foo", "http://foo", ScmType.Git));
+            list.Add(new HosterRepository("bar", "bar", "http://bar", ScmType.Git));
 
             var sut = new ApiRepositories();
             sut.AddItem(source, list);
@@ -68,8 +68,8 @@ namespace ScmBackup.Tests
         {
             // TODO: use different ScmTypes when more are supported
             var repos = new List<HosterRepository>();
-            repos.Add(new HosterRepository("testrepo", "http://clone.url", ScmType.Git));
-            repos.Add(new HosterRepository("testrepo2", "http://clone2.url", ScmType.Git));
+            repos.Add(new HosterRepository("testrepo", "testrepo", "http://clone.url", ScmType.Git));
+            repos.Add(new HosterRepository("testrepo2", "testrepo2", "http://clone2.url", ScmType.Git));
 
             var source1 = new ConfigSource();
             source1.Title = "testsource";

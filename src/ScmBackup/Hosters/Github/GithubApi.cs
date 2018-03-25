@@ -71,7 +71,7 @@ namespace ScmBackup.Hosters.Github
             {
                 foreach(var apiRepo in repos)
                 {
-                    var repo = new HosterRepository(apiRepo.FullName, apiRepo.CloneUrl, ScmType.Git);
+                    var repo = new HosterRepository(apiRepo.FullName, apiRepo.Name, apiRepo.CloneUrl, ScmType.Git);
 
                     if (apiRepo.HasWiki && apiRepo.CloneUrl.EndsWith(".git"))
                     {

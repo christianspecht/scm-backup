@@ -10,17 +10,17 @@ namespace ScmBackup.Tests.Hosters
         [InlineData("foo/bar", "foo#bar")]
         public void InvalidCharsInRepoNameAreReplaced(string inputName, string savedName)
         {
-            var sut = new HosterRepository(inputName, "http://clone", ScmType.Git);
+            var sut = new HosterRepository(inputName, "name", "http://clone", ScmType.Git);
             Assert.Equal(savedName, sut.Name);
 
-            sut = new HosterRepository(inputName, "http://clone", ScmType.Git, false, "", false, "");
+            sut = new HosterRepository(inputName, "name", "http://clone", ScmType.Git, false, "", false, "");
             Assert.Equal(savedName, sut.Name);
         }
 
         [Fact]
         public void SetWikiWorks()
         {
-            var sut = new HosterRepository("foo", "http://clone", ScmType.Git);
+            var sut = new HosterRepository("foo", "foo", "http://clone", ScmType.Git);
             sut.SetWiki(true, "url");
 
             Assert.True(sut.HasWiki);
@@ -30,7 +30,7 @@ namespace ScmBackup.Tests.Hosters
         [Fact]
         public void SetIssuesWorks()
         {
-            var sut = new HosterRepository("foo", "http://clone", ScmType.Git);
+            var sut = new HosterRepository("foo", "foo", "http://clone", ScmType.Git);
             sut.SetIssues(true, "url");
 
             Assert.True(sut.HasIssues);

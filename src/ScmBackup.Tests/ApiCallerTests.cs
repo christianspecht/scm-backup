@@ -32,10 +32,10 @@ namespace ScmBackup.Tests
             this.context.Config = reader.ReadConfig();
 
             list1 = new List<HosterRepository>();
-            list1.Add(new HosterRepository("foo1", "http://foo1", ScmType.Git));
+            list1.Add(new HosterRepository("foo1", "foo1", "http://foo1", ScmType.Git));
 
             list2 = new List<HosterRepository>();
-            list2.Add(new HosterRepository("foo2", "http://foo2", ScmType.Git));
+            list2.Add(new HosterRepository("foo2", "foo2", "http://foo2", ScmType.Git));
 
             hac = new FakeHosterApiCaller();
             hac.Lists.Add(source1, list1);
