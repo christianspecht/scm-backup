@@ -28,6 +28,11 @@ namespace ScmBackup.Tests.Integration
             Assert.Equal("type1", source1.Type);
             Assert.Equal("name1", source1.Name);
 
+            var ignores = source1.IgnoreRepos;
+            Assert.Equal(2, ignores.Count);
+            Assert.Equal("ignore0", ignores[0]);
+            Assert.Equal("ignore1", ignores[1]);
+
             var scm1 = config.Scms[0];
             Assert.Equal("git", scm1.Name);
             Assert.Equal("path/to/git", scm1.Path);

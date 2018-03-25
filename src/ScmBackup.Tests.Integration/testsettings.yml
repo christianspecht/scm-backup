@@ -19,3 +19,6 @@ sources:
   - hoster: hoster1
     type: type1
     name: name1
+    ignoreRepos:
+        - ignore0
+        - ignore1
