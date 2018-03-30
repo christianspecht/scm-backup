@@ -87,6 +87,7 @@ namespace ScmBackup.CompositionRoot
             container.RegisterSingleton<IHosterValidator>(new HosterValidator(hosterFactory));
 
             container.RegisterSingleton<IHosterApiCaller>(new HosterApiCaller(hosterFactory));
+            container.RegisterDecorator<IHosterApiCaller, IgnoringHosterApiCaller>();
             container.RegisterDecorator<IHosterApiCaller, LoggingHosterApiCaller>();
 
             container.RegisterSingleton<IHosterBackupMaker>(new HosterBackupMaker(hosterFactory));
