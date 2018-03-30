@@ -15,12 +15,13 @@ namespace ScmBackup.Tests.Hosters
 
             var factory = new FakeHosterFactory(hoster);
             var repo = new HosterRepository("foo", "foo", "http://clone", ScmType.Git);
+            repo.SetWiki(true, "http://wiki");
+            repo.SetIssues(true, "http://issues");
 
             var reader = new FakeConfigReader();
             reader.SetDefaultFakeConfig();
             var config = reader.ReadConfig();
             var source = config.Sources.First();
-
 
             var sut = new HosterBackupMaker(factory);
             sut.MakeBackup(source, repo, "foo");

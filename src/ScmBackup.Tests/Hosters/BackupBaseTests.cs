@@ -8,8 +8,12 @@ namespace ScmBackup.Tests.Hosters
         [Fact]
         public void BackupBaseExecutesAllSubMethods()
         {
+            var repo = new HosterRepository("foo", "foo", "http://clone", ScmType.Git);
+            repo.SetWiki(true, "http://wiki");
+            repo.SetIssues(true, "http://issues");
+
             var sut = new FakeHosterBackup();
-            sut.MakeBackup(new HosterRepository("foo", "foo", "http://clone", ScmType.Git), @"c:\foo");
+            sut.MakeBackup(repo, @"c:\foo");
 
             Assert.True(sut.WasExecuted);
         }

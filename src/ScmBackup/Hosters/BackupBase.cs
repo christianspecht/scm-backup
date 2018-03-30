@@ -17,11 +17,17 @@ namespace ScmBackup.Hosters
             string subdir = Path.Combine(repoFolder, this.SubDirRepo);
             this.BackupRepo(subdir);
 
-            subdir = Path.Combine(repoFolder, this.SubDirWiki);
-            this.BackupWiki(subdir);
+            if (this.repo.HasWiki)
+            {
+                subdir = Path.Combine(repoFolder, this.SubDirWiki);
+                this.BackupWiki(subdir);
+            }
 
-            subdir = Path.Combine(repoFolder, this.SubDirIssues);
-            this.BackupIssues(subdir);
+            if (this.repo.HasIssues)
+            {
+                subdir = Path.Combine(repoFolder, this.SubDirIssues);
+                this.BackupIssues(subdir);
+            }
         }
 
         // this MUST be implemented in the child classes

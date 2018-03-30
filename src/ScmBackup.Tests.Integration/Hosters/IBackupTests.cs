@@ -39,6 +39,32 @@ namespace ScmBackup.Tests.Integration.Hosters
             this.AssertIssues(Path.Combine(dir, this.sut.SubDirIssues));
         }
 
+        [Fact]
+        public void DoesntBackupWikiIfNotSet()
+        {
+            var dir = DirectoryHelper.CreateTempDirectory(this.DirSuffix("doesnt-backup-wiki"));
+            this.Setup();
+
+            this.repo.SetWiki(false, null);
+
+            sut.MakeBackup(this.repo, dir);
+
+            Assert.False(Directory.Exists(sut.SubDirWiki));
+        }
+
+        [Fact]
+        public void DoesntBackupIssuesIfNotSet()
+        {
+            var dir = DirectoryHelper.CreateTempDirectory(this.DirSuffix("doesnt-backup-issues"));
+            this.Setup();
+
+            this.repo.SetIssues(false, null);
+
+            sut.MakeBackup(this.repo, dir);
+
+            Assert.False(Directory.Exists(sut.SubDirIssues));
+        }
+
         /// <summary>
         /// helper for directory suffixes
         /// </summary>
