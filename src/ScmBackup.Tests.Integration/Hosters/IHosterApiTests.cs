@@ -16,6 +16,9 @@ namespace ScmBackup.Tests.Integration.Hosters
         // "hoster" value for config sources
         internal abstract string ConfigHoster { get; }
 
+        // minimum number of repos which must be returned in "GetRepositoryList_PaginationWorks" -> should be more than the default page size of the hoster's API
+        internal abstract int Pagination_MinNumberOfRepos { get; }
+
         // this needs to be created in the child classes' constructor:
         internal IHosterApi sut;
 
@@ -150,6 +153,21 @@ namespace ScmBackup.Tests.Integration.Hosters
             var repo = repoList.Where(r => r.FullName == expectedName).FirstOrDefault();
             Assert.NotNull(repo);
             Assert.True(ValidateUrls(repo));
+        }
+
+        [Fact]
+        public void GetRepositoryList_PaginationWorks()
+        {
+            var source = new ConfigSource();
+            source.Hoster = "github";
+            source.Type = "user";
+            source.Name = TestHelper.EnvVar(this.EnvVarPrefix, "PaginationUser");
+            source.AuthName = TestHelper.EnvVar(this.EnvVarPrefix, "Name");
+            source.Password = TestHelper.EnvVar(this.EnvVarPrefix, "PW");
+
+            var repoList = sut.GetRepositoryList(source);
+
+            Assert.True(repoList.Count > this.Pagination_MinNumberOfRepos);
         }
 
         private bool ValidateUrls(HosterRepository repo)

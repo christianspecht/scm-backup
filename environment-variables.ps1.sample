@@ -8,3 +8,4 @@ $env:GithubApiTests_PW = 'not-the-real-password'                                
 $env:GithubApiTests_Repo = 'scm-backup'                                         # a repository with wiki (must exist under user AND organization)
 $env:GithubApiTests_Commit = '7be29139f4cdc4037647fc2f21d9d82c42a96e88'         # a commit in the repository
 $env:GithubApiTests_WikiCommit = '714ddb8c48cebc70ff2ae74be98ac7cdf91ade6e'     # a commit in the wiki
+$env:GithubApiTests_PaginationUser = 'shanselman'                               # a user with enough public repos to test pagination
