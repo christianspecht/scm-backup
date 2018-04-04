@@ -44,15 +44,14 @@
                 result.AddMessage(ErrorLevel.Warn, Resource.AuthNameAndPasswortEmpty);
             }
 
-            return this.ValidateSpecific(result, source);
+            this.ValidateSpecific(result, source);
+
+            return result;
         }
 
         /// <summary>
         /// hoster-specific validation rules - this CAN be implemented in the child classes IF the given hoster has special rules
         /// </summary>
-        public ValidationResult ValidateSpecific(ValidationResult result, ConfigSource source)
-        {
-            return result;
-        }
+        public virtual void ValidateSpecific(ValidationResult result, ConfigSource source) { }
     }
 }
