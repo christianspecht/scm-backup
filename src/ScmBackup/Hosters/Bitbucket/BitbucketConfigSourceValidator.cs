@@ -1,12 +1,13 @@
-﻿using System;
-
-namespace ScmBackup.Hosters.Bitbucket
+﻿namespace ScmBackup.Hosters.Bitbucket
 {
-    internal class BitbucketConfigSourceValidator : IConfigSourceValidator
+    /// <summary>
+    /// validator for Bitbucket repositories
+    /// </summary>
+    internal class BitbucketConfigSourceValidator : ConfigSourceValidatorBase
     {
-        public ValidationResult Validate(ConfigSource config)
+        public override string HosterName
         {
-            throw new NotImplementedException();
+            get { return "bitbucket"; }
         }
     }
 }
