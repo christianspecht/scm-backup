@@ -24,8 +24,7 @@ namespace ScmBackup.Hosters.Github
             var product = new ProductHeaderValue(this.context.UserAgent, this.context.VersionNumberString);
             var client = new GitHubClient(product);
 
-            bool isAuthenticated = !String.IsNullOrWhiteSpace(source.AuthName) && !String.IsNullOrWhiteSpace(source.Password);
-            if (isAuthenticated)
+            if (source.IsAuthenticated)
             {
                 var basicAuth = new Credentials(source.AuthName, source.Password);
                 client.Credentials = basicAuth;

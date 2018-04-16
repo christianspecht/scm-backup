@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace ScmBackup
 {
@@ -43,6 +44,14 @@ namespace ScmBackup
         /// password for authentication
         /// </summary>
         public string Password { get; set; }
+
+        public bool IsAuthenticated
+        {
+            get
+            {
+                return !String.IsNullOrWhiteSpace(this.AuthName) && !String.IsNullOrWhiteSpace(this.Password);
+            }
+        }
 
         public override bool Equals(object obj)
         {
