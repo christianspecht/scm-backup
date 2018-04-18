@@ -123,6 +123,9 @@
   <data name="ApiGettingRepos" xml:space="preserve">
     <value>Getting repositories for source '{0}' from hoster '{1}'</value>
   </data>
+  <data name="ApiInvalidScmType" xml:space="preserve">
+    <value>Couldn't determine SCM type for repository: {0}</value>
+  </data>
   <data name="ApiInvalidUsername" xml:space="preserve">
     <value>User {0} not found!</value>
   </data>

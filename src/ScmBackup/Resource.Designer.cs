@@ -80,6 +80,15 @@ namespace ScmBackup {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Couldn&apos;t determine SCM type for repository: {0}.
+        /// </summary>
+        internal static string ApiInvalidScmType {
+            get {
+                return ResourceManager.GetString("ApiInvalidScmType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to User {0} not found!.
         /// </summary>
         internal static string ApiInvalidUsername {
