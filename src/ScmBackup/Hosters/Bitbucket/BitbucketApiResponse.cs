@@ -5,6 +5,7 @@ namespace ScmBackup.Hosters.Bitbucket
     internal class BitbucketApiResponse
     {
         public List<Repo> values { get; set; }
+        public string next { get; set; }
 
         internal class Repo
         {
@@ -14,7 +15,6 @@ namespace ScmBackup.Hosters.Bitbucket
             public bool has_wiki { get; set; }
             public bool has_issues { get; set; }
             public Links links { get; set; }
-
 
             internal class Links
             {

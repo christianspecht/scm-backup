@@ -32,47 +32,52 @@ namespace ScmBackup.Hosters.Bitbucket
 
             string url = "/2.0/repositories/" + source.Name;
 
-            var result = request.Execute(url).Result;
-
-            if (result.IsSuccessStatusCode)
+            while (url != null)
             {
-                var apiResponse = JsonConvert.DeserializeObject<BitbucketApiResponse>(result.Content);
+                var result = request.Execute(url).Result;
 
-                foreach (var apiRepo in apiResponse.values)
+                if (result.IsSuccessStatusCode)
                 {
-                    ScmType type;
-                    switch (apiRepo.scm.ToLower())
+                    var apiResponse = JsonConvert.DeserializeObject<BitbucketApiResponse>(result.Content);
+
+                    foreach (var apiRepo in apiResponse.values)
                     {
-                        case "hg":
-                            type = ScmType.Hg;
-                            break;
-                        case "git":
-                            type = ScmType.Git;
-                            break;
-                        default:
-                            throw new InvalidOperationException(string.Format(Resource.ApiInvalidScmType, apiRepo.full_name));
+                        ScmType type;
+                        switch (apiRepo.scm.ToLower())
+                        {
+                            case "hg":
+                                type = ScmType.Hg;
+                                break;
+                            case "git":
+                                type = ScmType.Git;
+                                break;
+                            default:
+                                throw new InvalidOperationException(string.Format(Resource.ApiInvalidScmType, apiRepo.full_name));
+                        }
+
+                        var clone = apiRepo.links.clone.Where(r => r.name == "https").First();
+                        string cloneurl = clone.href;
+
+                        var repo = new HosterRepository(apiRepo.full_name, apiRepo.name, cloneurl, type);
+
+                        // TODO: Wiki/Issues
+
+                        list.Add(repo);
                     }
 
-                    var clone = apiRepo.links.clone.Where(r => r.name == "https").First();
-                    string cloneurl = clone.href;
-
-                    var repo = new HosterRepository(apiRepo.full_name, apiRepo.name, cloneurl, type);
-
-                    // TODO: Wiki/Issues
-
-                    list.Add(repo);
+                    url = apiResponse.next;
                 }
-            }
-            else
-            {
-                switch (result.Status)
+                else
                 {
-                    case HttpStatusCode.Unauthorized:
-                        throw new AuthenticationException(string.Format(Resource.ApiAuthenticationFailed, source.AuthName));
-                    case HttpStatusCode.Forbidden:
-                        throw new SecurityException(Resource.ApiMissingPermissions);
-                    case HttpStatusCode.NotFound:
-                        throw new InvalidOperationException(string.Format(Resource.ApiInvalidUsername, source.Name));
+                    switch (result.Status)
+                    {
+                        case HttpStatusCode.Unauthorized:
+                            throw new AuthenticationException(string.Format(Resource.ApiAuthenticationFailed, source.AuthName));
+                        case HttpStatusCode.Forbidden:
+                            throw new SecurityException(Resource.ApiMissingPermissions);
+                        case HttpStatusCode.NotFound:
+                            throw new InvalidOperationException(string.Format(Resource.ApiInvalidUsername, source.Name));
+                    }
                 }
             }
 
