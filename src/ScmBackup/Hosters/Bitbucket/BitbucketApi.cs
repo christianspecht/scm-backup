@@ -60,7 +60,13 @@ namespace ScmBackup.Hosters.Bitbucket
 
                         var repo = new HosterRepository(apiRepo.full_name, apiRepo.name, cloneurl, type);
 
-                        // TODO: Wiki/Issues
+                        if (apiRepo.has_wiki)
+                        {
+                            string wikiUrl = cloneurl + "/wiki";
+                            repo.SetWiki(true, wikiUrl.ToString());
+                        }
+
+                        // TODO: Issues
 
                         list.Add(repo);
                     }
