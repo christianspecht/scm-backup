@@ -9,3 +9,11 @@ $env:GithubApiTests_Repo = 'scm-backup'                                         
 $env:GithubApiTests_Commit = '7be29139f4cdc4037647fc2f21d9d82c42a96e88'         # a commit in the repository
 $env:GithubApiTests_WikiCommit = '714ddb8c48cebc70ff2ae74be98ac7cdf91ade6e'     # a commit in the wiki
 $env:GithubApiTests_PaginationUser = 'shanselman'                               # a user with enough public repos to test pagination
+
+$env:BitbucketApiTests_Name = 'scm-backup-testuser'                             # Bitbucket user
+$env:BitbucketApiTests_OrgName = 'scm-backup-testteam'                          # Bitbucket organization
+$env:BitbucketApiTests_PW = 'not-the-real-password'                             # the user's password/personal access token
+$env:BitbucketApiTests_Repo = 'scm-backup-test'                                 # a repository with wiki (must exist under user AND organization)
+$env:BitbucketApiTests_Commit = '617f9e55262be7b6d1c9db081ec351ff25c9a0e5'      # a commit in the repository
+$env:BitbucketApiTests_WikiCommit = 'befce8ddfb6976918c3c3e1a44fb6a68a438b785'  # a commit in the wiki
+$env:BitbucketApiTests_PaginationUser = 'birkenfeld'                            # a user with enough public repos to test pagination
