@@ -100,6 +100,11 @@ namespace ScmBackup.Scm
 
             // check if there's an path in the "Scms" section in the config
             // (if it's there, the file MUST exist!)
+            if (this.context == null)
+            {
+                throw new InvalidOperationException(Resource.CommandLineScm_ContextIsNull);
+            }
+
             var config = this.context.Config;
             if (config.Scms != null)
             {

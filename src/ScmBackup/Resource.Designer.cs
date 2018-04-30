@@ -206,6 +206,15 @@ namespace ScmBackup {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The context is null (must be injected into the child classes which inherit from CommandLineScm!).
+        /// </summary>
+        internal static string CommandLineScm_ContextIsNull {
+            get {
+                return ResourceManager.GetString("CommandLineScm_ContextIsNull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Config must not be NULL.
         /// </summary>
         internal static string ConfigIsNull {

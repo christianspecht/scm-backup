@@ -52,5 +52,14 @@ namespace ScmBackup.Tests.Integration.Scm
 
             Assert.Equal(sut.FakeCommandResult, result);
         }
+
+        [Fact]
+        public void ThrowsWhenContextIsNull()
+        {
+            var sut = new FakeCommandLineScm();
+            sut.Context = null;
+
+            Assert.Throws<ArgumentNullException>(() => sut.IsOnThisComputer());
+        }
     }
 }

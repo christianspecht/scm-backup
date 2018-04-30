@@ -165,6 +165,9 @@
   <data name="BackupMaker_Source" xml:space="preserve">
     <value>Backing up source: {0}</value>
   </data>
+  <data name="CommandLineScm_ContextIsNull" xml:space="preserve">
+    <value>The context is null (must be injected into the child classes which inherit from CommandLineScm!)</value>
+  </data>
   <data name="ConfigIsNull" xml:space="preserve">
     <value>Config must not be NULL</value>
   </data>
