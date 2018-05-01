@@ -59,7 +59,7 @@ namespace ScmBackup.Tests.Integration.Scm
             var sut = new FakeCommandLineScm();
             sut.Context = null;
 
-            Assert.Throws<ArgumentNullException>(() => sut.IsOnThisComputer());
+            Assert.Throws<InvalidOperationException>(() => sut.IsOnThisComputer());
         }
     }
 }
