@@ -46,7 +46,7 @@ namespace ScmBackup.Hosters.Bitbucket
                         switch (apiRepo.scm.ToLower())
                         {
                             case "hg":
-                                type = ScmType.Hg;
+                                type = ScmType.Mercurial;
                                 break;
                             case "git":
                                 type = ScmType.Git;

@@ -6,6 +6,6 @@
     internal enum ScmType
     {
         Git,
-        Hg
+        Mercurial
     }
 }
