@@ -34,7 +34,7 @@ namespace ScmBackup.Scm
                 }
                 catch (Exception ex)
                 {
-                    this.logger.Log(ErrorLevel.Debug, ex, scm.DisplayName);
+                    this.logger.Log(ErrorLevel.Error, ex, scm.DisplayName + ": ");
                 }
 
                 if (onComputer)
