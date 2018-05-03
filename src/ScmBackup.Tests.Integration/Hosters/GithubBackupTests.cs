@@ -1,14 +1,16 @@
-﻿using ScmBackup.Hosters.Github;
-using ScmBackup.Http;
+﻿using ScmBackup.Hosters;
+using ScmBackup.Hosters.Github;
 using ScmBackup.Scm;
+using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using Xunit;
 
 namespace ScmBackup.Tests.Integration.Hosters
 {
     public class GithubBackupTests : IBackupTests
     {
+        private List<HosterRepository> repoList;
+
         protected override void Setup()
         {
             // re-use test repo for GithubApi tests
@@ -26,7 +28,8 @@ namespace ScmBackup.Tests.Integration.Hosters
             context.Config = config;
 
             var api = new GithubApi(context);
-            this.repo = api.GetRepositoryList(source).First();
+            this.repoList = api.GetRepositoryList(source);
+            this.repo = this.repoList.Find(r => r.ShortName == TestHelper.EnvVar("GithubApiTests_Repo"));
             
             this.scm = new GitScm(new FileSystemHelper(), context);
             Assert.True(this.scm.IsOnThisComputer());
