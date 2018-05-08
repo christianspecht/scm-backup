@@ -1,4 +1,5 @@
 ﻿using Octokit;
+using ScmBackup.Scm;
 using System;
 using System.Collections.Generic;
 
@@ -10,10 +11,12 @@ namespace ScmBackup.Hosters.Github
     internal class GithubApi : IHosterApi
     {
         private readonly IContext context;
+        private readonly IScmFactory factory;
 
-        public GithubApi(IContext context)
+        public GithubApi(IContext context, IScmFactory factory)
         {
             this.context = context;
+            this.factory = factory;
         }
 
         public List<HosterRepository> GetRepositoryList(ConfigSource source)
@@ -66,6 +69,8 @@ namespace ScmBackup.Hosters.Github
                 throw new ApiException(message, e);
             }
 
+            var scm = this.factory.Create(ScmType.Git);
+
             if (repos != null)
             {
                 foreach(var apiRepo in repos)
@@ -77,7 +82,12 @@ namespace ScmBackup.Hosters.Github
                         // build wiki clone URL, because API doesn't return it
                         string wikiUrl = apiRepo.CloneUrl.Substring(0, apiRepo.CloneUrl.Length - ".git".Length) + ".wiki.git";
 
-                        repo.SetWiki(true, wikiUrl);
+                        // issue #13: the GitHub API only returns whether it's *possible* to create a wiki, but not if the repo actually *has* a wiki.
+                        // So we need to skip the wiki when the URL (which we just built manually) is not a valid repository.
+                        if (scm.RemoteRepositoryExists(wikiUrl))
+                        {
+                            repo.SetWiki(true, wikiUrl);
+                        }
                     }
 
                     if (apiRepo.HasIssues)

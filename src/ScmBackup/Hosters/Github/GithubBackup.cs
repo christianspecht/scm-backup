@@ -41,13 +41,6 @@ namespace ScmBackup.Hosters.Github
         {
             InitScm();
 
-            // issue #13: the GitHub API only returns whether it's *possible* to create a wiki, but not if the repo actually *has* a wiki.
-            // So we need to skip the wiki when the URL (which we built manually) is not a valid repository:
-            if (!scm.RemoteRepositoryExists(this.repo.WikiUrl))
-            {
-                return;
-            }
-
             scm.PullFromRemote(this.repo.WikiUrl, subdir);
 
             if (!scm.DirectoryIsRepository(subdir))

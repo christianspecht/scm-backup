@@ -27,7 +27,10 @@ namespace ScmBackup.Tests.Integration.Hosters
             var context = new FakeContext();
             context.Config = config;
 
-            var api = new GithubApi(context);
+            var factory = new FakeScmFactory();
+            factory.Register(ScmType.Git, new GitScm(new FileSystemHelper(), context));
+
+            var api = new GithubApi(context, factory);
             this.repoList = api.GetRepositoryList(source);
             this.repo = this.repoList.Find(r => r.ShortName == TestHelper.EnvVar("GithubApiTests_Repo"));
             
