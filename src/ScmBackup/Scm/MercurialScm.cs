@@ -120,7 +120,7 @@ namespace ScmBackup.Scm
                 throw new InvalidOperationException(string.Format(Resource.DirectoryNoRepo, directory));
             }
 
-            string cmd = string.Format("identify -R \"{0}\" -r {1}", directory, commitid);
+            string cmd = string.Format("log -R \"{0}\" -r {1} -T {{node}}", directory, commitid);
             var result = this.ExecuteCommand(cmd);
 
             if (result.Successful && result.Output.StartsWith(commitid))
