@@ -4,7 +4,7 @@ Write-Host 'Setting environment variables for integration tests...'
 
 $env:GithubApiTests_Name = 'scm-backup-testuser'                                # GitHub user
 $env:GithubApiTests_OrgName = 'scm-backup-testorg'                              # GitHub organization
-$env:GithubApiTests_PW = 'not-the-real-password'                                # the user's password/personal access token
+$env:GithubApiTests_PW = 'not-the-real-password'                                # the user's personal access token
 $env:GithubApiTests_Repo = 'scm-backup'                                         # a repository with wiki (must exist under user AND organization)
 $env:GithubApiTests_Commit = '7be29139f4cdc4037647fc2f21d9d82c42a96e88'         # a commit in the repository
 $env:GithubApiTests_WikiCommit = '714ddb8c48cebc70ff2ae74be98ac7cdf91ade6e'     # a commit in the wiki
@@ -12,7 +12,7 @@ $env:GithubApiTests_PaginationUser = 'shanselman'                               
 
 $env:BitbucketApiTests_Name = 'scm-backup-testuser'                             # Bitbucket user
 $env:BitbucketApiTests_OrgName = 'scm-backup-testteam'                          # Bitbucket organization
-$env:BitbucketApiTests_PW = 'not-the-real-password'                             # the user's password/personal access token
+$env:BitbucketApiTests_PW = 'not-the-real-password'                             # the user's app password
 $env:BitbucketApiTests_Repo = 'scm-backup-test'                                 # a repository with wiki (must exist under user AND organization)
 $env:BitbucketApiTests_Commit = '617f9e55262be7b6d1c9db081ec351ff25c9a0e5'      # a commit in the repository
 $env:BitbucketApiTests_WikiCommit = 'befce8ddfb6976918c3c3e1a44fb6a68a438b785'  # a commit in the wiki
