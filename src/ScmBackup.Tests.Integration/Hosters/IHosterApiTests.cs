@@ -80,7 +80,7 @@ namespace ScmBackup.Tests.Integration.Hosters
         public void GetRepositoryList_AuthenticatedUser_Executes()
         {
             var source = new ConfigSource();
-            source.Hoster = "github";
+            source.Hoster = this.ConfigHoster;
             source.Type = "user";
             source.Name = TestHelper.EnvVar(this.EnvVarPrefix, "Name");
             source.AuthName = source.Name;
@@ -136,7 +136,7 @@ namespace ScmBackup.Tests.Integration.Hosters
         public void GetRepositoryList_AuthenticatedOrganization_Executes()
         {
             var source = new ConfigSource();
-            source.Hoster = "github";
+            source.Hoster = this.ConfigHoster;
             source.Type = "org";
             source.Name = TestHelper.EnvVar(this.EnvVarPrefix, "OrgName");
             source.AuthName = TestHelper.EnvVar(this.EnvVarPrefix, "Name");
@@ -159,7 +159,7 @@ namespace ScmBackup.Tests.Integration.Hosters
         public void GetRepositoryList_PaginationWorks()
         {
             var source = new ConfigSource();
-            source.Hoster = "github";
+            source.Hoster = this.ConfigHoster;
             source.Type = "user";
             source.Name = TestHelper.EnvVar(this.EnvVarPrefix, "PaginationUser");
             source.AuthName = TestHelper.EnvVar(this.EnvVarPrefix, "Name");
