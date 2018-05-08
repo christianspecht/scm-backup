@@ -1,12 +1,11 @@
 ﻿using ScmBackup.Scm;
+using ScmBackup.Tests.Hosters;
 using System;
 
 namespace ScmBackup.Tests.Integration.Scm
 {
     public class GitScmTests : IScmTests
     {
-        private string baseurl = "https://github.com/{0}/{1}";
-
         public GitScmTests()
         {
             this.sut = new GitScm(new FileSystemHelper(), new FakeContext());
@@ -16,7 +15,7 @@ namespace ScmBackup.Tests.Integration.Scm
         {
             get
             {
-                string url = string.Format(this.baseurl, TestHelper.EnvVar("GithubApiTests_Name"), TestHelper.EnvVar("GithubApiTests_Repo"));
+                string url = CloneUrlBuilder.GithubCloneUrl(TestHelper.EnvVar("GithubApiTests_Name"), TestHelper.EnvVar("GithubApiTests_Repo"));
                 return url;
             }
         }
@@ -28,7 +27,7 @@ namespace ScmBackup.Tests.Integration.Scm
 
         internal override string NonExistingRepoUrl
         {
-            get { return string.Format(this.baseurl, TestHelper.EnvVar("GithubApiTests_Name"), "repo-does-not-exist"); }
+            get { return CloneUrlBuilder.GithubCloneUrl(TestHelper.EnvVar("GithubApiTests_Name"), "repo-does-not-exist"); }
         }
 
         internal override string PublicRepoExistingCommitId

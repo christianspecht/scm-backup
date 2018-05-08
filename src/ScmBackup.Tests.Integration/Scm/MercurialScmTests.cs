@@ -1,12 +1,11 @@
 ﻿using ScmBackup.Scm;
+using ScmBackup.Tests.Hosters;
 using System;
 
 namespace ScmBackup.Tests.Integration.Scm
 {
     public class MercurialScmTests : IScmTests
     {
-        private string baseurl = "https://bitbucket.org/{0}/{1}";
-
         public MercurialScmTests()
         {
             this.sut = new MercurialScm(new FileSystemHelper(), new FakeContext());
@@ -14,7 +13,7 @@ namespace ScmBackup.Tests.Integration.Scm
 
         internal override string PublicRepoUrl
         {
-            get { return string.Format(this.baseurl, TestHelper.EnvVar("BitbucketApiTests_Name"), TestHelper.EnvVar("BitbucketApiTests_Repo")); }
+            get { return CloneUrlBuilder.BitbucketCloneUrl(TestHelper.EnvVar("BitbucketApiTests_Name"), TestHelper.EnvVar("BitbucketApiTests_Repo")); }
         }
 
         internal override string PrivateRepoUrl
@@ -24,7 +23,7 @@ namespace ScmBackup.Tests.Integration.Scm
 
         internal override string NonExistingRepoUrl
         {
-            get { return string.Format(this.baseurl, TestHelper.EnvVar("BitbucketApiTests_Name"), "repo-does-not-exist"); }
+            get { return CloneUrlBuilder.BitbucketCloneUrl(TestHelper.EnvVar("BitbucketApiTests_Name"), "repo-does-not-exist"); }
         }
 
         internal override string PublicRepoExistingCommitId
