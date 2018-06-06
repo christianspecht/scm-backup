@@ -1,5 +1,6 @@
 ﻿using ScmBackup.Hosters;
 using ScmBackup.Scm;
+using System;
 using System.IO;
 using Xunit;
 
@@ -63,6 +64,16 @@ namespace ScmBackup.Tests.Integration.Hosters
             sut.MakeBackup(this.repo, dir);
 
             Assert.False(Directory.Exists(sut.SubDirIssues));
+        }
+
+        [Fact]
+        public void ThrowsWhenScmFactoryIsNull()
+        {
+            var dir = DirectoryHelper.CreateTempDirectory(this.DirSuffix("throws-when-scmfactory-null"));
+            this.Setup();
+            sut.scmFactory = null;
+
+            Assert.Throws<ArgumentNullException>(() => sut.MakeBackup(this.repo, dir));
         }
 
         /// <summary>

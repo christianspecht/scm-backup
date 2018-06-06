@@ -5,24 +5,9 @@ namespace ScmBackup.Hosters.Github
 {
     internal class GithubBackup : BackupBase
     {
-        private readonly IScmFactory scmFactory;
-        private IScm scm;
-
         public GithubBackup(IScmFactory scmfactory)
         {
             this.scmFactory = scmfactory;
-        }
-
-        public void InitScm()
-        {
-            if (this.scm == null)
-            {
-                this.scm = this.scmFactory.Create(this.repo.Scm);
-                if (!this.scm.IsOnThisComputer())
-                {
-                    throw new InvalidOperationException(string.Format(Resource.ScmNotOnThisComputer, this.repo.Scm.ToString()));
-                }
-            }
         }
 
         public override void BackupRepo(string subdir)

@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using ScmBackup.Scm;
+using System;
+using System.IO;
 
 namespace ScmBackup.Hosters
 {
@@ -9,9 +11,18 @@ namespace ScmBackup.Hosters
         public readonly string SubDirIssues = "issues";
 
         protected HosterRepository repo;
+        protected IScm scm;
+
+        // this MUST be filled in the child classes' constructor
+        public IScmFactory scmFactory;
 
         public void MakeBackup(HosterRepository repo, string repoFolder)
         {
+            if (this.scmFactory == null)
+            {
+                throw new ArgumentNullException("!!");
+            }
+
             this.repo = repo;
 
             string subdir = Path.Combine(repoFolder, this.SubDirRepo);
@@ -27,6 +38,18 @@ namespace ScmBackup.Hosters
             {
                 subdir = Path.Combine(repoFolder, this.SubDirIssues);
                 this.BackupIssues(subdir);
+            }
+        }
+
+        public void InitScm()
+        {
+            if (this.scm == null)
+            {
+                this.scm = this.scmFactory.Create(this.repo.Scm);
+                if (!this.scm.IsOnThisComputer())
+                {
+                    throw new InvalidOperationException(string.Format(Resource.ScmNotOnThisComputer, this.repo.Scm.ToString()));
+                }
             }
         }
 

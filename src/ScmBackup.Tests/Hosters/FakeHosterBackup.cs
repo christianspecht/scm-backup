@@ -9,6 +9,11 @@ namespace ScmBackup.Tests.Hosters
         private bool repoWasExecuted;
         private bool wikiWasExecuted;
 
+        public FakeHosterBackup()
+        {
+            this.scmFactory = new FakeScmFactory();
+        }
+
         public bool WasExecuted
         {
             get
