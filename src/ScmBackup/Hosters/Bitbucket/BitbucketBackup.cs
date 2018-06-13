@@ -1,14 +1,39 @@
-﻿using System;
+﻿using ScmBackup.Scm;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace ScmBackup.Hosters.Bitbucket
 {
-    internal class BitbucketBackup : IBackup
+    internal class BitbucketBackup : BackupBase
     {
-        public void MakeBackup(HosterRepository repo, string repoFolder)
+        public BitbucketBackup(IScmFactory scmfactory)
         {
-            throw new NotImplementedException();
+            this.scmFactory = scmfactory;
+        }
+
+        public override void BackupRepo(string subdir)
+        {
+            this.InitScm();
+
+            this.scm.PullFromRemote(this.repo.CloneUrl, subdir);
+
+            if (!this.scm.DirectoryIsRepository(subdir))
+            {
+                throw new InvalidOperationException(Resource.DirectoryNoRepo);
+            }
+        }
+
+        public override void BackupWiki(string subdir)
+        {
+            this.InitScm();
+
+            this.scm.PullFromRemote(this.repo.WikiUrl, subdir);
+
+            if (!this.scm.DirectoryIsRepository(subdir))
+            {
+                throw new InvalidOperationException(Resource.DirectoryNoRepo);
+            }
         }
     }
 }
