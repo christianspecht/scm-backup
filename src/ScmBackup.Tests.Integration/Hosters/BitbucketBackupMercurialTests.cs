@@ -8,7 +8,7 @@ namespace ScmBackup.Tests.Integration.Hosters
 {
     public class BitbucketBackupMercurialTests : IBackupTests
     {
-        private string prefix = "BitbucketApiTests";
+        private string prefix = "Bitbucket";
 
         protected override void Setup()
         {

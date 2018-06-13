@@ -17,9 +17,9 @@ namespace ScmBackup.Tests.Integration.Hosters
             var source = new ConfigSource();
             source.Hoster = "github";
             source.Type = "user";
-            source.Name = TestHelper.EnvVar("GithubApiTests_Name");
+            source.Name = TestHelper.EnvVar("Github_Name");
             source.AuthName = source.Name;
-            source.Password = TestHelper.EnvVar("GithubApiTests_PW");
+            source.Password = TestHelper.EnvVar("Github_PW");
 
             var config = new Config();
             config.Sources.Add(source);
@@ -32,7 +32,7 @@ namespace ScmBackup.Tests.Integration.Hosters
 
             var api = new GithubApi(context, factory);
             this.repoList = api.GetRepositoryList(source);
-            this.repo = this.repoList.Find(r => r.ShortName == TestHelper.EnvVar("GithubApiTests_Repo"));
+            this.repo = this.repoList.Find(r => r.ShortName == TestHelper.EnvVar("Github_Repo"));
             
             this.scm = new GitScm(new FileSystemHelper(), context);
             Assert.True(this.scm.IsOnThisComputer());
@@ -46,14 +46,14 @@ namespace ScmBackup.Tests.Integration.Hosters
         {
             Assert.True(Directory.Exists(dir));
             Assert.True(this.scm.DirectoryIsRepository(dir));
-            Assert.True(scm.RepositoryContainsCommit(dir, TestHelper.EnvVar("GithubApiTests_Commit")));
+            Assert.True(scm.RepositoryContainsCommit(dir, TestHelper.EnvVar("Github_Commit")));
         }
 
         protected override void AssertWiki(string dir)
         {
             Assert.True(Directory.Exists(dir));
             Assert.True(this.scm.DirectoryIsRepository(dir));
-            Assert.True(scm.RepositoryContainsCommit(dir, TestHelper.EnvVar("GithubApiTests_WikiCommit")));
+            Assert.True(scm.RepositoryContainsCommit(dir, TestHelper.EnvVar("Github_WikiCommit")));
         }
     }
 }

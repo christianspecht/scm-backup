@@ -9,7 +9,7 @@ namespace ScmBackup.Tests.Integration.Hosters
     {
         internal override string EnvVarPrefix
         {
-            get { return "GithubApiTests"; }
+            get { return "Github"; }
         }
 
         internal override string ConfigHoster

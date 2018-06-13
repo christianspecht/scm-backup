@@ -15,7 +15,7 @@ namespace ScmBackup.Tests.Integration.Scm
         {
             get
             {
-                string url = CloneUrlBuilder.GithubCloneUrl(TestHelper.EnvVar("GithubApiTests_Name"), TestHelper.EnvVar("GithubApiTests_Repo"));
+                string url = CloneUrlBuilder.GithubCloneUrl(TestHelper.EnvVar("Github_Name"), TestHelper.EnvVar("Github_Repo"));
                 return url;
             }
         }
@@ -27,14 +27,14 @@ namespace ScmBackup.Tests.Integration.Scm
 
         internal override string NonExistingRepoUrl
         {
-            get { return CloneUrlBuilder.GithubCloneUrl(TestHelper.EnvVar("GithubApiTests_Name"), "repo-does-not-exist"); }
+            get { return CloneUrlBuilder.GithubCloneUrl(TestHelper.EnvVar("Github_Name"), "repo-does-not-exist"); }
         }
 
         internal override string PublicRepoExistingCommitId
         {
             get
             {
-                return TestHelper.EnvVar("GithubApiTests_Commit");
+                return TestHelper.EnvVar("Github_Commit");
             }
         }
 

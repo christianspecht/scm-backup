@@ -13,7 +13,7 @@ namespace ScmBackup.Tests.Integration.Scm
 
         internal override string PublicRepoUrl
         {
-            get { return CloneUrlBuilder.BitbucketCloneUrl(TestHelper.EnvVar("BitbucketApiTests_Name"), TestHelper.EnvVar("BitbucketApiTests_Repo")); }
+            get { return CloneUrlBuilder.BitbucketCloneUrl(TestHelper.EnvVar("Bitbucket_Name"), TestHelper.EnvVar("Bitbucket_Repo")); }
         }
 
         internal override string PrivateRepoUrl
@@ -23,12 +23,12 @@ namespace ScmBackup.Tests.Integration.Scm
 
         internal override string NonExistingRepoUrl
         {
-            get { return CloneUrlBuilder.BitbucketCloneUrl(TestHelper.EnvVar("BitbucketApiTests_Name"), "repo-does-not-exist"); }
+            get { return CloneUrlBuilder.BitbucketCloneUrl(TestHelper.EnvVar("Bitbucket_Name"), "repo-does-not-exist"); }
         }
 
         internal override string PublicRepoExistingCommitId
         {
-            get { return TestHelper.EnvVar("BitbucketApiTests_Commit"); }
+            get { return TestHelper.EnvVar("Bitbucket_Commit"); }
         }
 
         internal override string PublicRepoNonExistingCommitId
