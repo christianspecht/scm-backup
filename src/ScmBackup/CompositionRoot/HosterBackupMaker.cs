@@ -23,7 +23,7 @@ namespace ScmBackup.CompositionRoot
             }
 
             var hoster = factory.Create(source.Hoster);
-            hoster.Backup.MakeBackup(repo, repoFolder);
+            hoster.Backup.MakeBackup(source, repo, repoFolder);
         }
     }
 }

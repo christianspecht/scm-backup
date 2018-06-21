@@ -35,7 +35,7 @@ namespace ScmBackup.Tests.Integration.Hosters
             Assert.NotNull(this.scm);
             Assert.NotNull(this.source);
 
-            sut.MakeBackup(this.repo, dir);
+            sut.MakeBackup(this.source, this.repo, dir);
 
             this.AssertRepo(Path.Combine(dir, this.sut.SubDirRepo));
             this.AssertWiki(Path.Combine(dir, this.sut.SubDirWiki));
@@ -50,7 +50,7 @@ namespace ScmBackup.Tests.Integration.Hosters
 
             this.repo.SetWiki(false, null);
 
-            sut.MakeBackup(this.repo, dir);
+            sut.MakeBackup(this.source, this.repo, dir);
 
             Assert.False(Directory.Exists(sut.SubDirWiki));
         }
@@ -63,7 +63,7 @@ namespace ScmBackup.Tests.Integration.Hosters
 
             this.repo.SetIssues(false, null);
 
-            sut.MakeBackup(this.repo, dir);
+            sut.MakeBackup(this.source, this.repo, dir);
 
             Assert.False(Directory.Exists(sut.SubDirIssues));
         }
@@ -75,7 +75,7 @@ namespace ScmBackup.Tests.Integration.Hosters
             this.Setup();
             sut.scmFactory = null;
 
-            Assert.Throws<ArgumentNullException>(() => sut.MakeBackup(this.repo, dir));
+            Assert.Throws<ArgumentNullException>(() => sut.MakeBackup(this.source, this.repo, dir));
         }
 
         /// <summary>

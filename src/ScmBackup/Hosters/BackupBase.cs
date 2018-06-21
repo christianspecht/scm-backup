@@ -16,7 +16,7 @@ namespace ScmBackup.Hosters
         // this MUST be filled in the child classes' constructor
         public IScmFactory scmFactory;
 
-        public void MakeBackup(HosterRepository repo, string repoFolder)
+        public void MakeBackup(ConfigSource source, HosterRepository repo, string repoFolder)
         {
             if (this.scmFactory == null)
             {
