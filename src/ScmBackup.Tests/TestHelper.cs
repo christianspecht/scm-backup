@@ -47,7 +47,7 @@ namespace ScmBackup.Tests
         public static string EnvVar(string prefix, string name, bool throwException)
         {
             string variableName = prefix + "_" + name;
-            return EnvVar(variableName);
+            return EnvVar(variableName, throwException);
         }
 
         /// <summary>
