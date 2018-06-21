@@ -77,6 +77,8 @@ namespace ScmBackup.Hosters.Github
                 {
                     var repo = new HosterRepository(apiRepo.FullName, apiRepo.Name, apiRepo.CloneUrl, ScmType.Git);
 
+                    repo.SetPrivate(apiRepo.Private);
+
                     if (apiRepo.HasWiki && apiRepo.CloneUrl.EndsWith(".git"))
                     {
                         // build wiki clone URL, because API doesn't return it

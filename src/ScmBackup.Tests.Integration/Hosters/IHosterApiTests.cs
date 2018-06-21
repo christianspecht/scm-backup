@@ -156,6 +156,36 @@ namespace ScmBackup.Tests.Integration.Hosters
         }
 
         [Fact]
+        public void GetRepositoryList_PrivateRepoIsMarkedAsPrivate()
+        {
+            string repoName = TestHelper.EnvVar(this.EnvVarPrefix, "RepoPrivate", false);
+
+            if (repoName == null)
+            {
+                // if there's no private repo for this hoster, do nothing
+                Assert.True(true);
+            }
+            else
+            {
+                var source = new ConfigSource();
+                source.Hoster = this.ConfigHoster;
+                source.Type = "user";
+                source.Name = TestHelper.EnvVar(this.EnvVarPrefix, "Name");
+                source.AuthName = source.Name;
+                source.Password = TestHelper.EnvVar(this.EnvVarPrefix, "PW");
+
+                var repoList = sut.GetRepositoryList(source);
+
+                // specific repo exists and is private?
+                string expectedName = TestHelper.BuildRepositoryName(source.Name, repoName);
+                var repo = repoList.Where(r => r.FullName == expectedName).FirstOrDefault();
+                Assert.NotNull(repo);
+                Assert.True(repo.IsPrivate);
+            }
+        }
+
+        /*
+        [Fact]
         public void GetRepositoryList_PaginationWorks()
         {
             var source = new ConfigSource();
@@ -169,6 +199,7 @@ namespace ScmBackup.Tests.Integration.Hosters
 
             Assert.True(repoList.Count > this.Pagination_MinNumberOfRepos);
         }
+        */
 
         private bool ValidateUrls(HosterRepository repo)
         {

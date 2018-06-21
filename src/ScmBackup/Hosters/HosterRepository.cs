@@ -63,6 +63,11 @@
         /// </summary>
         public string IssueUrl { get; private set; }
 
+        /// <summary>
+        /// the repo is private
+        /// </summary>
+        public bool IsPrivate { get; private set; }
+
         public void SetFullName(string name)
         {
             this.FullName = name.Replace('/', '#');
@@ -78,6 +83,11 @@
         {
             this.HasIssues = hasissues;
             this.IssueUrl = issueurl;
+        }
+
+        public void SetPrivate(bool isPrivate)
+        {
+            this.IsPrivate = isPrivate;
         }
     }
 }

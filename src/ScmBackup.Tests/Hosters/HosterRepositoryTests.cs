@@ -36,5 +36,14 @@ namespace ScmBackup.Tests.Hosters
             Assert.True(sut.HasIssues);
             Assert.Equal("url", sut.IssueUrl);
         }
+
+        [Fact]
+        public void IsPrivateWorks()
+        {
+            var sut = new HosterRepository("foo", "foo", "http://clone", ScmType.Git);
+            sut.SetPrivate(true);
+
+            Assert.True(sut.IsPrivate);
+        }
     }
 }

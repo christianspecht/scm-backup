@@ -20,3 +20,5 @@ $env:Bitbucket_RepoGit = 'scm-backup-test-git'                          # GIT: a
 $env:Bitbucket_CommitGit = '389dae62982075f97efb660824c31f712872a9cd'   # GIT: a commit in the repository
 $env:Bitbucket_WikiCommitGit = '8c621fd488ee5fa1ed19ca78113ccc92d55820bd' # GIT: a commit in the wiki
 $env:Bitbucket_PaginationUser = 'birkenfeld'                            # a user with enough public repos to test pagination
+$env:Bitbucket_RepoPrivate = 'scm-backup-test-private-hg'               # MERCURIAL: a private repository
+$env:Bitbucket_RepoPrivateGit = 'scm-backup-test-private-git'           # GIT: a private repository

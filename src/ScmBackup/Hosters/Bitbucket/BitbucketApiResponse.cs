@@ -14,6 +14,7 @@ namespace ScmBackup.Hosters.Bitbucket
             public string full_name { get; set; }
             public bool has_wiki { get; set; }
             public bool has_issues { get; set; }
+            public bool is_private { get; set; }
             public Links links { get; set; }
 
             internal class Links
