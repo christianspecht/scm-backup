@@ -10,15 +10,24 @@ namespace ScmBackup.Tests
         /// <summary>
         /// Returns the value of an environment variable. Throws an exception when the variable doesn't exist.
         /// </summary>
-        /// <param name="variableName"></param>
-        /// <returns></returns>
         public static string EnvVar(string variableName)
+        {
+            return EnvVar(variableName, true);
+        }
+
+        /// <summary>
+        /// Returns the value of an environment variable. Optional: Throws an exception when the variable doesn't exist.
+        /// </summary>
+        public static string EnvVar(string variableName, bool throwException)
         {
             string result = Environment.GetEnvironmentVariable(variableName);
 
-            if (String.IsNullOrWhiteSpace(result))
+            if (throwException)
             {
-                throw new ArgumentException(string.Format("Environment variable {0} not found", variableName));
+                if (String.IsNullOrWhiteSpace(result))
+                {
+                    throw new ArgumentException(string.Format("Environment variable {0} not found", variableName));
+                }
             }
 
             return result;
@@ -29,6 +38,14 @@ namespace ScmBackup.Tests
         /// </summary>
         public static string EnvVar(string prefix, string name)
         {
+            return EnvVar(prefix, name, true);
+        }
+
+        /// <summary>
+        /// Returns the value of an environment variable. Optional: Throws an exception when the variable doesn't exist.
+        /// </summary>
+        public static string EnvVar(string prefix, string name, bool throwException)
+        {
             string variableName = prefix + "_" + name;
             return EnvVar(variableName);
         }
@@ -36,9 +53,6 @@ namespace ScmBackup.Tests
         /// <summary>
         /// Helper to build the repository name created in ScmBackup.Hosters.HosterRepository
         /// </summary>
-        /// <param name="userName"></param>
-        /// <param name="repoName"></param>
-        /// <returns></returns>
         public static string BuildRepositoryName(string userName, string repoName)
         {
             if (string.IsNullOrWhiteSpace(userName))

@@ -20,6 +20,12 @@ namespace ScmBackup.Tests
         }
 
         [Fact]
+        public void EnvVar_DoesNotThrowsWhenRequestedVariableDoesNotExist()
+        {
+            Assert.Null(TestHelper.EnvVar("ThisVariableDoesNotExist", false));
+        }
+
+        [Fact]
         public void EnvVar_WithPrefix_ReturnsExistingVariable()
         {
             Environment.SetEnvironmentVariable("prefix_name", "foo");
