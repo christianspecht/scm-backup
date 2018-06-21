@@ -14,15 +14,15 @@ namespace ScmBackup.Tests.Integration.Hosters
         protected override void Setup()
         {
             // re-use test repo for GithubApi tests
-            var source = new ConfigSource();
-            source.Hoster = "github";
-            source.Type = "user";
-            source.Name = TestHelper.EnvVar("Github_Name");
-            source.AuthName = source.Name;
-            source.Password = TestHelper.EnvVar("Github_PW");
+            this.source = new ConfigSource();
+            this.source.Hoster = "github";
+            this.source.Type = "user";
+            this.source.Name = TestHelper.EnvVar("Github_Name");
+            this.source.AuthName = this.source.Name;
+            this.source.Password = TestHelper.EnvVar("Github_PW");
 
             var config = new Config();
-            config.Sources.Add(source);
+            config.Sources.Add(this.source);
 
             var context = new FakeContext();
             context.Config = config;
@@ -31,7 +31,7 @@ namespace ScmBackup.Tests.Integration.Hosters
             factory.Register(ScmType.Git, new GitScm(new FileSystemHelper(), context));
 
             var api = new GithubApi(context, factory);
-            this.repoList = api.GetRepositoryList(source);
+            this.repoList = api.GetRepositoryList(this.source);
             this.repo = this.repoList.Find(r => r.ShortName == TestHelper.EnvVar("Github_Repo"));
             
             this.scm = new GitScm(new FileSystemHelper(), context);

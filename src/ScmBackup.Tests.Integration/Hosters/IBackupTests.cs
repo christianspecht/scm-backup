@@ -11,6 +11,7 @@ namespace ScmBackup.Tests.Integration.Hosters
         internal BackupBase sut;
         internal HosterRepository repo;
         internal IScm scm;
+        internal ConfigSource source;
 
         // The child classes need to implement this *and fill all above properties there*:
         protected abstract void Setup();
@@ -32,6 +33,7 @@ namespace ScmBackup.Tests.Integration.Hosters
             Assert.NotNull(this.sut);
             Assert.NotNull(this.repo);
             Assert.NotNull(this.scm);
+            Assert.NotNull(this.source);
 
             sut.MakeBackup(this.repo, dir);
 

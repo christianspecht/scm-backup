@@ -13,7 +13,7 @@ namespace ScmBackup.Tests.Hosters
             repo.SetIssues(true, "http://issues");
 
             var sut = new FakeHosterBackup();
-            sut.MakeBackup(repo, @"c:\foo");
+            sut.MakeBackup(new ConfigSource(), repo, @"c:\foo");
 
             Assert.True(sut.WasExecuted);
         }

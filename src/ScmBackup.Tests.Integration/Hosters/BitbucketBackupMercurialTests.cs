@@ -13,21 +13,21 @@ namespace ScmBackup.Tests.Integration.Hosters
         protected override void Setup()
         {
             // re-use test repo for Api tests
-            var source = new ConfigSource();
-            source.Hoster = "bitbucket";
-            source.Type = "user";
-            source.Name = TestHelper.EnvVar(prefix, "Name");
-            source.AuthName = source.Name;
-            source.Password = TestHelper.EnvVar(prefix, "PW");
+            this.source = new ConfigSource();
+            this.source.Hoster = "bitbucket";
+            this.source.Type = "user";
+            this.source.Name = TestHelper.EnvVar(prefix, "Name");
+            this.source.AuthName = this.source.Name;
+            this.source.Password = TestHelper.EnvVar(prefix, "PW");
 
             var config = new Config();
-            config.Sources.Add(source);
+            config.Sources.Add(this.source);
             
             var context = new FakeContext();
             context.Config = config;
 
             var api = new BitbucketApi(new HttpRequest());
-            var repoList = api.GetRepositoryList(source);
+            var repoList = api.GetRepositoryList(this.source);
             this.repo = repoList.Find(r => r.ShortName == TestHelper.EnvVar(prefix, "Repo"));
             
             this.scm = new MercurialScm(new FileSystemHelper(), context);
