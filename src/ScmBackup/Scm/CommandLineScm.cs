@@ -82,7 +82,17 @@ namespace ScmBackup.Scm
         /// If the folder doesn't exist or is not a repository, it's created first.
         /// Must be implemented in the child classes by calling ExecuteCommand and checking the result.
         /// </summary>
-        public abstract void PullFromRemote(string remoteUrl, string directory);
+        public void PullFromRemote(string remoteUrl, string directory)
+        {
+            this.PullFromRemote(remoteUrl, directory, null);
+        }
+
+        /// <summary>
+        /// Pulls from a remote repository into a local folder.
+        /// If the folder doesn't exist or is not a repository, it's created first.
+        /// Must be implemented in the child classes by calling ExecuteCommand and checking the result.
+        /// </summary>
+        public abstract void PullFromRemote(string remoteUrl, string directory, ScmCredentials credentials);
 
         /// <summary>
         /// Checks whether the repo in this directory contains a commit with this ID

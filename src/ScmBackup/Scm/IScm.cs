@@ -45,6 +45,12 @@ namespace ScmBackup.Scm
         /// If the folder doesn't exist or is not a repository, it's created first.
         /// </summary>
         void PullFromRemote(string remoteUrl, string directory);
+        
+        /// <summary>
+        /// Pulls from a remote repository into a local folder.
+        /// If the folder doesn't exist or is not a repository, it's created first.
+        /// </summary>
+        void PullFromRemote(string remoteUrl, string directory, ScmCredentials credentials);
 
         /// <summary>
         /// Checks whether the repo in this directory contains a commit with this ID

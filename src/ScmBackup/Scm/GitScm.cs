@@ -90,7 +90,7 @@ namespace ScmBackup.Scm
             return result.Successful;
         }
 
-        public override void PullFromRemote(string remoteUrl, string directory)
+        public override void PullFromRemote(string remoteUrl, string directory, ScmCredentials credentials)
         {
             if (!this.DirectoryIsRepository(directory))
             {
