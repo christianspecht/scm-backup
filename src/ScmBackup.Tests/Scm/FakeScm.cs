@@ -60,6 +60,11 @@ namespace ScmBackup.Tests.Scm
             throw new NotImplementedException();
         }
 
+        public bool RemoteRepositoryExists(string remoteUrl, ScmCredentials credentials)
+        {
+            throw new NotImplementedException();
+        }
+
         public void PullFromRemote(string remoteUrl, string directory)
         {
             throw new NotImplementedException();

@@ -101,7 +101,7 @@ namespace ScmBackup.Tests.Integration.Scm
             throw new NotImplementedException();
         }
 
-        public override bool RemoteRepositoryExists(string remoteUrl)
+        public override bool RemoteRepositoryExists(string remoteUrl, ScmCredentials credentials)
         {
             throw new NotImplementedException();
         }

@@ -41,6 +41,11 @@ namespace ScmBackup.Scm
         bool RemoteRepositoryExists(string remoteUrl);
 
         /// <summary>
+        /// Checks whether a repository exists under the given URL
+        /// </summary>
+        bool RemoteRepositoryExists(string remoteUrl, ScmCredentials credentials);
+
+        /// <summary>
         /// Pulls from a remote repository into a local folder.
         /// If the folder doesn't exist or is not a repository, it's created first.
         /// </summary>

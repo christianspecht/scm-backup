@@ -82,7 +82,7 @@ namespace ScmBackup.Scm
             }
         }
 
-        public override bool RemoteRepositoryExists(string remoteUrl)
+        public override bool RemoteRepositoryExists(string remoteUrl, ScmCredentials credentials)
         {
             string cmd = "ls-remote " + remoteUrl;
             var result = this.ExecuteCommand(cmd);

@@ -75,7 +75,15 @@ namespace ScmBackup.Scm
         /// <summary>
         /// Checks whether a repository exists under the given URL
         /// </summary>
-        public abstract bool RemoteRepositoryExists(string remoteUrl);
+        public bool RemoteRepositoryExists(string remoteUrl)
+        {
+            return this.RemoteRepositoryExists(remoteUrl, null);
+        }
+
+        /// <summary>
+        /// Checks whether a repository exists under the given URL
+        /// </summary>
+        public abstract bool RemoteRepositoryExists(string remoteUrl, ScmCredentials credentials);
 
         /// <summary>
         /// Pulls from a remote repository into a local folder.
