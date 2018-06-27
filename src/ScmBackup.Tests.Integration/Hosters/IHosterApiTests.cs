@@ -184,7 +184,6 @@ namespace ScmBackup.Tests.Integration.Hosters
             }
         }
 
-        /*
         [Fact]
         public void GetRepositoryList_PaginationWorks()
         {
@@ -199,7 +198,6 @@ namespace ScmBackup.Tests.Integration.Hosters
 
             Assert.True(repoList.Count > this.Pagination_MinNumberOfRepos);
         }
-        */
 
         private bool ValidateUrls(HosterRepository repo)
         {
