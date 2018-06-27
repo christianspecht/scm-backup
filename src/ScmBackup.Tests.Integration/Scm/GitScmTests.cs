@@ -22,7 +22,12 @@ namespace ScmBackup.Tests.Integration.Scm
 
         internal override string PrivateRepoUrl
         {
-            get { throw new NotImplementedException(); }
+            get { return CloneUrlBuilder.BitbucketCloneUrl(TestHelper.EnvVar("Bitbucket_Name"), TestHelper.EnvVar("Bitbucket_RepoPrivateGit")); }
+        }
+
+        internal override ScmCredentials PrivateRepoCredentials
+        {
+            get { return new ScmCredentials(TestHelper.EnvVar("Bitbucket_Name"), TestHelper.EnvVar("Bitbucket_PW")); }
         }
 
         internal override string NonExistingRepoUrl

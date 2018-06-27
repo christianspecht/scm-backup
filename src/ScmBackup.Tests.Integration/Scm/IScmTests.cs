@@ -12,6 +12,7 @@ namespace ScmBackup.Tests.Integration.Scm
         // public and private test repositories
         internal abstract string PublicRepoUrl { get; }
         internal abstract string PrivateRepoUrl { get; }
+        internal abstract ScmCredentials PrivateRepoCredentials { get; }
         internal abstract string NonExistingRepoUrl { get; }
 
         // commit ids that do/do not exist in the public repo
@@ -160,6 +161,18 @@ namespace ScmBackup.Tests.Integration.Scm
         }
 
         [Fact]
+        public void PullFromRemote_PrivateUrl_CreatesNewRepo()
+        {
+            string dir = DirectoryHelper.CreateTempDirectory(DirSuffix("private-pull-new"));
+            string subDir = Path.Combine(dir, "sub");
+
+            sut.PullFromRemote(this.PrivateRepoUrl, subDir, this.PrivateRepoCredentials);
+
+            Assert.True(Directory.Exists(subDir));
+            Assert.True(sut.DirectoryIsRepository(subDir));
+        }
+
+        [Fact]
         public void RepositoryContainsCommit_ThrowsWhenDirDoesntExist()
         {
             string dir = DirectoryHelper.CreateTempDirectory(DirSuffix("contains-nodir"));
@@ -209,6 +222,14 @@ namespace ScmBackup.Tests.Integration.Scm
             var result = sut.RemoteRepositoryExists(this.NonExistingRepoUrl);
             Assert.False(result);
         }
+
+        [Fact]
+        public void RemoteRepositoryExists_ReturnsTrueForPrivateRepo()
+        {
+            var result = sut.RemoteRepositoryExists(this.PrivateRepoUrl, this.PrivateRepoCredentials);
+            Assert.True(result);
+        }
+
 
         /// <summary>
         /// helper for directory suffixes

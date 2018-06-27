@@ -82,6 +82,11 @@ namespace ScmBackup.Scm
         public override bool RemoteRepositoryExists(string remoteUrl, ScmCredentials credentials)
         {
             string cmd = "identify " + remoteUrl;
+            if (credentials != null)
+            {
+                cmd += this.CreateParametersWithCredentials(credentials, remoteUrl);
+            }
+
             var result = this.ExecuteCommand(cmd);
 
             return result.Successful;
@@ -100,6 +105,11 @@ namespace ScmBackup.Scm
             }
 
             string cmd = string.Format("pull {0} -R \"{1}\"", remoteUrl, directory);
+            if (credentials != null)
+            {
+                cmd += this.CreateParametersWithCredentials(credentials, remoteUrl);
+            }
+
             var result = this.ExecuteCommand(cmd);
 
             if (!result.Successful)
@@ -129,6 +139,18 @@ namespace ScmBackup.Scm
             }
 
             return false;
+        }
+
+        private string CreateParametersWithCredentials(ScmCredentials credentials, string url)
+        {
+            // pass credentials via command line instead of putting them into the URL: https://stackoverflow.com/a/22126365/6884
+
+            // Note: we need to pass the host from the URL (e.g. https://bitbucket.org) as the first parameter, otherwise 
+            // authentication won't work when there's an actual entry in the local config file for the same hoster.
+            var uri = new Uri(url);
+            string baseurl = new UriBuilder(uri.Scheme, uri.Host).ToString();
+            
+            return string.Format(" --config auth.x.prefix={0} --config auth.x.username={1} --config auth.x.password={2}", baseurl, credentials.User, credentials.Password);
         }
     }
 }

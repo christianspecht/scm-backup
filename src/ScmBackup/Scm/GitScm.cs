@@ -84,6 +84,11 @@ namespace ScmBackup.Scm
 
         public override bool RemoteRepositoryExists(string remoteUrl, ScmCredentials credentials)
         {
+            if (credentials != null)
+            {
+                remoteUrl = this.CreateRepoUrlWithCredentials(remoteUrl, credentials);
+            }
+
             string cmd = "ls-remote " + remoteUrl;
             var result = this.ExecuteCommand(cmd);
 
@@ -100,6 +105,11 @@ namespace ScmBackup.Scm
                 }
                 
                 this.CreateRepository(directory);
+            }
+
+            if (credentials != null)
+            {
+                remoteUrl = this.CreateRepoUrlWithCredentials(remoteUrl, credentials);
             }
             
             string cmd = string.Format("-C \"{0}\" fetch --force --prune {1} refs/heads/*:refs/heads/* refs/tags/*:refs/tags/*", directory, remoteUrl);
@@ -133,6 +143,15 @@ namespace ScmBackup.Scm
             }
 
             return false;
+        }
+
+        public string CreateRepoUrlWithCredentials(string url, ScmCredentials credentials)
+        {
+            // https://stackoverflow.com/a/10054470/6884
+            var uri = new UriBuilder(url);
+            uri.UserName = credentials.User;
+            uri.Password = credentials.Password;
+            return uri.ToString();
         }
     }
 }
