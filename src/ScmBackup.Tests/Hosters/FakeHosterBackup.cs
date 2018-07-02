@@ -1,5 +1,5 @@
 ﻿using ScmBackup.Hosters;
-using System;
+using ScmBackup.Scm;
 
 namespace ScmBackup.Tests.Hosters
 {
@@ -22,17 +22,17 @@ namespace ScmBackup.Tests.Hosters
             }
         }
 
-        public override void BackupIssues(string subdir)
+        public override void BackupIssues(string subdir, ScmCredentials credentials)
         {
             this.issuesWasExecuted = true;
         }
 
-        public override void BackupRepo(string subdir)
+        public override void BackupRepo(string subdir, ScmCredentials credentials)
         {
             this.repoWasExecuted = true;
         }
 
-        public override void BackupWiki(string subdir)
+        public override void BackupWiki(string subdir, ScmCredentials credentials)
         {
             this.wikiWasExecuted = true;
         }

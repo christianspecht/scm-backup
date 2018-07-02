@@ -11,7 +11,9 @@ namespace ScmBackup.Tests.Integration.Hosters
     {
         private List<HosterRepository> repoList;
 
-        protected override void Setup()
+        internal override string PublicRepoName { get { return TestHelper.EnvVar("Github_Repo"); } }
+
+        protected override void Setup(string repoName)
         {
             // re-use test repo for GithubApi tests
             this.source = new ConfigSource();
@@ -32,7 +34,7 @@ namespace ScmBackup.Tests.Integration.Hosters
 
             var api = new GithubApi(context, factory);
             this.repoList = api.GetRepositoryList(this.source);
-            this.repo = this.repoList.Find(r => r.ShortName == TestHelper.EnvVar("Github_Repo"));
+            this.repo = this.repoList.Find(r => r.ShortName == repoName);
             
             this.scm = new GitScm(new FileSystemHelper(), context);
             Assert.True(this.scm.IsOnThisComputer());

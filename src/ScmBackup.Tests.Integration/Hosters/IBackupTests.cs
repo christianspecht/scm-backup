@@ -14,20 +14,27 @@ namespace ScmBackup.Tests.Integration.Hosters
         internal ConfigSource source;
 
         // The child classes need to implement this *and fill all above properties there*:
-        protected abstract void Setup();
+        protected abstract void Setup(string repoName);
 
         // The child classes need to implement this (Wiki/Issues only if necessary)
+        internal abstract string PublicRepoName { get; }
         protected abstract void AssertRepo(string dir);
         protected virtual void AssertWiki(string dir) { }
         protected virtual void AssertIssues(string dir) { }
+
+        // The child classes need to implement this, IF this hoster has private repos:
+        internal virtual string PrivateRepoName { get { return null; } }
+        protected virtual void AssertPrivateRepo(string dir) { }
 
 
         [Fact]
         public void MakesBackup()
         {
+            Assert.NotNull(this.PublicRepoName); // Note: PrivateRepoName is optional
+
             var dir = DirectoryHelper.CreateTempDirectory(this.DirSuffix("makes-backup"));
 
-            this.Setup();
+            this.Setup(this.PublicRepoName);
 
             // these should have been filled by the child classes' Setup() method
             Assert.NotNull(this.sut);
@@ -43,10 +50,30 @@ namespace ScmBackup.Tests.Integration.Hosters
         }
 
         [Fact]
+        public void MakesBackupOfPrivateRepo()
+        {
+            if (this.PrivateRepoName == null)
+            {
+                // if there's no private repo for this hoster, do nothing
+                Assert.True(true);
+            }
+            else
+            {
+                var dir = DirectoryHelper.CreateTempDirectory(this.DirSuffix("makes-backup-private"));
+
+                this.Setup(this.PrivateRepoName);
+
+                sut.MakeBackup(this.source, this.repo, dir);
+
+                this.AssertPrivateRepo(Path.Combine(dir, sut.SubDirRepo));
+            }
+        }
+
+        [Fact]
         public void DoesntBackupWikiIfNotSet()
         {
             var dir = DirectoryHelper.CreateTempDirectory(this.DirSuffix("doesnt-backup-wiki"));
-            this.Setup();
+            this.Setup(this.PublicRepoName);
 
             this.repo.SetWiki(false, null);
 
@@ -59,7 +86,7 @@ namespace ScmBackup.Tests.Integration.Hosters
         public void DoesntBackupIssuesIfNotSet()
         {
             var dir = DirectoryHelper.CreateTempDirectory(this.DirSuffix("doesnt-backup-issues"));
-            this.Setup();
+            this.Setup(this.PublicRepoName);
 
             this.repo.SetIssues(false, null);
 
@@ -72,7 +99,7 @@ namespace ScmBackup.Tests.Integration.Hosters
         public void ThrowsWhenScmFactoryIsNull()
         {
             var dir = DirectoryHelper.CreateTempDirectory(this.DirSuffix("throws-when-scmfactory-null"));
-            this.Setup();
+            this.Setup(this.PublicRepoName);
             sut.scmFactory = null;
 
             Assert.Throws<ArgumentNullException>(() => sut.MakeBackup(this.source, this.repo, dir));

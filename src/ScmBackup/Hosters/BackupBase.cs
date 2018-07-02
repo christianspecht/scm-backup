@@ -23,21 +23,27 @@ namespace ScmBackup.Hosters
                 throw new ArgumentNullException("!!");
             }
 
+            ScmCredentials credentials = null;
+            if (repo.IsPrivate)
+            {
+                credentials = new ScmCredentials(source.AuthName, source.Password);
+            }
+
             this.repo = repo;
 
             string subdir = Path.Combine(repoFolder, this.SubDirRepo);
-            this.BackupRepo(subdir);
+            this.BackupRepo(subdir, credentials);
 
             if (this.repo.HasWiki)
             {
                 subdir = Path.Combine(repoFolder, this.SubDirWiki);
-                this.BackupWiki(subdir);
+                this.BackupWiki(subdir, credentials);
             }
 
             if (this.repo.HasIssues)
             {
                 subdir = Path.Combine(repoFolder, this.SubDirIssues);
-                this.BackupIssues(subdir);
+                this.BackupIssues(subdir, credentials);
             }
         }
 
@@ -54,10 +60,10 @@ namespace ScmBackup.Hosters
         }
 
         // this MUST be implemented in the child classes
-        public abstract void BackupRepo(string subdir);
+        public abstract void BackupRepo(string subdir, ScmCredentials credentials);
 
         // these can be implemented in the child classes IF the given hoster has issues, a wiki...
-        public virtual void BackupWiki(string subdir) { }
-        public virtual void BackupIssues(string subdir) { }
+        public virtual void BackupWiki(string subdir, ScmCredentials credentials) { }
+        public virtual void BackupIssues(string subdir, ScmCredentials credentials) { }
     }
 }

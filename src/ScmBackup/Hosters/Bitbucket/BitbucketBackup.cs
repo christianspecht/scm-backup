@@ -12,11 +12,11 @@ namespace ScmBackup.Hosters.Bitbucket
             this.scmFactory = scmfactory;
         }
 
-        public override void BackupRepo(string subdir)
+        public override void BackupRepo(string subdir, ScmCredentials credentials)
         {
             this.InitScm();
 
-            this.scm.PullFromRemote(this.repo.CloneUrl, subdir);
+            this.scm.PullFromRemote(this.repo.CloneUrl, subdir, credentials);
 
             if (!this.scm.DirectoryIsRepository(subdir))
             {
@@ -24,11 +24,11 @@ namespace ScmBackup.Hosters.Bitbucket
             }
         }
 
-        public override void BackupWiki(string subdir)
+        public override void BackupWiki(string subdir, ScmCredentials credentials)
         {
             this.InitScm();
 
-            this.scm.PullFromRemote(this.repo.WikiUrl, subdir);
+            this.scm.PullFromRemote(this.repo.WikiUrl, subdir, credentials);
 
             if (!this.scm.DirectoryIsRepository(subdir))
             {

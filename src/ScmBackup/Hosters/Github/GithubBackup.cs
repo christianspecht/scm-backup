@@ -10,11 +10,11 @@ namespace ScmBackup.Hosters.Github
             this.scmFactory = scmfactory;
         }
 
-        public override void BackupRepo(string subdir)
+        public override void BackupRepo(string subdir, ScmCredentials credentials)
         {
             InitScm();
 
-            scm.PullFromRemote(this.repo.CloneUrl, subdir);
+            scm.PullFromRemote(this.repo.CloneUrl, subdir, credentials);
 
             if (!scm.DirectoryIsRepository(subdir))
             {
@@ -22,11 +22,11 @@ namespace ScmBackup.Hosters.Github
             }
         }
 
-        public override void BackupWiki(string subdir)
+        public override void BackupWiki(string subdir, ScmCredentials credentials)
         {
             InitScm();
 
-            scm.PullFromRemote(this.repo.WikiUrl, subdir);
+            scm.PullFromRemote(this.repo.WikiUrl, subdir, credentials);
 
             if (!scm.DirectoryIsRepository(subdir))
             {

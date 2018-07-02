@@ -10,7 +10,17 @@ namespace ScmBackup.Tests.Integration.Hosters
     {
         private string prefix = "Bitbucket";
 
-        protected override void Setup()
+        internal override string PublicRepoName
+        {
+            get { return TestHelper.EnvVar(prefix, "RepoGit"); }
+        }
+
+        internal override string PrivateRepoName
+        {
+            get { return TestHelper.EnvVar(prefix, "RepoPrivateGit"); }
+        }
+
+        protected override void Setup(string repoName)
         {
             // re-use test repo for Api tests
             this.source = new ConfigSource();
@@ -28,7 +38,7 @@ namespace ScmBackup.Tests.Integration.Hosters
 
             var api = new BitbucketApi(new HttpRequest());
             var repoList = api.GetRepositoryList(this.source);
-            this.repo = repoList.Find(r => r.ShortName == TestHelper.EnvVar(prefix, "RepoGit"));
+            this.repo = repoList.Find(r => r.ShortName == repoName);
 
             this.scm = new GitScm(new FileSystemHelper(), context);
             Assert.True(this.scm.IsOnThisComputer());
@@ -50,6 +60,12 @@ namespace ScmBackup.Tests.Integration.Hosters
             Assert.True(Directory.Exists(dir));
             Assert.True(this.scm.DirectoryIsRepository(dir));
             Assert.True(scm.RepositoryContainsCommit(dir, TestHelper.EnvVar(prefix, "WikiCommitGit")));
+        }
+
+        protected override void AssertPrivateRepo(string dir)
+        {
+            Assert.True(Directory.Exists(dir));
+            Assert.True(this.scm.DirectoryIsRepository(dir));
         }
     }
 }
