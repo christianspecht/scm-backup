@@ -3,7 +3,7 @@ using Xunit;
 
 namespace ScmBackup.Tests.Http
 {
-    public class UrlValidatorTests
+    public class UrlHelperTests
     {
         [Theory]
         [InlineData("http://scm-backup.org", true)]
@@ -14,7 +14,7 @@ namespace ScmBackup.Tests.Http
         [InlineData("file:///c:/foo.txt", false)]
         public void ValidatesUrls(string url, bool expectedResult)
         {
-            var sut = new UrlValidator();
+            var sut = new UrlHelper();
             Assert.Equal(expectedResult, sut.UrlIsValid(url));
         }
         

@@ -203,7 +203,7 @@ namespace ScmBackup.Tests.Integration.Hosters
         {
             bool result = true;
 
-            var validator = new UrlValidator();
+            var validator = new UrlHelper();
             if (!validator.UrlIsValid(repo.CloneUrl))
             {
                 return false;

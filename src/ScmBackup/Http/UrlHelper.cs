@@ -2,7 +2,7 @@
 
 namespace ScmBackup.Http
 {
-    internal class UrlValidator
+    internal class UrlHelper
     {
         public bool UrlIsValid(string url)
         {
