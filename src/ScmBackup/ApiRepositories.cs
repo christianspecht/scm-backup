@@ -26,7 +26,7 @@ namespace ScmBackup
 
         public IEnumerable<HosterRepository> GetReposForSource(ConfigSource config)
         {
-            return this.Dic[config];
+            return this.Dic[config].OrderBy(r => r.FullName);
         }
 
         /// <summary>

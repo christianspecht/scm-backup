@@ -51,8 +51,8 @@ namespace ScmBackup.Tests
             source.Title = "title";
 
             var list = new List<HosterRepository>();
-            list.Add(new HosterRepository("foo", "foo", "http://foo", ScmType.Git));
             list.Add(new HosterRepository("bar", "bar", "http://bar", ScmType.Git));
+            list.Add(new HosterRepository("foo", "foo", "http://foo", ScmType.Git));
 
             var sut = new ApiRepositories();
             sut.AddItem(source, list);
@@ -60,7 +60,28 @@ namespace ScmBackup.Tests
             var result = sut.GetReposForSource(source);
 
             Assert.Equal(2, result.Count());
-            Assert.Equal("foo", result.First().FullName);
+            Assert.Equal("bar", result.First().FullName);
+        }
+
+        [Fact]
+        public void GetReposForSourceReturnsAlphabeticallySorted()
+        {
+            var source = new ConfigSource();
+            source.Title = "title";
+
+            var list = new List<HosterRepository>();
+            list.Add(new HosterRepository("ccc", "ccc", "http://ccc", ScmType.Git));
+            list.Add(new HosterRepository("aaa", "aaa", "http://aaa", ScmType.Git));
+            list.Add(new HosterRepository("bbb", "bbb", "http://bbb", ScmType.Git));
+
+            var sut = new ApiRepositories();
+            sut.AddItem(source, list);
+
+            var result = sut.GetReposForSource(source).ToList();
+
+            Assert.Equal("aaa", result[0].FullName);
+            Assert.Equal("bbb", result[1].FullName);
+            Assert.Equal("ccc", result[2].FullName);
         }
 
         [Fact]
