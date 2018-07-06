@@ -12,5 +12,17 @@ namespace ScmBackup.Http
             return Uri.TryCreate(url, UriKind.Absolute, out uriResult)
                 && (uriResult.Scheme == "http" || uriResult.Scheme == "https");
         }
+
+        public string RemoveCredentialsFromUrl(string oldUrl)
+        {
+            var uri = new UriBuilder(oldUrl);
+            uri.UserName = null;
+            uri.Password = null;
+            if (uri.Uri.IsDefaultPort)
+            {
+                uri.Port = -1;
+            }
+            return uri.Uri.AbsoluteUri;
+        }
     }
 }

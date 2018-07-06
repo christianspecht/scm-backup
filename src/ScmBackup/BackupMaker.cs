@@ -1,5 +1,5 @@
 ﻿using ScmBackup.Hosters;
-using ScmBackup.Scm;
+using ScmBackup.Http;
 using System.Collections.Generic;
 
 namespace ScmBackup
@@ -28,11 +28,13 @@ namespace ScmBackup
 
             string sourceFolder = this.fileHelper.CreateSubDirectory(context.Config.LocalFolder, source.Title);
 
+            var url = new UrlHelper();
+
             foreach (var repo in repos)
             {
                 string repoFolder = this.fileHelper.CreateSubDirectory(sourceFolder, repo.FullName);
 
-                this.logger.Log(ErrorLevel.Info, Resource.BackupMaker_Repo, repo.Scm.ToString(), repo.CloneUrl);
+                this.logger.Log(ErrorLevel.Info, Resource.BackupMaker_Repo, repo.Scm.ToString(), url.RemoveCredentialsFromUrl(repo.CloneUrl));
 
                 this.backupMaker.MakeBackup(source, repo, repoFolder);
             }
