@@ -58,7 +58,7 @@ namespace ScmBackup.Hosters.Bitbucket
                         var clone = apiRepo.links.clone.Where(r => r.name == "https").First();
                         string cloneurl = clone.href;
 
-                        var repo = new HosterRepository(apiRepo.full_name, apiRepo.name, cloneurl, type);
+                        var repo = new HosterRepository(apiRepo.full_name, apiRepo.slug, cloneurl, type);
 
                         repo.SetPrivate(apiRepo.is_private);
 

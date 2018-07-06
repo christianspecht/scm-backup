@@ -10,7 +10,7 @@ namespace ScmBackup.Hosters.Bitbucket
         internal class Repo
         {
             public string scm { get; set; }
-            public string name { get; set; }
+            public string slug { get; set; }
             public string full_name { get; set; }
             public bool has_wiki { get; set; }
             public bool has_issues { get; set; }
