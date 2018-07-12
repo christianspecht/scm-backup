@@ -7,6 +7,7 @@ namespace ScmBackup.Tests.Integration.Scm
 {
     public abstract class IScmTests
     {
+        // this must be set in the child classes' constructor
         internal IScm sut;
 
         // public and private test repositories
