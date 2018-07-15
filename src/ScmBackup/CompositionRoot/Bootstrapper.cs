@@ -21,7 +21,9 @@ namespace ScmBackup.CompositionRoot
             container.RegisterDecorator<IScmBackup, LoggingScmBackup>();
             container.RegisterDecorator<IScmBackup, ErrorHandlingScmBackup>();
 
-            container.RegisterCollection<ILogger>(new ConsoleLogger(), new NLogLogger());
+            // auto-register loggers
+            container.RegisterCollection<ILogger>(thisAssembly);
+
             container.Register<ILogger, CompositeLogger>(Lifestyle.Singleton);
             container.Register<IFileSystemHelper, FileSystemHelper>();
 
