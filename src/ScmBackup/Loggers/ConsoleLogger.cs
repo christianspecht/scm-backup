@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ScmBackup
+namespace ScmBackup.Loggers
 {
     /// <summary>
     /// Logs to the console

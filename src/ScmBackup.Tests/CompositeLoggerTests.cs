@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using ScmBackup.Loggers;
+using System.Collections.Generic;
 using Xunit;
 
 namespace ScmBackup.Tests

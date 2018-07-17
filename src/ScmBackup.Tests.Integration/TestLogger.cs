@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ScmBackup.Loggers;
+using System;
 
 namespace ScmBackup.Tests.Integration
 {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ScmBackup
+namespace ScmBackup.Loggers
 {
     /// <summary>
     /// Wrapper, calls the other loggers

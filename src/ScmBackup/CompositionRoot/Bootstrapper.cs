@@ -1,5 +1,6 @@
 ﻿using ScmBackup.Hosters;
 using ScmBackup.Http;
+using ScmBackup.Loggers;
 using ScmBackup.Scm;
 using SimpleInjector;
 using System.Reflection;
