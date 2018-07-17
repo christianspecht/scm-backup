@@ -26,6 +26,7 @@ namespace ScmBackup.CompositionRoot
             container.RegisterCollection<ILogger>(thisAssembly);
 
             container.Register<ILogger, CompositeLogger>(Lifestyle.Singleton);
+            container.RegisterSingleton<ILogMessages, LogMessages>();
             container.Register<IFileSystemHelper, FileSystemHelper>();
 
             container.RegisterSingleton<IContext, Context>();
