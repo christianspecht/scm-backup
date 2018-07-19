@@ -216,6 +216,9 @@
   <data name="LocalFolderMissing" xml:space="preserve">
     <value>Local folder is missing!</value>
   </data>
+  <data name="LogMailSubject" xml:space="preserve">
+    <value>SCM Backup output: {0}</value>
+  </data>
   <data name="NameEmpty" xml:space="preserve">
     <value>name is empty</value>
   </data>

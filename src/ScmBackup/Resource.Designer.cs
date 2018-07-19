@@ -10,7 +10,6 @@
 
 namespace ScmBackup {
     using System;
-    using System.Reflection;
     
     
     /// <summary>
@@ -40,7 +39,7 @@ namespace ScmBackup {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ScmBackup.Resource", typeof(Resource).GetTypeInfo().Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ScmBackup.Resource", typeof(Resource).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -355,6 +354,15 @@ namespace ScmBackup {
         internal static string LocalFolderMissing {
             get {
                 return ResourceManager.GetString("LocalFolderMissing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SCM Backup output: {0}.
+        /// </summary>
+        internal static string LogMailSubject {
+            get {
+                return ResourceManager.GetString("LogMailSubject", resourceCulture);
             }
         }
         

@@ -1,0 +1,34 @@
+﻿using ScmBackup.Http;
+using ScmBackup.Loggers;
+using System;
+using System.Linq;
+
+namespace ScmBackup
+{
+    /// <summary>
+    /// Sends the console output via mail
+    /// </summary>
+    internal class LogMailingScmBackup : IScmBackup
+    {
+        private readonly IScmBackup backup;
+        private readonly ILogMessages messages;
+        private readonly IEmailSender mail;
+
+        public LogMailingScmBackup(IScmBackup backup, ILogMessages messages, IEmailSender mail)
+        {
+            this.backup = backup;
+            this.messages = messages;
+            this.mail = mail;
+        }
+
+        public void Run()
+        {
+            this.backup.Run();
+
+            string subject = string.Format(Resource.LogMailSubject, DateTime.Now.ToString("dd MMM HH:mm:ss"));
+            string body = string.Join(Environment.NewLine, this.messages.GetMessages().ToArray());
+
+            this.mail.Send(subject, body);
+        }
+    }
+}
