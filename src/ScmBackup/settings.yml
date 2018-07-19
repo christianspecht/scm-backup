@@ -4,6 +4,16 @@ localFolder: 'c:\scm-backup'
 # when an error occurs, wait that many seconds before exiting the application
 waitSecondsOnError: 5
 
+# uncomment this to send SCM Backup's console output via email
+#email:
+#  from: from@example.com
+#  to: to@example.com
+#  server: smtp.example.com
+#  port: 0
+#  useSsl: false
+#  userName: testuser
+#  password: not-the-real-password
+
 sources:
 
   - title:  github_singleuser

@@ -15,6 +15,8 @@ namespace ScmBackup
 
         public List<ConfigSource> Sources { get; set; }
 
+        public ConfigEmail Email { get; set; }
+
         public Config()
         {
             this.Sources = new List<ConfigSource>();
