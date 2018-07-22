@@ -21,6 +21,7 @@ namespace ScmBackup.CompositionRoot
             container.Register<IScmBackup, ScmBackup>();
             container.RegisterDecorator<IScmBackup, LoggingScmBackup>();
             container.RegisterDecorator<IScmBackup, ErrorHandlingScmBackup>();
+            container.RegisterDecorator<IScmBackup, LogMailingScmBackup>();
 
             // auto-register loggers
             container.RegisterCollection<ILogger>(thisAssembly);
@@ -37,6 +38,7 @@ namespace ScmBackup.CompositionRoot
 
             container.Register<IHttpRequest, HttpRequest>();
             container.RegisterDecorator<IHttpRequest, LoggingHttpRequest>();
+            container.Register<IEmailSender, MailKitEmailSender>();
 
             container.Register<IApiCaller, ApiCaller>();
             container.Register<IScmValidator, ScmValidator>();
