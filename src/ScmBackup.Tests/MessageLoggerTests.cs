@@ -15,7 +15,7 @@ namespace ScmBackup.Tests
             sut.Log(ErrorLevel.Info, "foo {0}", "bar");
 
             var result = msg.GetMessages().ToList();
-            Assert.Equal(1, result.Count);
+            Assert.Single(result);
 
             string text = result.First();
 

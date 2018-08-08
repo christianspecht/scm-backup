@@ -25,7 +25,7 @@ namespace ScmBackup.Tests.Hosters
             var result = sut.Validate(config);
 
             Assert.False(result.IsValid);
-            Assert.Equal(1, result.Messages.Count);
+            Assert.Single(result.Messages);
             Assert.Equal(ErrorLevel.Error, result.Messages[0].Error);
         }
 
@@ -39,7 +39,7 @@ namespace ScmBackup.Tests.Hosters
             var result = sut.Validate(config);
 
             Assert.False(result.IsValid);
-            Assert.Equal(1, result.Messages.Count);
+            Assert.Single(result.Messages);
             Assert.Equal(ErrorLevel.Error, result.Messages[0].Error);
         }
 
@@ -53,7 +53,7 @@ namespace ScmBackup.Tests.Hosters
             var result = sut.Validate(config);
 
             Assert.True(result.IsValid);
-            Assert.False(result.Messages.Any());
+            Assert.Empty(result.Messages);
         }
 
         [Theory]
@@ -67,7 +67,7 @@ namespace ScmBackup.Tests.Hosters
             var result = sut.Validate(config);
 
             Assert.False(result.IsValid);
-            Assert.Equal(1, result.Messages.Count);
+            Assert.Single(result.Messages);
             Assert.Equal(ErrorLevel.Error, result.Messages[0].Error);
         }
 
@@ -84,7 +84,7 @@ namespace ScmBackup.Tests.Hosters
             var result = sut.Validate(config);
 
             Assert.False(result.IsValid);
-            Assert.Equal(1, result.Messages.Count);
+            Assert.Single(result.Messages);
             Assert.Equal(ErrorLevel.Error, result.Messages[0].Error);
         }
 
@@ -100,7 +100,7 @@ namespace ScmBackup.Tests.Hosters
             var result = sut.Validate(config);
 
             Assert.True(result.IsValid);
-            Assert.Equal(1, result.Messages.Count);
+            Assert.Single(result.Messages);
             Assert.Equal(ErrorLevel.Warn, result.Messages[0].Error);
         }
     }

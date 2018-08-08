@@ -17,7 +17,7 @@ namespace ScmBackup.Tests
         {
             sut.AddMessage(ErrorLevel.Info, "i");
 
-            Assert.Equal(1, sut.Messages.Count);
+            Assert.Single(sut.Messages);
         }
 
         [Fact]
@@ -30,8 +30,8 @@ namespace ScmBackup.Tests
             sut.AddMessage(ErrorLevel.Info, "message");
 
             var createdText = sut.Messages.First().Message;
-            Assert.True(createdText.StartsWith("foo"));
-            Assert.True(createdText.EndsWith("message"));
+            Assert.StartsWith("foo", createdText);
+            Assert.EndsWith("message", createdText);
         }
 
         [Fact]
@@ -56,7 +56,7 @@ namespace ScmBackup.Tests
         {
             sut.AddMessage(ErrorLevel.Error, "e");
 
-            Assert.Equal(1, sut.Messages.Count);
+            Assert.Single(sut.Messages);
             Assert.False(sut.IsValid);
         }
 

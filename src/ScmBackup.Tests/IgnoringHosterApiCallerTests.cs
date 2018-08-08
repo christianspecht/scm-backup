@@ -32,7 +32,7 @@ namespace ScmBackup.Tests
 
             var list = this.sut.GetRepositoryList(this.source);
 
-            Assert.Equal(1, list.Count);
+            Assert.Single(list);
             Assert.Equal("baz", list.First().ShortName);
         }
 

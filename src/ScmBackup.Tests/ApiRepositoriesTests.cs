@@ -19,7 +19,7 @@ namespace ScmBackup.Tests
             var sut = new ApiRepositories();
             sut.AddItem(source, list);
 
-            Assert.Equal(1, sut.Dic.Count);
+            Assert.Single(sut.Dic);
         }
 
         [Fact]
@@ -40,8 +40,8 @@ namespace ScmBackup.Tests
             var result = sut.GetSources();
 
             Assert.Equal(2, result.Count());
-            Assert.True(result.Contains(source1));
-            Assert.True(result.Contains(source2));
+            Assert.Contains(source1, result);
+            Assert.Contains(source2, result);
         }
 
         [Fact]
@@ -103,7 +103,7 @@ namespace ScmBackup.Tests
 
             var result = sut.GetScmTypes();
 
-            Assert.Equal(1, result.Count);
+            Assert.Single(result);
             Assert.Equal(ScmType.Git, result.First());
         }
 
