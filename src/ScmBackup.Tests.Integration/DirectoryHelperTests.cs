@@ -23,7 +23,7 @@ namespace ScmBackup.Tests.Integration
 
             Assert.False(string.IsNullOrWhiteSpace(result));
             Assert.True(Directory.Exists(result));
-            Assert.True(result.EndsWith(suffix));
+            Assert.EndsWith(suffix, result);
         }
 
         [Fact]

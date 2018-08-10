@@ -20,7 +20,7 @@ namespace ScmBackup.Tests.Integration
         [Fact]
         public void NewHosterIsAdded()
         {
-            Assert.Equal(1, sut.Count);
+            Assert.Single(sut);
         }
 
         [Fact]
