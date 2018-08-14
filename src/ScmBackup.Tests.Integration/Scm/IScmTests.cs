@@ -217,9 +217,11 @@ namespace ScmBackup.Tests.Integration.Scm
             Assert.True(result);
         }
 
-        [Fact(Skip="Doesn't finish on AppVeyor, see #15")]
+        [SkippableFact]
         public void RemoteRepositoryExists_ReturnsFalseForNonExistingRepo()
         {
+            Skip.If(TestHelper.RunsOnAppVeyor(), "Doesn't finish on AppVeyor, see #15");
+
             var result = sut.RemoteRepositoryExists(this.NonExistingRepoUrl);
             Assert.False(result);
         }

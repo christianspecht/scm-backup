@@ -51,5 +51,13 @@ namespace ScmBackup.Tests
         {
             Assert.Throws<ArgumentException>(() => TestHelper.BuildRepositoryName(userName, repoName));
         }
+
+        [Fact]
+        public void RunsOnAppVeyor_Works()
+        {
+            // We can't test the *result* without duplicating the "check whether we are on AppVeyor" 
+            // logic, but we can at least check whether the method executes without errors.
+            bool result = TestHelper.RunsOnAppVeyor();
+        }
     }
 }

@@ -67,5 +67,25 @@ namespace ScmBackup.Tests
 
             return userName + "#" + repoName;
         }
+
+        /// <summary>
+        /// Determines whether the tests are currently running on AppVeyor
+        /// </summary>
+        /// <remarks>
+        /// Note: We could use the environment variable "CI" instead, and this would work on Travis as well
+        /// (https://docs.travis-ci.com/user/environment-variables/#default-environment-variables)
+        /// But we probably need to distinguish between CI providers (should we ever use more than one) because some issues (like #15) could be provider-specific
+        /// </remarks>
+        public static bool RunsOnAppVeyor()
+        {
+            // https://www.appveyor.com/docs/environment-variables/
+            string v = Environment.GetEnvironmentVariable("APPVEYOR");
+            if (!string.IsNullOrEmpty(v) && v.ToLower()=="true")
+            {
+                return true;
+            }
+
+            return false;
+        }
     }
 }
