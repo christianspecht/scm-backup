@@ -155,33 +155,26 @@ namespace ScmBackup.Tests.Integration.Hosters
             Assert.True(ValidateUrls(repo));
         }
 
-        [Fact]
+        [SkippableFact]
         public void GetRepositoryList_PrivateRepoIsMarkedAsPrivate()
         {
             string repoName = TestHelper.EnvVar(this.EnvVarPrefix, "RepoPrivate", false);
+            Skip.If(repoName == null, "There's no private repo for this hoster");
 
-            if (repoName == null)
-            {
-                // if there's no private repo for this hoster, do nothing
-                Assert.True(true);
-            }
-            else
-            {
-                var source = new ConfigSource();
-                source.Hoster = this.ConfigHoster;
-                source.Type = "user";
-                source.Name = TestHelper.EnvVar(this.EnvVarPrefix, "Name");
-                source.AuthName = source.Name;
-                source.Password = TestHelper.EnvVar(this.EnvVarPrefix, "PW");
+            var source = new ConfigSource();
+            source.Hoster = this.ConfigHoster;
+            source.Type = "user";
+            source.Name = TestHelper.EnvVar(this.EnvVarPrefix, "Name");
+            source.AuthName = source.Name;
+            source.Password = TestHelper.EnvVar(this.EnvVarPrefix, "PW");
 
-                var repoList = sut.GetRepositoryList(source);
+            var repoList = sut.GetRepositoryList(source);
 
-                // specific repo exists and is private?
-                string expectedName = TestHelper.BuildRepositoryName(source.Name, repoName);
-                var repo = repoList.Where(r => r.FullName == expectedName).FirstOrDefault();
-                Assert.NotNull(repo);
-                Assert.True(repo.IsPrivate);
-            }
+            // specific repo exists and is private?
+            string expectedName = TestHelper.BuildRepositoryName(source.Name, repoName);
+            var repo = repoList.Where(r => r.FullName == expectedName).FirstOrDefault();
+            Assert.NotNull(repo);
+            Assert.True(repo.IsPrivate);
         }
 
         [Fact]

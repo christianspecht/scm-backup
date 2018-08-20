@@ -49,24 +49,18 @@ namespace ScmBackup.Tests.Integration.Hosters
             this.AssertIssues(Path.Combine(dir, this.sut.SubDirIssues));
         }
 
-        [Fact]
+        [SkippableFact]
         public void MakesBackupOfPrivateRepo()
         {
-            if (this.PrivateRepoName == null)
-            {
-                // if there's no private repo for this hoster, do nothing
-                Assert.True(true);
-            }
-            else
-            {
-                var dir = DirectoryHelper.CreateTempDirectory(this.DirSuffix("makes-backup-private"));
+            Skip.If(this.PrivateRepoName == null, "There's no private repo for this hoster");
 
-                this.Setup(this.PrivateRepoName);
+            var dir = DirectoryHelper.CreateTempDirectory(this.DirSuffix("makes-backup-private"));
 
-                sut.MakeBackup(this.source, this.repo, dir);
+            this.Setup(this.PrivateRepoName);
 
-                this.AssertPrivateRepo(Path.Combine(dir, sut.SubDirRepo));
-            }
+            sut.MakeBackup(this.source, this.repo, dir);
+
+            this.AssertPrivateRepo(Path.Combine(dir, sut.SubDirRepo));
         }
 
         [Fact]
