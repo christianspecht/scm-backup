@@ -1,18 +1,22 @@
 # SCM Backup
 
-![SCM Backup logo](https://raw.githubusercontent.com/christianspecht/scm-backup/master/img/logo128x128.png)
+![SCM Backup logo](https://scm-backup.org/img/logo128x128.png)
 
 [![Build status](https://ci.appveyor.com/api/projects/status/a28uyjw91iim9wv9?svg=true)](https://ci.appveyor.com/project/ChristianSpecht/scm-backup)
 
-A backup tool which clones all your repositories to your local machine.
+SCM Backup is a tool which makes offline backups of your cloud hosted source code repositories, by cloning them. It supports backing up from multiple source code hosters and backing up multiple users/teams per source code hoster.    
+At the moment, the following hosters are supported:
 
-It's similar to [Bitbucket Backup](http://christianspecht.de/bitbucket-backup/), but it will support multiple source code hosters *(starting with GitHub)* and multiple users/teams.  
+- [GitHub](https://github.com)
+- [Bitbucket](https://bitbucket.org)
+
+  
 And it's written in [.NET Core](https://dotnet.github.io/), which means that it's supposed to run on Windows, Linux **and** MacOS.
 
 
-- [Website](http://scm-backup.org)
+- [Website](https://scm-backup.org)
 - [Documentation](http://docs.scm-backup.org)
-- [Download](http://scm-backup.org/downloads/)
+- [Download](https://scm-backup.org/downloads/)
 
 
 ## License
