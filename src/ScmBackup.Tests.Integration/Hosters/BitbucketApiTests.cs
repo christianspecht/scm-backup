@@ -20,6 +20,11 @@ namespace ScmBackup.Tests.Integration.Hosters
             get { return 11; } // https://developer.atlassian.com/bitbucket/api/2/reference/meta/pagination
         }
 
+        internal override bool SkipUnauthenticatedTests
+        {
+            get { return false; }
+        }
+
         public BitbucketApiTests()
         {
             this.sut = new BitbucketApi(new HttpRequest());

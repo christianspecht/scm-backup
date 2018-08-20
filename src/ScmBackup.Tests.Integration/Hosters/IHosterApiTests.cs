@@ -19,6 +19,9 @@ namespace ScmBackup.Tests.Integration.Hosters
         // minimum number of repos which must be returned in "GetRepositoryList_PaginationWorks" -> should be more than the default page size of the hoster's API
         internal abstract int Pagination_MinNumberOfRepos { get; }
 
+        // set this to true in order to skip all tests without authentication (because of rate limits, see #7)
+        internal abstract bool SkipUnauthenticatedTests { get; }
+
         // this needs to be created in the child classes' constructor:
         internal IHosterApi sut;
 
@@ -28,9 +31,11 @@ namespace ScmBackup.Tests.Integration.Hosters
             Assert.NotNull(this.sut);
         }
 
-        [Fact]
+        [SkippableFact]
         public void GetRepositoryList_UnauthenticatedUser_Executes()
         {
+            Skip.If(this.SkipUnauthenticatedTests);
+
             var source = new ConfigSource();
             source.Hoster = this.ConfigHoster;
             source.Type = "user";
@@ -50,9 +55,11 @@ namespace ScmBackup.Tests.Integration.Hosters
         }
 
 
-        [Fact]
+        [SkippableFact]
         public void GetRepositoryList_NonExistingUser_ThrowsException()
         {
+            Skip.If(this.SkipUnauthenticatedTests);
+
             var source = new ConfigSource();
             source.Hoster = this.ConfigHoster;
             source.Type = "user";
@@ -99,9 +106,11 @@ namespace ScmBackup.Tests.Integration.Hosters
             Assert.True(ValidateUrls(repo));
         }
 
-        [Fact]
+        [SkippableFact]
         public void GetRepositoryList_UnauthenticatedOrganization_Executes()
         {
+            Skip.If(this.SkipUnauthenticatedTests);
+
             var source = new ConfigSource();
             source.Hoster = this.ConfigHoster;
             source.Type = "org";
@@ -120,9 +129,11 @@ namespace ScmBackup.Tests.Integration.Hosters
             Assert.True(ValidateUrls(repo));
         }
 
-        [Fact]
+        [SkippableFact]
         public void GetRepositoryList_NonExistingOrganization_ThrowsException()
         {
+            Skip.If(this.SkipUnauthenticatedTests);
+
             var source = new ConfigSource();
             source.Hoster = this.ConfigHoster;
             source.Type = "org";

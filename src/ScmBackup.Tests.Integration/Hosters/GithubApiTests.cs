@@ -22,6 +22,12 @@ namespace ScmBackup.Tests.Integration.Hosters
             get { return 101; } // https://developer.github.com/v3/#pagination
         }
 
+        internal override bool SkipUnauthenticatedTests
+        {
+            // those sometimes fail on AppVeyor because of rate limits, see #7
+            get { return TestHelper.RunsOnAppVeyor(); }
+        }
+
         public GithubApiTests()
         {
             var context = new FakeContext();
