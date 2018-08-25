@@ -24,7 +24,7 @@ namespace ScmBackup.CompositionRoot
             container.RegisterDecorator<IScmBackup, LogMailingScmBackup>();
 
             // auto-register loggers
-            container.RegisterCollection<ILogger>(thisAssembly);
+            container.Collection.Register<ILogger>(thisAssembly);
 
             container.Register<ILogger, CompositeLogger>(Lifestyle.Singleton);
             container.RegisterSingleton<ILogMessages, LogMessages>();
@@ -90,15 +90,15 @@ namespace ScmBackup.CompositionRoot
                 scmFactory.Register(scm);
             }
 
-            container.RegisterSingleton<IHosterValidator>(new HosterValidator(hosterFactory));
+            container.RegisterInstance<IHosterValidator>(new HosterValidator(hosterFactory));
 
-            container.RegisterSingleton<IHosterApiCaller>(new HosterApiCaller(hosterFactory));
+            container.RegisterInstance<IHosterApiCaller>(new HosterApiCaller(hosterFactory));
             container.RegisterDecorator<IHosterApiCaller, IgnoringHosterApiCaller>();
             container.RegisterDecorator<IHosterApiCaller, LoggingHosterApiCaller>();
 
-            container.RegisterSingleton<IHosterBackupMaker>(new HosterBackupMaker(hosterFactory));
-            container.RegisterSingleton<IHosterFactory>(hosterFactory); // only needed for integration tests!
-            container.RegisterSingleton<IScmFactory>(scmFactory);
+            container.RegisterInstance<IHosterBackupMaker>(new HosterBackupMaker(hosterFactory));
+            container.RegisterInstance<IHosterFactory>(hosterFactory); // only needed for integration tests!
+            container.RegisterInstance<IScmFactory>(scmFactory);
             container.Verify();
 
             return container;
