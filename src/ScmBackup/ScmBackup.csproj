@@ -29,10 +29,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="MailKit" Version="2.0.5" />
+    <PackageReference Include="MailKit" Version="2.0.6" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
     <PackageReference Include="NLog" Version="4.5.8" />
-    <PackageReference Include="Octokit" Version="0.29.0" />
+    <PackageReference Include="Octokit" Version="0.31.0" />
     <PackageReference Include="SimpleInjector" Version="4.3.0" />
     <PackageReference Include="YamlDotNet" Version="5.0.1" />
   </ItemGroup>
