@@ -39,6 +39,7 @@ namespace ScmBackup.CompositionRoot
             container.Register<IHttpRequest, HttpRequest>();
             container.RegisterDecorator<IHttpRequest, LoggingHttpRequest>();
             container.Register<IEmailSender, MailKitEmailSender>();
+            container.Register<IUrlHelper, UrlHelper>();
 
             container.Register<IApiCaller, ApiCaller>();
             container.Register<IScmValidator, ScmValidator>();

@@ -2,7 +2,7 @@
 
 namespace ScmBackup.Http
 {
-    internal class UrlHelper
+    internal class UrlHelper : IUrlHelper
     {
         public bool UrlIsValid(string url)
         {
