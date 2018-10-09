@@ -22,7 +22,7 @@ if (Test-Path -Path $temppath) {
 Write-Host '###### UNIT TESTS ######'
 dotnet test "$PSScriptRoot\src\ScmBackup.Tests\ScmBackup.Tests.csproj" -c Release
 if ($LASTEXITCODE -eq 1) {
-    exit
+    throw
 }
 
 
@@ -30,6 +30,6 @@ if ($LASTEXITCODE -eq 1) {
 Write-Host '###### INTEGRATION TESTS ######'
 dotnet test "$PSScriptRoot\src\ScmBackup.Tests.Integration\ScmBackup.Tests.Integration.csproj" -c Release
 if ($LASTEXITCODE -eq 1) {
-    exit
+    throw
 }
 
