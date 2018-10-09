@@ -39,7 +39,13 @@ namespace ScmBackup.Http
 
                 client.Connect(config.Server, config.Port, config.UseSsl);
                 
-                client.Authenticate(config.UserName, config.Password);
+                if (client.Capabilities.HasFlag(SmtpCapabilities.Authentication))
+                {
+                    if (!string.IsNullOrWhiteSpace(config.UserName) && !string.IsNullOrWhiteSpace(config.Password))
+                    {
+                        client.Authenticate(config.UserName, config.Password);
+                    }
+                }
 
                 client.Send(message);
                 client.Disconnect(true);
