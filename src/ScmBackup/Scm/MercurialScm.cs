@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ScmBackup.Http;
+using System;
 using System.IO;
 using System.Text.RegularExpressions;
 
@@ -7,13 +8,15 @@ namespace ScmBackup.Scm
     [Scm(Type = ScmType.Mercurial)]
     internal class MercurialScm : CommandLineScm, IScm
     {
-        public MercurialScm(IFileSystemHelper filesystemhelper, IContext context)
+        public MercurialScm(IFileSystemHelper filesystemhelper, IContext context, IUrlHelper urlhelper)
         {
             this.FileSystemHelper = filesystemhelper;
             this.context = context;
+            this.UrlHelper = urlhelper;
         }
 
         public IFileSystemHelper FileSystemHelper { get; set; }
+        public IUrlHelper UrlHelper { get; set; }
 
         public override string ShortName
         {
@@ -81,6 +84,8 @@ namespace ScmBackup.Scm
 
         public override bool RemoteRepositoryExists(string remoteUrl, ScmCredentials credentials)
         {
+            remoteUrl = this.RemoveCredentialsFromUrl(remoteUrl, credentials);
+
             string cmd = "identify " + remoteUrl;
             if (credentials != null)
             {
@@ -103,6 +108,8 @@ namespace ScmBackup.Scm
 
                 this.CreateRepository(directory);
             }
+
+            remoteUrl = this.RemoveCredentialsFromUrl(remoteUrl, credentials);
 
             string cmd = string.Format("pull {0} -R \"{1}\"", remoteUrl, directory);
             if (credentials != null)
@@ -139,6 +146,18 @@ namespace ScmBackup.Scm
             }
 
             return false;
+        }
+
+        private string RemoveCredentialsFromUrl(string url, ScmCredentials credentials)
+        {
+            // Issue #19: if credentials are passed via --config, remove the username from the URL (the Bitbucket API returns the clone URL with username, for example).
+            // Some HG versions stop when the username is in the URL *and* passed via --config
+            if (credentials != null)
+            {
+                return this.UrlHelper.RemoveCredentialsFromUrl(url);
+            }
+
+            return url;
         }
 
         private string CreateParametersWithCredentials(ScmCredentials credentials, string url)

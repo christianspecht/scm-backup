@@ -1,4 +1,5 @@
-﻿using ScmBackup.Scm;
+﻿using ScmBackup.Http;
+using ScmBackup.Scm;
 using ScmBackup.Tests.Hosters;
 using System;
 
@@ -8,7 +9,7 @@ namespace ScmBackup.Tests.Integration.Scm
     {
         public MercurialScmTests()
         {
-            this.sut = new MercurialScm(new FileSystemHelper(), new FakeContext());
+            this.sut = new MercurialScm(new FileSystemHelper(), new FakeContext(), new UrlHelper());
         }
 
         internal override string PublicRepoUrl

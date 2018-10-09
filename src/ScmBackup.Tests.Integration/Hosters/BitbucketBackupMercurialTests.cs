@@ -40,7 +40,7 @@ namespace ScmBackup.Tests.Integration.Hosters
             var repoList = api.GetRepositoryList(this.source);
             this.repo = repoList.Find(r => r.ShortName == repoName);
             
-            this.scm = new MercurialScm(new FileSystemHelper(), context);
+            this.scm = new MercurialScm(new FileSystemHelper(), context, new UrlHelper());
             Assert.True(this.scm.IsOnThisComputer());
 
             var scmFactory = new FakeScmFactory();
