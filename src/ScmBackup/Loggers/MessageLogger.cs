@@ -19,6 +19,11 @@ namespace ScmBackup.Loggers
 
         public void Log(ErrorLevel level, Exception ex, string message, params object[] arg)
         {
+            if (level == ErrorLevel.Debug)
+            {
+                return;
+            }
+
             var tmp = new StringBuilder();
             tmp.Append(level.ToString("f")); // https://stackoverflow.com/a/32726578/6884
 
