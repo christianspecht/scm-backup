@@ -10,6 +10,15 @@ namespace ScmBackup.Tests.Integration.Hosters
 {
     public abstract class IHosterApiTests
     {
+        // user, repo etc. (must be implemented in the child classes)
+        internal abstract string HosterUser { get; }                    // test user
+        internal abstract string HosterOrganization { get; }            // test organization
+        internal abstract string HosterRepo { get; }                    // a repository with wiki (must exist under user AND organization)
+        internal abstract string HosterCommit { get; }                  // a commit in the repository
+        internal abstract string HosterWikiCommit { get; }              // a commit in the wiki
+        internal abstract string HosterPaginationUser { get; }          // a user with enough public repos to test pagination
+        internal abstract string HosterPrivateRepo { get; }             // a private repository, must exist under the user from the environment variable. Return null to skip tests
+
         // environment variables with this prefix (from environment-variables.ps1) are used
         internal abstract string EnvVarPrefix { get; }
 
@@ -39,7 +48,7 @@ namespace ScmBackup.Tests.Integration.Hosters
             var source = new ConfigSource();
             source.Hoster = this.ConfigHoster;
             source.Type = "user";
-            source.Name = TestHelper.EnvVar(this.EnvVarPrefix, "Name");
+            source.Name = this.HosterUser;
 
             var repoList = this.sut.GetRepositoryList(source);
 
@@ -48,7 +57,7 @@ namespace ScmBackup.Tests.Integration.Hosters
             Assert.True(repoList.Count > 0);
 
             // specific repo exists?
-            string expectedName = TestHelper.BuildRepositoryName(source.Name, TestHelper.EnvVar(this.EnvVarPrefix, "Repo"));
+            string expectedName = TestHelper.BuildRepositoryName(source.Name, this.HosterRepo);
             var repo = repoList.Where(r => r.FullName == expectedName).FirstOrDefault();
             Assert.NotNull(repo);
             Assert.True(ValidateUrls(repo));
@@ -75,8 +84,8 @@ namespace ScmBackup.Tests.Integration.Hosters
             var source = new ConfigSource();
             source.Hoster = this.ConfigHoster;
             source.Type = "user";
-            source.Name = TestHelper.EnvVar(this.EnvVarPrefix, "Name");
-            source.AuthName = source.Name;
+            source.Name = this.HosterUser;
+            source.AuthName = TestHelper.EnvVar(this.EnvVarPrefix, "Name");
             source.Password = "invalid-password";
 
             List<HosterRepository> repoList;
@@ -89,8 +98,8 @@ namespace ScmBackup.Tests.Integration.Hosters
             var source = new ConfigSource();
             source.Hoster = this.ConfigHoster;
             source.Type = "user";
-            source.Name = TestHelper.EnvVar(this.EnvVarPrefix, "Name");
-            source.AuthName = source.Name;
+            source.Name = this.HosterUser;
+            source.AuthName = TestHelper.EnvVar(this.EnvVarPrefix, "Name");
             source.Password = TestHelper.EnvVar(this.EnvVarPrefix, "PW");
 
             var repoList = sut.GetRepositoryList(source);
@@ -100,7 +109,7 @@ namespace ScmBackup.Tests.Integration.Hosters
             Assert.True(repoList.Count > 0);
 
             // specific repo exists?
-            string expectedName = TestHelper.BuildRepositoryName(source.Name, TestHelper.EnvVar(this.EnvVarPrefix, "Repo"));
+            string expectedName = TestHelper.BuildRepositoryName(source.Name, this.HosterRepo);
             var repo = repoList.Where(r => r.FullName == expectedName).FirstOrDefault();
             Assert.NotNull(repo);
             Assert.True(ValidateUrls(repo));
@@ -114,7 +123,7 @@ namespace ScmBackup.Tests.Integration.Hosters
             var source = new ConfigSource();
             source.Hoster = this.ConfigHoster;
             source.Type = "org";
-            source.Name = TestHelper.EnvVar(this.EnvVarPrefix, "OrgName");
+            source.Name = this.HosterOrganization;
 
             var repoList = sut.GetRepositoryList(source);
 
@@ -123,7 +132,7 @@ namespace ScmBackup.Tests.Integration.Hosters
             Assert.True(repoList.Count > 0);
 
             // specific repo exists?
-            string expectedName = TestHelper.BuildRepositoryName(source.Name, TestHelper.EnvVar(this.EnvVarPrefix, "Repo"));
+            string expectedName = TestHelper.BuildRepositoryName(source.Name, this.HosterRepo);
             var repo = repoList.Where(r => r.FullName == expectedName).FirstOrDefault();
             Assert.NotNull(repo);
             Assert.True(ValidateUrls(repo));
@@ -149,7 +158,7 @@ namespace ScmBackup.Tests.Integration.Hosters
             var source = new ConfigSource();
             source.Hoster = this.ConfigHoster;
             source.Type = "org";
-            source.Name = TestHelper.EnvVar(this.EnvVarPrefix, "OrgName");
+            source.Name = this.HosterOrganization;
             source.AuthName = TestHelper.EnvVar(this.EnvVarPrefix, "Name");
             source.Password = TestHelper.EnvVar(this.EnvVarPrefix, "PW");
 
@@ -160,7 +169,7 @@ namespace ScmBackup.Tests.Integration.Hosters
             Assert.True(repoList.Count > 0);
 
             // specific repo exists?
-            string expectedName = TestHelper.BuildRepositoryName(source.Name, TestHelper.EnvVar(this.EnvVarPrefix, "Repo"));
+            string expectedName = TestHelper.BuildRepositoryName(source.Name, this.HosterRepo);
             var repo = repoList.Where(r => r.FullName == expectedName).FirstOrDefault();
             Assert.NotNull(repo);
             Assert.True(ValidateUrls(repo));
@@ -169,7 +178,7 @@ namespace ScmBackup.Tests.Integration.Hosters
         [SkippableFact]
         public void GetRepositoryList_PrivateRepoIsMarkedAsPrivate()
         {
-            string repoName = TestHelper.EnvVar(this.EnvVarPrefix, "RepoPrivate", false);
+            string repoName = this.HosterPrivateRepo;
             Skip.If(repoName == null, "There's no private repo for this hoster");
 
             var source = new ConfigSource();
@@ -194,7 +203,7 @@ namespace ScmBackup.Tests.Integration.Hosters
             var source = new ConfigSource();
             source.Hoster = this.ConfigHoster;
             source.Type = "user";
-            source.Name = TestHelper.EnvVar(this.EnvVarPrefix, "PaginationUser");
+            source.Name = this.HosterPaginationUser;
             source.AuthName = TestHelper.EnvVar(this.EnvVarPrefix, "Name");
             source.Password = TestHelper.EnvVar(this.EnvVarPrefix, "PW");
 

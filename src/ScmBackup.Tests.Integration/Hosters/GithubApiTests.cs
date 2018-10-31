@@ -7,6 +7,15 @@ namespace ScmBackup.Tests.Integration.Hosters
 {
     public class GithubApiTests : IHosterApiTests
     {
+        //  user, repo etc.
+        internal override string HosterUser { get { return "scm-backup-testuser"; } }
+        internal override string HosterOrganization { get { return "scm-backup-testorg"; } }
+        internal override string HosterRepo { get { return "scm-backup"; } }
+        internal override string HosterCommit { get { return "7be29139f4cdc4037647fc2f21d9d82c42a96e88"; } }
+        internal override string HosterWikiCommit { get { return "714ddb8c48cebc70ff2ae74be98ac7cdf91ade6e"; } }
+        internal override string HosterPaginationUser { get { return "shanselman"; } }
+        internal override string HosterPrivateRepo { get { return null; } } // see #17
+
         internal override string EnvVarPrefix
         {
             get { return "Github"; }
