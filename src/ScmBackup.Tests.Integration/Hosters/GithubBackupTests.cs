@@ -11,16 +11,17 @@ namespace ScmBackup.Tests.Integration.Hosters
     {
         private List<HosterRepository> repoList;
 
-        internal override string PublicRepoName { get { return TestHelper.EnvVar("Github_Repo"); } }
+        internal override string PublicUserName { get { return "scm-backup-testuser"; } }
+        internal override string PublicRepoName { get { return "scm-backup"; } }
 
-        protected override void Setup(string repoName)
+        protected override void Setup(bool usePrivateRepo)
         {
             // re-use test repo for GithubApi tests
             this.source = new ConfigSource();
             this.source.Hoster = "github";
             this.source.Type = "user";
-            this.source.Name = TestHelper.EnvVar("Github_Name");
-            this.source.AuthName = this.source.Name;
+            this.source.Name = this.GetUserName(usePrivateRepo);
+            this.source.AuthName = TestHelper.EnvVar("Github_Name");
             this.source.Password = TestHelper.EnvVar("Github_PW");
 
             var config = new Config();
@@ -34,7 +35,7 @@ namespace ScmBackup.Tests.Integration.Hosters
 
             var api = new GithubApi(context, factory);
             this.repoList = api.GetRepositoryList(this.source);
-            this.repo = this.repoList.Find(r => r.ShortName == repoName);
+            this.repo = this.repoList.Find(r => r.ShortName == this.GetRepoName(usePrivateRepo));
             
             this.scm = new GitScm(new FileSystemHelper(), context);
             Assert.True(this.scm.IsOnThisComputer());
@@ -48,14 +49,14 @@ namespace ScmBackup.Tests.Integration.Hosters
         {
             Assert.True(Directory.Exists(dir));
             Assert.True(this.scm.DirectoryIsRepository(dir));
-            Assert.True(scm.RepositoryContainsCommit(dir, TestHelper.EnvVar("Github_Commit")));
+            Assert.True(scm.RepositoryContainsCommit(dir, "7be29139f4cdc4037647fc2f21d9d82c42a96e88"));
         }
 
         protected override void AssertWiki(string dir)
         {
             Assert.True(Directory.Exists(dir));
             Assert.True(this.scm.DirectoryIsRepository(dir));
-            Assert.True(scm.RepositoryContainsCommit(dir, TestHelper.EnvVar("Github_WikiCommit")));
+            Assert.True(scm.RepositoryContainsCommit(dir, "714ddb8c48cebc70ff2ae74be98ac7cdf91ade6e"));
         }
     }
 }
