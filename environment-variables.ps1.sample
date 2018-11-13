@@ -2,23 +2,11 @@
 
 Write-Host 'Setting environment variables for integration tests...'
 
-$env:Github_Name = 'scm-backup-testuser'                                # GitHub user
-$env:Github_OrgName = 'scm-backup-testorg'                              # GitHub organization
+$env:Github_Name = 'scm-backup-testuser'                                # User for authentication. Must have read permission for private repo.
 $env:Github_PW = 'not-the-real-password'                                # the user's personal access token
-$env:Github_Repo = 'scm-backup'                                         # a repository with wiki (must exist under user AND organization)
-$env:Github_Commit = '7be29139f4cdc4037647fc2f21d9d82c42a96e88'         # a commit in the repository
-$env:Github_WikiCommit = '714ddb8c48cebc70ff2ae74be98ac7cdf91ade6e'     # a commit in the wiki
-$env:Github_PaginationUser = 'shanselman'                               # a user with enough public repos to test pagination
+# $env:Github_RepoPrivate = '...'                                       # TODO: a private repository
 
-$env:Bitbucket_Name = 'scm-backup-testuser'                             # Bitbucket user
-$env:Bitbucket_OrgName = 'scm-backup-testteam'                          # Bitbucket organization
+$env:Bitbucket_Name = 'scm-backup-testuser'                             # User for authentication. Must have read permission for both private repos
 $env:Bitbucket_PW = 'not-the-real-password'                             # the user's app password
-$env:Bitbucket_Repo = 'scm-backup-test'                                 # MERCURIAL: a repository with wiki (must exist under user AND organization)
-$env:Bitbucket_Commit = '617f9e55262be7b6d1c9db081ec351ff25c9a0e5'      # MERCURIAL: a commit in the repository
-$env:Bitbucket_WikiCommit = 'befce8ddfb6976918c3c3e1a44fb6a68a438b785'  # MERCURIAL: a commit in the wiki
-$env:Bitbucket_RepoGit = 'scm-backup-test-git'                          # GIT: a repository with wiki (must exist under user AND organization)
-$env:Bitbucket_CommitGit = '389dae62982075f97efb660824c31f712872a9cd'   # GIT: a commit in the repository
-$env:Bitbucket_WikiCommitGit = '8c621fd488ee5fa1ed19ca78113ccc92d55820bd' # GIT: a commit in the wiki
-$env:Bitbucket_PaginationUser = 'birkenfeld'                            # a user with enough public repos to test pagination
 $env:Bitbucket_RepoPrivate = 'scm-backup-test-private-hg'               # MERCURIAL: a private repository
 $env:Bitbucket_RepoPrivateGit = 'scm-backup-test-private-git'           # GIT: a private repository
