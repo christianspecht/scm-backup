@@ -22,5 +22,37 @@ namespace ScmBackup.Tests
             }
 
         }
+
+        [Fact]
+        public void ExecutesAllUnderlyingLoggers()
+        {
+            var logger1 = new FakeLogger();
+            var logger2 = new FakeLogger();
+
+            var loggers = new List<FakeLogger> { logger1, logger2 };
+            var sut = new CompositeLogger(loggers);
+            sut.ExecuteOnExit();
+
+            Assert.True(logger1.ExecutedOnExit && logger2.ExecutedOnExit);
+        }
+
+        [Fact]
+        public void ReturnsFilesFromAllUnderlyingLoggers()
+        {
+            var logger1 = new FakeLogger();
+            logger1.FakeFilesToBackup = new List<string> { "a.txt", "b.txt" };
+
+            var logger2 = new FakeLogger();
+            logger2.FakeFilesToBackup = new List<string> { "c.txt" };
+
+            var loggers = new List<FakeLogger> { logger1, logger2 };
+            var sut = new CompositeLogger(loggers);
+            var list = sut.FilesToBackup;
+
+            Assert.Equal(3, list.Count);
+            Assert.Contains("a.txt", list);
+            Assert.Contains("b.txt", list);
+            Assert.Contains("c.txt", list);
+        }
     }
 }

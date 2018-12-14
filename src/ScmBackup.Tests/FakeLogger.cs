@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace ScmBackup.Tests
 {
@@ -9,9 +10,11 @@ namespace ScmBackup.Tests
         public Exception LastException { get; set; }
         public string LastMessage { get; set; }
         public object[] LastArg { get; set; }
+        public bool ExecutedOnExit { get; set; }
 
         public bool IgnoreDebugLogs { get; set; }
         public bool ConsoleOutput { get; set; }
+        public List<string> FakeFilesToBackup { get; set; }
 
         public FakeLogger()
         {
@@ -45,6 +48,16 @@ namespace ScmBackup.Tests
             this.LastException = ex;
             this.LastMessage = message;
             this.LastArg = arg;
+        }
+
+        public List<string> FilesToBackup
+        {
+            get { return this.FakeFilesToBackup; }
+        }
+
+        public void ExecuteOnExit()
+        {
+            this.ExecutedOnExit = true;
         }
     }
 }

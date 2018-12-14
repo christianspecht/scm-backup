@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace ScmBackup.Loggers
 {
@@ -33,6 +34,15 @@ namespace ScmBackup.Loggers
 
             Console.WriteLine(message, arg);
             Console.ResetColor();
+        }
+
+        public List<string> FilesToBackup
+        {
+            get { return null; }
+        }
+
+        public void ExecuteOnExit()
+        {
         }
     }
 }

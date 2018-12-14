@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
 
 namespace ScmBackup.Loggers
@@ -37,6 +38,15 @@ namespace ScmBackup.Loggers
             tmp.AppendFormat(message, arg);
 
             this.messages.AddMessage(tmp.ToString());
+        }
+
+        public List<string> FilesToBackup
+        {
+            get { return null; }
+        }
+
+        public void ExecuteOnExit()
+        {
         }
     }
 }
