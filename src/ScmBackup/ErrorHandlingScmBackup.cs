@@ -58,6 +58,8 @@ namespace ScmBackup
                 this.logger.Log(ErrorLevel.Error, Resource.EndSeconds, seconds);
                 Task.Delay(TimeSpan.FromSeconds(seconds)).Wait();
             }
+
+            this.logger.ExecuteOnExit();
         }
     }
 }
