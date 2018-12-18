@@ -24,6 +24,8 @@ namespace ScmBackup.Tests
 
             // default setting: don't actually output log messages
             this.ConsoleOutput = false;
+
+            this.FakeFilesToBackup = new List<string>();
         }
 
         public void Log(ErrorLevel level, string message, params object[] arg)

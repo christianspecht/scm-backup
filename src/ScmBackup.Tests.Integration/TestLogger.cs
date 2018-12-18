@@ -32,7 +32,7 @@ namespace ScmBackup.Tests.Integration
 
         public List<string> FilesToBackup
         {
-            get { return null; }
+            get { return new List<string>(); }
         }
 
         public void ExecuteOnExit()
