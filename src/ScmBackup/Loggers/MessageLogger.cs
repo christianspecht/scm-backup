@@ -45,7 +45,7 @@ namespace ScmBackup.Loggers
             get { return null; }
         }
 
-        public void ExecuteOnExit()
+        public void ExecuteOnExit(bool successful)
         {
         }
     }

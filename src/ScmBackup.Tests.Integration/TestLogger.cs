@@ -35,7 +35,7 @@ namespace ScmBackup.Tests.Integration
             get { return new List<string>(); }
         }
 
-        public void ExecuteOnExit()
+        public void ExecuteOnExit(bool successful)
         {
         }
     }

@@ -46,11 +46,11 @@ namespace ScmBackup.Loggers
             }
         }
 
-        public void ExecuteOnExit()
+        public void ExecuteOnExit(bool successful)
         {
             foreach (var logger in this.loggers)
             {
-                logger.ExecuteOnExit();
+                logger.ExecuteOnExit(successful);
             }
         }
     }

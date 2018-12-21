@@ -11,6 +11,7 @@ namespace ScmBackup.Tests
         public string LastMessage { get; set; }
         public object[] LastArg { get; set; }
         public bool ExecutedOnExit { get; set; }
+        public bool ExecuteOnExit_Successful { get; set; }
 
         public bool IgnoreDebugLogs { get; set; }
         public bool ConsoleOutput { get; set; }
@@ -57,9 +58,10 @@ namespace ScmBackup.Tests
             get { return this.FakeFilesToBackup; }
         }
 
-        public void ExecuteOnExit()
+        public void ExecuteOnExit(bool successful)
         {
             this.ExecutedOnExit = true;
+            this.ExecuteOnExit_Successful = successful;
         }
     }
 }

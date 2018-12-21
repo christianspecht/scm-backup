@@ -31,7 +31,7 @@ namespace ScmBackup.Tests
 
             var loggers = new List<FakeLogger> { logger1, logger2 };
             var sut = new CompositeLogger(loggers);
-            sut.ExecuteOnExit();
+            sut.ExecuteOnExit(true);
 
             Assert.True(logger1.ExecutedOnExit && logger2.ExecutedOnExit);
         }

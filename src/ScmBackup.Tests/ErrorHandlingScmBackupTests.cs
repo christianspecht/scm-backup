@@ -40,6 +40,7 @@ namespace ScmBackup.Tests
             sut.Run();
 
             Assert.True(logger.ExecutedOnExit);
+            Assert.True(logger.ExecuteOnExit_Successful);
         }
 
         [Fact]
@@ -55,6 +56,7 @@ namespace ScmBackup.Tests
             sut.Run();
 
             Assert.True(logger.ExecutedOnExit);
+            Assert.False(logger.ExecuteOnExit_Successful);
         }
     }
 }

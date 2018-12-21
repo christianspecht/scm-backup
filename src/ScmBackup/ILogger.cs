@@ -19,6 +19,6 @@ namespace ScmBackup
         /// <summary>
         /// This will be executed when SCM Backup exits
         /// </summary>
-        void ExecuteOnExit();
+        void ExecuteOnExit(bool successful);
     }
 }

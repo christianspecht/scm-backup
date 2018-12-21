@@ -44,7 +44,7 @@ namespace ScmBackup.Loggers
             get { return new List<string> { "NLog.config" }; }
         }
 
-        public void ExecuteOnExit()
+        public void ExecuteOnExit(bool successful)
         {
         }
     }

@@ -59,7 +59,7 @@ namespace ScmBackup
                 Task.Delay(TimeSpan.FromSeconds(seconds)).Wait();
             }
 
-            this.logger.ExecuteOnExit();
+            this.logger.ExecuteOnExit(ok);
         }
     }
 }
