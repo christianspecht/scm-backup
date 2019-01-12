@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using ScmBackup.Configuration;
+using Xunit;
 using YamlDotNet.Core;
 
 namespace ScmBackup.Tests.Integration

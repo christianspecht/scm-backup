@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using ScmBackup.Configuration;
 using ScmBackup.Http;
 using System;
 using System.Collections.Generic;

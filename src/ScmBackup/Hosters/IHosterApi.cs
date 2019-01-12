@@ -1,4 +1,5 @@
-﻿using ScmBackup.Http;
+﻿using ScmBackup.Configuration;
+using ScmBackup.Http;
 using System.Collections.Generic;
 
 namespace ScmBackup.Hosters

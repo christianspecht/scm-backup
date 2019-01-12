@@ -1,4 +1,6 @@
-﻿namespace ScmBackup.Tests
+﻿using ScmBackup.Configuration;
+
+namespace ScmBackup.Tests
 {
     internal class FakeHosterValidator : IHosterValidator
     {

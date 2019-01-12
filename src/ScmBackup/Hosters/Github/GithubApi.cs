@@ -1,4 +1,5 @@
 ﻿using Octokit;
+using ScmBackup.Configuration;
 using ScmBackup.Scm;
 using System;
 using System.Collections.Generic;
