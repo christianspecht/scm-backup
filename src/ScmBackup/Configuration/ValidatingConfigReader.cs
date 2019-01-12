@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace ScmBackup
+namespace ScmBackup.Configuration
 {
     /// <summary>
     /// decorator for ConfigReader, validates the configuration values

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 
-namespace ScmBackup
+namespace ScmBackup.Configuration
 {
     internal class ConfigBackupMaker : IConfigBackupMaker
     {

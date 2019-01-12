@@ -1,4 +1,4 @@
-﻿namespace ScmBackup
+﻿namespace ScmBackup.Configuration
 {
     /// <summary>
     /// Configuration data for email sending

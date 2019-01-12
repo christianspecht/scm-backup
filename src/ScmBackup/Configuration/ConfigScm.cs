@@ -1,4 +1,4 @@
-﻿namespace ScmBackup
+﻿namespace ScmBackup.Configuration
 {
     public class ConfigScm
     {

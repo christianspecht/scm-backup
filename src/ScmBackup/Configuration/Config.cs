@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace ScmBackup
+namespace ScmBackup.Configuration
 {
     /// <summary>
     /// Holds all configuration values
