@@ -4,7 +4,7 @@ Write-Host 'Setting environment variables for integration tests...'
 
 $env:Github_Name = 'scm-backup-testuser'                                # User for authentication. Must have read permission for private repo.
 $env:Github_PW = 'not-the-real-password'                                # the user's personal access token
-# $env:Github_RepoPrivate = '...'                                       # TODO: a private repository (see #17)
+$env:Github_RepoPrivate = 'scm-backup-test-private'                     # a private repository
 
 $env:Bitbucket_Name = 'scm-backup-testuser'                             # User for authentication. Must have read permission for both private repos
 $env:Bitbucket_PW = 'not-the-real-password'                             # the user's app password

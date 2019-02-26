@@ -14,6 +14,9 @@ namespace ScmBackup.Tests.Integration.Hosters
         internal override string PublicUserName { get { return "scm-backup-testuser"; } }
         internal override string PublicRepoName { get { return "scm-backup"; } }
 
+        internal override string PrivateUserName { get { return TestHelper.EnvVar("Github_Name"); } }
+        internal override string PrivateRepoName { get { return TestHelper.EnvVar("Github_RepoPrivate"); } }
+
         protected override void Setup(bool usePrivateRepo)
         {
             // re-use test repo for GithubApi tests
@@ -57,6 +60,12 @@ namespace ScmBackup.Tests.Integration.Hosters
             Assert.True(Directory.Exists(dir));
             Assert.True(this.scm.DirectoryIsRepository(dir));
             Assert.True(scm.RepositoryContainsCommit(dir, "714ddb8c48cebc70ff2ae74be98ac7cdf91ade6e"));
+        }
+
+        protected override void AssertPrivateRepo(string dir)
+        {
+            Assert.True(Directory.Exists(dir));
+            Assert.True(this.scm.DirectoryIsRepository(dir));
         }
     }
 }
