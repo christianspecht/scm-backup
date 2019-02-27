@@ -14,7 +14,7 @@ namespace ScmBackup.Tests.Integration.Hosters
         internal override string HosterCommit { get { return "7be29139f4cdc4037647fc2f21d9d82c42a96e88"; } }
         internal override string HosterWikiCommit { get { return "714ddb8c48cebc70ff2ae74be98ac7cdf91ade6e"; } }
         internal override string HosterPaginationUser { get { return "shanselman"; } }
-        internal override string HosterPrivateRepo { get { return "scm-backup-test-private"; } }
+        internal override string HosterPrivateRepo { get { return TestHelper.EnvVar(this.EnvVarPrefix, "RepoPrivate"); } }
 
         internal override string EnvVarPrefix
         {
