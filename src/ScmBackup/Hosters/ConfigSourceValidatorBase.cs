@@ -19,17 +19,17 @@
 
             if (source.Hoster != this.HosterName)
             {
-                result.AddMessage(ErrorLevel.Error, string.Format(Resource.WrongHoster, source.Hoster));
+                result.AddMessage(ErrorLevel.Error, string.Format(Resource.WrongHoster, source.Hoster), ValidationMessageType.WrongHoster);
             }
 
             if (source.Type != "user" && source.Type != "org")
             {
-                result.AddMessage(ErrorLevel.Error, string.Format(Resource.WrongType, source.Type));
+                result.AddMessage(ErrorLevel.Error, string.Format(Resource.WrongType, source.Type), ValidationMessageType.WrongType);
             }
 
             if (string.IsNullOrWhiteSpace(source.Name))
             {
-                result.AddMessage(ErrorLevel.Error, Resource.NameEmpty);
+                result.AddMessage(ErrorLevel.Error, Resource.NameEmpty, ValidationMessageType.NameEmpty);
             }
 
             bool authNameEmpty = string.IsNullOrWhiteSpace(source.AuthName);
@@ -37,11 +37,11 @@
 
             if (authNameEmpty != passwordEmpty)
             {
-                result.AddMessage(ErrorLevel.Error, Resource.AuthNameOrPasswortEmpty);
+                result.AddMessage(ErrorLevel.Error, Resource.AuthNameOrPasswortEmpty, ValidationMessageType.AuthNameOrPasswortEmpty);
             }
             else if (authNameEmpty && passwordEmpty)
             {
-                result.AddMessage(ErrorLevel.Warn, Resource.AuthNameAndPasswortEmpty);
+                result.AddMessage(ErrorLevel.Warn, Resource.AuthNameAndPasswortEmpty, ValidationMessageType.AuthNameAndPasswortEmpty);
             }
 
             this.ValidateSpecific(result, source);

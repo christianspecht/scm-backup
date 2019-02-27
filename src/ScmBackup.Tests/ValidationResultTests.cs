@@ -70,5 +70,21 @@ namespace ScmBackup.Tests
             Assert.Equal(3, sut.Messages.Count);
             Assert.False(sut.IsValid);
         }
+        
+        [Fact]
+        public void AddMessageWithoutTypeSetsUndefined()
+        {
+            sut.AddMessage(ErrorLevel.Info, "foo");
+
+            Assert.Equal(ValidationMessageType.Undefined, sut.Messages.First().Type);
+        }
+
+        [Fact]
+        public void AddMessageWithTypeSetsType()
+        {
+            sut.AddMessage(ErrorLevel.Info, "foo", ValidationMessageType.NameEmpty);
+
+            Assert.Equal(ValidationMessageType.NameEmpty, sut.Messages.First().Type);
+        }
     }
 }
