@@ -11,6 +11,7 @@
         NameEmpty,
         AuthNameOrPasswortEmpty,
         AuthNameAndPasswortEmpty,
+        AuthNameAndNameNotEqual,
 
         /// <summary>
         /// default value when not set - sometimes we don't care

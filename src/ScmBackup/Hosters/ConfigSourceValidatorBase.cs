@@ -11,6 +11,11 @@
         public abstract string HosterName { get; }
 
         /// <summary>
+        /// Some APIs require authentication with the same user whose repositories are requested. In this case, set this to True
+        /// </summary>
+        public abstract bool AuthNameAndNameMustBeEqual { get; }
+
+        /// <summary>
         /// basic validation rules which are always the same
         /// </summary>
         public ValidationResult Validate(ConfigSource source)
@@ -42,6 +47,14 @@
             else if (authNameEmpty && passwordEmpty)
             {
                 result.AddMessage(ErrorLevel.Warn, Resource.AuthNameAndPasswortEmpty, ValidationMessageType.AuthNameAndPasswortEmpty);
+            }
+
+            if (this.AuthNameAndNameMustBeEqual)
+            {
+                if (source.Name != source.AuthName)
+                {
+                    result.AddMessage(ErrorLevel.Warn, string.Format(Resource.AuthNameAndNameNotEqual, source.Hoster), ValidationMessageType.AuthNameAndNameNotEqual);
+                }
             }
 
             this.ValidateSpecific(result, source);

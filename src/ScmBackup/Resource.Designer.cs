@@ -133,6 +133,15 @@ namespace ScmBackup {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to AuthName and Name must be equal for hoster {0}. If they are different, SCM Backup will backup public repositories only!.
+        /// </summary>
+        internal static string AuthNameAndNameNotEqual {
+            get {
+                return ResourceManager.GetString("AuthNameAndNameNotEqual", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to AuthName and Password are empty. Without authentication, SCM Backup will backup public repositories only!.
         /// </summary>
         internal static string AuthNameAndPasswortEmpty {

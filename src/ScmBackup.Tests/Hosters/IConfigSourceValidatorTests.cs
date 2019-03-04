@@ -115,5 +115,26 @@ namespace ScmBackup.Tests.Hosters
             var message = result.Messages.First(r => r.Type == ValidationMessageType.AuthNameAndPasswortEmpty);
             Assert.Equal(ErrorLevel.Warn, message.Error);
         }
+
+        [Fact]
+        public void AuthNameAndName_AreNotEqual()
+        {
+            config.Name = "foo";
+            config.AuthName = "bar";
+            var result = sut.Validate(config);
+
+            var message = result.Messages.FirstOrDefault(r => r.Type == ValidationMessageType.AuthNameAndNameNotEqual);
+
+            if (sut.AuthNameAndNameMustBeEqual)
+            {
+                Assert.NotEmpty(result.Messages);
+                Assert.NotNull(message);               
+                Assert.Equal(ErrorLevel.Warn, message.Error);
+            }
+            else
+            {
+                Assert.NotNull(message);
+            }
+        }
     }
 }

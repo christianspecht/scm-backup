@@ -9,5 +9,10 @@
         {
             get { return "bitbucket"; }
         }
+
+        public override bool AuthNameAndNameMustBeEqual
+        {
+            get { return true; }
+        }
     }
 }
