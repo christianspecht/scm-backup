@@ -197,15 +197,17 @@ namespace ScmBackup.Tests.Integration.Hosters
             Assert.True(repo.IsPrivate);
         }
 
-        [Fact]
+        [SkippableFact]
         public void GetRepositoryList_PaginationWorks()
         {
+            // Name and AuthName must be equal for all of the currently supported hosters, so this test must be without authentication
+            // TODO: make authentication for this test configurable when a new hoster without this limitation is added
+            Skip.If(this.SkipUnauthenticatedTests);
+
             var source = new ConfigSource();
             source.Hoster = this.ConfigHoster;
             source.Type = "user";
             source.Name = this.HosterPaginationUser;
-            source.AuthName = TestHelper.EnvVar(this.EnvVarPrefix, "Name");
-            source.Password = TestHelper.EnvVar(this.EnvVarPrefix, "PW");
 
             var repoList = sut.GetRepositoryList(source);
 
