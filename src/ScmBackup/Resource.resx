@@ -142,7 +142,7 @@
     <value>SCM Backup</value>
   </data>
   <data name="AppWebsite" xml:space="preserve">
-    <value>http://scm-backup.org/</value>
+    <value>https://scm-backup.org/</value>
   </data>
   <data name="AuthNameAndNameNotEqual" xml:space="preserve">
     <value>AuthName and Name must be equal for hoster {0}. If they are different, SCM Backup will backup public repositories only!</value>

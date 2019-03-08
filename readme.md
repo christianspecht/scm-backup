@@ -15,7 +15,7 @@ And it's written in [.NET Core](https://dotnet.github.io/), which means that it'
 
 
 - [Website](https://scm-backup.org)
-- [Documentation](http://docs.scm-backup.org)
+- [Documentation](https://docs.scm-backup.org)
 - [Download](https://scm-backup.org/downloads/)
 
 

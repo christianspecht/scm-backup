@@ -133,7 +133,7 @@ namespace ScmBackup {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to http://scm-backup.org/.
+        ///   Looks up a localized string similar to https://scm-backup.org/.
         /// </summary>
         internal static string AppWebsite {
             get {
