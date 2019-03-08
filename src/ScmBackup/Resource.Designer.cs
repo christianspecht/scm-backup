@@ -79,6 +79,15 @@ namespace ScmBackup {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Not enough scope for source &apos;{0}&apos;. You need to set at least the &quot;repo&quot; scope, otherwise SCM Backup will backup public repositories only!.
+        /// </summary>
+        internal static string ApiGithubNotEnoughScope {
+            get {
+                return ResourceManager.GetString("ApiGithubNotEnoughScope", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Couldn&apos;t determine SCM type for repository: {0}.
         /// </summary>
         internal static string ApiInvalidScmType {

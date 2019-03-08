@@ -3,6 +3,7 @@ using ScmBackup.Scm;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security;
 
 namespace ScmBackup.Hosters.Github
 {
@@ -78,6 +79,20 @@ namespace ScmBackup.Hosters.Github
                 }
 
                 throw new ApiException(message, e);
+            }
+
+            // Check the right scope: 
+            // #29: when authenticated, the personal access token must at least have the "repo" scope, otherwise the API doesn't return private repos
+            // There are no tests for this, because this would require everybody to create a second token with insufficient permissions in order to run the integration tests.
+            // -> so we just throw an exception here, which means that most of the integration tests will fail
+            if (source.IsAuthenticated)
+            {
+                var info = client.GetLastApiInfo();
+                if (!info.OauthScopes.Contains("repo"))
+                {
+                    throw new SecurityException(string.Format(Resource.ApiGithubNotEnoughScope, source.Title));
+                }
+
             }
 
             var scm = this.factory.Create(ScmType.Git);
