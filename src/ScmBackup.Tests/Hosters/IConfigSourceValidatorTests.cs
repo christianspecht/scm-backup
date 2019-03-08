@@ -136,5 +136,18 @@ namespace ScmBackup.Tests.Hosters
                 Assert.NotNull(message);
             }
         }
+
+        [Fact]
+        public void AuthNameAndName_NotEqualDoesntMatterForOrgs()
+        {
+            config.Type = "org";
+            config.Name = "foo";
+            config.AuthName = "bar";
+            var result = sut.Validate(config);
+
+            var message = result.Messages.FirstOrDefault(r => r.Type == ValidationMessageType.AuthNameAndNameNotEqual);
+
+            Assert.Null(message);
+        }
     }
 }

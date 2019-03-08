@@ -51,7 +51,7 @@
 
             if (this.AuthNameAndNameMustBeEqual)
             {
-                if (source.Name != source.AuthName)
+                if (source.Type != "org" && source.Name != source.AuthName)
                 {
                     result.AddMessage(ErrorLevel.Warn, string.Format(Resource.AuthNameAndNameNotEqual, source.Hoster), ValidationMessageType.AuthNameAndNameNotEqual);
                 }
