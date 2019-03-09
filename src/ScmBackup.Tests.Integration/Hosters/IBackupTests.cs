@@ -1,6 +1,7 @@
 ﻿using ScmBackup.Hosters;
 using ScmBackup.Scm;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using Xunit;
 
@@ -28,6 +29,8 @@ namespace ScmBackup.Tests.Integration.Hosters
         internal virtual string PrivateRepoName { get { return null; } }
         protected virtual void AssertPrivateRepo(string dir) { }
 
+        // The child classes need to implement this, if they need to skip some tests
+        internal virtual HashSet<string> TestsToSkip { get { return new HashSet<string>(); } }
 
         [Fact]
         public void MakesBackup()
@@ -65,9 +68,11 @@ namespace ScmBackup.Tests.Integration.Hosters
             this.AssertPrivateRepo(Path.Combine(dir, sut.SubDirRepo));
         }
 
-        [Fact]
+        [SkippableFact]
         public void DoesntBackupWikiIfNotSet()
         {
+            Skip.If(this.TestsToSkip.Contains("DoesntBackupWikiIfNotSet"));
+
             var dir = DirectoryHelper.CreateTempDirectory(this.DirSuffix("doesnt-backup-wiki"));
             this.Setup(false);
 
