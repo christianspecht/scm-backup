@@ -51,16 +51,26 @@ namespace ScmBackup.Tests.Integration.Hosters
             var factory = new FakeScmFactory();
             factory.Register(ScmType.Git, new GitScm(new FileSystemHelper(), context));
 
+            var logger = new TestLogger("GithubBackupTests");
+            logger.Log(ErrorLevel.Debug, "factory created");
+
             var api = new GithubApi(context, factory);
             this.repoList = api.GetRepositoryList(this.source);
+
+            logger.Log(ErrorLevel.Debug, "API call finished");
+
             this.repo = this.repoList.Find(r => r.ShortName == this.GetRepoName(usePrivateRepo));
             
             this.scm = new GitScm(new FileSystemHelper(), context);
             Assert.True(this.scm.IsOnThisComputer());
 
+            logger.Log(ErrorLevel.Debug, "Git found: {0}", this.scm.GetVersionNumber());
+
             var scmFactory = new FakeScmFactory();
             scmFactory.Register(ScmType.Git, this.scm);
             this.sut = new GithubBackup(scmFactory);
+
+            logger.Log(ErrorLevel.Debug, "Setup finished");
         }
 
         protected override void AssertRepo(string dir)
