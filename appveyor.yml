@@ -3,11 +3,15 @@ image: Visual Studio 2017
 branches:
   only:
   - master
+init:
+- ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
 install:
 - ps: C:\projects\scm-backup\version-number.ps1
 build_script:
 - ps: C:\projects\scm-backup\build-release.ps1
 test: off
+on_finish:
+- ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
 artifacts:
 - path: release\scm-backup-*.zip
   name: Release Version

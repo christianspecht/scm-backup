@@ -25,7 +25,7 @@ namespace ScmBackup.Tests.Integration.Hosters
 
                 if (TestHelper.RunsOnAppVeyor())
                 {
-                    t.Add("DoesntBackupWikiIfNotSet");
+                    // t.Add("DoesntBackupWikiIfNotSet");
                 }
 
                 return t;
