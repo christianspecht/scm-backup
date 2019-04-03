@@ -100,9 +100,11 @@ namespace ScmBackup.Tests.Integration.Hosters
             Assert.False(Directory.Exists(sut.SubDirIssues));
         }
 
-        [Fact]
+        [SkippableFact]
         public void ThrowsWhenScmFactoryIsNull()
         {
+            Skip.If(this.SkipTestsIssue15());
+
             var dir = DirectoryHelper.CreateTempDirectory(this.DirSuffix("throws-when-scmfactory-null"));
             this.Setup(false);
             sut.scmFactory = null;

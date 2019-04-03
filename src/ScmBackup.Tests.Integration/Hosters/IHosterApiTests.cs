@@ -34,6 +34,13 @@ namespace ScmBackup.Tests.Integration.Hosters
         // this needs to be created in the child classes' constructor:
         internal IHosterApi sut;
 
+        // skip certain tests because of https://github.com/christianspecht/scm-backup/issues/15
+        // Child classes which need to skip those tests need to implement this and return true
+        protected virtual bool SkipTestsIssue15()
+        {
+            return false;
+        }
+
         [Fact]
         public void SutWasSetInChildClass()
         {
@@ -180,6 +187,8 @@ namespace ScmBackup.Tests.Integration.Hosters
         {
             string repoName = this.HosterPrivateRepo;
             Skip.If(repoName == null, "There's no private repo for this hoster");
+
+            Skip.If(this.SkipTestsIssue15());
 
             var source = new ConfigSource();
             source.Hoster = this.ConfigHoster;

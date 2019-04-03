@@ -37,6 +37,11 @@ namespace ScmBackup.Tests.Integration.Hosters
             get { return TestHelper.RunsOnAppVeyor(); }
         }
 
+        protected override bool SkipTestsIssue15()
+        {
+            return TestHelper.RunsOnAppVeyor();
+        }
+
         public GithubApiTests()
         {
             var context = new FakeContext();
