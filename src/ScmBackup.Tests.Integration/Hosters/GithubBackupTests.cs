@@ -17,19 +17,9 @@ namespace ScmBackup.Tests.Integration.Hosters
         internal override string PrivateUserName { get { return TestHelper.EnvVar("Github_Name"); } }
         internal override string PrivateRepoName { get { return TestHelper.EnvVar("Github_RepoPrivate"); } }
 
-        internal override HashSet<string> TestsToSkip
+        protected override bool SkipTestsIssue15()
         {
-            get
-            {
-                var t = new HashSet<string>();
-
-                if (TestHelper.RunsOnAppVeyor())
-                {
-                    // t.Add("DoesntBackupWikiIfNotSet");
-                }
-
-                return t;
-            }
+            return TestHelper.RunsOnAppVeyor();
         }
 
         protected override void Setup(bool usePrivateRepo)

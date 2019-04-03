@@ -29,8 +29,12 @@ namespace ScmBackup.Tests.Integration.Hosters
         internal virtual string PrivateRepoName { get { return null; } }
         protected virtual void AssertPrivateRepo(string dir) { }
 
-        // The child classes need to implement this, if they need to skip some tests
-        internal virtual HashSet<string> TestsToSkip { get { return new HashSet<string>(); } }
+        // skip certain tests because of https://github.com/christianspecht/scm-backup/issues/15
+        // Child classes which need to skip those tests need to implement this and return true
+        protected virtual bool SkipTestsIssue15()
+        {
+            return false;
+        }
 
         [Fact]
         public void MakesBackup()
@@ -71,7 +75,7 @@ namespace ScmBackup.Tests.Integration.Hosters
         [SkippableFact]
         public void DoesntBackupWikiIfNotSet()
         {
-            Skip.If(this.TestsToSkip.Contains("DoesntBackupWikiIfNotSet"));
+            Skip.If(this.SkipTestsIssue15());
 
             var dir = DirectoryHelper.CreateTempDirectory(this.DirSuffix("doesnt-backup-wiki"));
             this.Setup(false);
