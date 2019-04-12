@@ -70,6 +70,15 @@ namespace ScmBackup {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Unable to get the UUID for username {0} from the Bitbucket API.
+        /// </summary>
+        internal static string ApiBitbucketCantGetUuid {
+            get {
+                return ResourceManager.GetString("ApiBitbucketCantGetUuid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Getting repositories for source &apos;{0}&apos; from hoster &apos;{1}&apos;.
         /// </summary>
         internal static string ApiGettingRepos {
