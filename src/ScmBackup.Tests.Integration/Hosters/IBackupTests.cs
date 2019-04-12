@@ -62,6 +62,7 @@ namespace ScmBackup.Tests.Integration.Hosters
         public void MakesBackupOfPrivateRepo()
         {
             Skip.If(this.PrivateRepoName == null, "There's no private repo for this hoster");
+            Skip.If(this.SkipTestsIssue15());
 
             var dir = DirectoryHelper.CreateTempDirectory(this.DirSuffix("makes-backup-private"));
 
