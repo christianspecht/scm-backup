@@ -51,9 +51,11 @@ namespace ScmBackup.Tests.Integration.Hosters
             this.sut = new GithubApi(context, factory);
         }
 
-        [Fact]
+        [SkippableFact]
         public void SetsWikiToFalseWhenWikiDoesntExist()
         {
+            Skip.If(this.SkipTestsIssue15());
+
             // issue #13: the GitHub API only returns whether it's *possible* to create a wiki, but not if the repo actually *has* a wiki.
 
             // This is a test repo without wiki, but with the "wiki" checkbox set:
