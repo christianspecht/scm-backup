@@ -36,9 +36,11 @@ namespace ScmBackup.Tests.Integration.Hosters
             return false;
         }
 
-        [Fact]
+        [SkippableFact]
         public void MakesBackup()
         {
+            Skip.If(this.SkipTestsIssue15());
+
             Assert.NotNull(this.PublicRepoName); // Note: PrivateRepoName is optional
 
             var dir = DirectoryHelper.CreateTempDirectory(this.DirSuffix("makes-backup"));
