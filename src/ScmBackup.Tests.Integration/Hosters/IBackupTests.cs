@@ -90,9 +90,11 @@ namespace ScmBackup.Tests.Integration.Hosters
             Assert.False(Directory.Exists(sut.SubDirWiki));
         }
 
-        [Fact]
+        [SkippableFact]
         public void DoesntBackupIssuesIfNotSet()
         {
+            Skip.If(this.SkipTestsIssue15());
+
             var dir = DirectoryHelper.CreateTempDirectory(this.DirSuffix("doesnt-backup-issues"));
             this.Setup(false);
 
