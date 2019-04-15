@@ -99,9 +99,11 @@ namespace ScmBackup.Tests.Integration.Hosters
             Assert.ThrowsAny<Exception>(() => repoList = sut.GetRepositoryList(source));
         }
 
-        [Fact]
+        [SkippableFact]
         public void GetRepositoryList_AuthenticatedUser_Executes()
         {
+            Skip.If(this.SkipTestsIssue15());
+
             var source = new ConfigSource();
             source.Hoster = this.ConfigHoster;
             source.Type = "user";
