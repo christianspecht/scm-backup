@@ -2,6 +2,8 @@
 using ScmBackup.Scm;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Security;
 
 namespace ScmBackup.Hosters.Github
 {
@@ -40,7 +42,17 @@ namespace ScmBackup.Hosters.Github
                 {
                     case "user":
 
-                        repos = client.Repository.GetAllForUser(source.Name).Result;
+                        if (source.IsAuthenticated)
+                        {
+                            // If authenticated, lists ALL repos for the user, include private ones (https://developer.github.com/v3/repos/#list-your-repositories)
+                            repos = client.Repository.GetAllForCurrent().Result;
+                        }
+                        else
+                        {
+                            // GetAllForCurrent REQUIRES authentication, so we must use GetAllForUser when not authenticated to list public repos (https://developer.github.com/v3/repos/#list-user-repositories)
+                            repos = client.Repository.GetAllForUser(source.Name).Result;
+                        }
+
                         break;
 
                     case "org":
@@ -69,11 +81,29 @@ namespace ScmBackup.Hosters.Github
                 throw new ApiException(message, e);
             }
 
+            // Check the right scope: 
+            // #29: when authenticated, the personal access token must at least have the "repo" scope, otherwise the API doesn't return private repos
+            // There are no tests for this, because this would require everybody to create a second token with insufficient permissions in order to run the integration tests.
+            // -> so we just throw an exception here, which means that most of the integration tests will fail
+            if (source.IsAuthenticated)
+            {
+                var info = client.GetLastApiInfo();
+                if (!info.OauthScopes.Contains("repo"))
+                {
+                    throw new SecurityException(string.Format(Resource.ApiGithubNotEnoughScope, source.Title));
+                }
+
+            }
+
             var scm = this.factory.Create(ScmType.Git);
 
             if (repos != null)
             {
-                foreach(var apiRepo in repos)
+                // #29: GetAllForCurrent (see above) returns ALL repos the user has access to (for example, the repos of orgs where the user is a member).
+                // We only want the repos under the user:
+                var userRepos = repos.Where(r => r.Owner.Login == source.Name);
+
+                foreach (var apiRepo in userRepos)
                 {
                     var repo = new HosterRepository(apiRepo.FullName, apiRepo.Name, apiRepo.CloneUrl, ScmType.Git);
 

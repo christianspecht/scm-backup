@@ -1,6 +1,7 @@
 ﻿using ScmBackup.Hosters;
 using ScmBackup.Scm;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using Xunit;
 
@@ -28,10 +29,18 @@ namespace ScmBackup.Tests.Integration.Hosters
         internal virtual string PrivateRepoName { get { return null; } }
         protected virtual void AssertPrivateRepo(string dir) { }
 
+        // skip certain tests because of https://github.com/christianspecht/scm-backup/issues/15
+        // Child classes which need to skip those tests need to implement this and return true
+        protected virtual bool SkipTestsIssue15()
+        {
+            return false;
+        }
 
-        [Fact]
+        [SkippableFact]
         public void MakesBackup()
         {
+            Skip.If(this.SkipTestsIssue15());
+
             Assert.NotNull(this.PublicRepoName); // Note: PrivateRepoName is optional
 
             var dir = DirectoryHelper.CreateTempDirectory(this.DirSuffix("makes-backup"));
@@ -55,6 +64,7 @@ namespace ScmBackup.Tests.Integration.Hosters
         public void MakesBackupOfPrivateRepo()
         {
             Skip.If(this.PrivateRepoName == null, "There's no private repo for this hoster");
+            Skip.If(this.SkipTestsIssue15());
 
             var dir = DirectoryHelper.CreateTempDirectory(this.DirSuffix("makes-backup-private"));
 
@@ -65,9 +75,11 @@ namespace ScmBackup.Tests.Integration.Hosters
             this.AssertPrivateRepo(Path.Combine(dir, sut.SubDirRepo));
         }
 
-        [Fact]
+        [SkippableFact]
         public void DoesntBackupWikiIfNotSet()
         {
+            Skip.If(this.SkipTestsIssue15());
+
             var dir = DirectoryHelper.CreateTempDirectory(this.DirSuffix("doesnt-backup-wiki"));
             this.Setup(false);
 
@@ -78,9 +90,11 @@ namespace ScmBackup.Tests.Integration.Hosters
             Assert.False(Directory.Exists(sut.SubDirWiki));
         }
 
-        [Fact]
+        [SkippableFact]
         public void DoesntBackupIssuesIfNotSet()
         {
+            Skip.If(this.SkipTestsIssue15());
+
             var dir = DirectoryHelper.CreateTempDirectory(this.DirSuffix("doesnt-backup-issues"));
             this.Setup(false);
 
@@ -91,9 +105,11 @@ namespace ScmBackup.Tests.Integration.Hosters
             Assert.False(Directory.Exists(sut.SubDirIssues));
         }
 
-        [Fact]
+        [SkippableFact]
         public void ThrowsWhenScmFactoryIsNull()
         {
+            Skip.If(this.SkipTestsIssue15());
+
             var dir = DirectoryHelper.CreateTempDirectory(this.DirSuffix("throws-when-scmfactory-null"));
             this.Setup(false);
             sut.scmFactory = null;

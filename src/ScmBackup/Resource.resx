@@ -120,8 +120,14 @@
   <data name="ApiAuthenticationFailed" xml:space="preserve">
     <value>Authentication failed for {0}</value>
   </data>
+  <data name="ApiBitbucketCantGetUuid" xml:space="preserve">
+    <value>Unable to get the UUID for username {0} from the Bitbucket API</value>
+  </data>
   <data name="ApiGettingRepos" xml:space="preserve">
     <value>Getting repositories for source '{0}' from hoster '{1}'</value>
+  </data>
+  <data name="ApiGithubNotEnoughScope" xml:space="preserve">
+    <value>Not enough scope for source '{0}'. You need to set at least the "repo" scope, otherwise SCM Backup will backup public repositories only!</value>
   </data>
   <data name="ApiInvalidScmType" xml:space="preserve">
     <value>Couldn't determine SCM type for repository: {0}</value>
@@ -139,7 +145,10 @@
     <value>SCM Backup</value>
   </data>
   <data name="AppWebsite" xml:space="preserve">
-    <value>http://scm-backup.org/</value>
+    <value>https://scm-backup.org/</value>
+  </data>
+  <data name="AuthNameAndNameNotEqual" xml:space="preserve">
+    <value>AuthName and Name must be equal for hoster {0}. If they are different, SCM Backup will backup public repositories only!</value>
   </data>
   <data name="AuthNameAndPasswortEmpty" xml:space="preserve">
     <value>AuthName and Password are empty. Without authentication, SCM Backup will backup public repositories only!</value>

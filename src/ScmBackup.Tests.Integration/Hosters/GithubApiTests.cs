@@ -14,7 +14,7 @@ namespace ScmBackup.Tests.Integration.Hosters
         internal override string HosterCommit { get { return "7be29139f4cdc4037647fc2f21d9d82c42a96e88"; } }
         internal override string HosterWikiCommit { get { return "714ddb8c48cebc70ff2ae74be98ac7cdf91ade6e"; } }
         internal override string HosterPaginationUser { get { return "shanselman"; } }
-        internal override string HosterPrivateRepo { get { return null; } } // see #17
+        internal override string HosterPrivateRepo { get { return TestHelper.EnvVar(this.EnvVarPrefix, "RepoPrivate"); } }
 
         internal override string EnvVarPrefix
         {
@@ -37,6 +37,11 @@ namespace ScmBackup.Tests.Integration.Hosters
             get { return TestHelper.RunsOnAppVeyor(); }
         }
 
+        protected override bool SkipTestsIssue15()
+        {
+            return TestHelper.RunsOnAppVeyor();
+        }
+
         public GithubApiTests()
         {
             var context = new FakeContext();
@@ -46,9 +51,11 @@ namespace ScmBackup.Tests.Integration.Hosters
             this.sut = new GithubApi(context, factory);
         }
 
-        [Fact]
+        [SkippableFact]
         public void SetsWikiToFalseWhenWikiDoesntExist()
         {
+            Skip.If(this.SkipTestsIssue15());
+
             // issue #13: the GitHub API only returns whether it's *possible* to create a wiki, but not if the repo actually *has* a wiki.
 
             // This is a test repo without wiki, but with the "wiki" checkbox set:

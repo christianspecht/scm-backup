@@ -70,11 +70,29 @@ namespace ScmBackup {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Unable to get the UUID for username {0} from the Bitbucket API.
+        /// </summary>
+        internal static string ApiBitbucketCantGetUuid {
+            get {
+                return ResourceManager.GetString("ApiBitbucketCantGetUuid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Getting repositories for source &apos;{0}&apos; from hoster &apos;{1}&apos;.
         /// </summary>
         internal static string ApiGettingRepos {
             get {
                 return ResourceManager.GetString("ApiGettingRepos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Not enough scope for source &apos;{0}&apos;. You need to set at least the &quot;repo&quot; scope, otherwise SCM Backup will backup public repositories only!.
+        /// </summary>
+        internal static string ApiGithubNotEnoughScope {
+            get {
+                return ResourceManager.GetString("ApiGithubNotEnoughScope", resourceCulture);
             }
         }
         
@@ -124,11 +142,20 @@ namespace ScmBackup {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to http://scm-backup.org/.
+        ///   Looks up a localized string similar to https://scm-backup.org/.
         /// </summary>
         internal static string AppWebsite {
             get {
                 return ResourceManager.GetString("AppWebsite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to AuthName and Name must be equal for hoster {0}. If they are different, SCM Backup will backup public repositories only!.
+        /// </summary>
+        internal static string AuthNameAndNameNotEqual {
+            get {
+                return ResourceManager.GetString("AuthNameAndNameNotEqual", resourceCulture);
             }
         }
         

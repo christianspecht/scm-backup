@@ -11,6 +11,11 @@
         public abstract string HosterName { get; }
 
         /// <summary>
+        /// Some APIs require authentication with the same user whose repositories are requested. In this case, set this to True
+        /// </summary>
+        public abstract bool AuthNameAndNameMustBeEqual { get; }
+
+        /// <summary>
         /// basic validation rules which are always the same
         /// </summary>
         public ValidationResult Validate(ConfigSource source)
@@ -19,17 +24,17 @@
 
             if (source.Hoster != this.HosterName)
             {
-                result.AddMessage(ErrorLevel.Error, string.Format(Resource.WrongHoster, source.Hoster));
+                result.AddMessage(ErrorLevel.Error, string.Format(Resource.WrongHoster, source.Hoster), ValidationMessageType.WrongHoster);
             }
 
             if (source.Type != "user" && source.Type != "org")
             {
-                result.AddMessage(ErrorLevel.Error, string.Format(Resource.WrongType, source.Type));
+                result.AddMessage(ErrorLevel.Error, string.Format(Resource.WrongType, source.Type), ValidationMessageType.WrongType);
             }
 
             if (string.IsNullOrWhiteSpace(source.Name))
             {
-                result.AddMessage(ErrorLevel.Error, Resource.NameEmpty);
+                result.AddMessage(ErrorLevel.Error, Resource.NameEmpty, ValidationMessageType.NameEmpty);
             }
 
             bool authNameEmpty = string.IsNullOrWhiteSpace(source.AuthName);
@@ -37,11 +42,19 @@
 
             if (authNameEmpty != passwordEmpty)
             {
-                result.AddMessage(ErrorLevel.Error, Resource.AuthNameOrPasswortEmpty);
+                result.AddMessage(ErrorLevel.Error, Resource.AuthNameOrPasswortEmpty, ValidationMessageType.AuthNameOrPasswortEmpty);
             }
             else if (authNameEmpty && passwordEmpty)
             {
-                result.AddMessage(ErrorLevel.Warn, Resource.AuthNameAndPasswortEmpty);
+                result.AddMessage(ErrorLevel.Warn, Resource.AuthNameAndPasswortEmpty, ValidationMessageType.AuthNameAndPasswortEmpty);
+            }
+
+            if (this.AuthNameAndNameMustBeEqual)
+            {
+                if (source.Type != "org" && source.Name != source.AuthName)
+                {
+                    result.AddMessage(ErrorLevel.Warn, string.Format(Resource.AuthNameAndNameNotEqual, source.Hoster), ValidationMessageType.AuthNameAndNameNotEqual);
+                }
             }
 
             this.ValidateSpecific(result, source);
