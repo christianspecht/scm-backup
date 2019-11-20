@@ -1,6 +1,7 @@
 ﻿using ScmBackup.Http;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
 
@@ -36,23 +37,53 @@ namespace ScmBackup.Hosters.Gitlab
 
             string url = string.Format("/api/v4/{0}/{1}/projects", type, config.Name);
 
-            var result = req.Execute(url).Result;
-            if (result.IsSuccessStatusCode)
+            while (url != null)
             {
-                var response = JsonConvert.DeserializeObject<List<GitlabApiRepo>>(result.Content);
-
-                foreach (var apiRepo in response)
+                var result = req.Execute(url).Result;
+                url = null;
+                if (result.IsSuccessStatusCode)
                 {
-                    var repo = new HosterRepository(apiRepo.path_with_namespace, apiRepo.name, apiRepo.http_url_to_repo, ScmType.Git);
+                    var response = JsonConvert.DeserializeObject<List<GitlabApiRepo>>(result.Content);
 
-                    repo.SetPrivate(apiRepo.visibility == "private");
+                    foreach (var apiRepo in response)
+                    {
+                        var repo = new HosterRepository(apiRepo.path_with_namespace, apiRepo.name, apiRepo.http_url_to_repo, ScmType.Git);
 
-                    repos.Add(repo);
+                        repo.SetPrivate(apiRepo.visibility == "private");
+
+                        // wiki_enabled
+
+                        // TODO: Issues
+                        // _links -> issues ??
+                        // issues_access_level ??
+                        
+                        repos.Add(repo);
+                    }
+                    
+                    if (result.Headers.Contains("Link"))
+                    {
+                        // There are multiple links, but all in one header value
+                        // https://docs.gitlab.com/ee/api/README.html#pagination-link-header
+                        string links = result.Headers.GetValues("Link").First();
+
+                        // The API returns something like this and we need the link named "next":
+                        // <https://gitlab.com/api/foo>; rel="next", <https://gitlab.com/api/bar>; rel="first", <https://gitlab.com/api/baz>; rel="last"
+                        foreach (var link in links.Split(','))
+                        {
+                            var items = link.Split(';');
+                            if (items[1].Contains("next"))
+                            {
+                                url = items[0].Trim('<', '>');
+                                break;
+                            }
+                        }
+                    }
                 }
-            }
-            else
-            {
-                System.Diagnostics.Debugger.Break();
+                else
+                {
+                    // TODO: Exceptions
+                    System.Diagnostics.Debugger.Break();
+                }
             }
 
             return repos;

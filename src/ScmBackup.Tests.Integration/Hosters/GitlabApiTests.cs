@@ -18,7 +18,7 @@ namespace ScmBackup.Tests.Integration.Hosters
 
         internal override string HosterWikiCommit { get { return "5893873f9da26fc59bbeaafde5fad5800907e56f"; } }
 
-        internal override string HosterPaginationUser => throw new NotImplementedException();
+        internal override string HosterPaginationUser { get { return "dzaporozhets"; } }
 
         internal override string HosterPrivateRepo { get { return TestHelper.EnvVar(this.EnvVarPrefix, "RepoPrivate"); } }
 
@@ -26,7 +26,7 @@ namespace ScmBackup.Tests.Integration.Hosters
 
         internal override string ConfigHoster { get { return "gitlab"; } }
 
-        internal override int Pagination_MinNumberOfRepos => throw new NotImplementedException();
+        internal override int Pagination_MinNumberOfRepos { get { return 20; } } // https://docs.gitlab.com/ee/api/README.html#pagination
 
         internal override bool SkipUnauthenticatedTests { get { return false; } }
 
