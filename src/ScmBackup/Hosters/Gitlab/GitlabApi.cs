@@ -73,7 +73,7 @@ namespace ScmBackup.Hosters.Gitlab
                             var items = link.Split(';');
                             if (items[1].Contains("next"))
                             {
-                                url = items[0].Trim('<', '>');
+                                url = items[0].Trim('<', '>', ' ');
                                 break;
                             }
                         }
