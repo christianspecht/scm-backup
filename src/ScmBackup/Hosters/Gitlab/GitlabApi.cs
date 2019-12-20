@@ -30,14 +30,16 @@ namespace ScmBackup.Hosters.Gitlab
                 this.req.AddHeader("Private-Token", config.Password);
             }
 
-            string type = "groups";
+            string type = "users";
+            string args = string.Empty;
 
-            if (config.Type.ToLower() == "user")
+            if (config.Type.ToLower() != "user")
             {
-                type = "users";
+                type = "groups";
+                args = "?include_subgroups=true";
             }
 
-            string url = string.Format("/api/v4/{0}/{1}/projects", type, config.Name);
+            string url = string.Format("/api/v4/{0}/{1}/projects{2}", type, config.Name, args);
 
             while (url != null)
             {
