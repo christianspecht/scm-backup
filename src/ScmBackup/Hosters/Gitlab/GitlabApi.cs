@@ -1,9 +1,11 @@
-﻿using ScmBackup.Http;
+﻿using Newtonsoft.Json;
+using ScmBackup.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using Newtonsoft.Json;
+using System.Net;
+using System.Security;
+using System.Security.Authentication;
 
 namespace ScmBackup.Hosters.Gitlab
 {
@@ -81,8 +83,15 @@ namespace ScmBackup.Hosters.Gitlab
                 }
                 else
                 {
-                    // TODO: Exceptions
-                    System.Diagnostics.Debugger.Break();
+                    switch (result.Status)
+                    {
+                        case HttpStatusCode.Unauthorized:
+                            throw new AuthenticationException(string.Format(Resource.ApiAuthenticationFailed, config.AuthName));
+                        case HttpStatusCode.Forbidden:
+                            throw new SecurityException(Resource.ApiMissingPermissions);
+                        case HttpStatusCode.NotFound:
+                            throw new InvalidOperationException(string.Format(Resource.ApiInvalidUsername, config.Name));
+                    }
                 }
             }
 
