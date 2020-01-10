@@ -20,7 +20,7 @@ namespace ScmBackup.Hosters
         {
             if (this.scmFactory == null)
             {
-                throw new ArgumentNullException("!!");
+                throw new InvalidOperationException(string.Format(Resource.BackupBase_IScmfactoryIsMissing, source.Hoster));
             }
 
             ScmCredentials credentials = null;
