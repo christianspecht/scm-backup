@@ -118,6 +118,20 @@ namespace ScmBackup.Tests.Integration.Hosters
         }
 
         /// <summary>
+        /// default logic to assert whether dir is a valid repository
+        /// </summary>
+        protected void DefaultRepoAssert(string dir, string commit = "")
+        {
+            Assert.True(Directory.Exists(dir));
+            Assert.True(this.scm.DirectoryIsRepository(dir));
+
+            if (!string.IsNullOrEmpty(commit))
+            {
+                Assert.True(scm.RepositoryContainsCommit(dir, commit));
+            }
+        }
+
+        /// <summary>
         /// gets user name for public or private repo
         /// </summary>
         protected string GetUserName(bool usePrivateRepo)
