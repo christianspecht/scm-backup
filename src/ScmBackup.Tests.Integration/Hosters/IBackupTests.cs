@@ -114,7 +114,7 @@ namespace ScmBackup.Tests.Integration.Hosters
             this.Setup(false);
             sut.scmFactory = null;
 
-            Assert.Throws<ArgumentNullException>(() => sut.MakeBackup(this.source, this.repo, dir));
+            Assert.Throws<InvalidOperationException>(() => sut.MakeBackup(this.source, this.repo, dir));
         }
 
         /// <summary>
