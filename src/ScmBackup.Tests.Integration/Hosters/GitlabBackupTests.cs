@@ -34,7 +34,10 @@ namespace ScmBackup.Tests.Integration.Hosters
             var context = new FakeContext();
             context.Config = config;
 
-            var api = new GitlabApi(new HttpRequest());
+            var factory = new FakeScmFactory();
+            factory.Register(ScmType.Git, new GitScm(new FileSystemHelper(), context));
+
+            var api = new GitlabApi(new HttpRequest(), factory);
             var repoList = api.GetRepositoryList(this.source);
             this.repo = repoList.Find(r=>r.ShortName == this.GetRepoName(usePrivateRepo));
 
@@ -54,6 +57,11 @@ namespace ScmBackup.Tests.Integration.Hosters
         protected override void AssertPrivateRepo(string dir)
         {
             this.DefaultRepoAssert(dir);
+        }
+
+        protected override void AssertWiki(string dir)
+        {
+            this.DefaultRepoAssert(dir, "5893873f9da26fc59bbeaafde5fad5800907e56f");
         }
     }
 }

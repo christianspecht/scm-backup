@@ -1,21 +1,25 @@
 ﻿using Newtonsoft.Json;
 using ScmBackup.Http;
+using ScmBackup.Scm;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Security;
 using System.Security.Authentication;
+using System.Threading.Tasks;
 
 namespace ScmBackup.Hosters.Gitlab
 {
     internal class GitlabApi : IHosterApi
     {
         private readonly IHttpRequest req;
+        private readonly IScmFactory factory;
 
-        public GitlabApi(IHttpRequest req)
+        public GitlabApi(IHttpRequest req, IScmFactory factory)
         {
             this.req = req;
+            this.factory = factory;
         }
 
         public List<HosterRepository> GetRepositoryList(ConfigSource config)
@@ -39,6 +43,8 @@ namespace ScmBackup.Hosters.Gitlab
                 args = "?include_subgroups=true";
             }
 
+            var scm = this.factory.Create(ScmType.Git);
+
             string url = string.Format("/api/v4/{0}/{1}/projects{2}", type, config.Name, args);
 
             while (url != null)
@@ -51,19 +57,40 @@ namespace ScmBackup.Hosters.Gitlab
 
                     foreach (var apiRepo in response)
                     {
-                        var repo = new HosterRepository(apiRepo.path_with_namespace, apiRepo.name, apiRepo.http_url_to_repo, ScmType.Git);
+                        string cloneUrl = apiRepo.http_url_to_repo;
+
+                        var repo = new HosterRepository(apiRepo.path_with_namespace, apiRepo.name, cloneUrl, ScmType.Git);
 
                         repo.SetPrivate(apiRepo.visibility == "private");
 
-                        // wiki_enabled
+                        // wiki: the API only returns if it's enabled, but not if it actually contains pages
+                        // The Git repo always exists, even when the wiki has no pages.
+                        // So we can't check for the existence of the Git repo -> we need to make another API call to check if it has at least one page
+                        if (apiRepo.wiki_enabled && cloneUrl.EndsWith(".git"))
+                        {
+                            // Rate limit of 10 requests per second per IP address (https://docs.gitlab.com/ee/user/gitlab_com/index.html#gitlabcom-specific-rate-limits)
+                            // --> block long enough so that 10 requests will take longer than a second
+                            Task.Delay(110).Wait();
+
+                            string wikiUrl = string.Format("/api/v4/projects/{0}/wikis", apiRepo.id);
+                            var wikiResult = req.Execute(wikiUrl).Result;
+                            if (wikiResult.IsSuccessStatusCode)
+                            {
+                                var wikis = JsonConvert.DeserializeObject<List<GitlabApiWiki>>(wikiResult.Content);
+                                if (wikis.Any())
+                                {
+                                    repo.SetWiki(true, cloneUrl.Substring(0, cloneUrl.Length - ".git".Length) + ".wiki.git");
+                                }
+                            }
+                        }
 
                         // TODO: Issues
                         // _links -> issues ??
                         // issues_access_level ??
-                        
+
                         repos.Add(repo);
                     }
-                    
+
                     if (result.Headers.Contains("Link"))
                     {
                         // There are multiple links, but all in one header value

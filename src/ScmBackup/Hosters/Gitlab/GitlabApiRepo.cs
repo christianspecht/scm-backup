@@ -7,6 +7,7 @@ namespace ScmBackup.Hosters.Gitlab
 {
     internal class GitlabApiRepo
     {
+        public int id { get; set; }
         public string name { get; set; }
         public string path_with_namespace { get; set; }
         public string http_url_to_repo { get; set; }

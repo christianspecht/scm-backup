@@ -1,5 +1,6 @@
 ﻿using ScmBackup.Hosters.Gitlab;
 using ScmBackup.Http;
+using ScmBackup.Scm;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -32,7 +33,11 @@ namespace ScmBackup.Tests.Integration.Hosters
 
         public GitlabApiTests()
         {
-            this.sut = new GitlabApi(new HttpRequest());
+            var context = new FakeContext();
+            var factory = new FakeScmFactory();
+            factory.Register(ScmType.Git, new GitScm(new FileSystemHelper(), context));
+
+            this.sut = new GitlabApi(new HttpRequest(), factory);
         }
     }
 }

@@ -14,13 +14,12 @@ namespace ScmBackup.Hosters.Gitlab
 
         public override void BackupRepo(string subdir, ScmCredentials credentials)
         {
-            InitScm();
-            scm.PullFromRemote(this.repo.CloneUrl, subdir, credentials);
+            this.DefaultBackup(this.repo.CloneUrl, subdir, credentials);
+        }
 
-            if (!scm.DirectoryIsRepository(subdir))
-            {
-                throw new InvalidOperationException(Resource.DirectoryNoRepo);
-            }
+        public override void BackupWiki(string subdir, ScmCredentials credentials)
+        {
+            this.DefaultBackup(this.repo.WikiUrl, subdir, credentials);
         }
     }
 }
