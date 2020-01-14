@@ -51,5 +51,9 @@ namespace ScmBackup.Tests.Integration.Hosters
             this.DefaultRepoAssert(dir, "d7c9ad8185b7707dbcc907e41154e3e5e5b2a540");
         }
 
+        protected override void AssertPrivateRepo(string dir)
+        {
+            this.DefaultRepoAssert(dir);
+        }
     }
 }
