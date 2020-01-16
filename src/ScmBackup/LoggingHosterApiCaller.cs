@@ -1,5 +1,6 @@
 ﻿using ScmBackup.Hosters;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ScmBackup
 {
@@ -17,7 +18,20 @@ namespace ScmBackup
         public List<HosterRepository> GetRepositoryList(ConfigSource source)
         {
             this.logger.Log(ErrorLevel.Info, Resource.ApiGettingRepos, source.Title, source.Hoster);
-            return this.caller.GetRepositoryList(source);
+            var repos = this.caller.GetRepositoryList(source);
+
+            // #40: Bitbucket will remove all Mercurial repos on Jun 01 2020 -> show warning when the list contains at least one
+            if (source.Hoster == "bitbucket")
+            {
+                var hgrepos = repos.Where(r => r.Scm == ScmType.Mercurial).Count();
+
+                if (hgrepos > 0)
+                {
+                    this.logger.Log(ErrorLevel.Warn,Resource.BitbucketMercurialWarning, hgrepos);
+                }
+            }
+
+            return repos;
         }
     }
 }
