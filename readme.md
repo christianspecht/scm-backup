@@ -9,6 +9,7 @@ At the moment, the following hosters are supported:
 
 - [GitHub](https://github.com)
 - [Bitbucket](https://bitbucket.org)
+- [GitLab](https://gitlab.com)
 
   
 And it's written in [.NET Core](https://dotnet.github.io/), which means that it's supposed to run on Windows, Linux **and** MacOS.
