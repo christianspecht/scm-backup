@@ -16,6 +16,11 @@ namespace ScmBackup.Hosters.Gitlab
         private readonly IHttpRequest req;
         private readonly IScmFactory factory;
 
+        // Wait time between API calls (for API "subcalls" per repo)
+        // Reason: Rate limit of 10 requests per second per IP address (https://docs.gitlab.com/ee/user/gitlab_com/index.html#gitlabcom-specific-rate-limits)
+        // --> block long enough so that 10 requests will take longer than a second
+        private const int ApiWaitTime = 110;
+
         public GitlabApi(IHttpRequest req, IScmFactory factory)
         {
             this.req = req;
@@ -68,9 +73,7 @@ namespace ScmBackup.Hosters.Gitlab
                         // So we can't check for the existence of the Git repo -> we need to make another API call to check if it has at least one page
                         if (apiRepo.wiki_enabled && cloneUrl.EndsWith(".git"))
                         {
-                            // Rate limit of 10 requests per second per IP address (https://docs.gitlab.com/ee/user/gitlab_com/index.html#gitlabcom-specific-rate-limits)
-                            // --> block long enough so that 10 requests will take longer than a second
-                            Task.Delay(110).Wait();
+                            Task.Delay(GitlabApi.ApiWaitTime).Wait();
 
                             string wikiUrl = string.Format("/api/v4/projects/{0}/wikis", apiRepo.id);
                             var wikiResult = req.Execute(wikiUrl).Result;
@@ -93,8 +96,7 @@ namespace ScmBackup.Hosters.Gitlab
                             // So if it doesn't have at least one *open* issues, we need to find out via Issues Statistics API if it has issues at all
                             if (!hasIssues)
                             {
-                                // block because of rate limit again (see wiki above)
-                                Task.Delay(110).Wait();
+                                Task.Delay(GitlabApi.ApiWaitTime).Wait();
 
                                 string issueUrl = string.Format("/api/v4/projects/{0}/issues_statistics", apiRepo.id);
                                 var issueResult = req.Execute(issueUrl).Result;
