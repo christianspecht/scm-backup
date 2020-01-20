@@ -84,9 +84,35 @@ namespace ScmBackup.Hosters.Gitlab
                             }
                         }
 
-                        // TODO: Issues
-                        // _links -> issues ??
-                        // issues_access_level ??
+                        // Issues: like wikis, it's possible that issues are enabled, but the repo doesn't have any. We need to find out if there's at least one
+                        if (apiRepo.issues_enabled)
+                        {
+                            // The "main" API call returns the number of open issues only
+                            bool hasIssues = (apiRepo.open_issues_count > 0);
+
+                            // So if it doesn't have at least one *open* issues, we need to find out via Issues Statistics API if it has issues at all
+                            if (!hasIssues)
+                            {
+                                // block because of rate limit again (see wiki above)
+                                Task.Delay(110).Wait();
+
+                                string issueUrl = string.Format("/api/v4/projects/{0}/issues_statistics", apiRepo.id);
+                                var issueResult = req.Execute(issueUrl).Result;
+                                if (issueResult.IsSuccessStatusCode)
+                                {
+                                    var stats = JsonConvert.DeserializeObject<GitlabApiIssueStats>(issueResult.Content);
+                                    hasIssues = (stats.statistics.counts.all > 0);
+                                }
+                            }
+
+                            if (hasIssues)
+                            {
+                                if (apiRepo._links.ContainsKey("issues"))
+                                {
+                                    repo.SetIssues(true, apiRepo._links["issues"]);
+                                }
+                            }
+                        }
 
                         repos.Add(repo);
                     }

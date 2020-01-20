@@ -21,5 +21,10 @@ namespace ScmBackup.Hosters.Gitlab
         {
             this.DefaultBackup(this.repo.WikiUrl, subdir, credentials);
         }
+
+        public override void BackupIssues(string subdir, ScmCredentials credentials)
+        {
+            // TODO: call API (this.repo.IssueUrl)
+        }
     }
 }

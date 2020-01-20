@@ -13,6 +13,8 @@ namespace ScmBackup.Hosters.Gitlab
         public string http_url_to_repo { get; set; }
         public string visibility { get; set; }
         public bool issues_enabled { get; set; }
+        public int open_issues_count { get; set; }
         public bool wiki_enabled { get; set; }
+        public Dictionary<string,string> _links { get; set; }
     }
 }
