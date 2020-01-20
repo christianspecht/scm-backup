@@ -114,7 +114,21 @@ namespace ScmBackup.Tests.Integration.Hosters
             this.Setup(false);
             sut.scmFactory = null;
 
-            Assert.Throws<ArgumentNullException>(() => sut.MakeBackup(this.source, this.repo, dir));
+            Assert.Throws<InvalidOperationException>(() => sut.MakeBackup(this.source, this.repo, dir));
+        }
+
+        /// <summary>
+        /// default logic to assert whether dir is a valid repository
+        /// </summary>
+        protected void DefaultRepoAssert(string dir, string commit = "")
+        {
+            Assert.True(Directory.Exists(dir));
+            Assert.True(this.scm.DirectoryIsRepository(dir));
+
+            if (!string.IsNullOrEmpty(commit))
+            {
+                Assert.True(scm.RepositoryContainsCommit(dir, commit));
+            }
         }
 
         /// <summary>

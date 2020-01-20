@@ -10,3 +10,7 @@ $env:Bitbucket_Name = 'scm-backup-testuser'                             # User f
 $env:Bitbucket_PW = 'not-the-real-password'                             # the user's app password
 $env:Bitbucket_RepoPrivate = 'scm-backup-test-private-hg'               # MERCURIAL: a private repository
 $env:Bitbucket_RepoPrivateGit = 'scm-backup-test-private-git'           # GIT: a private repository
+
+$env:Gitlab_Name = 'scm-backup-testuser'                                # User for authentication. Must have read permission for private repo.
+$env:Gitlab_PW = 'not-the-real-password'                                # the user's personal access token
+$env:Gitlab_RepoPrivate = 'scm-backup-test-private'                     # a private repository

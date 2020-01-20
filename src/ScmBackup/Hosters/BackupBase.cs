@@ -20,7 +20,7 @@ namespace ScmBackup.Hosters
         {
             if (this.scmFactory == null)
             {
-                throw new ArgumentNullException("!!");
+                throw new InvalidOperationException(string.Format(Resource.BackupBase_IScmfactoryIsMissing, source.Hoster));
             }
 
             ScmCredentials credentials = null;
@@ -65,5 +65,19 @@ namespace ScmBackup.Hosters
         // these can be implemented in the child classes IF the given hoster has issues, a wiki...
         public virtual void BackupWiki(string subdir, ScmCredentials credentials) { }
         public virtual void BackupIssues(string subdir, ScmCredentials credentials) { }
+
+        /// <summary>
+        /// default implementation for backups if nothing special is needed
+        /// </summary>
+        protected void DefaultBackup(string cloneurl, string subdir, ScmCredentials credentials)
+        {
+            InitScm();
+            scm.PullFromRemote(cloneurl, subdir, credentials);
+
+            if (!scm.DirectoryIsRepository(subdir))
+            {
+                throw new InvalidOperationException(Resource.DirectoryNoRepo);
+            }
+        }
     }
 }

@@ -159,6 +159,9 @@
   <data name="BackingUpConfigs" xml:space="preserve">
     <value>Backing up config files</value>
   </data>
+  <data name="BackupBase_IScmfactoryIsMissing" xml:space="preserve">
+    <value>Missing IScmFactory instance in BackupBase implementation for hoster {0}</value>
+  </data>
   <data name="BackupFailed" xml:space="preserve">
     <value>Backup failed!</value>
   </data>
