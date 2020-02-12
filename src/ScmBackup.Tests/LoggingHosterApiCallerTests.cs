@@ -1,4 +1,5 @@
-﻿using ScmBackup.Hosters;
+﻿using ScmBackup.Configuration;
+using ScmBackup.Hosters;
 using ScmBackup.Tests.Hosters;
 using System.Collections.Generic;
 using Xunit;
