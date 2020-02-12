@@ -15,6 +15,14 @@ namespace ScmBackup.Tests.Integration.Hosters
         internal override string PublicUserName { get { return "scm-backup-testuser"; } }
         internal override string PublicRepoName { get { return "scm-backup"; } }
 
+        internal override string PrivateUserName { get { return TestHelper.EnvVar("Github_Name"); } }
+        internal override string PrivateRepoName { get { return TestHelper.EnvVar("Github_RepoPrivate"); } }
+
+        protected override bool SkipTestsIssue15()
+        {
+            return TestHelper.RunsOnAppVeyor();
+        }
+
         protected override void Setup(bool usePrivateRepo)
         {
             // re-use test repo for GithubApi tests
@@ -34,16 +42,26 @@ namespace ScmBackup.Tests.Integration.Hosters
             var factory = new FakeScmFactory();
             factory.Register(ScmType.Git, new GitScm(new FileSystemHelper(), context));
 
+            var logger = new TestLogger("GithubBackupTests");
+            logger.Log(ErrorLevel.Debug, "factory created");
+
             var api = new GithubApi(context, factory);
             this.repoList = api.GetRepositoryList(this.source);
+
+            logger.Log(ErrorLevel.Debug, "API call finished");
+
             this.repo = this.repoList.Find(r => r.ShortName == this.GetRepoName(usePrivateRepo));
             
             this.scm = new GitScm(new FileSystemHelper(), context);
             Assert.True(this.scm.IsOnThisComputer());
 
+            logger.Log(ErrorLevel.Debug, "Git found: {0}", this.scm.GetVersionNumber());
+
             var scmFactory = new FakeScmFactory();
             scmFactory.Register(ScmType.Git, this.scm);
             this.sut = new GithubBackup(scmFactory);
+
+            logger.Log(ErrorLevel.Debug, "Setup finished");
         }
 
         protected override void AssertRepo(string dir)
@@ -58,6 +76,12 @@ namespace ScmBackup.Tests.Integration.Hosters
             Assert.True(Directory.Exists(dir));
             Assert.True(this.scm.DirectoryIsRepository(dir));
             Assert.True(scm.RepositoryContainsCommit(dir, "714ddb8c48cebc70ff2ae74be98ac7cdf91ade6e"));
+        }
+
+        protected override void AssertPrivateRepo(string dir)
+        {
+            Assert.True(Directory.Exists(dir));
+            Assert.True(this.scm.DirectoryIsRepository(dir));
         }
     }
 }

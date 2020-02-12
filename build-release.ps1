@@ -5,7 +5,7 @@ if ($env:APPVEYOR) {
     # We are on AppVeyor
     # - environment variables are set in the AppVeyor settings
     # - version-number.ps1 was already called before AssemblyInfo patching
-
+    
 }
 else {
 

@@ -7,6 +7,7 @@ namespace ScmBackup.Hosters
     /// </summary>
     internal interface IConfigSourceValidator
     {
+        bool AuthNameAndNameMustBeEqual { get; }
         ValidationResult Validate(ConfigSource config);
     }
 }

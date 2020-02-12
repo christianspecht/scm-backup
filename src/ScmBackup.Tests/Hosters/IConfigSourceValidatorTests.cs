@@ -26,8 +26,10 @@ namespace ScmBackup.Tests.Hosters
             var result = sut.Validate(config);
 
             Assert.False(result.IsValid);
-            Assert.Single(result.Messages);
-            Assert.Equal(ErrorLevel.Error, result.Messages[0].Error);
+            Assert.NotEmpty(result.Messages);
+
+            var message = result.Messages.First(r => r.Type == ValidationMessageType.WrongHoster);
+            Assert.Equal(ErrorLevel.Error, message.Error);
         }
 
         [Theory]
@@ -40,8 +42,10 @@ namespace ScmBackup.Tests.Hosters
             var result = sut.Validate(config);
 
             Assert.False(result.IsValid);
-            Assert.Single(result.Messages);
-            Assert.Equal(ErrorLevel.Error, result.Messages[0].Error);
+            Assert.NotEmpty(result.Messages);
+
+            var message = result.Messages.First(r => r.Type == ValidationMessageType.WrongType);
+            Assert.Equal(ErrorLevel.Error, message.Error);
         }
 
         [Theory]
@@ -68,8 +72,11 @@ namespace ScmBackup.Tests.Hosters
             var result = sut.Validate(config);
 
             Assert.False(result.IsValid);
-            Assert.Single(result.Messages);
-            Assert.Equal(ErrorLevel.Error, result.Messages[0].Error);
+            Assert.NotEmpty(result.Messages);
+
+            var message = result.Messages.First(r => r.Type == ValidationMessageType.NameEmpty);
+            Assert.Equal(ErrorLevel.Error, message.Error);
+
         }
 
         [Theory]
@@ -85,8 +92,11 @@ namespace ScmBackup.Tests.Hosters
             var result = sut.Validate(config);
 
             Assert.False(result.IsValid);
-            Assert.Single(result.Messages);
-            Assert.Equal(ErrorLevel.Error, result.Messages[0].Error);
+
+            Assert.NotEmpty(result.Messages);
+
+            var message = result.Messages.First(r => r.Type == ValidationMessageType.AuthNameOrPasswortEmpty);
+            Assert.Equal(ErrorLevel.Error, message.Error);
         }
 
         [Theory]
@@ -101,8 +111,44 @@ namespace ScmBackup.Tests.Hosters
             var result = sut.Validate(config);
 
             Assert.True(result.IsValid);
-            Assert.Single(result.Messages);
-            Assert.Equal(ErrorLevel.Warn, result.Messages[0].Error);
+            Assert.NotEmpty(result.Messages);
+
+            var message = result.Messages.First(r => r.Type == ValidationMessageType.AuthNameAndPasswortEmpty);
+            Assert.Equal(ErrorLevel.Warn, message.Error);
+        }
+
+        [Fact]
+        public void AuthNameAndName_AreNotEqual()
+        {
+            config.Name = "foo";
+            config.AuthName = "bar";
+            var result = sut.Validate(config);
+
+            var message = result.Messages.FirstOrDefault(r => r.Type == ValidationMessageType.AuthNameAndNameNotEqual);
+
+            if (sut.AuthNameAndNameMustBeEqual)
+            {
+                Assert.NotEmpty(result.Messages);
+                Assert.NotNull(message);               
+                Assert.Equal(ErrorLevel.Warn, message.Error);
+            }
+            else
+            {
+                Assert.NotNull(message);
+            }
+        }
+
+        [Fact]
+        public void AuthNameAndName_NotEqualDoesntMatterForOrgs()
+        {
+            config.Type = "org";
+            config.Name = "foo";
+            config.AuthName = "bar";
+            var result = sut.Validate(config);
+
+            var message = result.Messages.FirstOrDefault(r => r.Type == ValidationMessageType.AuthNameAndNameNotEqual);
+
+            Assert.Null(message);
         }
     }
 }

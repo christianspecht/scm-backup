@@ -25,7 +25,7 @@ namespace ScmBackup.Configuration
                 this.config = new Config();
 
                 var input = File.ReadAllText(this.ConfigFileName);
-                var deserializer = new DeserializerBuilder().WithNamingConvention(new CamelCaseNamingConvention()).Build();
+                var deserializer = new DeserializerBuilder().WithNamingConvention(CamelCaseNamingConvention.Instance).Build();
                 this.config = deserializer.Deserialize<Config>(input);
             }
 

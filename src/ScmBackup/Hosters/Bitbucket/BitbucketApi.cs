@@ -31,7 +31,37 @@ namespace ScmBackup.Hosters.Bitbucket
                 request.AddBasicAuthHeader(source.AuthName, source.Password);
             }
 
-            string url = "/2.0/repositories/" + source.Name;
+            string url = string.Empty;
+            string apiUsername = null;
+
+            // Issue #32: from Apr 29 2019, usernames (not team names) must be replaced by UUIDs
+            if (source.Type.ToLower() == "user")
+            {
+                url = "/2.0/users/" + source.Name;
+
+                var result = request.Execute(url).Result;
+
+                if (result.IsSuccessStatusCode)
+                {
+                    var apiResponse = JsonConvert.DeserializeObject<BitbucketApiUserResponse>(result.Content);
+                    if (apiResponse != null)
+                    {
+                        apiUsername = Uri.EscapeUriString(apiResponse.uuid);
+                    }
+                }
+
+                if (string.IsNullOrWhiteSpace(apiUsername))
+                {
+                    throw new InvalidOperationException(string.Format(Resource.ApiBitbucketCantGetUuid, source.Name));
+                }
+            }
+            else
+            {
+                apiUsername = source.Name;
+            }
+
+
+            url = "/2.0/repositories/" + apiUsername;
 
             while (url != null)
             {

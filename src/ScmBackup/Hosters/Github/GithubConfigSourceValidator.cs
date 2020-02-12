@@ -9,5 +9,10 @@
         {
             get { return "github"; }
         }
+
+        public override bool AuthNameAndNameMustBeEqual
+        {
+            get { return true; }
+        }
     }
 }

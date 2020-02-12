@@ -11,7 +11,7 @@ namespace ScmBackup.Tests.Hosters
             config.Hoster = "bitbucket";
             config.Type = "user";
             config.Name = "foo";
-            config.AuthName = "authname";
+            config.AuthName = config.Name;
             config.Password = "pass";
 
             sut = new BitbucketConfigSourceValidator();
