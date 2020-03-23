@@ -3,7 +3,7 @@ from PIL import Image, ImageFont, ImageDraw, ImageEnhance
 
 # define fonts
 font_logo = ImageFont.truetype('calibrib.ttf', 64)
-font = ImageFont.truetype('calibri.ttf', 36)
+font = ImageFont.truetype('calibri.ttf', 30)
 
 
 # empty image
@@ -12,18 +12,18 @@ dr = ImageDraw.Draw(img)
 
 
 # logo
-logo = Image.open('../img/logo200x200.png').convert("RGBA")
-img.paste(logo, (35,35), logo)
+logo = Image.open('../img/logo128x128.png').convert("RGBA")
+img.paste(logo, (35,25), logo)
 
 
 # logo text
-dr.text((250,100), 'SCM Backup', font=font_logo, fill='black')
+dr.text((220,65), 'SCM Backup', font=font_logo, fill='black')
 
 
 # blue box
-dr.rectangle(((0, 250), (600, 350)), fill='#239FE6')
-dr.text((50,260), 'Make offline backups of your cloud', font=font, fill='white')
-dr.text((50,310), 'hosted source code repositories', font=font, fill='white')
+dr.rectangle(((0, 170), (600, 250)), fill='#239FE6')
+dr.text((50,180), 'Make offline backups of your cloud', font=font, fill='white')
+dr.text((50,210), 'hosted source code repositories', font=font, fill='white')
 
 
 # "Contribute" text
