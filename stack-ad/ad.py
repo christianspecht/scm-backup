@@ -22,8 +22,8 @@ dr.text((220,65), 'SCM Backup', font=font_logo, fill='black')
 
 # blue box
 dr.rectangle(((0, 170), (600, 250)), fill='#239FE6')
-dr.text((50,180), 'Make offline backups of your cloud', font=font, fill='white')
-dr.text((50,210), 'hosted source code repositories', font=font, fill='white')
+dr.text((75,180), 'Makes offline backups of your cloud', font=font, fill='white')
+dr.text((75,210), 'hosted source code repositories', font=font, fill='white')
 
 
 # "Contribute" text
