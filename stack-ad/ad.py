@@ -28,8 +28,8 @@ dr.text((75,230), 'hosted source code repositories', font=font, fill='white')
 
 
 # "Contribute" text
-dr.text((75,300), 'Help us implement support', font=font, fill='black')
-dr.text((75,330), 'for more hosting sites!', font=font, fill='black')
+dr.text((75,300), 'Help us implement support for backing', font=font, fill='black')
+dr.text((75,330), 'up from more hosting sites!', font=font, fill='black')
 dr.text((75,360), '(in C#)', font=font, fill='black')
 dr.text((50,430), 'Contribute on GitHub', font=font_cont, fill='black')
 
