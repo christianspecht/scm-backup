@@ -46,6 +46,7 @@ namespace ScmBackup.CompositionRoot
             container.Register<IConfigBackupMaker, ConfigBackupMaker>();
 
             container.Register<IConfigReader, ConfigReader>(Lifestyle.Singleton);
+            container.RegisterDecorator<IConfigReader, EnvironmentVariableConfigReader>(Lifestyle.Singleton); 
             container.RegisterDecorator<IConfigReader, ValidatingConfigReader>(Lifestyle.Singleton);
 
             container.Register<IHttpRequest, HttpRequest>();

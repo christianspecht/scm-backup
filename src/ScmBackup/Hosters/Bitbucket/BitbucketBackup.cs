@@ -14,26 +14,12 @@ namespace ScmBackup.Hosters.Bitbucket
 
         public override void BackupRepo(string subdir, ScmCredentials credentials)
         {
-            this.InitScm();
-
-            this.scm.PullFromRemote(this.repo.CloneUrl, subdir, credentials);
-
-            if (!this.scm.DirectoryIsRepository(subdir))
-            {
-                throw new InvalidOperationException(Resource.DirectoryNoRepo);
-            }
+            this.DefaultBackup(this.repo.CloneUrl, subdir, credentials);
         }
 
         public override void BackupWiki(string subdir, ScmCredentials credentials)
         {
-            this.InitScm();
-
-            this.scm.PullFromRemote(this.repo.WikiUrl, subdir, credentials);
-
-            if (!this.scm.DirectoryIsRepository(subdir))
-            {
-                throw new InvalidOperationException(Resource.DirectoryNoRepo);
-            }
+            this.DefaultBackup(this.repo.WikiUrl, subdir, credentials);
         }
     }
 }
