@@ -36,7 +36,7 @@ namespace ScmBackup.Hosters.Bitbucket
             // Issue #32: from Apr 29 2019, usernames (not team names) must be replaced by UUIDs
             if (source.Type.ToLower() == "user")
             {
-                url = "/2.0/users/" + source.Name;
+                url = "/2.0/workspaces/" + source.Name;
 
                 var result = request.Execute(url).Result;
 
