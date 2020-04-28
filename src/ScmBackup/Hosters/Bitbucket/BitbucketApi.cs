@@ -45,12 +45,18 @@ namespace ScmBackup.Hosters.Bitbucket
                     Dictionary<string, string> repo;
                     if (apiResponse.links.TryGetValue("repositories", out repo))
                     {
-                        if (!repo.TryGetValue("href", out url))
-                        {
-                            throw new InvalidOperationException(string.Format("no workspace", source.Name));
-                        }
+                        repo.TryGetValue("href", out url);
                     }
                 }
+            }
+            else
+            {
+                throw new InvalidOperationException(string.Format(Resource.ApiBitbucketNoWorkspace, source.Name));
+            }
+
+            if (string.IsNullOrWhiteSpace(url))
+            {
+                throw new InvalidOperationException(string.Format(Resource.ApiBitbucketNoRepoUrl, source.Name));
             }
 
             // 2. load repositories
