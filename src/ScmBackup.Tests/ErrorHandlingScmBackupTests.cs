@@ -35,5 +35,15 @@ namespace ScmBackup.Tests
             // we can't check whether the last exception is the exception from above,
             // because there are more logging outputs after the exception.
         }
+
+        [Fact]
+        public void ReturnsFalseWhenExceptionIsThrown()
+        {
+            var (_, backup) = BuildFakeScmBackup();
+
+            var result = backup.Run();
+
+            Assert.False(result);
+        }
     }
 }

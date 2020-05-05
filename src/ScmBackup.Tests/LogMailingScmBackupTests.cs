@@ -5,9 +5,10 @@ namespace ScmBackup.Tests
 {
     public class LogMailingScmBackupTests
     {
-        static (FakeEmailSender mail, LogMailingScmBackup sut) BuildFakeLogMailingScmBackup()
+        static (FakeEmailSender mail, LogMailingScmBackup sut) BuildFakeLogMailingScmBackup(bool innerReturnValue)
         {
             var subBackup = new FakeScmBackup();
+            subBackup.ToReturn = innerReturnValue;
 
             var messages = new LogMessages();
             messages.AddMessage("1");
@@ -22,7 +23,7 @@ namespace ScmBackup.Tests
         [Fact]
         public void RunSendsMail()
         {
-            var (mail, sut) = BuildFakeLogMailingScmBackup();
+            var (mail, sut) = BuildFakeLogMailingScmBackup(true);
 
             sut.Run();
 
@@ -30,6 +31,18 @@ namespace ScmBackup.Tests
             Assert.NotNull(mail.LastBody);
             Assert.Contains("1", mail.LastBody);
             Assert.Contains("2", mail.LastBody);
+        }
+
+        [Theory]
+        [InlineData(true)]
+        [InlineData(false)]
+        public void RunReturnsValueFromInnerExecution(bool innerReturnValue)
+        {
+            var (mail, sut) = BuildFakeLogMailingScmBackup(innerReturnValue);
+
+            var result = sut.Run();
+
+            Assert.Equal(result, innerReturnValue);
         }
     }
 }

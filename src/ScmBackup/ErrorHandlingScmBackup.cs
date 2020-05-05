@@ -27,14 +27,14 @@ namespace ScmBackup
             this.WaitSecondsOnError = 5;
         }
 
-        public void Run()
+        public bool Run()
         {
             string className = this.GetType().Name;
 
             try
             {
                 this.logger.Log(ErrorLevel.Debug, Resource.StartingBackup, className);
-                this.backup.Run();
+                return this.backup.Run();
             }
             catch (Exception ex)
             {
@@ -52,6 +52,8 @@ namespace ScmBackup
                 this.logger.Log(ErrorLevel.Error, Resource.BackupFailed);
                 this.logger.Log(ErrorLevel.Error, Resource.EndSeconds, seconds);
                 Task.Delay(TimeSpan.FromSeconds(seconds)).Wait();
+
+                return false;
             }
         }
     }
