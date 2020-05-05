@@ -6,8 +6,7 @@ namespace ScmBackup.Tests
 {
     public class ErrorHandlingScmBackupTests
     {
-        [Fact]
-        public void LogsWhenExceptionIsThrown()
+        static (FakeLogger FakeLogger, ErrorHandlingScmBackup ErrorHandlingScmBackup) BuildFakeScmBackup()
         {
             var ex = new Exception("!!!");
             var subBackup = new FakeScmBackup();
@@ -21,6 +20,14 @@ namespace ScmBackup.Tests
             var logger = new FakeLogger();
 
             var backup = new ErrorHandlingScmBackup(subBackup, logger, context);
+            return (logger, backup);
+        }
+
+        [Fact]
+        public void LogsWhenExceptionIsThrown()
+        {
+            var (logger, backup) = BuildFakeScmBackup();
+
             backup.Run();
 
             Assert.True(logger.LoggedSomething);
