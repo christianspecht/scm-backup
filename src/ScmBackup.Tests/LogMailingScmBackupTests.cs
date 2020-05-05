@@ -5,8 +5,7 @@ namespace ScmBackup.Tests
 {
     public class LogMailingScmBackupTests
     {
-        [Fact]
-        public void RunSendsMail()
+        static (FakeEmailSender mail, LogMailingScmBackup sut) BuildFakeLogMailingScmBackup()
         {
             var subBackup = new FakeScmBackup();
 
@@ -17,6 +16,14 @@ namespace ScmBackup.Tests
             var mail = new FakeEmailSender();
 
             var sut = new LogMailingScmBackup(subBackup, messages, mail);
+            return (mail, sut);
+        }
+
+        [Fact]
+        public void RunSendsMail()
+        {
+            var (mail, sut) = BuildFakeLogMailingScmBackup();
+
             sut.Run();
 
             Assert.NotNull(mail.LastSubject);
