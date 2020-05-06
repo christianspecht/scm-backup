@@ -30,39 +30,11 @@ namespace ScmBackup.Hosters.Bitbucket
                 request.AddBasicAuthHeader(source.AuthName, source.Password);
             }
 
-            string workspaceUrl = string.Empty;
-            string url = string.Empty;
+            string url = "/2.0/repositories/" + source.Name;
 
-            // 1. load repo url from workspace
-            workspaceUrl = "/2.0/workspaces/" + source.Name;
-
-            var result = request.Execute(workspaceUrl).Result;
-            if (result.IsSuccessStatusCode)
-            {
-                var apiResponse = JsonConvert.DeserializeObject<BitbucketApiWorkspaceResponse>(result.Content);
-                if (apiResponse != null)
-                {
-                    Dictionary<string, string> repo;
-                    if (apiResponse.links.TryGetValue("repositories", out repo))
-                    {
-                        repo.TryGetValue("href", out url);
-                    }
-                }
-            }
-            else
-            {
-                throw new InvalidOperationException(string.Format(Resource.ApiBitbucketNoWorkspace, source.Name));
-            }
-
-            if (string.IsNullOrWhiteSpace(url))
-            {
-                throw new InvalidOperationException(string.Format(Resource.ApiBitbucketNoRepoUrl, source.Name));
-            }
-
-            // 2. load repositories
             while (url != null)
             {
-                result = request.Execute(url).Result;
+                var result = request.Execute(url).Result;
 
                 if (result.IsSuccessStatusCode)
                 {

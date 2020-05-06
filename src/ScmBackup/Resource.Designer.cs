@@ -70,24 +70,6 @@ namespace ScmBackup {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No repository URL found for workspace {0}.
-        /// </summary>
-        internal static string ApiBitbucketNoRepoUrl {
-            get {
-                return ResourceManager.GetString("ApiBitbucketNoRepoUrl", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to No workspace named {0} found!.
-        /// </summary>
-        internal static string ApiBitbucketNoWorkspace {
-            get {
-                return ResourceManager.GetString("ApiBitbucketNoWorkspace", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Getting repositories for source &apos;{0}&apos; from hoster &apos;{1}&apos;.
         /// </summary>
         internal static string ApiGettingRepos {
