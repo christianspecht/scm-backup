@@ -120,9 +120,6 @@
   <data name="ApiAuthenticationFailed" xml:space="preserve">
     <value>Authentication failed for {0}</value>
   </data>
-  <data name="ApiBitbucketCantGetUuid" xml:space="preserve">
-    <value>Unable to get the UUID for username {0} from the Bitbucket API</value>
-  </data>
   <data name="ApiGettingRepos" xml:space="preserve">
     <value>Getting repositories for source '{0}' from hoster '{1}'</value>
   </data>
