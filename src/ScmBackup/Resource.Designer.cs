@@ -241,7 +241,7 @@ namespace ScmBackup {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Found {0} Mercurial repos. Bitbucket will delete all Mercurial repos on June 1, 2020!!.
+        ///   Looks up a localized string similar to Found {0} Mercurial repos. Bitbucket will delete all Mercurial repos on July 1, 2020!!.
         /// </summary>
         internal static string BitbucketMercurialWarning {
             get {
