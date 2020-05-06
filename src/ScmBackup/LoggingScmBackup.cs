@@ -13,17 +13,19 @@
             this.logger = logger;
         }
 
-        public void Run()
+        public bool Run()
         {
             logger.Log(ErrorLevel.Info, this.context.AppTitle);
             logger.Log(ErrorLevel.Info, Resource.AppWebsite);
 
             // TODO: log more stuff (operating system, configuration...)
 
-            this.backup.Run();
+            var result = this.backup.Run();
 
             logger.Log(ErrorLevel.Info, Resource.BackupFinished);
             logger.Log(ErrorLevel.Info, string.Format(Resource.BackupFinishedDirectory, this.context.Config.LocalFolder));
+
+            return result;
         }
     }
 }

@@ -21,14 +21,16 @@ namespace ScmBackup
             this.mail = mail;
         }
 
-        public void Run()
+        public bool Run()
         {
-            this.backup.Run();
+            var result = this.backup.Run();
 
             string subject = string.Format(Resource.LogMailSubject, DateTime.Now.ToString("dd MMM HH:mm:ss"));
             string body = string.Join(Environment.NewLine, this.messages.GetMessages().ToArray());
 
             this.mail.Send(subject, body);
+
+            return result;
         }
     }
 }

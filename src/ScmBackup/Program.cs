@@ -4,10 +4,11 @@ namespace ScmBackup
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static int Main(string[] args)
         {
             var container = Bootstrapper.BuildContainer();            
-            container.GetInstance<IScmBackup>().Run();
+            var success = container.GetInstance<IScmBackup>().Run();
+            return success ? 0 : 1;
         }
     }
 }
