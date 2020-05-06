@@ -232,7 +232,13 @@
     <value>Local folder is missing!</value>
   </data>
   <data name="LogMailSubject" xml:space="preserve">
-    <value>SCM Backup output: {0}</value>
+    <value>SCM Backup output: {0} / {1}</value>
+  </data>
+  <data name="LogMailSubjectFailed" xml:space="preserve">
+    <value>Failed</value>
+  </data>
+  <data name="LogMailSubjectSuccess" xml:space="preserve">
+    <value>Success</value>
   </data>
   <data name="NameEmpty" xml:space="preserve">
     <value>name is empty</value>

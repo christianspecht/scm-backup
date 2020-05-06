@@ -403,11 +403,29 @@ namespace ScmBackup {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to SCM Backup output: {0}.
+        ///   Looks up a localized string similar to SCM Backup output: {0} / {1}.
         /// </summary>
         internal static string LogMailSubject {
             get {
                 return ResourceManager.GetString("LogMailSubject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed.
+        /// </summary>
+        internal static string LogMailSubjectFailed {
+            get {
+                return ResourceManager.GetString("LogMailSubjectFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Success.
+        /// </summary>
+        internal static string LogMailSubjectSuccess {
+            get {
+                return ResourceManager.GetString("LogMailSubjectSuccess", resourceCulture);
             }
         }
         
