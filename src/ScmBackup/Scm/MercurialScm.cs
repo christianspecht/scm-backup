@@ -1,7 +1,6 @@
 ﻿using ScmBackup.Http;
 using System;
 using System.IO;
-using System.Text.RegularExpressions;
 
 namespace ScmBackup.Scm
 {
@@ -37,7 +36,7 @@ namespace ScmBackup.Scm
         {
             var result = this.ExecuteCommand("version");
 
-            if (result.Successful && result.StandardOutput.ToLower().Contains("mercurial distributed scm"))
+            if (result.Successful && result.StandardOutput.ToLower().Contains("mercurial"))
             {
                 return true;
             }
@@ -47,17 +46,11 @@ namespace ScmBackup.Scm
 
         public override string GetVersionNumber()
         {
-            var result = this.ExecuteCommand("version");
+            var result = this.ExecuteCommand("version -T {ver}");
 
             if (result.Successful)
             {
-                string pattern = @"mercurial distributed scm \(version (.*)\)";
-                var regex = new Regex(pattern, RegexOptions.IgnoreCase);
-                var match = regex.Match(result.StandardOutput);
-                if (match.Success)
-                {
-                    return match.Groups[1].ToString();
-                }
+                return result.StandardOutput;
             }
 
             throw new InvalidOperationException(result.Output);
