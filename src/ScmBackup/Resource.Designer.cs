@@ -232,15 +232,6 @@ namespace ScmBackup {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Found {0} Mercurial repos. Bitbucket will delete all Mercurial repos on July 1, 2020!!.
-        /// </summary>
-        internal static string BitbucketMercurialWarning {
-            get {
-                return ResourceManager.GetString("BitbucketMercurialWarning", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to The context is null (must be injected into the child classes which inherit from CommandLineScm!).
         /// </summary>
         internal static string CommandLineScm_ContextIsNull {

@@ -174,9 +174,6 @@
   <data name="BackupMaker_Source" xml:space="preserve">
     <value>Backing up source: {0}</value>
   </data>
-  <data name="BitbucketMercurialWarning" xml:space="preserve">
-    <value>Found {0} Mercurial repos. Bitbucket will delete all Mercurial repos on July 1, 2020!!</value>
-  </data>
   <data name="CommandLineScm_ContextIsNull" xml:space="preserve">
     <value>The context is null (must be injected into the child classes which inherit from CommandLineScm!)</value>
   </data>

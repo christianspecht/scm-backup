@@ -5,7 +5,9 @@ using System;
 
 namespace ScmBackup.Tests.Integration.Scm
 {
-    public class MercurialScmTests : IScmTests
+    // Test class disabled (=private) because none of the currently supported hosters supports Mercurial anymore.
+    // If a Mercurial hoster is supported in the future, we need new test repos
+    class MercurialScmTests : IScmTests
     {
         public MercurialScmTests()
         {
