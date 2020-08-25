@@ -511,6 +511,15 @@ namespace ScmBackup {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Operating system: {0}.
+        /// </summary>
+        internal static string SystemOS {
+            get {
+                return ResourceManager.GetString("SystemOS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Can&apos;t register {0} in the HosterFactory because it doesn&apos;t implement IHoster.
         /// </summary>
         internal static string TypeIsNoIHoster {

@@ -1,4 +1,6 @@
-﻿namespace ScmBackup
+﻿using System.Runtime.InteropServices;
+
+namespace ScmBackup
 {
     internal class LoggingScmBackup : IScmBackup
     {
@@ -17,8 +19,8 @@
         {
             logger.Log(ErrorLevel.Info, this.context.AppTitle);
             logger.Log(ErrorLevel.Info, Resource.AppWebsite);
-
-            // TODO: log more stuff (operating system, configuration...)
+            logger.Log(ErrorLevel.Info, string.Format(Resource.SystemOS, RuntimeInformation.OSDescription));
+            // TODO: log more stuff (configuration...)
 
             var result = this.backup.Run();
 
