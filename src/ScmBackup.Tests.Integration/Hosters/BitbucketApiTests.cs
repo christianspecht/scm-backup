@@ -1,5 +1,7 @@
 ﻿using ScmBackup.Hosters.Bitbucket;
 using ScmBackup.Http;
+using System.Linq;
+using Xunit;
 
 namespace ScmBackup.Tests.Integration.Hosters
 {
@@ -37,6 +39,23 @@ namespace ScmBackup.Tests.Integration.Hosters
         public BitbucketApiTests()
         {
             this.sut = new BitbucketApi(new HttpRequest());
+        }
+
+        [Fact]
+        public void GetRepositoryList_DoesntReturnMercurialRepos()
+        {
+            // #60: 2 months after Bitbucket's HG deprecation, their API still returns HG repos but cloning/pulling them fails -> ignore them
+            var source = new ConfigSource();
+            source.Hoster = this.ConfigHoster;
+            source.Type = "user";
+            source.Name = this.HosterUser;
+            source.AuthName = TestHelper.EnvVar(this.EnvVarPrefix, "Name");
+            source.Password = TestHelper.EnvVar(this.EnvVarPrefix, "PW");
+
+            var repoList = sut.GetRepositoryList(source);
+
+            var hgrepos = repoList.Where(x => x.Scm == ScmType.Mercurial);
+            Assert.Empty(hgrepos);
         }
     }
 }

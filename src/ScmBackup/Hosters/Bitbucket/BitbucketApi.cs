@@ -40,14 +40,12 @@ namespace ScmBackup.Hosters.Bitbucket
                 {
                     var apiResponse = JsonConvert.DeserializeObject<BitbucketApiResponse>(result.Content);
 
-                    foreach (var apiRepo in apiResponse.values)
+                    // #60: 2 months after Bitbucket's HG deprecation, their API still returns HG repos but cloning/pulling them fails -> ignore them
+                    foreach (var apiRepo in apiResponse.values.Where(x => x.scm.ToLower() != "hg"))
                     {
                         ScmType type;
                         switch (apiRepo.scm.ToLower())
                         {
-                            case "hg":
-                                type = ScmType.Mercurial;
-                                break;
                             case "git":
                                 type = ScmType.Git;
                                 break;
