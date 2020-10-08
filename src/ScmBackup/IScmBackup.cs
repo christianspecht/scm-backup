@@ -2,6 +2,6 @@
 {
     internal interface IScmBackup
     {
-        void Run();
+        bool Run();
     }
 }

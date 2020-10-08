@@ -31,37 +31,7 @@ namespace ScmBackup.Hosters.Bitbucket
                 request.AddBasicAuthHeader(source.AuthName, source.Password);
             }
 
-            string url = string.Empty;
-            string apiUsername = null;
-
-            // Issue #32: from Apr 29 2019, usernames (not team names) must be replaced by UUIDs
-            if (source.Type.ToLower() == "user")
-            {
-                url = "/2.0/users/" + source.Name;
-
-                var result = request.Execute(url).Result;
-
-                if (result.IsSuccessStatusCode)
-                {
-                    var apiResponse = JsonConvert.DeserializeObject<BitbucketApiUserResponse>(result.Content);
-                    if (apiResponse != null)
-                    {
-                        apiUsername = Uri.EscapeUriString(apiResponse.uuid);
-                    }
-                }
-
-                if (string.IsNullOrWhiteSpace(apiUsername))
-                {
-                    throw new InvalidOperationException(string.Format(Resource.ApiBitbucketCantGetUuid, source.Name));
-                }
-            }
-            else
-            {
-                apiUsername = source.Name;
-            }
-
-
-            url = "/2.0/repositories/" + apiUsername;
+            string url = "/2.0/repositories/" + source.Name;
 
             while (url != null)
             {
@@ -71,14 +41,12 @@ namespace ScmBackup.Hosters.Bitbucket
                 {
                     var apiResponse = JsonConvert.DeserializeObject<BitbucketApiResponse>(result.Content);
 
-                    foreach (var apiRepo in apiResponse.values)
+                    // #60: 2 months after Bitbucket's HG deprecation, their API still returns HG repos but cloning/pulling them fails -> ignore them
+                    foreach (var apiRepo in apiResponse.values.Where(x => x.scm.ToLower() != "hg"))
                     {
                         ScmType type;
                         switch (apiRepo.scm.ToLower())
                         {
-                            case "hg":
-                                type = ScmType.Mercurial;
-                                break;
                             case "git":
                                 type = ScmType.Git;
                                 break;

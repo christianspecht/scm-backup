@@ -70,15 +70,6 @@ namespace ScmBackup {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Unable to get the UUID for username {0} from the Bitbucket API.
-        /// </summary>
-        internal static string ApiBitbucketCantGetUuid {
-            get {
-                return ResourceManager.GetString("ApiBitbucketCantGetUuid", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Getting repositories for source &apos;{0}&apos; from hoster &apos;{1}&apos;.
         /// </summary>
         internal static string ApiGettingRepos {
@@ -241,15 +232,6 @@ namespace ScmBackup {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Found {0} Mercurial repos. Bitbucket will delete all Mercurial repos on June 1, 2020!!.
-        /// </summary>
-        internal static string BitbucketMercurialWarning {
-            get {
-                return ResourceManager.GetString("BitbucketMercurialWarning", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to The context is null (must be injected into the child classes which inherit from CommandLineScm!).
         /// </summary>
         internal static string CommandLineScm_ContextIsNull {
@@ -403,11 +385,29 @@ namespace ScmBackup {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to SCM Backup output: {0}.
+        ///   Looks up a localized string similar to SCM Backup output: {0} / {1}.
         /// </summary>
         internal static string LogMailSubject {
             get {
                 return ResourceManager.GetString("LogMailSubject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed.
+        /// </summary>
+        internal static string LogMailSubjectFailed {
+            get {
+                return ResourceManager.GetString("LogMailSubjectFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Success.
+        /// </summary>
+        internal static string LogMailSubjectSuccess {
+            get {
+                return ResourceManager.GetString("LogMailSubjectSuccess", resourceCulture);
             }
         }
         
@@ -507,6 +507,15 @@ namespace ScmBackup {
         internal static string StartingBackup {
             get {
                 return ResourceManager.GetString("StartingBackup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Operating system: {0}.
+        /// </summary>
+        internal static string SystemOS {
+            get {
+                return ResourceManager.GetString("SystemOS", resourceCulture);
             }
         }
         

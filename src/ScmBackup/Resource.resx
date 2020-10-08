@@ -120,9 +120,6 @@
   <data name="ApiAuthenticationFailed" xml:space="preserve">
     <value>Authentication failed for {0}</value>
   </data>
-  <data name="ApiBitbucketCantGetUuid" xml:space="preserve">
-    <value>Unable to get the UUID for username {0} from the Bitbucket API</value>
-  </data>
   <data name="ApiGettingRepos" xml:space="preserve">
     <value>Getting repositories for source '{0}' from hoster '{1}'</value>
   </data>
@@ -177,9 +174,6 @@
   <data name="BackupMaker_Source" xml:space="preserve">
     <value>Backing up source: {0}</value>
   </data>
-  <data name="BitbucketMercurialWarning" xml:space="preserve">
-    <value>Found {0} Mercurial repos. Bitbucket will delete all Mercurial repos on June 1, 2020!!</value>
-  </data>
   <data name="CommandLineScm_ContextIsNull" xml:space="preserve">
     <value>The context is null (must be injected into the child classes which inherit from CommandLineScm!)</value>
   </data>
@@ -232,7 +226,13 @@
     <value>Local folder is missing!</value>
   </data>
   <data name="LogMailSubject" xml:space="preserve">
-    <value>SCM Backup output: {0}</value>
+    <value>SCM Backup output: {0} / {1}</value>
+  </data>
+  <data name="LogMailSubjectFailed" xml:space="preserve">
+    <value>Failed</value>
+  </data>
+  <data name="LogMailSubjectSuccess" xml:space="preserve">
+    <value>Success</value>
   </data>
   <data name="NameEmpty" xml:space="preserve">
     <value>name is empty</value>
@@ -266,6 +266,9 @@
   </data>
   <data name="StartingBackup" xml:space="preserve">
     <value>{0}: Starting backup</value>
+  </data>
+  <data name="SystemOS" xml:space="preserve">
+    <value>Operating system: {0}</value>
   </data>
   <data name="TypeIsNoIHoster" xml:space="preserve">
     <value>Can't register {0} in the HosterFactory because it doesn't implement IHoster</value>

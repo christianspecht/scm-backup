@@ -22,7 +22,7 @@ namespace ScmBackup
             this.configBackupMaker = configBackupMaker;
         }
 
-        public void Run()
+        public bool Run()
         {
             this.configBackupMaker.BackupConfigs();
 
@@ -37,6 +37,8 @@ namespace ScmBackup
             {
                 this.backupMaker.Backup(source, repos.GetReposForSource(source));
             }
+
+            return true;
         }
     }
 }
