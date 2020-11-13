@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using Xunit;
 
-namespace ScmBackup.Tests.ConfigTests
+namespace ScmBackup.Tests.Configuration
 {
     public class ConfigEmailTests
     {
