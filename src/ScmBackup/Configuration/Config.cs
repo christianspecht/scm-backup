@@ -32,31 +32,31 @@ namespace ScmBackup.Configuration
         /// <summary>
         /// Gets a value from the config options
         /// </summary>
-        /// <param name="type">The value must be of this type</param>
+        /// <typeparam name="T">The value must be of this type</typeparam>
         /// <param name="key1">first level key</param>
         /// <param name="key2">second level key</param>
         /// <returns></returns>
-        public object GetOption(Type type, string key1, string key2)
+        public T GetOption<T>(string key1, string key2)
         {
             if (this.Options == null || !this.Options.ContainsKey(key1))
             {
-                return null;
+                return default(T);
             }
 
             var optionsSub = this.Options[key1];
             if (optionsSub == null || !optionsSub.ContainsKey(key2))
             {
-                return null;
+                return default(T);
             }
 
             var val = optionsSub[key2];
             try
             {
-                return Convert.ChangeType(val, type);
+                return (T)Convert.ChangeType(val, typeof(T));
             }
             catch
             {
-                return null;
+                return default(T);
             }
         }
     }

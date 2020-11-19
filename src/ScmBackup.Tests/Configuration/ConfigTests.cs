@@ -25,20 +25,38 @@ namespace ScmBackup.Tests.Configuration
         }
 
         [Theory]
-        [InlineData(typeof(bool), "foo", "test_bool", true)]
-        [InlineData(typeof(string), "foo", "test_string", "test")]
-        [InlineData(typeof(int), "foo", "test_int", 42)]
-        [InlineData(typeof(string), "foo", "bar", null)]                // bar doesn't exist
-        [InlineData(typeof(bool), "bar", "test_bool", null)]            // bar doesn't exist
-        public void GetOptions_Check(Type type, string key1, string key2, object expectedResult)
+        [InlineData("foo", "test_string", "test")]
+        [InlineData("foo", "test_int", "42")]
+        [InlineData("foo", "bar", null)]                // bar doesn't exist
+        public void GetOptions_StringTests(string key1, string key2, string expectedResult)
         {
-            var result = this.sut.GetOption(type, key1, key2);
+            var result = this.sut.GetOption<string>(key1, key2);
 
             Assert.Equal(expectedResult, result);
-            if (result != null)
-            {
-                Assert.IsType(type, result);
-            }
+        }
+
+        [Theory]
+        [InlineData("foo", "test_int", 42)]
+        [InlineData("foo", "test_bool", 1)]
+        [InlineData("foo", "test_string", 0)]           // wrong type
+        [InlineData("foo", "bar", 0)]                   // bar doesn't exist
+        public void GetOptions_IntTests(string key1, string key2, int expectedResult)
+        {
+            var result = this.sut.GetOption<int>(key1, key2);
+
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Theory]
+        [InlineData("foo", "test_bool", true)]
+        [InlineData("foo", "test_int", true)]
+        [InlineData("foo", "test_string", false)]       // wrong type
+        [InlineData("foo", "bar", false)]               // bar doesn't exist
+        public void GetOptions_BoolTests(string key1, string key2, bool expectedResult)
+        {
+            var result = this.sut.GetOption<bool>(key1, key2);
+
+            Assert.Equal(expectedResult, result);
         }
     }
 }
