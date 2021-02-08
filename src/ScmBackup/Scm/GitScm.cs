@@ -119,6 +119,16 @@ namespace ScmBackup.Scm
             {
                 throw new InvalidOperationException(result.Output);
             }
+			
+			// fetching all LFS files - without checking if the repo has LFS activated or not (works for LFS and non-LFS repos)
+			// git -C *DIR* lfs fetch --all *REMOTE*
+			string cmd2 = string.Format("-C \"{0}\" lfs fetch --all {1}", directory, remoteUrl);
+			var result2 = this.ExecuteCommand(cmd2);
+
+			if (!result2.Successful)
+			{
+				throw new InvalidOperationException(result2.Output);
+			}
         }
 
         public override bool RepositoryContainsCommit(string directory, string commitid)
