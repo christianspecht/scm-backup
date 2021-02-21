@@ -23,7 +23,7 @@ namespace ScmBackup.Tests.Integration
         [Fact]
         public void NewScmIsAdded()
         {
-            Assert.Single(sut);
+            Assert.Single(sut.Scms);
         }
 
         [Fact]

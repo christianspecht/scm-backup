@@ -9,13 +9,16 @@ namespace ScmBackup.CompositionRoot
     /// <summary>
     /// factory to create IScm instances
     /// </summary>
-    internal class ScmFactory : Dictionary<ScmType, Type>,  IScmFactory
+    internal class ScmFactory : IScmFactory
     {
         private readonly Container container;
+        
+        public Dictionary<ScmType, Type> Scms { get; private set; }
 
         public ScmFactory(Container container)
         {
             this.container = container;
+            this.Scms = new Dictionary<ScmType, Type>();
         }
 
         public void Register(Type type)
@@ -28,14 +31,14 @@ namespace ScmBackup.CompositionRoot
             var attribute = type.GetTypeInfo().GetCustomAttribute<ScmAttribute>();
 
             this.container.Register(type);
-            this.Add(attribute.Type, type);
+            this.Scms.Add(attribute.Type, type);
         }
 
         public IScm Create(ScmType type)
         {
             Type outType;
 
-            if (!this.TryGetValue(type, out outType))
+            if (!this.Scms.TryGetValue(type, out outType))
             {
                 throw new InvalidOperationException(string.Format(Resource.ScmDoesntExist, type));
             }
