@@ -14,14 +14,19 @@ namespace ScmBackup.Tests.Configuration
         {
             this.sut = new Config();
 
-            // options
-            sut.Options = new Dictionary<string, Dictionary<string, object>>();
-
             var foo = new Dictionary<string, object>();
             foo.Add("test_bool", true);
             foo.Add("test_string", "test");
             foo.Add("test_int", 42);
             sut.Options.Add("foo", foo);
+        }
+
+        [Fact]
+        public void IsInitialized()
+        {
+            Assert.NotNull(sut.Options);
+            Assert.NotNull(sut.Scms);
+            Assert.NotNull(sut.Sources);
         }
 
         [Theory]
