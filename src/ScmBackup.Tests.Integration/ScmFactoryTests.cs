@@ -2,6 +2,7 @@
 using ScmBackup.Scm;
 using SimpleInjector;
 using System;
+using System.Collections.Generic;
 using Xunit;
 
 namespace ScmBackup.Tests.Integration
@@ -21,12 +22,6 @@ namespace ScmBackup.Tests.Integration
         }
 
         [Fact]
-        public void NewScmIsAdded()
-        {
-            Assert.Single(sut.Scms);
-        }
-
-        [Fact]
         public void CreateReturnScm()
         {
             var result = sut.Create(ScmType.Git);
@@ -40,5 +35,46 @@ namespace ScmBackup.Tests.Integration
         {
             Assert.Throws<InvalidOperationException>(() => sut.Register(typeof(ScmBackup)));
         }
+
+        [Fact]
+        public void FillScmsReturnsStandardGit()
+        {
+            var tempScms = new Dictionary<Type, ScmType>();
+            tempScms.Add(typeof(GitScm), ScmType.Git);
+            tempScms.Add(typeof(LibgitScm), ScmType.Git);
+
+            var reader = new FakeConfigReader();
+            reader.SetDefaultFakeConfig();
+            var config = reader.ReadConfig();
+
+            var result = sut.FillScms(config, tempScms);
+
+            var gitImplementation = result[ScmType.Git].Name;
+            Assert.Equal(ScmFactory.DefaultGitImplementation, gitImplementation);
+        }
+
+        [Fact]
+        public void FillScmsReturnsGitFromConfig()
+        {
+            var tempScms = new Dictionary<Type, ScmType>();
+            tempScms.Add(typeof(GitScm), ScmType.Git);
+            tempScms.Add(typeof(LibgitScm), ScmType.Git);
+
+            var reader = new FakeConfigReader();
+            reader.SetDefaultFakeConfig();
+
+            string expectedGitImplementation = "LibgitScm";
+
+            var gitConfig = new Dictionary<string, object>();
+            gitConfig.Add("implementation", expectedGitImplementation);
+            reader.FakeConfig.Options.Add("git", gitConfig);
+            var config = reader.ReadConfig();
+
+            var result = sut.FillScms(config, tempScms);
+
+            var gitImplementation = result[ScmType.Git].Name;
+            Assert.Equal(expectedGitImplementation, gitImplementation);
+        }
+
     }
 }
