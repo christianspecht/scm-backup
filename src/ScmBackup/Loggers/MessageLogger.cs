@@ -26,7 +26,7 @@ namespace ScmBackup.Loggers
             }
 
             var tmp = new StringBuilder();
-            tmp.Append(level.ToString("f")); // https://stackoverflow.com/a/32726578/6884
+            tmp.Append(level.LevelName());
 
             if (ex != null)
             {
