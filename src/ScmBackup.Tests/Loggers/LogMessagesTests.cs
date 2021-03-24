@@ -2,7 +2,7 @@
 using System.Linq;
 using Xunit;
 
-namespace ScmBackup.Tests
+namespace ScmBackup.Tests.Loggers
 {
     public class LogMessagesTests
     {
