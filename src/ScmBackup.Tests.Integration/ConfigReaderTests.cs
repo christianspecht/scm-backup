@@ -41,14 +41,6 @@ namespace ScmBackup.Tests.Integration
             var scm2 = config.Scms[1];
             Assert.Equal("hg", scm2.Name);
             Assert.Equal("path/to/hg", scm2.Path);
-
-            var options = config.Options;
-            Assert.True(options.ContainsKey("foo"));
-
-            var optionFoo = config.Options["foo"];
-            Assert.Equal(2, optionFoo.Keys.Count);
-            Assert.Equal("value1", optionFoo["key1"]);
-            Assert.Equal("42", optionFoo["key2"]);
         }
 
         [Fact]

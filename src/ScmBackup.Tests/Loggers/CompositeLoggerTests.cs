@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Xunit;
 
-namespace ScmBackup.Tests
+namespace ScmBackup.Tests.Loggers
 {
     public class CompositeLoggerTests
     {
