@@ -9,5 +9,19 @@ namespace ScmBackup.Configuration
     /// </summary>
     class ConfigOptions
     {
+        public ConfigOptions()
+        {
+            this.Git = new GitOptions();
+        }
+
+        public GitOptions Git { get; set; }
+    }
+
+    class GitOptions
+    {
+        /// <summary>
+        /// Git implementation that will be used for all Git operations
+        /// </summary>
+        public string Implementation { get; set; }
     }
 }

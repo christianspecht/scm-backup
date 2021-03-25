@@ -63,7 +63,7 @@ namespace ScmBackup.CompositionRoot
         // Return the SCMs that will actually be used (depending on configuration)
         public Dictionary<ScmType, Type> FillScms(Config config, Dictionary<Type, ScmType> tempScms)
         {
-            string gitImplementation = config.GetOption<string>("git", "implementation");
+            string gitImplementation = config.Options.Git.Implementation;
             if (string.IsNullOrWhiteSpace(gitImplementation))
             {
                 gitImplementation = ScmFactory.DefaultGitImplementation;

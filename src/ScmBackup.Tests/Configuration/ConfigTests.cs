@@ -19,6 +19,7 @@ namespace ScmBackup.Tests.Configuration
         public void IsInitialized()
         {
             Assert.NotNull(sut.Options);
+            Assert.NotNull(sut.Options.Git);
             Assert.NotNull(sut.Scms);
             Assert.NotNull(sut.Sources);
         }

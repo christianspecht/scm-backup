@@ -67,7 +67,7 @@ namespace ScmBackup.Tests.Integration
 
             var gitConfig = new Dictionary<string, object>();
             gitConfig.Add("implementation", expectedGitImplementation);
-            reader.FakeConfig.Options.Add("git", gitConfig);
+            reader.FakeConfig.Options.Git.Implementation = expectedGitImplementation;
             var config = reader.ReadConfig();
 
             var result = sut.FillScms(config, tempScms);

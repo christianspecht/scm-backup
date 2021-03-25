@@ -27,7 +27,7 @@ namespace ScmBackup.Configuration
         {
             this.Sources = new List<ConfigSource>();
             this.Scms = new List<ConfigScm>();
-            this.Options = new Dictionary<string, Dictionary<string, object>>();
+            this.Options = new ConfigOptions();
         }
     }
 }
