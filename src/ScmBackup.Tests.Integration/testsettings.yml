@@ -22,8 +22,3 @@ sources:
     ignoreRepos:
         - ignore0
         - ignore1
-
-options:
-    foo:
-        key1: value1
-        key2: 42
