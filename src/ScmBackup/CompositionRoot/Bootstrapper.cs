@@ -25,7 +25,6 @@ namespace ScmBackup.CompositionRoot
             container.Register<IScmBackup, ScmBackup>();
             container.RegisterDecorator<IScmBackup, LoggingScmBackup>();
             container.RegisterDecorator<IScmBackup, ErrorHandlingScmBackup>();
-            container.RegisterDecorator<IScmBackup, LogMailingScmBackup>();
 
             // auto-register loggers
             // https://github.com/simpleinjector/SimpleInjector/issues/208#issuecomment-201423660
@@ -51,7 +50,7 @@ namespace ScmBackup.CompositionRoot
 
             container.Register<IHttpRequest, HttpRequest>();
             container.RegisterDecorator<IHttpRequest, LoggingHttpRequest>();
-            container.Register<IEmailSender, MailKitEmailSender>();
+            container.RegisterSingleton<IEmailSender, MailKitEmailSender>();
             container.Register<IUrlHelper, UrlHelper>();
 
             container.Register<IApiCaller, ApiCaller>();
