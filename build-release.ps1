@@ -1,6 +1,6 @@
 ﻿Write-Host '###### INITIALIZE ######'
 
-if ($env:APPVEYOR) {
+if ($env:APPVEYOR -Or $env:CI) {
 
     # We are on AppVeyor
     # - environment variables are set in the AppVeyor settings
