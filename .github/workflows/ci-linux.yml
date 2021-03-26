@@ -1,0 +1,25 @@
+name: .NET
+
+on:
+  push:
+    branches: [ ci-linux ]
+  pull_request:
+    branches: [ ci-linux ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.x
+    - name: Set version number
+      run: .\version-number.ps1
+      shell: pwsh
+    - name: Run build script
+      run: ./build-release.ps1
+      shell: pwsh
