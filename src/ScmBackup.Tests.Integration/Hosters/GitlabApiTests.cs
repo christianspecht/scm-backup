@@ -23,7 +23,7 @@ namespace ScmBackup.Tests.Integration.Hosters
 
         internal override string HosterPrivateRepo { get { return TestHelper.EnvVar(this.EnvVarPrefix, "RepoPrivate"); } }
 
-        internal override string EnvVarPrefix { get { return "Gitlab"; } }
+        internal override string EnvVarPrefix { get { return "Tests_Gitlab"; } }
 
         internal override string ConfigHoster { get { return "gitlab"; } }
 

@@ -18,7 +18,7 @@ namespace ScmBackup.Tests.Integration.Hosters
 
         internal override string EnvVarPrefix
         {
-            get { return "Github"; }
+            get { return "Tests_Github"; }
         }
 
         internal override string ConfigHoster

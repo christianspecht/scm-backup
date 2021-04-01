@@ -18,7 +18,7 @@ namespace ScmBackup.Tests.Integration.Hosters
 
         internal override string EnvVarPrefix
         {
-            get { return "Bitbucket"; }
+            get { return "Tests_Bitbucket"; }
         }
 
         internal override string ConfigHoster
