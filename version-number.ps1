@@ -11,7 +11,7 @@
     else {
         # regular CI build, no release
         $shortversion = '0.0.0'
-        $longversion = '0.0.0.CI-' + $env:APPVEYOR_BUILD_NUMBER + '-' + $commit
+        $longversion = '0.0.0.CI-WIN-' + $env:APPVEYOR_BUILD_NUMBER + '-' + $commit
     }
 }
 elseif ($env:CI) {
@@ -19,7 +19,7 @@ elseif ($env:CI) {
     # GH Actions
     $commit = $env:GITHUB_SHA.Substring(0,7)
     $shortversion = '0.0.0'
-    $longversion = '0.0.0.CI-' + $env:GITHUB_RUN_ID + '-' + $commit
+    $longversion = '0.0.0.CI-LINUX-' + $env:GITHUB_RUN_NUMBER + '-' + $commit
 }
 else {
 
