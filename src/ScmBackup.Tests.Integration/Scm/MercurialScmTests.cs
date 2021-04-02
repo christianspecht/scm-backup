@@ -21,12 +21,12 @@ namespace ScmBackup.Tests.Integration.Scm
 
         internal override string PrivateRepoUrl
         {
-            get { return CloneUrlBuilder.BitbucketCloneUrl(TestHelper.EnvVar("Bitbucket_Name"), TestHelper.EnvVar("Bitbucket_RepoPrivate")); }
+            get { return CloneUrlBuilder.BitbucketCloneUrl(TestHelper.EnvVar("Tests_Bitbucket_Name"), TestHelper.EnvVar("Tests_Bitbucket_RepoPrivate")); }
         }
 
         internal override ScmCredentials PrivateRepoCredentials
         {
-            get { return new ScmCredentials(TestHelper.EnvVar("Bitbucket_Name"), TestHelper.EnvVar("Bitbucket_PW")); }
+            get { return new ScmCredentials(TestHelper.EnvVar("Tests_Bitbucket_Name"), TestHelper.EnvVar("Tests_Bitbucket_PW")); }
         }
 
         internal override string NonExistingRepoUrl
