@@ -23,11 +23,11 @@ namespace ScmBackup.Tests.Integration.Scm
             }
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
             {
-                throw new NotImplementedException();
+                throw new NotImplementedException("FakeCommandLineScm is not implemented for Linux");
             }
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
             {
-                throw new NotImplementedException();
+                throw new NotImplementedException("FakeCommandLineScm is not implemented for OSX");
             }
 
             this.context = new FakeContext();
