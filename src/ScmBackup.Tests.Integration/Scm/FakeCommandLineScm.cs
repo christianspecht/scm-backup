@@ -23,7 +23,7 @@ namespace ScmBackup.Tests.Integration.Scm
             }
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
             {
-                this.FakeCommandName = Path.Combine(testAssemblyDir, @"Scm/FakeCommandLineScmTools/FakeCommandLineScm-Command-Linux.sh");
+                this.FakeCommandName = Path.Combine(testAssemblyDir, @"Scm/FakeCommandLineScmTools/FakeCommandLineScm-Command-Linux.ps1");
                 this.FakeCommandArgs = "";
                 this.FakeCommandResult = "Linux";
 
