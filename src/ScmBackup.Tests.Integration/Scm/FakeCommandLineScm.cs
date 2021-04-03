@@ -23,9 +23,9 @@ namespace ScmBackup.Tests.Integration.Scm
             }
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
             {
-                this.FakeCommandName = Path.Combine(testAssemblyDir, @"Scm/FakeCommandLineScmTools/FakeCommandLineScm-Command-Linux.ps1");
-                this.FakeCommandArgs = "";
-                this.FakeCommandResult = "Linux";
+                this.FakeCommandName = "git";
+                this.FakeCommandArgs = "--version";
+                this.FakeCommandResult = "git version";
 
                 this.FakeCommandNameNotExisting = Path.Combine(testAssemblyDir, "doesnt-exist");
             }
