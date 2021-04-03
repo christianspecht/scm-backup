@@ -23,7 +23,11 @@ namespace ScmBackup.Tests.Integration.Scm
             }
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
             {
-                throw new NotImplementedException("FakeCommandLineScm is not implemented for Linux");
+                this.FakeCommandName = Path.Combine(testAssemblyDir, @"Scm/FakeCommandLineScmTools/FakeCommandLineScm-Command-Linux.sh");
+                this.FakeCommandArgs = "";
+                this.FakeCommandResult = "Linux";
+
+                this.FakeCommandNameNotExisting = Path.Combine(testAssemblyDir, "doesnt-exist");
             }
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
             {
