@@ -23,7 +23,7 @@
     <None Update="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Scm\FakeCommandLineScmTools\FakeCommandLineScm-Command-Linux.sh">
+    <None Update="Scm\FakeCommandLineScmTools\FakeCommandLineScm-Command-Linux.ps1">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Scm\FakeCommandLineScmTools\FakeCommandLineScm-Command-Windows.bat">
