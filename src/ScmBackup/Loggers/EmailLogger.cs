@@ -27,7 +27,7 @@ namespace ScmBackup.Loggers
         {
             string success = successful ? Resource.LogMailSubjectSuccess : Resource.LogMailSubjectFailed;
 
-            string subject = string.Format("!" + Resource.LogMailSubject, success, DateTime.Now.ToString("dd MMM HH:mm:ss"));
+            string subject = string.Format(Resource.LogMailSubject, success, DateTime.Now.ToString("dd MMM HH:mm:ss"));
             string body = string.Join(Environment.NewLine, this.messages);
 
             this.mail.Send(subject, body);
