@@ -34,6 +34,11 @@ namespace ScmBackup.Scm
         public abstract string GetVersionNumber();
 
         /// <summary>
+        /// Checks whether git lfs is installed on this computer
+        /// </summary>
+        public abstract bool LFSIsOnThisComputer();
+
+        /// <summary>
         /// Executes the command line tool.
         /// </summary>
         protected CommandLineResult ExecuteCommand(string args)
@@ -50,12 +55,29 @@ namespace ScmBackup.Scm
             info.RedirectStandardError = true;
             info.RedirectStandardOutput = true;
 
+            //var proc = Process.Start(info);
+            //var result = new CommandLineResult();
+            //result.StandardError = proc.StandardError.ReadToEnd();
+            //result.StandardOutput = proc.StandardOutput.ReadToEnd();
+            //proc.WaitForExit();
+
+            //result.ExitCode = proc.ExitCode;
+            //return result;
+
+            //deadlock fix to make function 'RepositoryContainsLFS' run without deadlock
             var proc = Process.Start(info);
             var result = new CommandLineResult();
-            result.StandardError = proc.StandardError.ReadToEnd();
-            result.StandardOutput = proc.StandardOutput.ReadToEnd();
+            var output = new System.Text.StringBuilder();
+            var error = new System.Text.StringBuilder();
+
+            proc.OutputDataReceived += (sender, eventArgs) => output.AppendLine(eventArgs.Data);
+            proc.ErrorDataReceived += (sender, eventArgs) => error.AppendLine(eventArgs.Data);
+            proc.BeginOutputReadLine();
+            proc.BeginErrorReadLine();
             proc.WaitForExit();
 
+            result.StandardOutput = output.ToString();
+            result.StandardError = error.ToString();
             result.ExitCode = proc.ExitCode;
             return result;
         }
@@ -103,6 +125,16 @@ namespace ScmBackup.Scm
         public abstract void PullFromRemote(string remoteUrl, string directory, ScmCredentials credentials);
 
         /// <summary>
+        /// Pulls LFS files from a remote repository into a local folder.
+        /// </summary>
+        public abstract void PullLFSFromRemote(string remoteUrl, string directory, ScmCredentials credentials);
+
+        /// <summary>
+        /// Checks whether the repo contains LFS files
+        /// </summary>
+        public abstract bool RepositoryContainsLFS(string directory);
+
+        /// <summary>
         /// Checks whether the repo in this directory contains a commit with this ID
         /// Must be implemented in the child classes by calling ExecuteCommand and checking the result.
         /// </summary>
@@ -138,5 +170,6 @@ namespace ScmBackup.Scm
                 }
             }
         }
+
     }
 }

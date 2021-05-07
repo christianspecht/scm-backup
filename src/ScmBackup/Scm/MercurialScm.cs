@@ -56,6 +56,11 @@ namespace ScmBackup.Scm
             throw new InvalidOperationException(result.Output);
         }
 
+        public override bool LFSIsOnThisComputer()
+        {
+            return false;
+        }
+
         public override bool DirectoryIsRepository(string directory)
         {
             string hgdir = Path.Combine(directory, ".hg");
@@ -141,6 +146,16 @@ namespace ScmBackup.Scm
             return false;
         }
 
+        public override void PullLFSFromRemote(string remoteUrl, string directory, ScmCredentials credentials)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override bool RepositoryContainsLFS(string directory)
+        {
+            return false;
+        }
+
         private string RemoveCredentialsFromUrl(string url, ScmCredentials credentials)
         {
             // Issue #19: if credentials are passed via --config, remove the username from the URL (the Bitbucket API returns the clone URL with username, for example).
@@ -164,5 +179,6 @@ namespace ScmBackup.Scm
             
             return string.Format(" --config auth.x.prefix={0} --config auth.x.username={1} --config auth.x.password={2}", baseurl, credentials.User, credentials.Password);
         }
+
     }
 }

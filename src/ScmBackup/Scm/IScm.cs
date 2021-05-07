@@ -26,6 +26,11 @@ namespace ScmBackup.Scm
         string GetVersionNumber();
 
         /// <summary>
+        /// Checks whether the git LFS is present on this computer
+        /// </summary>
+        bool LFSIsOnThisComputer();
+
+        /// <summary>
         /// Checks whether the given directory is a repository
         /// </summary>
         bool DirectoryIsRepository(string directory);
@@ -58,8 +63,19 @@ namespace ScmBackup.Scm
         void PullFromRemote(string remoteUrl, string directory, ScmCredentials credentials);
 
         /// <summary>
+        /// Pulls all LFS files from a remote repository into a local folder.
+        /// </summary>
+        void PullLFSFromRemote(string remoteUrl, string directory, ScmCredentials credentials);
+
+        /// <summary>
+        /// Checks whether the repo in this directory contains LFS files
+        /// </summary>
+        bool RepositoryContainsLFS(string directory);
+
+        /// <summary>
         /// Checks whether the repo in this directory contains a commit with this ID
         /// </summary>
         bool RepositoryContainsCommit(string directory, string commitid);
+
     }
 }

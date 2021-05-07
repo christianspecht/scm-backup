@@ -54,6 +54,20 @@ namespace ScmBackup.Scm
             throw new InvalidOperationException(result.Output);
         }
 
+        public override bool LFSIsOnThisComputer()
+        {
+            var result = this.ExecuteCommand("lfs version");
+
+            if (result.Successful)
+            {
+                return true; //git lfs found: run lfs commands
+            }
+            else
+            {
+                return false; //git lfs not found: do not run lfs commands
+            }
+        }
+
         public override bool DirectoryIsRepository(string directory)
         {
             // SCM Backup uses bare repos only, so we don't need to check for non-bare repos at all
@@ -103,7 +117,7 @@ namespace ScmBackup.Scm
                 {
                     throw new InvalidOperationException(string.Format(Resource.ScmTargetDirectoryNotEmpty, directory));
                 }
-                
+
                 this.CreateRepository(directory);
             }
 
@@ -111,13 +125,58 @@ namespace ScmBackup.Scm
             {
                 remoteUrl = this.CreateRepoUrlWithCredentials(remoteUrl, credentials);
             }
-            
+
             string cmd = string.Format("-C \"{0}\" fetch --force --prune {1} refs/heads/*:refs/heads/* refs/tags/*:refs/tags/*", directory, remoteUrl);
             var result = this.ExecuteCommand(cmd);
 
             if (!result.Successful)
             {
                 throw new InvalidOperationException(result.Output);
+            }
+
+            if (LFSIsOnThisComputer())
+            {
+                if (RepositoryContainsLFS(directory))
+                {
+                    PullLFSFromRemote(remoteUrl, directory, credentials);
+                }
+            }
+        }
+
+        public override void PullLFSFromRemote(string remoteUrl, string directory, ScmCredentials credentials)
+        {
+            if (credentials != null)
+            {
+                remoteUrl = this.CreateRepoUrlWithCredentials(remoteUrl, credentials);
+            }
+
+            string cmd = string.Format("-C \"{0}\" lfs fetch --all {1}", directory, remoteUrl); // git -C *DIR* lfs fetch --all *REMOTE*
+            var result = this.ExecuteCommand(cmd);
+
+            if (!result.Successful)
+            {
+                throw new InvalidOperationException(result.Output);
+            }
+        }
+
+        public override bool RepositoryContainsLFS(string directory) //test if repo contains lfs files
+        {
+            //do not run if LFSIsOnThisComputer = false
+            string cmd = string.Format("-C \"{0}\" lfs ls-files", directory); 
+            var result = this.ExecuteCommand(cmd);
+
+            if (!result.Successful)
+            {
+                throw new InvalidOperationException(result.Output);
+            }
+
+            if (String.IsNullOrWhiteSpace(result.Output))
+            {
+                return false; //no lfs files found, continuing
+            }
+            else
+            {
+                return true; //lfs files found, backing them up
             }
         }
 
