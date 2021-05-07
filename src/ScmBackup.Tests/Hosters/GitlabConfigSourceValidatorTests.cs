@@ -1,4 +1,5 @@
-﻿using ScmBackup.Hosters.Gitlab;
+﻿using ScmBackup.Configuration;
+using ScmBackup.Hosters.Gitlab;
 using System;
 using System.Collections.Generic;
 using System.Text;

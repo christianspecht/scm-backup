@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
-namespace ScmBackup
+namespace ScmBackup.Configuration
 {
     /// <summary>
     /// Holds all configuration values
@@ -14,6 +15,11 @@ namespace ScmBackup
         public List<ConfigScm> Scms { get; set; }
 
         public List<ConfigSource> Sources { get; set; }
+
+        /// <summary>
+        /// Various options
+        /// </summary>
+        public ConfigOptions Options { get; set; }
 
         public ConfigEmail Email { get; set; }
 

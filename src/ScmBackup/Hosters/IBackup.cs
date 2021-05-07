@@ -1,4 +1,6 @@
-﻿namespace ScmBackup.Hosters
+﻿using ScmBackup.Configuration;
+
+namespace ScmBackup.Hosters
 {
     internal interface IBackup
     {

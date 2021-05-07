@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace ScmBackup
+namespace ScmBackup.Configuration
 {
     /// <summary>
     /// return value for validators

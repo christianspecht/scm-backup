@@ -1,4 +1,5 @@
-﻿using ScmBackup.Hosters.Bitbucket;
+﻿using ScmBackup.Configuration;
+using ScmBackup.Hosters.Bitbucket;
 using ScmBackup.Http;
 using System.Linq;
 using Xunit;

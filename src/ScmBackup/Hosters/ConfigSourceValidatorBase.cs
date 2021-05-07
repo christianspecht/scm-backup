@@ -1,4 +1,6 @@
-﻿namespace ScmBackup.Hosters
+﻿using ScmBackup.Configuration;
+
+namespace ScmBackup.Hosters
 {
     /// <summary>
     /// base class for all config source validators

@@ -1,4 +1,5 @@
-﻿using ScmBackup.Hosters.Github;
+﻿using ScmBackup.Configuration;
+using ScmBackup.Hosters.Github;
 
 namespace ScmBackup.Tests.Hosters
 {

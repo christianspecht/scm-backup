@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ScmBackup.Configuration;
+using System;
 using System.IO;
 using Xunit;
 

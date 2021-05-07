@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace ScmBackup.Tests
 {
@@ -9,9 +10,12 @@ namespace ScmBackup.Tests
         public Exception LastException { get; set; }
         public string LastMessage { get; set; }
         public object[] LastArg { get; set; }
+        public bool ExecutedOnExit { get; set; }
+        public bool ExecuteOnExit_Successful { get; set; }
 
         public bool IgnoreDebugLogs { get; set; }
         public bool ConsoleOutput { get; set; }
+        public List<string> FakeFilesToBackup { get; set; }
 
         public FakeLogger()
         {
@@ -21,6 +25,8 @@ namespace ScmBackup.Tests
 
             // default setting: don't actually output log messages
             this.ConsoleOutput = false;
+
+            this.FakeFilesToBackup = new List<string>();
         }
 
         public void Log(ErrorLevel level, string message, params object[] arg)
@@ -45,6 +51,17 @@ namespace ScmBackup.Tests
             this.LastException = ex;
             this.LastMessage = message;
             this.LastArg = arg;
+        }
+
+        public List<string> FilesToBackup
+        {
+            get { return this.FakeFilesToBackup; }
+        }
+
+        public void ExecuteOnExit(bool successful)
+        {
+            this.ExecutedOnExit = true;
+            this.ExecuteOnExit_Successful = successful;
         }
     }
 }

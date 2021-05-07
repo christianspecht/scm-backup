@@ -1,4 +1,5 @@
 ﻿using ScmBackup.CompositionRoot;
+using ScmBackup.Configuration;
 using ScmBackup.Tests.Hosters;
 using System.Collections.Generic;
 using System.Linq;

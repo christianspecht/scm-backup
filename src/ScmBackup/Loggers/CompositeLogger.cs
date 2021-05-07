@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ScmBackup.Loggers
 {
@@ -25,6 +26,31 @@ namespace ScmBackup.Loggers
             foreach (var logger in this.loggers)
             {
                 logger.Log(level, ex, message, arg);
+            }
+        }
+
+        public List<string> FilesToBackup
+        {
+            get
+            {
+                var list = new List<string>();
+                foreach (var logger in this.loggers)
+                {
+                    if (logger.FilesToBackup != null && logger.FilesToBackup.Any())
+                    {
+                        list.AddRange(logger.FilesToBackup);
+                    }
+                }
+
+                return list;
+            }
+        }
+
+        public void ExecuteOnExit(bool successful)
+        {
+            foreach (var logger in this.loggers)
+            {
+                logger.ExecuteOnExit(successful);
             }
         }
     }

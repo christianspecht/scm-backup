@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 
-namespace ScmBackup
+namespace ScmBackup.Configuration
 {
     internal class ConfigBackupMaker : IConfigBackupMaker
     {
@@ -27,7 +27,12 @@ namespace ScmBackup
         /// </summary>
         public List<string> ConfigFileNames
         {
-            get { return new List<string> { "settings.yml", "NLog.config" }; }
+            get
+            {
+                var list = this.logger.FilesToBackup;
+                list.Add("settings.yml");
+                return list;
+            }
         }
 
         /// <summary>
