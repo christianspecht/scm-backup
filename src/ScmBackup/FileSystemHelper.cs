@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
@@ -43,6 +44,15 @@ namespace ScmBackup
         public string PathCombine(string path1, string path2)
         {
             return Path.Combine(path1, path2);
+        }
+
+        /// <summary>
+        /// Returns a list of all subdirectory names
+        /// </summary>
+        public IEnumerable<string> GetSubDirectoryNames(string path)
+        {
+            var info = new DirectoryInfo(path);
+            return info.GetDirectories().Select(x => x.Name);
         }
     }
 }

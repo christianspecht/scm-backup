@@ -1,5 +1,6 @@
-﻿using System.IO;
-using System;
+﻿using System;
+using System.IO;
+using System.Linq;
 using Xunit;
 
 namespace ScmBackup.Tests.Integration
@@ -72,6 +73,22 @@ namespace ScmBackup.Tests.Integration
 
             var sut = new FileSystemHelper();
             Assert.Throws<DirectoryNotFoundException>(() => sut.CreateSubDirectory(dir, "sub"));
+        }
+
+        [Fact]
+        public void GetSubDirectories_ReturnsList()
+        {
+            string dir = DirectoryHelper.CreateTempDirectory("fsh-7");
+
+            var sut = new FileSystemHelper();
+            sut.CreateSubDirectory(dir, "sub1");
+            sut.CreateSubDirectory(dir, "sub2");
+
+            var result = sut.GetSubDirectoryNames(dir);
+
+            Assert.Equal(2, result.Count());
+            Assert.Contains("sub1", result);
+            Assert.Contains("sub2", result);
         }
     }
 }
