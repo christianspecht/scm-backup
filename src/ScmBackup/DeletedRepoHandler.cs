@@ -28,10 +28,24 @@ namespace ScmBackup
 
             if (deletedRepoDirs.Any())
             {
-                this.logger.Log(ErrorLevel.Warn, Resource.DeletedRepoWarning);
+                bool remove = this.context.Config.Options.Backup.RemoveDeletedRepos;
+
+                if (remove)
+                {
+                    this.logger.Log(ErrorLevel.Warn, Resource.DeletedRepoRemoving);
+                }
+                else
+                {
+                    this.logger.Log(ErrorLevel.Warn, Resource.DeletedRepoWarning);
+                }
 
                 foreach (string dir in deletedRepoDirs)
                 {
+                    if (remove)
+                    {
+                        this.fileHelper.DeleteDirectory(this.fileHelper.PathCombine(backupDir, dir));
+                    }
+
                     this.logger.Log(ErrorLevel.Warn, "  " + dir);
                 }
             }

@@ -54,5 +54,13 @@ namespace ScmBackup
             var info = new DirectoryInfo(path);
             return info.GetDirectories().Select(x => x.Name);
         }
+
+        /// <summary>
+        /// Deletes a directory
+        /// </summary>
+        public void DeleteDirectory(string path)
+        {
+            Directory.Delete(path, true);
+        }
     }
 }

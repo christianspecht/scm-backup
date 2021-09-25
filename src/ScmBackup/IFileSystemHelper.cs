@@ -26,5 +26,10 @@ namespace ScmBackup
         /// Returns a list of all subdirectory names
         /// </summary>
         IEnumerable<string> GetSubDirectoryNames(string path);
+
+        /// <summary>
+        /// Deletes a directory
+        /// </summary>
+        void DeleteDirectory(string path);
     }
 }

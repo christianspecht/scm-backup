@@ -277,6 +277,15 @@ namespace ScmBackup {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Removing repos from the backup folder that don&apos;t exist at the hoster:.
+        /// </summary>
+        internal static string DeletedRepoRemoving {
+            get {
+                return ResourceManager.GetString("DeletedRepoRemoving", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The following repos are in the backup folder, but not at the hoster (probably deleted there):.
         /// </summary>
         internal static string DeletedRepoWarning {

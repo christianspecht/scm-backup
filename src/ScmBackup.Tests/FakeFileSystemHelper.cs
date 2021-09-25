@@ -8,6 +8,8 @@ namespace ScmBackup.Tests
     {
         public List<string> SubDirectoryNames { get; set; } = new List<string>();
 
+        public List<string> DeletedDirectories { get; set; } = new List<string>();
+
         public string CreateSubDirectory(string mainDir, string subDir)
         {
             throw new NotImplementedException();
@@ -26,6 +28,10 @@ namespace ScmBackup.Tests
         public string PathCombine(string path1, string path2)
         {
             throw new NotImplementedException();
+        }
+        public void DeleteDirectory(string path)
+        {
+            this.DeletedDirectories.Add(path);
         }
     }
 }
