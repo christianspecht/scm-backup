@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 namespace ScmBackup.Tests
@@ -27,7 +28,7 @@ namespace ScmBackup.Tests
 
         public string PathCombine(string path1, string path2)
         {
-            throw new NotImplementedException();
+            return Path.Combine(path1, path2);
         }
         public void DeleteDirectory(string path)
         {

@@ -60,7 +60,15 @@ namespace ScmBackup
         /// </summary>
         public void DeleteDirectory(string path)
         {
-            Directory.Delete(path, true);
+            // if the directory is a Git repo which was pulled into, Directory.Delete isn't able to delete it: https://stackoverflow.com/q/63449326/6884
+            var directory = new DirectoryInfo(path) { Attributes = FileAttributes.Normal };
+
+            foreach (var info in directory.GetFileSystemInfos("*", SearchOption.AllDirectories))
+            {
+                info.Attributes = FileAttributes.Normal;
+            }
+
+            directory.Delete(true);
         }
     }
 }

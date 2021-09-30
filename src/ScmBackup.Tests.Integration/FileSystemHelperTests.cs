@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ScmBackup.Scm;
+using ScmBackup.Tests.Hosters;
+using System;
 using System.IO;
 using System.Linq;
 using Xunit;
@@ -89,6 +91,26 @@ namespace ScmBackup.Tests.Integration
             Assert.Equal(2, result.Count());
             Assert.Contains("sub1", result);
             Assert.Contains("sub2", result);
+        }
+
+        [Fact]
+        public void DeleteDirectory_DeletesGitRepo()
+        {
+            string dir = DirectoryHelper.CreateTempDirectory("fsh-8");
+
+            var sut = new FileSystemHelper();
+            var repoDir = sut.CreateSubDirectory(dir, "repo");
+
+            var git = new GitScm(sut, new FakeContext());
+            git.CreateRepository(repoDir);
+
+            string url = CloneUrlBuilder.GithubCloneUrl("scm-backup-testuser", "scm-backup");
+            git.PullFromRemote(url, repoDir);
+
+            // if the directory is a Git repo which was pulled into, Directory.Delete isn't able to delete it: https://stackoverflow.com/q/63449326/6884
+            sut.DeleteDirectory(repoDir);
+
+            Assert.False(Directory.Exists(repoDir));
         }
     }
 }
