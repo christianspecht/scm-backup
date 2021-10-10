@@ -34,6 +34,11 @@ namespace ScmBackup.Tests.Integration.Scm
             get { return CloneUrlBuilder.BitbucketCloneUrl("scm-backup-testuser", "repo-does-not-exist"); }
         }
 
+        internal override string DotRepoUrl
+        {
+            get { return null; }
+        }
+
         internal override string PublicRepoExistingCommitId
         {
             get { return "617f9e55262be7b6d1c9db081ec351ff25c9a0e5"; }

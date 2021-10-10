@@ -35,6 +35,11 @@ namespace ScmBackup.Tests.Integration.Scm
             get { return CloneUrlBuilder.GithubCloneUrl("scm-backup-testuser", "repo-does-not-exist"); }
         }
 
+        internal override string DotRepoUrl
+        {
+            get { return CloneUrlBuilder.GithubCloneUrl("scm-backup-testuser", "name-with-dot."); }
+        }
+
         internal override string PublicRepoExistingCommitId
         {
             get
