@@ -23,6 +23,14 @@ namespace ScmBackup
         }
 
         /// <summary>
+        /// wrapper for Directory.CreateDirectory
+        /// </summary>
+        public void CreateDirectory(string path)
+        {
+            Directory.CreateDirectory(path);
+        }
+
+        /// <summary>
         /// Creates a subdirectory inside the given directory and returns the path
         /// </summary>
         public string CreateSubDirectory(string mainDir, string subDir)

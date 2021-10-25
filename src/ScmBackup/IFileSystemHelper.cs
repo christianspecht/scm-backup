@@ -11,6 +11,11 @@
         bool DirectoryIsEmpty(string path);
 
         /// <summary>
+        /// wrapper for Directory.CreateDirectory
+        /// </summary>
+        void CreateDirectory(string path);
+
+        /// <summary>
         /// Creates a subdirectory inside the given directory and returns the path
         /// </summary>
         string CreateSubDirectory(string mainDir, string subDir);

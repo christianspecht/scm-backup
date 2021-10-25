@@ -1,6 +1,8 @@
 ﻿using ScmBackup.Scm;
 using ScmBackup.Tests.Hosters;
 using System;
+using System.IO;
+using Xunit;
 
 namespace ScmBackup.Tests.Integration.Scm
 {
@@ -51,6 +53,21 @@ namespace ScmBackup.Tests.Integration.Scm
         internal override string PublicRepoNonExistingCommitId
         {
             get { return "00000"; }
+        }
+
+        [Fact]
+        public void CreateRepository_WorksWithDotPath()
+        {
+            // Apparently `git init` fails when you pass a multi-level path that doesn't exist
+            // yet, and where the name of one directory ends with "."
+            // This happens when backing up a repo whose name ends with "."
+            // The resulting path is "REPONAME.\repo"
+            string maindir = DirectoryHelper.CreateTempDirectory(DirSuffix("create-git-dot"));
+            var dir = Path.Combine(maindir, "dotdir.", "repo");
+
+            sut.CreateRepository(dir);
+
+            Assert.True(sut.DirectoryIsRepository(dir));
         }
     }
 }

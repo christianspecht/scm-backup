@@ -250,7 +250,7 @@ namespace ScmBackup.Tests.Integration.Scm
         /// <summary>
         /// helper for directory suffixes
         /// </summary>
-        private string DirSuffix(string suffix)
+        public string DirSuffix(string suffix)
         {
             return "iscm-" + this.sut.ShortName + "-" + suffix;
         }
