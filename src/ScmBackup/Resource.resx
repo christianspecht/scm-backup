@@ -189,6 +189,12 @@
   <data name="ConfigSourceWithoutTitle" xml:space="preserve">
     <value>All sources in the settings file must have a title.</value>
   </data>
+  <data name="DeletedRepoRemoving" xml:space="preserve">
+    <value>Removing repos from the backup folder that don't exist at the hoster:</value>
+  </data>
+  <data name="DeletedRepoWarning" xml:space="preserve">
+    <value>The following repos are in the backup folder, but not at the hoster (probably deleted there):</value>
+  </data>
   <data name="DirectoryDoesntExist" xml:space="preserve">
     <value>Directory {0} doesn't exist!</value>
   </data>

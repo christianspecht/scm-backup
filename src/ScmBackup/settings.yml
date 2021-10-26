@@ -20,3 +20,9 @@ sources:
     hoster: github
     type: user
     name: scm-backup-testuser
+
+
+options:
+    backup:
+        # delete repos from local backup that don't exist at the hoster
+        removeDeletedRepos : false

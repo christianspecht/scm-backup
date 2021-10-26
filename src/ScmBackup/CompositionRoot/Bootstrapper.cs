@@ -55,6 +55,7 @@ namespace ScmBackup.CompositionRoot
             container.Register<IApiCaller, ApiCaller>();
             container.Register<IScmValidator, ScmValidator>();
             container.Register<IBackupMaker, BackupMaker>();
+            container.Register<IDeletedRepoHandler, DeletedRepoHandler>();
 
             // auto-register validators
             var validators = container.GetTypesToRegister(typeof(IConfigSourceValidator), thisAssembly);

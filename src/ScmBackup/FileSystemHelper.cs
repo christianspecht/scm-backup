@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
@@ -51,6 +52,31 @@ namespace ScmBackup
         public string PathCombine(string path1, string path2)
         {
             return Path.Combine(path1, path2);
+        }
+
+        /// <summary>
+        /// Returns a list of all subdirectory names
+        /// </summary>
+        public IEnumerable<string> GetSubDirectoryNames(string path)
+        {
+            var info = new DirectoryInfo(path);
+            return info.GetDirectories().Select(x => x.Name);
+        }
+
+        /// <summary>
+        /// Deletes a directory
+        /// </summary>
+        public void DeleteDirectory(string path)
+        {
+            // if the directory is a Git repo which was pulled into, Directory.Delete isn't able to delete it: https://stackoverflow.com/q/63449326/6884
+            var directory = new DirectoryInfo(path) { Attributes = FileAttributes.Normal };
+
+            foreach (var info in directory.GetFileSystemInfos("*", SearchOption.AllDirectories))
+            {
+                info.Attributes = FileAttributes.Normal;
+            }
+
+            directory.Delete(true);
         }
     }
 }

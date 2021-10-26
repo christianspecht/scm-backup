@@ -1,4 +1,6 @@
-﻿namespace ScmBackup
+﻿using System.Collections.Generic;
+
+namespace ScmBackup
 {
     /// <summary>
     /// helper class for file system operations
@@ -24,5 +26,15 @@
         /// wrapper for Path.Combine
         /// </summary>
         string PathCombine(string path1, string path2);
+
+        /// <summary>
+        /// Returns a list of all subdirectory names
+        /// </summary>
+        IEnumerable<string> GetSubDirectoryNames(string path);
+
+        /// <summary>
+        /// Deletes a directory
+        /// </summary>
+        void DeleteDirectory(string path);
     }
 }

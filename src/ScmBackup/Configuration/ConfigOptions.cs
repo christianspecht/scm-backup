@@ -9,5 +9,11 @@ namespace ScmBackup.Configuration
     /// </summary>
     class ConfigOptions
     {
+        public BackupOptions Backup { get; set; } = new BackupOptions();
+    }
+
+    class BackupOptions
+    {
+        public bool RemoveDeletedRepos { get; set; }
     }
 }

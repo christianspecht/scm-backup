@@ -13,13 +13,15 @@ namespace ScmBackup
         private readonly IScmValidator validator;
         private readonly IBackupMaker backupMaker;
         private readonly IConfigBackupMaker configBackupMaker;
+        private readonly IDeletedRepoHandler deletedHandler;
 
-        public ScmBackup(IApiCaller apiCaller, IScmValidator validator, IBackupMaker backupMaker, IConfigBackupMaker configBackupMaker)
+        public ScmBackup(IApiCaller apiCaller, IScmValidator validator, IBackupMaker backupMaker, IConfigBackupMaker configBackupMaker, IDeletedRepoHandler deletedHandler)
         {
             this.apiCaller = apiCaller;
             this.validator = validator;
             this.backupMaker = backupMaker;
             this.configBackupMaker = configBackupMaker;
+            this.deletedHandler = deletedHandler;
         }
 
         public bool Run()
@@ -35,7 +37,9 @@ namespace ScmBackup
             
             foreach (var source in repos.GetSources())
             {
-                this.backupMaker.Backup(source, repos.GetReposForSource(source));
+                var sourceRepos = repos.GetReposForSource(source);
+                string sourceFolder = this.backupMaker.Backup(source, sourceRepos);
+                this.deletedHandler.HandleDeletedRepos(sourceRepos, sourceFolder);
             }
 
             return true;
