@@ -11,6 +11,11 @@ namespace ScmBackup.Tests
 
         public List<string> DeletedDirectories { get; set; } = new List<string>();
 
+        public void CreateDirectory(string path)
+        {
+            throw new NotImplementedException();
+        }
+
         public string CreateSubDirectory(string mainDir, string subDir)
         {
             throw new NotImplementedException();
