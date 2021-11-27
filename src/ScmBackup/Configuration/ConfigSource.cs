@@ -40,6 +40,12 @@ namespace ScmBackup.Configuration
         /// </summary>
         public List<string> IgnoreRepos { get; set; }
 
+
+        /// <summary>
+        /// list of repository names which should be included in the backup, all others will be ignored!
+        /// </summary>
+        public List<string> IncludeRepos { get; set; }
+
         /// <summary>
         /// password for authentication
         /// </summary>
