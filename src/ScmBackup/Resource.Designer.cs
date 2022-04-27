@@ -223,6 +223,15 @@ namespace ScmBackup {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to        Finished.
+        /// </summary>
+        internal static string BackupMaker_RepoFinished {
+            get {
+                return ResourceManager.GetString("BackupMaker_RepoFinished", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Backing up source: {0}.
         /// </summary>
         internal static string BackupMaker_Source {

@@ -171,6 +171,9 @@
   <data name="BackupMaker_Repo" xml:space="preserve">
     <value>  {0}: {1}</value>
   </data>
+  <data name="BackupMaker_RepoFinished" xml:space="preserve">
+    <value>       Finished</value>
+  </data>
   <data name="BackupMaker_Source" xml:space="preserve">
     <value>Backing up source: {0}</value>
   </data>
