@@ -39,7 +39,10 @@ namespace ScmBackup
 
                 this.backupMaker.MakeBackup(source, repo, repoFolder);
 
-                this.logger.Log(ErrorLevel.Info, Resource.BackupMaker_RepoFinished);
+                if (this.context.Config.Options.Backup.LogRepoFinished)
+                {
+                    this.logger.Log(ErrorLevel.Info, Resource.BackupMaker_RepoFinished);
+                }
             }
 
             return sourceFolder;
