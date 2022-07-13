@@ -41,7 +41,7 @@ namespace ScmBackup.Tests.Integration
         /// </summary>
         public static string TestAssemblyDirectory()
         {
-            string unc = typeof(DirectoryHelper).GetTypeInfo().Assembly.CodeBase;
+            string unc = typeof(DirectoryHelper).GetTypeInfo().Assembly.Location;
 
             // convert from UNC path to "real" path
             var uri = new Uri(unc);
