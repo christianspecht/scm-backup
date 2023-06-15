@@ -1,3 +1,3 @@
 @echo off
-powershell .\build-release.ps1
+powershell -executionpolicy bypass -file .\build-release.ps1
 pause

@@ -15,6 +15,7 @@ namespace ScmBackup.Tests.Integration.Scm
         internal abstract string PrivateRepoUrl { get; }
         internal abstract ScmCredentials PrivateRepoCredentials { get; }
         internal abstract string NonExistingRepoUrl { get; }
+        internal abstract string DotRepoUrl { get; }  // a repo which has a name containing "."
 
         // commit ids that do/do not exist in the public repo
         internal abstract string PublicRepoExistingCommitId { get; }
@@ -173,6 +174,18 @@ namespace ScmBackup.Tests.Integration.Scm
             Assert.True(sut.DirectoryIsRepository(subDir));
         }
 
+        [SkippableFact]
+        public void PullFromRemote_DotRepo_MakesBackup()
+        {
+            Skip.If(string.IsNullOrWhiteSpace(this.DotRepoUrl));
+
+            string dir = DirectoryHelper.CreateTempDirectory(DirSuffix("pull-dot"));
+            sut.CreateRepository(dir);
+
+            sut.PullFromRemote(this.DotRepoUrl, dir);
+            Assert.True(sut.DirectoryIsRepository(dir));
+        }
+
         [Fact]
         public void RepositoryContainsCommit_ThrowsWhenDirDoesntExist()
         {
@@ -237,7 +250,7 @@ namespace ScmBackup.Tests.Integration.Scm
         /// <summary>
         /// helper for directory suffixes
         /// </summary>
-        private string DirSuffix(string suffix)
+        public string DirSuffix(string suffix)
         {
             return "iscm-" + this.sut.ShortName + "-" + suffix;
         }

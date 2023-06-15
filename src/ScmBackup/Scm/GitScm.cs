@@ -70,6 +70,8 @@ namespace ScmBackup.Scm
 
         public override void CreateRepository(string directory)
         {
+            this.FileSystemHelper.CreateDirectory(directory);
+
             if (!this.DirectoryIsRepository(directory))
             {
                 string cmd = string.Format("init --bare \"{0}\"", directory);

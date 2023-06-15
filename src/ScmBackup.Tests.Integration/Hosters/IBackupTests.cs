@@ -1,4 +1,5 @@
-﻿using ScmBackup.Hosters;
+﻿using ScmBackup.Configuration;
+using ScmBackup.Hosters;
 using ScmBackup.Scm;
 using System;
 using System.Collections.Generic;

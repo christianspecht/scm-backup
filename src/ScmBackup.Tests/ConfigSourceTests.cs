@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using ScmBackup.Configuration;
+using Xunit;
 
 namespace ScmBackup.Tests
 {

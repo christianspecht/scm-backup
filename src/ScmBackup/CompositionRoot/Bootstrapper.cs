@@ -4,6 +4,9 @@ using ScmBackup.Http;
 using ScmBackup.Loggers;
 using ScmBackup.Scm;
 using SimpleInjector;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 
 namespace ScmBackup.CompositionRoot
@@ -22,13 +25,19 @@ namespace ScmBackup.CompositionRoot
             container.Register<IScmBackup, ScmBackup>();
             container.RegisterDecorator<IScmBackup, LoggingScmBackup>();
             container.RegisterDecorator<IScmBackup, ErrorHandlingScmBackup>();
-            container.RegisterDecorator<IScmBackup, LogMailingScmBackup>();
 
             // auto-register loggers
-            container.Collection.Register<ILogger>(thisAssembly);
+            // https://github.com/simpleinjector/SimpleInjector/issues/208#issuecomment-201423660
+            var subLoggers = container.GetTypesToRegister(typeof(ILogger), thisAssembly)
+                .Except(new List<Type> { typeof(CompositeLogger) });
+            var subLoggerRegistrations = (
+                from type in subLoggers
+                select Lifestyle.Singleton.CreateRegistration(type, container)
+                ).ToArray();
 
+            container.Collection.Register<ILogger>(subLoggerRegistrations);
             container.Register<ILogger, CompositeLogger>(Lifestyle.Singleton);
-            container.RegisterSingleton<ILogMessages, LogMessages>();
+
             container.Register<IFileSystemHelper, FileSystemHelper>();
 
             container.RegisterSingleton<IContext, Context>();
@@ -40,12 +49,13 @@ namespace ScmBackup.CompositionRoot
 
             container.Register<IHttpRequest, HttpRequest>();
             container.RegisterDecorator<IHttpRequest, LoggingHttpRequest>();
-            container.Register<IEmailSender, MailKitEmailSender>();
+            container.RegisterSingleton<IEmailSender, MailKitEmailSender>();
             container.Register<IUrlHelper, UrlHelper>();
 
             container.Register<IApiCaller, ApiCaller>();
             container.Register<IScmValidator, ScmValidator>();
             container.Register<IBackupMaker, BackupMaker>();
+            container.Register<IDeletedRepoHandler, DeletedRepoHandler>();
 
             // auto-register validators
             var validators = container.GetTypesToRegister(typeof(IConfigSourceValidator), thisAssembly);
@@ -97,6 +107,7 @@ namespace ScmBackup.CompositionRoot
 
             container.RegisterInstance<IHosterApiCaller>(new HosterApiCaller(hosterFactory));
             container.RegisterDecorator<IHosterApiCaller, IgnoringHosterApiCaller>();
+            container.RegisterDecorator<IHosterApiCaller, IncludingHosterApiCaller>();
             container.RegisterDecorator<IHosterApiCaller, LoggingHosterApiCaller>();
 
             container.RegisterInstance<IHosterBackupMaker>(new HosterBackupMaker(hosterFactory));

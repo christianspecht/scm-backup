@@ -1,5 +1,6 @@
 ﻿using NLog;
 using System;
+using System.Collections.Generic;
 
 namespace ScmBackup.Loggers
 {
@@ -36,6 +37,15 @@ namespace ScmBackup.Loggers
             }
 
             this.logger.Log(NLogLevel, ex, message, arg);
+        }
+
+        public List<string> FilesToBackup
+        {
+            get { return new List<string> { "NLog.config" }; }
+        }
+
+        public void ExecuteOnExit(bool successful)
+        {
         }
     }
 }

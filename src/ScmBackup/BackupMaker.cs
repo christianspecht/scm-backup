@@ -1,4 +1,5 @@
-﻿using ScmBackup.Hosters;
+﻿using ScmBackup.Configuration;
+using ScmBackup.Hosters;
 using ScmBackup.Http;
 using System.Collections.Generic;
 
@@ -22,7 +23,7 @@ namespace ScmBackup
             this.context = context;
         }
 
-        public void Backup(ConfigSource source, IEnumerable<HosterRepository> repos)
+        public string Backup(ConfigSource source, IEnumerable<HosterRepository> repos)
         {
             this.logger.Log(ErrorLevel.Info, Resource.BackupMaker_Source, source.Title);
 
@@ -38,6 +39,8 @@ namespace ScmBackup
 
                 this.backupMaker.MakeBackup(source, repo, repoFolder);
             }
+
+            return sourceFolder;
         }
     }
 }

@@ -1,10 +1,11 @@
-﻿using ScmBackup.Hosters;
+﻿using ScmBackup.Configuration;
+using ScmBackup.Hosters;
 using System.Collections.Generic;
 
 namespace ScmBackup
 {
     internal interface IBackupMaker
     {
-        void Backup(ConfigSource source, IEnumerable<HosterRepository> repos);
+        string Backup(ConfigSource source, IEnumerable<HosterRepository> repos);
     }
 }

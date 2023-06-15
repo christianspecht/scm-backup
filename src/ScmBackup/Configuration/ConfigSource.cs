@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ScmBackup
+namespace ScmBackup.Configuration
 {
     /// <summary>
     /// Configuration data to get the repositories of user X from hoster Y
@@ -39,6 +39,12 @@ namespace ScmBackup
         /// list of repository names which should be ignored
         /// </summary>
         public List<string> IgnoreRepos { get; set; }
+
+
+        /// <summary>
+        /// list of repository names which should be included in the backup, all others will be ignored!
+        /// </summary>
+        public List<string> IncludeRepos { get; set; }
 
         /// <summary>
         /// password for authentication

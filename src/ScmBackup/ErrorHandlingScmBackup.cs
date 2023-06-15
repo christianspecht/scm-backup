@@ -30,11 +30,12 @@ namespace ScmBackup
         public bool Run()
         {
             string className = this.GetType().Name;
+            bool ok;
 
             try
             {
                 this.logger.Log(ErrorLevel.Debug, Resource.StartingBackup, className);
-                return this.backup.Run();
+                ok = this.backup.Run();
             }
             catch (Exception ex)
             {
@@ -53,8 +54,11 @@ namespace ScmBackup
                 this.logger.Log(ErrorLevel.Error, Resource.EndSeconds, seconds);
                 Task.Delay(TimeSpan.FromSeconds(seconds)).Wait();
 
-                return false;
+                ok = false;
             }
+
+            this.logger.ExecuteOnExit(ok);
+            return ok;
         }
     }
 }

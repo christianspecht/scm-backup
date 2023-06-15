@@ -45,5 +45,35 @@ namespace ScmBackup.Tests
 
             Assert.False(result);
         }
+
+        [Fact]
+        public void RunsExecuteOnExit_OnRegularExit()
+        {
+            var subBackup = new FakeScmBackup();
+            var context = new FakeContext();
+            var logger = new FakeLogger();
+
+            var sut = new ErrorHandlingScmBackup(subBackup, logger, context);
+            sut.Run();
+
+            Assert.True(logger.ExecutedOnExit);
+            Assert.True(logger.ExecuteOnExit_Successful);
+        }
+
+        [Fact]
+        public void RunsExecuteOnExit_WhenExceptionIsThrown()
+        {
+            var subBackup = new FakeScmBackup();
+            subBackup.ToThrow = new Exception("!!");
+
+            var context = new FakeContext();
+            var logger = new FakeLogger();
+
+            var sut = new ErrorHandlingScmBackup(subBackup, logger, context);
+            sut.Run();
+
+            Assert.True(logger.ExecutedOnExit);
+            Assert.False(logger.ExecuteOnExit_Successful);
+        }
     }
 }

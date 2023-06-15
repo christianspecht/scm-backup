@@ -1,5 +1,6 @@
 ﻿using ScmBackup.Loggers;
 using System;
+using System.Collections.Generic;
 
 namespace ScmBackup.Tests.Integration
 {
@@ -27,6 +28,15 @@ namespace ScmBackup.Tests.Integration
         public void Log(ErrorLevel level, Exception ex, string message, params object[] arg)
         {
             this.logger.Log(level, ex, message, arg);
+        }
+
+        public List<string> FilesToBackup
+        {
+            get { return new List<string>(); }
+        }
+
+        public void ExecuteOnExit(bool successful)
+        {
         }
     }
 }

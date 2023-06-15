@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using ScmBackup.Configuration;
+using System.Linq;
 using Xunit;
 
 namespace ScmBackup.Tests

@@ -1,4 +1,5 @@
-﻿using ScmBackup.Scm;
+﻿using ScmBackup.Configuration;
+using ScmBackup.Scm;
 using System;
 
 namespace ScmBackup.Tests.Scm
