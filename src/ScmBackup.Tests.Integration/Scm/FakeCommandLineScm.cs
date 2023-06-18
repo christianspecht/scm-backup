@@ -23,8 +23,10 @@ namespace ScmBackup.Tests.Integration.Scm
             }
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
             {
+                string tmppath = Path.Combine(testAssemblyDir, @"Scm/FakeCommandLineScmTools/FakeCommandLineScm-Command-Linux.sh");
+
                 this.FakeCommandName = "/bin/bash";
-                this.FakeCommandArgs = "-c \"" + Path.Combine(testAssemblyDir, @"Scm/FakeCommandLineScmTools/FakeCommandLineScm-Command-Linux.sh") + "\"";
+                this.FakeCommandArgs = "-c \"chmod +x " + tmppath + " && " + tmppath + "\"";
                 this.FakeCommandResult = "Test Linux";
 
                 this.FakeCommandNameNotExisting = Path.Combine(testAssemblyDir, "doesnt-exist");
