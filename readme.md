@@ -13,7 +13,7 @@ At the moment, the following hosters are supported:
 - [GitLab](https://gitlab.com)
 
   
-And it's written in [.NET Core](https://dotnet.github.io/), which means that it's supposed to run on Windows, Linux **and** MacOS.
+And it's written in [.NET Core](https://dotnet.github.io/), which means that it runs on Windows, Linux **and** MacOS.
 
 
 - [Website](https://scm-backup.org)
