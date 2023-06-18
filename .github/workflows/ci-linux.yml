@@ -2,7 +2,7 @@ name: "Linux build"
 
 on:
   push:
-    branches: [ ci-linux ]
+    branches: [ ci-linux ] # hier alle branches
   pull_request:
     branches: [ ci-linux ]
 
@@ -33,3 +33,8 @@ jobs:
         Tests_Gitlab_RepoPrivate : ${{ secrets.Tests_Gitlab_RepoPrivate }}
       run: ./build-release.ps1
       shell: pwsh
+    - name: Upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: Application
+        path: release/scm-backup-*.zip
