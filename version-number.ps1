@@ -34,7 +34,7 @@ else {
 
 $env:ScmBackupCommit=$commit
 $env:ScmBackupShortVersion=$shortversion
-$env:ScmBackupLongVersion=$longversion
+$env:ScmBackupLongVersion=$longversion >> $env:GITHUB_ENV
 
 Write-Host 'Commit: ' $env:ScmBackupCommit
 Write-Host 'Short Version: ' $env:ScmBackupShortVersion
