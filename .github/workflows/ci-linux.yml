@@ -35,8 +35,13 @@ jobs:
       shell: pwsh
     - name: Show tree
       run: tree
-    - name: Upload artifact
+    - name: Upload application
       uses: actions/upload-artifact@v3
       with:
         name: Application
-        path: .\release\scm-backup-*.zip
+        path: release/scm-backup-*.zip
+    - name: Upload test log
+      uses: actions/upload-artifact@v3
+      with:
+        name: Test log
+        path: src/ScmBackup.Tests.Integration/bin/Release/netcoreapp3.1/*.log
