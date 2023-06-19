@@ -64,4 +64,5 @@ if ($LASTEXITCODE -eq 1) {
 
 ''
 Write-Host '###### ZIP ######'
-7z a -r "release\$release_filename.zip" .\release\bin\*
+$zippath = Join-Path "release" "$release_filename.zip"
+7z a -r $zippath .\release\bin\*
