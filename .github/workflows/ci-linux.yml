@@ -33,8 +33,6 @@ jobs:
         Tests_Gitlab_RepoPrivate : ${{ secrets.Tests_Gitlab_RepoPrivate }}
       run: ./build-release.ps1
       shell: pwsh
-    - name: Show tree
-      run: tree
     - name: Upload application
       uses: actions/upload-artifact@v3
       with:
