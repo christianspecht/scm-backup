@@ -34,8 +34,15 @@ else {
 
 $env:ScmBackupCommit=$commit
 $env:ScmBackupShortVersion=$shortversion
-$env:ScmBackupLongVersion=$longversion >> $env:GITHUB_ENV
+$env:ScmBackupLongVersion=$longversion
 
 Write-Host 'Commit: ' $env:ScmBackupCommit
 Write-Host 'Short Version: ' $env:ScmBackupShortVersion
 Write-Host 'Long Version: ' $env:ScmBackupLongVersion
+
+if ($env:GITHUB_ACTIONS) {
+    # for GH Actions, save version numbers so they are available in subsequent steps
+    "ScmBackupCommit=$commit" >> $env:GITHUB_ENV
+    "ScmBackupShortVersion=$shortversion" >> $env:GITHUB_ENV
+    "ScmBackupLongVersion=$longversion" >> $env:GITHUB_ENV
+}
