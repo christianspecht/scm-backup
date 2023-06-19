@@ -1,6 +1,6 @@
 ﻿Write-Host '###### INITIALIZE ######'
 
-if ($env:APPVEYOR -Or $env:CI) {
+if ($env:APPVEYOR -Or $env:GITHUB_ACTIONS) {
 
     # We are on AppVeyor
     # - environment variables are set in the AppVeyor settings

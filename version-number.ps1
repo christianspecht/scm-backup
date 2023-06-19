@@ -14,7 +14,7 @@
         $longversion = '0.0.0.CI-WIN-' + $env:APPVEYOR_BUILD_NUMBER + '-' + $commit
     }
 }
-elseif ($env:CI) {
+elseif ($env:GITHUB_ACTIONS) {
 
     # GH Actions
     $commit = $env:GITHUB_SHA.Substring(0,7)
