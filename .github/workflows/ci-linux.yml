@@ -1,10 +1,6 @@
 name: "Linux build"
 
-on:
-  push:
-    branches: [ ci-linux ] # hier alle branches
-  pull_request:
-    branches: [ ci-linux ]
+on: [push, pull_request]
 
 jobs:
   build:
