@@ -65,3 +65,7 @@ if ($LASTEXITCODE -eq 1) {
 ''
 Write-Host '###### ZIP ######'
 7z a -r "release\$release_filename.zip" .\release\bin\*
+
+if ($env:APPVEYOR) {
+    tree /f
+}
