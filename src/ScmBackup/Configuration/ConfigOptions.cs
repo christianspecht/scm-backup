@@ -15,5 +15,6 @@ namespace ScmBackup.Configuration
     class BackupOptions
     {
         public bool RemoveDeletedRepos { get; set; }
+        public bool LogRepoFinished { get; set; }
     }
 }

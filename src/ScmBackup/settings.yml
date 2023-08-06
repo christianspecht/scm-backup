@@ -26,3 +26,6 @@ options:
     backup:
         # delete repos from local backup that don't exist at the hoster
         removeDeletedRepos : false
+
+        # output a second log message for each repo when backing it up is finished
+        logRepoFinished: false

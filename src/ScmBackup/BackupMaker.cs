@@ -38,6 +38,11 @@ namespace ScmBackup
                 this.logger.Log(ErrorLevel.Info, Resource.BackupMaker_Repo, repo.Scm.ToString(), url.RemoveCredentialsFromUrl(repo.CloneUrl));
 
                 this.backupMaker.MakeBackup(source, repo, repoFolder);
+
+                if (this.context.Config.Options.Backup.LogRepoFinished)
+                {
+                    this.logger.Log(ErrorLevel.Info, Resource.BackupMaker_RepoFinished);
+                }
             }
 
             return sourceFolder;
