@@ -11,12 +11,13 @@ namespace ScmBackup.Tests.Integration.Hosters
     public class GithubBackupTests : IBackupTests
     {
         private List<HosterRepository> repoList;
+        private string prefix = "Tests_Github";
 
         internal override string PublicUserName { get { return "scm-backup-testuser"; } }
         internal override string PublicRepoName { get { return "scm-backup"; } }
 
-        internal override string PrivateUserName { get { return TestHelper.EnvVar("Github_Name"); } }
-        internal override string PrivateRepoName { get { return TestHelper.EnvVar("Github_RepoPrivate"); } }
+        internal override string PrivateUserName { get { return TestHelper.EnvVar(prefix, "Name"); } }
+        internal override string PrivateRepoName { get { return TestHelper.EnvVar(prefix, "RepoPrivate"); } }
 
         protected override bool SkipTestsIssue15()
         {
@@ -30,8 +31,8 @@ namespace ScmBackup.Tests.Integration.Hosters
             this.source.Hoster = "github";
             this.source.Type = "user";
             this.source.Name = this.GetUserName(usePrivateRepo);
-            this.source.AuthName = TestHelper.EnvVar("Github_Name");
-            this.source.Password = TestHelper.EnvVar("Github_PW");
+            this.source.AuthName = TestHelper.EnvVar(prefix, "Name");
+            this.source.Password = TestHelper.EnvVar(prefix, "PW");
 
             var config = new Config();
             config.Sources.Add(this.source);

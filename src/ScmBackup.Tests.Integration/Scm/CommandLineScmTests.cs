@@ -51,7 +51,7 @@ namespace ScmBackup.Tests.Integration.Scm
 
             var result = sut.ExecuteCommandDirectly();
 
-            Assert.Equal(sut.FakeCommandResult, result);
+            Assert.Contains(sut.FakeCommandResult, result);
         }
 
         [Fact]

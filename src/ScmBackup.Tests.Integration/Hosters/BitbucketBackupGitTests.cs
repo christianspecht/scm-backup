@@ -9,7 +9,7 @@ namespace ScmBackup.Tests.Integration.Hosters
 {
     public class BitbucketBackupGitTests : IBackupTests
     {
-        private string prefix = "Bitbucket";
+        private string prefix = "Tests_Bitbucket";
 
         internal override string PublicUserName { get { return "scm-backup-testuser"; } }
         internal override string PublicRepoName { get { return "scm-backup-test-git"; } }

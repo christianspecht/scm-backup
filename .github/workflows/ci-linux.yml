@@ -1,0 +1,41 @@
+name: "Linux build"
+
+on: [push, pull_request]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 3.1.x
+    - name: Set version number
+      run: .\version-number.ps1
+      shell: pwsh
+    - name: Run build script
+      env:
+        Tests_Github_Name : ${{ secrets.Tests_Github_Name }}
+        Tests_Github_PW : ${{ secrets.Tests_Github_PW }}
+        Tests_Github_RepoPrivate : ${{ secrets.Tests_Github_RepoPrivate }}
+        Tests_Bitbucket_Name : ${{ secrets.Tests_Bitbucket_Name }}
+        Tests_Bitbucket_PW : ${{ secrets.Tests_Bitbucket_PW }}
+        Tests_Bitbucket_RepoPrivateGit : ${{ secrets.Tests_Bitbucket_RepoPrivateGit }}
+        Tests_Gitlab_Name : ${{ secrets.Tests_Gitlab_Name }}
+        Tests_Gitlab_PW : ${{ secrets.Tests_Gitlab_PW }}
+        Tests_Gitlab_RepoPrivate : ${{ secrets.Tests_Gitlab_RepoPrivate }}
+      run: ./build-release.ps1
+      shell: pwsh
+    - name: Upload application
+      uses: actions/upload-artifact@v3
+      with:
+        name: Application
+        path: release/scm-backup-*.zip
+    - name: Upload test log
+      uses: actions/upload-artifact@v3
+      with:
+        name: Test log
+        path: src/ScmBackup.Tests.Integration/bin/Release/netcoreapp3.1/*.log

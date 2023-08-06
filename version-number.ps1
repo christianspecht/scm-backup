@@ -11,8 +11,15 @@
     else {
         # regular CI build, no release
         $shortversion = '0.0.0'
-        $longversion = '0.0.0.CI-' + $env:APPVEYOR_BUILD_NUMBER + '-' + $commit
+        $longversion = '0.0.0.CI-WIN-' + $env:APPVEYOR_BUILD_NUMBER + '-' + $commit
     }
+}
+elseif ($env:GITHUB_ACTIONS) {
+
+    # GH Actions
+    $commit = $env:GITHUB_SHA.Substring(0,7)
+    $shortversion = '0.0.0'
+    $longversion = '0.0.0.CI-LINUX-' + $env:GITHUB_RUN_NUMBER + '-' + $commit
 }
 else {
 
@@ -32,3 +39,10 @@ $env:ScmBackupLongVersion=$longversion
 Write-Host 'Commit: ' $env:ScmBackupCommit
 Write-Host 'Short Version: ' $env:ScmBackupShortVersion
 Write-Host 'Long Version: ' $env:ScmBackupLongVersion
+
+if ($env:GITHUB_ACTIONS) {
+    # for GH Actions, save version numbers so they are available in subsequent steps
+    "ScmBackupCommit=$commit" >> $env:GITHUB_ENV
+    "ScmBackupShortVersion=$shortversion" >> $env:GITHUB_ENV
+    "ScmBackupLongVersion=$longversion" >> $env:GITHUB_ENV
+}

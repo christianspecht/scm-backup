@@ -11,7 +11,7 @@ namespace ScmBackup.Tests.Integration.Hosters
 {
     public class GitlabBackupTests : IBackupTests
     {
-        private string prefix = "Gitlab";
+        private string prefix = "Tests_Gitlab";
 
         internal override string PublicUserName { get { return "scm-backup-testuser"; } }
         internal override string PublicRepoName { get { return "scm-backup-test"; } }

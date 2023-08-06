@@ -1,6 +1,6 @@
 ﻿Write-Host '###### INITIALIZE ######'
 
-if ($env:APPVEYOR) {
+if ($env:APPVEYOR -Or $env:GITHUB_ACTIONS) {
 
     # We are on AppVeyor
     # - environment variables are set in the AppVeyor settings
@@ -65,4 +65,5 @@ if ($LASTEXITCODE -eq 1) {
 ''
 Write-Host '###### ZIP ######'
 Copy-Item -Path .\LICENSE.txt -Destination .\release\bin\
-7z a -r "release\$release_filename.zip" .\release\bin\*
+$zippath = Join-Path "release" "$release_filename.zip"
+7z a -r $zippath .\release\bin\*
