@@ -1,4 +1,16 @@
-﻿# all backups go here
+﻿###########################################################################
+##
+##  SCM Backup
+##  https://scm-backup.org/
+##  Makes offline backups of your cloud hosted source code repositories
+##
+##  Documentation about this config file:
+##  https://docs.scm-backup.org/en/latest/config.html
+##
+###########################################################################
+
+
+# all backups go here
 localFolder: 'c:\scm-backup'
 
 # when an error occurs, wait that many seconds before exiting the application

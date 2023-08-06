@@ -64,4 +64,5 @@ if ($LASTEXITCODE -eq 1) {
 
 ''
 Write-Host '###### ZIP ######'
+Copy-Item -Path .\LICENSE.txt -Destination .\release\bin\
 7z a -r "release\$release_filename.zip" .\release\bin\*
