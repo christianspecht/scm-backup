@@ -20,7 +20,7 @@ deploy:
   description: ''
   provider: GitHub
   auth_token:
-    secure: jSFkl4pbQUbrR2Yqh8MEAUmJ8uP6/Pm6sca+pd6HYB04B/zi4Y92WF0FG6d1/PdF
+    secure: jRqXr7hU3p3AEzsOemTcWbDSAgNuooWgME3GQHAxtDjxFcGHiLFhBeaRbighBLLZ
   artifact: Application
   draft: false
   prerelease: false
