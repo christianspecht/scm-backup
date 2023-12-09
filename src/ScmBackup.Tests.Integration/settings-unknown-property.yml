@@ -1,0 +1,5 @@
+﻿localFolder: 'c:\scm-backup'
+
+# this property doesn't exist in the config class:
+unknownProperty:
+    foo: bar

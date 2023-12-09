@@ -51,5 +51,14 @@ namespace ScmBackup.Tests.Integration
 
             Assert.ThrowsAny<YamlException>(() => sut.ReadConfig());
         }
+
+        [Fact]
+        public void IgnoresUnknownProperties_Issue76()
+        {
+            var sut = new ConfigReader();
+            sut.ConfigFileName = "settings-unknown-property.yml";
+
+            var config = sut.ReadConfig(); // should just ignore the unknown property and NOT throw an exception
+        }
     }
 }
