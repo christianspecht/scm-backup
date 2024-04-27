@@ -22,10 +22,10 @@ namespace ScmBackup.Http
             }
 
             var message = new MimeMessage();
-            message.From.Add(new MailboxAddress(config.From));
+            message.From.Add(new MailboxAddress("", config.From));
             foreach (var to in config.To_AsList())
             {
-                message.To.Add(new MailboxAddress(to));
+                message.To.Add(new MailboxAddress("", to));
             }
             message.Subject = subject;
 

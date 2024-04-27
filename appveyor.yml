@@ -1,5 +1,5 @@
 version: "{build}"
-image: Visual Studio 2019
+image: Visual Studio 2022
 install:
 - ps: C:\projects\scm-backup\version-number.ps1
 build_script:
@@ -8,7 +8,7 @@ test: off
 artifacts:
 - path: release\scm-backup-*.zip
   name: Application
-- path: src\ScmBackup.Tests.Integration\bin\Release\netcoreapp3.1\*.log
+- path: src\ScmBackup.Tests.Integration\bin\Release\net8.0\*.log
   name: Integration Test Logfile
 assembly_info:
   patch: true
