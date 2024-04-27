@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "ScmBackup": {
+      "commandName": "Project"
+    },
+    "Docker": {
+      "commandName": "Docker"
+    }
+  }
+}
