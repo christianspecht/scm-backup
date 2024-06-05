@@ -12,7 +12,7 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: 3.1.x
+        dotnet-version: 8.0.x
     - name: Set version number
       run: .\version-number.ps1
       shell: pwsh
@@ -38,4 +38,4 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: Test log
-        path: src/ScmBackup.Tests.Integration/bin/Release/netcoreapp3.1/*.log
+        path: src/ScmBackup.Tests.Integration/bin/Release/net8.0/*.log
