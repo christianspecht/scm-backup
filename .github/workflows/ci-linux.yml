@@ -8,9 +8,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: Setup .NET
-      uses: actions/setup-dotnet@v3
+      uses: actions/setup-dotnet@v4
       with:
         dotnet-version: 8.0.x
     - name: Set version number
@@ -30,12 +30,12 @@ jobs:
       run: ./build-release.ps1
       shell: pwsh
     - name: Upload application
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: Application
         path: release/scm-backup-*.zip
     - name: Upload test log
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: Test log
         path: src/ScmBackup.Tests.Integration/bin/Release/net8.0/*.log
