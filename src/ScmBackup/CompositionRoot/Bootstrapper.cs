@@ -38,14 +38,15 @@ namespace ScmBackup.CompositionRoot
             container.Collection.Register<ILogger>(subLoggerRegistrations);
             container.Register<ILogger, CompositeLogger>(Lifestyle.Singleton);
 
-            container.Register<IFileSystemHelper, FileSystemHelper>();
+            container.Register<IFileSystemHelper, FileSystemHelper>(Lifestyle.Singleton);
 
             container.RegisterSingleton<IContext, Context>();
             container.Register<IConfigBackupMaker, ConfigBackupMaker>();
 
             container.Register<IConfigReader, ConfigReader>(Lifestyle.Singleton);
-            container.RegisterDecorator<IConfigReader, EnvironmentVariableConfigReader>(Lifestyle.Singleton); 
-            container.RegisterDecorator<IConfigReader, ValidatingConfigReader>(Lifestyle.Singleton);
+            container.RegisterDecorator<IConfigReader, EnvironmentVariableConfigReader>(Lifestyle.Singleton);
+			container.RegisterDecorator<IConfigReader, AddTimestampedSubfolderConfigReader>(Lifestyle.Singleton);
+			container.RegisterDecorator<IConfigReader, ValidatingConfigReader>(Lifestyle.Singleton);
 
             container.Register<IHttpRequest, HttpRequest>();
             container.RegisterDecorator<IHttpRequest, LoggingHttpRequest>();

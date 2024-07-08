@@ -44,3 +44,9 @@ options:
 
         # output a second log message for each repo when backing it up is finished
         logRepoFinished: false
+
+        # add subfolder to localfolder in format yyyy-MM-dd_HHmm
+        addTimestampedSubfolder: true
+
+        # timestamp format for timestamped subfolder.
+        timestampFormat: yyyy-MM-dd_HHmm

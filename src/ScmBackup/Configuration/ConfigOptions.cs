@@ -16,5 +16,7 @@ namespace ScmBackup.Configuration
     {
         public bool RemoveDeletedRepos { get; set; }
         public bool LogRepoFinished { get; set; }
+        public bool AddTimestampedSubfolder { get; set; }
+        public string TimestampFormat { get; set; }
     }
 }
