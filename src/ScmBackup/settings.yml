@@ -46,7 +46,7 @@ options:
         logRepoFinished: false
 
         # add subfolder to localfolder in format yyyy-MM-dd_HHmm
-        addTimestampedSubfolder: true
+        addTimestampedSubfolder: false
 
         # timestamp format for timestamped subfolder.
         timestampFormat: yyyy-MM-dd_HHmm
