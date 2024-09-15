@@ -6,7 +6,7 @@ using System.Text;
 namespace ScmBackup.Configuration
 {
     /// <summary>
-    /// decorator for ConfigReader, replaces %foo% values with the respective environment variables
+    /// decorator for ConfigReader, append timestamped subfolder to backup folder
     /// </summary>
     internal class AddTimestampedSubfolderConfigReader : IConfigReader
     {
