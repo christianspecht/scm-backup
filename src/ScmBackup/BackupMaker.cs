@@ -2,6 +2,7 @@
 using ScmBackup.Hosters;
 using ScmBackup.Http;
 using System.Collections.Generic;
+using System.IO;
 
 namespace ScmBackup
 {
@@ -23,11 +24,16 @@ namespace ScmBackup
             this.context = context;
         }
 
-        public string Backup(ConfigSource source, IEnumerable<HosterRepository> repos)
+        /*
+            * Modified by ISC. Gicel Cordoba Pech. 
+            Chicxulub puerto Progreso, Mérida Yucatán . As of June 18, 2024
+            Company: Fundación Rafael Dondé. position: INGENIERO CD CI DEVOPS
+        */
+        public string Backup(ConfigSource source, IEnumerable<HosterRepository> repos, string projectFolder )
         {
             this.logger.Log(ErrorLevel.Info, Resource.BackupMaker_Source, source.Title);
 
-            string sourceFolder = this.fileHelper.CreateSubDirectory(context.Config.LocalFolder, source.Title);
+            string sourceFolder = this.fileHelper.CreateSubDirectory(context.Config.LocalFolder, source.Title + Path.DirectorySeparatorChar + projectFolder);
 
             var url = new UrlHelper();
 
@@ -46,6 +52,38 @@ namespace ScmBackup
             }
 
             return sourceFolder;
+        }
+
+        /*
+            * Add by ISC. Gicel Cordoba Pech. 
+            Chicxulub puerto Progreso, Mérida Yucatán . As of June 18, 2024
+            Company: Fundación Rafael Dondé. position: INGENIERO CD CI DEVOPS
+        */
+        public string Backup( ConfigSource source, IEnumerable<HosterProject> projects )
+        {
+
+            this.logger.Log(ErrorLevel.Info, Resource.BackupMaker_Source, source.Title);
+
+            string sourceFolder = this.fileHelper.CreateSubDirectory(context.Config.LocalFolder, source.Title);
+
+            var url = new UrlHelper();
+
+            foreach (var project in projects)
+            {
+                string projectFolder = this.fileHelper.CreateSubDirectory(sourceFolder, project.Key + "#" + project.FullName);
+
+                this.logger.Log(ErrorLevel.Info, Resource.BackupMaker_Repo, project.Key.ToString(), url.RemoveCredentialsFromUrl(project.FullName));
+
+                this.backupMaker.MakeBackup(source, project, projectFolder, this.logger);
+
+                if (this.context.Config.Options.Backup.LogRepoFinished)
+                {
+                    this.logger.Log(ErrorLevel.Info, Resource.BackupMaker_RepoFinished);
+                }
+            }
+
+            return sourceFolder;
+
         }
     }
 }

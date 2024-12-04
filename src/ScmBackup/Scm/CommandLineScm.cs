@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 
 namespace ScmBackup.Scm
 {
@@ -33,10 +34,15 @@ namespace ScmBackup.Scm
         /// </summary>
         public abstract string GetVersionNumber();
 
+        /*
+            * Modified by ISC. Gicel Cordoba Pech. 
+            Chicxulub puerto Progreso, Mérida Yucatán . As of July 26, 2024
+            Company: Fundación Rafael Dondé. position: INGENIERO CD CI DEVOPS
+        */
         /// <summary>
         /// Executes the command line tool.
         /// </summary>
-        protected CommandLineResult ExecuteCommand(string args)
+        protected CommandLineResult ExecuteCommand(string args, Boolean isGitCommand = true )
         {
             if (string.IsNullOrWhiteSpace(this.executable))
             {
@@ -44,7 +50,18 @@ namespace ScmBackup.Scm
             }
 
             var info = new ProcessStartInfo();
-            info.FileName = this.executable;
+
+            if ( isGitCommand )
+                info.FileName = this.executable;
+            else {
+
+                if ( RuntimeInformation.IsOSPlatform( OSPlatform.Linux ) || RuntimeInformation.IsOSPlatform( OSPlatform.OSX ) )
+                         info.FileName = "rm"; //Linux and Mac
+                else info.FileName = "del"; //Windows
+                //else info.FileName = "rmdir"; //Windows
+
+            }
+                
             info.Arguments = args;
             info.CreateNoWindow = true;
             info.RedirectStandardError = true;

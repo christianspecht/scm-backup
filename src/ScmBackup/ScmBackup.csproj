@@ -28,11 +28,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="GraphQL" Version="7.8.0" />
+    <PackageReference Include="GraphQL.DataLoader" Version="7.8.0" />
+    <PackageReference Include="GraphQL.MemoryCache" Version="7.8.0" />
+    <PackageReference Include="GraphQL.MicrosoftDI" Version="7.8.0" />
+    <PackageReference Include="GraphQL.NewtonsoftJson" Version="7.8.0" />
+    <PackageReference Include="GraphQL.SystemTextJson" Version="7.8.0" />
     <PackageReference Include="MailKit" Version="4.5.0" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.19.5" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="NLog" Version="5.2.8" />
     <PackageReference Include="Octokit" Version="11.0.1" />
+    <PackageReference Include="Octokit.GraphQL" Version="0.4.0-beta" />
     <PackageReference Include="SimpleInjector" Version="5.4.5" />
     <PackageReference Include="YamlDotNet" Version="15.1.2" />
   </ItemGroup>

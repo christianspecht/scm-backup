@@ -17,9 +17,9 @@ namespace ScmBackup
 
         public bool Run()
         {
-            logger.Log(ErrorLevel.Info, this.context.AppTitle);
-            logger.Log(ErrorLevel.Info, Resource.AppWebsite);
-            logger.Log(ErrorLevel.Info, string.Format(Resource.SystemOS, RuntimeInformation.OSDescription));
+            logger.Log(ErrorLevel.Info, this.context.AppTitle); //SCM Backup 0.0.0-DEV
+            logger.Log(ErrorLevel.Info, Resource.AppWebsite); //https://scm-backup.org/
+            logger.Log(ErrorLevel.Info, string.Format(Resource.SystemOS, RuntimeInformation.OSDescription)); //Operating system: Microsoft Windows 10.0.22631
             // TODO: log more stuff (configuration...)
 
             var result = this.backup.Run();

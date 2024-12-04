@@ -5,14 +5,16 @@
     /// </summary>
     internal class HosterRepository
     {
-        public HosterRepository(string fullName, string shortName, string cloneUrl, ScmType scm)
+        public HosterRepository(string fullName, string shortName, string cloneUrl, ScmType scm )
         {
             SetFullName(fullName);
             this.ShortName = shortName;
             this.CloneUrl = cloneUrl;
             this.Scm = scm;
+            //this.projectKey = projectKey;
         }
 
+        //public HosterRepository(string fullName, string shortName, string cloneUrl, ScmType scm, bool haswiki, string wikiurl, bool hasissues, string issueurl, string projectFullName = null, string projectKey = null)
         public HosterRepository(string fullName, string shortName, string cloneUrl, ScmType scm, bool haswiki, string wikiurl, bool hasissues, string issueurl)
         {
             SetFullName(fullName);
@@ -21,6 +23,7 @@
             this.Scm = scm;
             SetWiki(haswiki, wikiurl);
             SetIssues(hasissues, issueurl);
+            //this.projectKey = projectKey; 
         }
 
         /// <summary>
@@ -43,6 +46,7 @@
         /// </summary>
         public ScmType Scm { get; private set; }
 
+        public string projectKey { get; set; }
         /// <summary>
         /// Does the repo have a wiki?
         /// </summary>

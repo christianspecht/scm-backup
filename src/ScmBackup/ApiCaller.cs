@@ -38,5 +38,23 @@ namespace ScmBackup
 
             return repos;
         }
+
+        /*
+            * Add by ISC. Gicel Cordoba Pech. 
+            Chicxulub puerto Progreso, Mérida Yucatán . As of June 18, 2024
+            Company: Fundación Rafael Dondé. position: INGENIERO CD CI DEVOPS
+        */
+        public ApiProjects CallApisProjects()
+        {
+            var projects = new ApiProjects();
+
+            foreach ( var source in this.context.Config.Sources )
+            {
+                var tmp = this.apiCaller.GetProjectsList( source );
+                projects.AddItem( source, tmp );
+            }
+
+            return projects;
+        }
     }
 }

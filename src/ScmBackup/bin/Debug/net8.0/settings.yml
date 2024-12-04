@@ -1,0 +1,55 @@
+﻿###########################################################################
+##
+##  SCM Backup
+##  https://scm-backup.org/
+##  Makes offline backups of your cloud hosted source code repositories
+##
+##  Documentation about this config file:
+##  https://docs.scm-backup.org/en/latest/config.html
+##
+###########################################################################
+
+
+# all backups go here
+localFolder: ''
+
+# when an error occurs, wait that many seconds before exiting the application
+waitSecondsOnError: 5
+
+scms:
+  - name: git
+    path: ''
+# uncomment this to send SCM Backup's console output via email
+#email:
+#  from: from@example.com
+#  to: to@example.com
+#  server: smtp.example.com
+#  port: 0
+#  useSsl: false
+#  userName: testuser
+#  password: not-the-real-password
+
+sources:
+
+  - title:  
+    hoster: 
+    type: 
+    name: 
+    authName: 
+    password: 
+    ignoreRepos:
+    #includeRepos:
+    #    - esf-pyme-bucket-bid
+
+options:
+    backup:
+        # delete repos from local backup that don't exist at the hoster
+        removeDeletedRepos : false
+        # output a second log message for each repo when backing it up is finished
+        logRepoFinished: false
+        #Add by ISC. Gicel Cordoba Pech. 
+        #Chicxulub puerto Progreso, Mérida Yucatán . As of June 18, 2024
+        #Company: Fundación Rafael Dondé. position: INGENIERO CD CI DEVOPS
+        #backup of repositories through projects
+        backupByProject: true
+

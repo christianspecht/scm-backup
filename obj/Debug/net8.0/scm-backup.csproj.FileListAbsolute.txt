@@ -1,0 +1,7 @@
+C:\Users\gcordobap\OneDrive - Fundacion Rafael Dondé IAP\Documentos\Gicel\Programacion\C#\scm-backup\obj\Debug\net8.0\scm_backup.src.ScmBackup.Resource.resources
+C:\Users\gcordobap\OneDrive - Fundacion Rafael Dondé IAP\Documentos\Gicel\Programacion\C#\scm-backup\obj\Debug\net8.0\scm-backup.csproj.GenerateResource.cache
+C:\Users\gcordobap\OneDrive - Fundacion Rafael Dondé IAP\Documentos\Gicel\Programacion\C#\scm-backup\obj\Debug\net8.0\scm-backup.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\gcordobap\OneDrive - Fundacion Rafael Dondé IAP\Documentos\Gicel\Programacion\C#\scm-backup\obj\Debug\net8.0\scm-backup.AssemblyInfoInputs.cache
+C:\Users\gcordobap\OneDrive - Fundacion Rafael Dondé IAP\Documentos\Gicel\Programacion\C#\scm-backup\obj\Debug\net8.0\scm-backup.AssemblyInfo.cs
+C:\Users\gcordobap\OneDrive - Fundacion Rafael Dondé IAP\Documentos\Gicel\Programacion\C#\scm-backup\obj\Debug\net8.0\scm-backup.csproj.CoreCompileInputs.cache
+C:\Users\gcordobap\OneDrive - Fundacion Rafael Dondé IAP\Documentos\Gicel\Programacion\C#\scm-backup\obj\Debug\net8.0\scm-backup.sourcelink.json

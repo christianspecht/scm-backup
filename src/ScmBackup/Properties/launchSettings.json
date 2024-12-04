@@ -4,8 +4,7 @@
       "commandName": "Project"
     },
     "Docker": {
-      "commandName": "Docker",
-      "DockerfileRunArguments": "-v \"c:\\scm-backup:/app/backups\" -e TZ=Europe/Stockholm"
+      "commandName": "Docker"
     }
   }
 }

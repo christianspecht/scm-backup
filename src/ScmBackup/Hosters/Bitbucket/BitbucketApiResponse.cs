@@ -28,5 +28,7 @@ namespace ScmBackup.Hosters.Bitbucket
                 }
             }
         }
+
     }
+
 }

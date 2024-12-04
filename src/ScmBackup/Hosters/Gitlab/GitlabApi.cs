@@ -23,7 +23,30 @@ namespace ScmBackup.Hosters.Gitlab
             this.factory = factory;
         }
 
-        public List<HosterRepository> GetRepositoryList(ConfigSource config)
+        /*
+            * Add by ISC. Gicel Cordoba Pech. 
+            Chicxulub puerto Progreso, Mérida Yucatán . As of June 18, 2024
+            Company: Fundación Rafael Dondé. position: INGENIERO CD CI DEVOPS
+        */
+        public List<HosterProject> GetProjectList( ConfigSource config )
+        {
+            var listProject = new List<HosterProject>();
+
+            var project = new HosterProject( "projectGitLab0001", "PGL0001" );
+
+            project.SetPrivate( true );
+
+            listProject.Add( project );
+
+            return listProject;
+        }
+
+        /*
+            * Modified by ISC. Gicel Cordoba Pech. 
+            Chicxulub puerto Progreso, Mérida Yucatán . As of June 18, 2024
+            Company: Fundación Rafael Dondé. position: INGENIERO CD CI DEVOPS
+        */
+        public List<HosterRepository> GetRepositoryList(ConfigSource config, string keyProject = null)
         {
             var repos = new List<HosterRepository>();
 
