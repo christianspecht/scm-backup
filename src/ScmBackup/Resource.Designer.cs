@@ -77,6 +77,20 @@ namespace ScmBackup {
                 return ResourceManager.GetString("ApiGettingRepos", resourceCulture);
             }
         }
+
+        /*
+            * Add by zISC. Gicel Cordoba Pech. 
+            Chicxulub puerto Progreso, Mérida Yucatán . As of June 18, 2024
+            Company: Fundación Rafael Dondé. position: INGENIERO CD CI DEVOPS
+        */
+        /// <summary>
+        ///   Looks up a localized string similar to Getting repositories for source &apos;{0}&apos; from hoster &apos;{1}&apos;.
+        /// </summary>
+        internal static string ApiGettingProjects {
+            get {
+                return ResourceManager.GetString("ApiGettingProjects", resourceCulture);
+            }
+        }
         
         /// <summary>
         ///   Looks up a localized string similar to Not enough scope for source &apos;{0}&apos;. You need to set at least the &quot;repo&quot; scope, otherwise SCM Backup will backup public repositories only!.
@@ -579,6 +593,62 @@ namespace ScmBackup {
         internal static string WrongType {
             get {
                 return ResourceManager.GetString("WrongType", resourceCulture);
+            }
+        }
+
+        /*
+            * Add by ISC. Gicel Cordoba Pech. 
+            Chicxulub puerto Progreso, Mérida Yucatán . As of June 18, 2024
+            Company: Fundación Rafael Dondé. position: INGENIERO CD CI DEVOPS
+        */
+        /// <summary>
+        ///   Looks up a localized string similar to wrong type: {0}.
+        /// </summary>
+        internal static string BackupTypeByRepository {
+            get {
+                return ResourceManager.GetString("BackupTypeByRepository", resourceCulture);
+            }
+        }
+
+        /*
+            * Add by ISC. Gicel Cordoba Pech. 
+            Chicxulub puerto Progreso, Mérida Yucatán . As of June 18, 2024
+            Company: Fundación Rafael Dondé. position: INGENIERO CD CI DEVOPS
+        */
+        /// <summary>
+        ///   Looks up a localized string similar to wrong type: {0}.
+        /// </summary>
+        internal static string BackupTypeByProjects {
+            get {
+                return ResourceManager.GetString("BackupTypeByProjects", resourceCulture);
+            }
+        }
+
+        /*
+            * Add by ISC. Gicel Cordoba Pech. 
+            Chicxulub puerto Progreso, Mérida Yucatán . As of June 18, 2024
+            Company: Fundación Rafael Dondé. position: INGENIERO CD CI DEVOPS
+        */
+        /// <summary>
+        ///   Looks up a localized string similar to wrong type: {0}.
+        /// </summary>
+        internal static string DadLovesThem {
+            get {
+                return ResourceManager.GetString("DadLovesThem", resourceCulture);
+            }
+        }
+
+        /*
+            * Add by ISC. Gicel Cordoba Pech. 
+            Chicxulub puerto Progreso, Mérida Yucatán . As of June 18, 2024
+            Company: Fundación Rafael Dondé. position: INGENIERO CD CI DEVOPS
+        */
+        /// <summary>
+        ///   Looks up a localized string similar to wrong type: {0}.
+        /// </summary>
+        internal static string Vacation {
+            get {
+                return ResourceManager.GetString("Vacation", resourceCulture);
             }
         }
     }

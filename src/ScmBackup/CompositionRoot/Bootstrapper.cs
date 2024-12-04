@@ -22,6 +22,15 @@ namespace ScmBackup.CompositionRoot
             var thisAssembly = new[] { typeof(ScmBackup).GetTypeInfo().Assembly };
 
             var container = new Container();
+
+            /*
+                * Add by ISC. Gicel Cordoba Pech. 
+                Chicxulub puerto Progreso, Mérida Yucatán . As of June 18, 2024
+                Company: Fundación Rafael Dondé. position: INGENIERO CD CI DEVOPS
+            */
+            container.Register<Config>();
+            /*Add Fin*/
+
             container.Register<IScmBackup, ScmBackup>();
             container.RegisterDecorator<IScmBackup, LoggingScmBackup>();
             container.RegisterDecorator<IScmBackup, ErrorHandlingScmBackup>();
@@ -38,15 +47,14 @@ namespace ScmBackup.CompositionRoot
             container.Collection.Register<ILogger>(subLoggerRegistrations);
             container.Register<ILogger, CompositeLogger>(Lifestyle.Singleton);
 
-            container.Register<IFileSystemHelper, FileSystemHelper>(Lifestyle.Singleton);
+            container.Register<IFileSystemHelper, FileSystemHelper>();
 
             container.RegisterSingleton<IContext, Context>();
             container.Register<IConfigBackupMaker, ConfigBackupMaker>();
 
             container.Register<IConfigReader, ConfigReader>(Lifestyle.Singleton);
-            container.RegisterDecorator<IConfigReader, EnvironmentVariableConfigReader>(Lifestyle.Singleton);
-			container.RegisterDecorator<IConfigReader, AddTimestampedSubfolderConfigReader>(Lifestyle.Singleton);
-			container.RegisterDecorator<IConfigReader, ValidatingConfigReader>(Lifestyle.Singleton);
+            container.RegisterDecorator<IConfigReader, EnvironmentVariableConfigReader>(Lifestyle.Singleton); 
+            container.RegisterDecorator<IConfigReader, ValidatingConfigReader>(Lifestyle.Singleton);
 
             container.Register<IHttpRequest, HttpRequest>();
             container.RegisterDecorator<IHttpRequest, LoggingHttpRequest>();

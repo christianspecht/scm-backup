@@ -291,4 +291,45 @@
   <data name="WrongType" xml:space="preserve">
     <value>wrong type: {0}</value>
   </data>
+  <!-- 
+    Add by ISC. Gicel Cordoba Pech. 
+    Chicxulub puerto Progreso, Mérida Yucatán . As of June 18, 2024
+    Company: Fundación Rafael Dondé. position: INGENIERO CD CI DEVOPS
+  -->
+  <data name="ApiGettingProjects" xml:space="preserve">
+    <value>Getting projects for source '{0}' from hoster '{1}'</value>
+  </data>
+
+  <!-- 
+    Add by ISC. Gicel Cordoba Pech. 
+    Chicxulub puerto Progreso, Mérida Yucatán . As of June 18, 2024
+    Company: Fundación Rafael Dondé. position: INGENIERO CD CI DEVOPS
+  -->
+  <data name="BackupTypeByRepository" xml:space="preserve">
+    <value>Backup type per repository</value>
+  </data>
+  <!-- 
+    Add by ISC. Gicel Cordoba Pech. 
+    Chicxulub puerto Progreso, Mérida Yucatán . As of June 18, 2024
+    Company: Fundación Rafael Dondé. position: INGENIERO CD CI DEVOPS
+  -->
+  <data name="BackupTypeByProjects" xml:space="preserve">
+    <value>Backup type by projects</value>
+  </data>
+  <!-- 
+    Add by ISC. Gicel Cordoba Pech. 
+    Chicxulub puerto Progreso, Mérida Yucatán . As of June 18, 2024
+    Company: Fundación Rafael Dondé. position: INGENIERO CD CI DEVOPS
+  -->
+  <data name="DadLovesThem" xml:space="preserve">
+    <value>Dad: {0}</value>
+  </data>
+  <!-- 
+    Add by ISC. Gicel Cordoba Pech. 
+    Chicxulub puerto Progreso, Mérida Yucatán . As of June 18, 2024
+    Company: Fundación Rafael Dondé. position: INGENIERO CD CI DEVOPS
+  -->
+  <data name="Vacation" xml:space="preserve">
+    <value>Vacation: {0}</value>
+  </data>
 </root>

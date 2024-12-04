@@ -51,6 +51,13 @@ namespace ScmBackup.Configuration
         /// </summary>
         public string Password { get; set; }
 
+        /*
+            * Add by ISC. Gicel Cordoba Pech. 
+            Chicxulub puerto Progreso, Mérida Yucatán . As of June 18, 2024
+            Company: Fundación Rafael Dondé. position: INGENIERO CD CI DEVOPS
+        */
+        //public string TokenGitHub { get; set; }
+
         public bool IsAuthenticated
         {
             get

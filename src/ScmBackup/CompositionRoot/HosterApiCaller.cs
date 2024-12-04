@@ -14,7 +14,7 @@ namespace ScmBackup.CompositionRoot
             this.factory = factory;
         }
 
-        public List<HosterRepository> GetRepositoryList(ConfigSource source)
+        public List<HosterRepository> GetRepositoryList(ConfigSource source, string keyProject = null )
         {
             if (source == null)
             {
@@ -22,7 +22,18 @@ namespace ScmBackup.CompositionRoot
             }
 
             var hoster = this.factory.Create(source.Hoster);
-            return hoster.Api.GetRepositoryList(source);
+            return hoster.Api.GetRepositoryList(source, keyProject );
+        }
+
+        public List<HosterProject> GetProjectsList(ConfigSource source)
+        {
+            if (source == null)
+            {
+                throw new ArgumentNullException(Resource.ConfigSourceIsNull);
+            }
+
+            var hoster = this.factory.Create(source.Hoster);
+            return hoster.Api.GetProjectList(source);
         }
     }
 }

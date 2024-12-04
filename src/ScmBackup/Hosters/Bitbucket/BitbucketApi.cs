@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using MimeKit.Encodings;
+using Newtonsoft.Json;
 using ScmBackup.Configuration;
 using ScmBackup.Http;
 using System;
@@ -19,7 +20,69 @@ namespace ScmBackup.Hosters.Bitbucket
             this.request = request;
         }
 
-        public List<HosterRepository> GetRepositoryList(ConfigSource source)
+        /*
+         * Add by ISC. Gicel Cordoba Pech. 
+           Chicxulub puerto Progreso, Mérida Yucatán . As of June 18, 2024
+           Company: Fundación Rafael Dondé. position: INGENIERO CD CI DEVOPS
+        */
+        public List<HosterProject> GetProjectList( ConfigSource source )
+        {
+            var listProject = new List<HosterProject>();
+
+            request.SetBaseUrl( "https://api.bitbucket.org" );
+
+            if ( source.IsAuthenticated ) {
+
+                request.AddBasicAuthHeader( source.AuthName, source.Password );
+
+            }
+
+            string urlProject = "/2.0/workspaces/" + source.Name + "/projects/";
+
+            while ( urlProject != null ) {
+
+                var resultProject = request.Execute( urlProject ).Result;
+
+                if ( resultProject.IsSuccessStatusCode ) {
+
+                    var apiResponseProject = JsonConvert.DeserializeObject<BitbucketApiResponseProject>( resultProject.Content );
+
+                    foreach ( var apiProject in apiResponseProject.values ) {
+
+                        var project = new HosterProject( apiProject.name, apiProject.key );
+
+                        project.SetPrivate( apiProject.is_private );
+
+                        listProject.Add( project );
+                    }
+
+                    urlProject = apiResponseProject.next;
+
+                }
+                else {
+
+                    switch ( resultProject.Status ) {
+
+                        case HttpStatusCode.Unauthorized :
+                            throw new AuthenticationException( string.Format( Resource.ApiAuthenticationFailed, source.AuthName ) );
+                        case HttpStatusCode.Forbidden :
+                            throw new SecurityException( Resource.ApiMissingPermissions );
+                        case HttpStatusCode.NotFound :
+                            throw new InvalidOperationException( string.Format( Resource.ApiInvalidUsername, source.Name ) );
+                        
+                    }
+                }
+            }
+            
+            return listProject;
+        }
+
+        /*
+            * Modified by ISC. Gicel Cordoba Pech. 
+            Chicxulub puerto Progreso, Mérida Yucatán . As of June 18, 2024
+            Company: Fundación Rafael Dondé. position: INGENIERO CD CI DEVOPS
+        */
+        public List<HosterRepository> GetRepositoryList(ConfigSource source, string keyProject = null )
         {
             var list = new List<HosterRepository>();
             string className = this.GetType().Name;
@@ -31,10 +94,29 @@ namespace ScmBackup.Hosters.Bitbucket
                 request.AddBasicAuthHeader(source.AuthName, source.Password);
             }
 
-            string url = "/2.0/repositories/" + source.Name;
+            string url = null;
+
+            url = "/2.0/repositories/" + source.Name; //source.name es el workspace configurado en el archivo settings.yml
+
+
+            /*
+                * Add by ISC. Gicel Cordoba Pech. 
+                Chicxulub puerto Progreso, Mérida Yucatán . As of June 18, 2024
+                Company: Fundación Rafael Dondé. position: INGENIERO CD CI DEVOPS
+            */
+            if ( !string.IsNullOrWhiteSpace( keyProject ) ) {
+                
+                url += "?q=project.key=\"" + keyProject + "\"";
+            }
 
             while (url != null)
             {
+                /*
+                 * Aqui se concatena el request.SetBaseUrl("https://api.bitbucket.org") con el source.name. 
+                 * Ejemplo https://api.bitbucket.org/2.0/repositories/ejemplo
+                 * En el caso de que sea el backup por proyecto queda de la siguiente manera: https://api.bitbucket.org/2.0/repositories/ejemplo?q=project.key="AB"
+                 */
+                
                 var result = request.Execute(url).Result;
 
                 if (result.IsSuccessStatusCode)

@@ -14,9 +14,14 @@ namespace ScmBackup
             this.caller = caller;
         }
 
-        public List<HosterRepository> GetRepositoryList(ConfigSource source)
+        /*
+            * Modified by ISC. Gicel Cordoba Pech. 
+            Chicxulub puerto Progreso, Mérida Yucatán . As of June 18, 2024
+            Company: Fundación Rafael Dondé. position: INGENIERO CD CI DEVOPS
+        */
+        public List<HosterRepository> GetRepositoryList(ConfigSource source, string keyProject = null )
         {
-            var list = this.caller.GetRepositoryList(source);
+            var list = this.caller.GetRepositoryList(source, keyProject);
 
             if (source.IncludeRepos != null && source.IncludeRepos.Any())
             {
@@ -24,6 +29,18 @@ namespace ScmBackup
             }
 
             return list;
+        }
+
+        /*
+            * Add by ISC. Gicel Cordoba Pech. 
+            Chicxulub puerto Progreso, Mérida Yucatán . As of June 18, 2024
+            Company: Fundación Rafael Dondé. position: INGENIERO CD CI DEVOPS
+        */
+         public List<HosterProject> GetProjectsList(ConfigSource source)
+        {
+
+            return this.caller.GetProjectsList( source );
+
         }
     }
 }

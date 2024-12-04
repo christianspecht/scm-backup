@@ -48,7 +48,7 @@ namespace ScmBackup.Configuration
                 File.Copy(file, Path.Combine(backupDir, file), true);
             }
 
-            this.logger.Log(ErrorLevel.Info, Resource.BackingUpConfigs);
+            this.logger.Log(ErrorLevel.Info, Resource.BackingUpConfigs); //Backing up config files
         }
     }
 }

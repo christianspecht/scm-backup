@@ -16,7 +16,24 @@ namespace ScmBackup.Tests.Hosters
             this.PassedConfigSources = new List<ConfigSource>();
         }
 
-        public List<HosterRepository> GetRepositoryList(ConfigSource source)
+        /*
+            * Add by ISC. Gicel Cordoba Pech. 
+            Chicxulub puerto Progreso, Mérida Yucatán . As of June 18, 2024
+            Company: Fundación Rafael Dondé. position: INGENIERO CD CI DEVOPS
+        */
+        public List<HosterProject> GetProjectList( ConfigSource source )
+        {
+            var listProject = new List<HosterProject>();
+
+            return listProject;
+        }
+
+        /*
+            * Modified by ISC. Gicel Cordoba Pech. 
+            Chicxulub puerto Progreso, Mérida Yucatán . As of June 18, 2024
+            Company: Fundación Rafael Dondé. position: INGENIERO CD CI DEVOPS
+        */
+        public List<HosterRepository> GetRepositoryList(ConfigSource source, string keyProject = null)
         {
             if (this.Lists == null || this.Lists.Count == 0)
             {

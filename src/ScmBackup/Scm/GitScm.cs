@@ -1,15 +1,18 @@
 ﻿using System;
 using System.IO;
+using System.Runtime.InteropServices;
 
 namespace ScmBackup.Scm
 {
     [Scm(Type = ScmType.Git)]
     internal class GitScm : CommandLineScm, IScm
     {
-        public GitScm(IFileSystemHelper filesystemhelper, IContext context)
+        private readonly ILogger logger;
+        public GitScm(IFileSystemHelper filesystemhelper, IContext context, ILogger logger )
         {
             this.FileSystemHelper = filesystemhelper;
             this.context = context;
+            this.logger = logger;
         }
 
         public IFileSystemHelper FileSystemHelper { get; set; }
@@ -119,7 +122,36 @@ namespace ScmBackup.Scm
 
             if (!result.Successful)
             {
-                throw new InvalidOperationException(result.Output);
+                /*
+                    * Add and Modified by zISC. Gicel Cordoba Pech. 
+                    Chicxulub puerto Progreso, Mérida Yucatán . As of July 26, 2024
+                    Company: Fundación Rafael Dondé. position: INGENIERO CD CI DEVOPS
+                */
+                if ( result.StandardError.ToLower().Contains( "invalid index-pack output" ) ) {
+
+                    if ( RuntimeInformation.IsOSPlatform( OSPlatform.Linux ) || RuntimeInformation.IsOSPlatform( OSPlatform.OSX ) )
+                         cmd = string.Format( "-fr \"{0}/*\"", directory ); //Linux and Mac
+                    else cmd = string.Format( "\"{0}\" /S /F /Q", directory ); //Windows
+                    //else cmd = string.Format( "/S /Q \"{0}\"", directory ); //Windows
+                    
+                    result = this.ExecuteCommand( cmd, false );
+
+                    if ( result.Successful ) {
+
+                        this.CreateRepository( directory );
+
+                        cmd = string.Format( "-C \"{0}\" fetch --force --prune {1} refs/heads/*:refs/heads/* refs/tags/*:refs/tags/*", directory, remoteUrl );
+                        result = this.ExecuteCommand( cmd );
+
+                        /*if ( !result.Successful )
+                            throw new InvalidOperationException( result.Output + "-1" );*/
+                    
+                        if ( !result.Successful )
+                            this.logger.Log( ErrorLevel.Error, Resource.BackupFailed, directory + " - " + remoteUrl );
+                    }
+                    else throw new InvalidOperationException( result.Output + "-2" );
+                }
+                else throw new InvalidOperationException(result.Output + "-3");
             }
         }
 
