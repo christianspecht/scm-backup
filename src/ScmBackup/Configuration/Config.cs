@@ -22,6 +22,11 @@ namespace ScmBackup.Configuration
         public ConfigOptions Options { get; set; }
 
         public ConfigEmail Email { get; set; }
+        
+        /// <summary>
+        /// S3 bucket name for backup
+        /// </summary>
+        public string S3BucketName { get; set; }
 
         public Config()
         {
