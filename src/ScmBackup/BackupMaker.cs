@@ -50,9 +50,9 @@ namespace ScmBackup
             }
 
             // Upload backup folder to S3 if bucket name is specified
-            if (!string.IsNullOrEmpty(context.Config.S3BucketName))
+            if (!string.IsNullOrEmpty(this.context.Config.Options.Backup.S3BucketName))
             {
-                UploadToS3(sourceFolder, context.Config.S3BucketName);
+                UploadToS3(sourceFolder, this.context.Config.Options.Backup.S3BucketName);
             }
 
             return sourceFolder;
@@ -63,7 +63,7 @@ namespace ScmBackup
             try
             {
                 this.logger.Log(ErrorLevel.Info, "Starting upload to S3 bucket: {0}", bucketName);
-                
+
                 using (var s3Client = new AmazonS3Client())
                 {
                     var transferUtility = new TransferUtility(s3Client);
@@ -78,7 +78,7 @@ namespace ScmBackup
 
                     transferUtility.UploadDirectory(directoryTransferUtility);
                 }
-                
+
                 this.logger.Log(ErrorLevel.Info, "Successfully uploaded backup to S3 bucket: {0}", bucketName);
             }
             catch (Exception ex)
