@@ -18,6 +18,6 @@ namespace ScmBackup.Configuration
         public bool LogRepoFinished { get; set; }
         public bool AddTimestampedSubfolder { get; set; }
         public string TimestampFormat { get; set; }
-        public string S3BucketName { get; set; }
+        public string s3BucketName { get; set; }
     }
 }

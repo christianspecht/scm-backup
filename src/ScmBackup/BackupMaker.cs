@@ -50,9 +50,9 @@ namespace ScmBackup
             }
 
             // Upload backup folder to S3 if bucket name is specified
-            if (!string.IsNullOrEmpty(this.context.Config.Options.Backup.S3BucketName))
+            if (!string.IsNullOrEmpty(this.context.Config.Options.Backup.s3BucketName))
             {
-                UploadToS3(sourceFolder, this.context.Config.Options.Backup.S3BucketName);
+                UploadToS3(sourceFolder, this.context.Config.Options.Backup.s3BucketName);
             }
 
             return sourceFolder;

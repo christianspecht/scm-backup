@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyVersion("0.0.0")]
-[assembly: AssemblyFileVersion("0.0.0")]
-[assembly: AssemblyInformationalVersion("0.0.0-DEV")]
+[assembly: AssemblyVersion("1.0.0")]
+[assembly: AssemblyFileVersion("1.0.0")]
+[assembly: AssemblyInformationalVersion("1.0.0-PROD")]
 [assembly: AssemblyTitle("SCM Backup")]
-[assembly: AssemblyDescription("Backup repositories from cloud hosters to your local machine")]
+[assembly: AssemblyDescription("Backup repositories from cloud hosters to your local machine or S3 bucket")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("scm-backup.org")]
 [assembly: AssemblyProduct("SCM Backup")]
