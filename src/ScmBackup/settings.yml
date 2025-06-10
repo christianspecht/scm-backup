@@ -11,10 +11,10 @@
 
 
 # all backups go here
-# localFolder: 'c:\scm-backup'
+localFolder: 'c:\scm-backup'
 
 # all backups go here on docker
-localFolder: '/app/backups'
+# localFolder: '/app/backups'
 
 # when an error occurs, wait that many seconds before exiting the application
 waitSecondsOnError: 5
@@ -31,13 +31,10 @@ waitSecondsOnError: 5
 
 sources:
 
-  - title: citadelgroup-sydney
-    hoster: bitbucket
-    type: org
-    name: citadelgroup-sydney
-    authName: andrewlorien_citadel
-    # the password is set in an environment variable which is read from an SSM parameter
-    password: '%bitbucket-app-password%'
+  - title:  github_singleuser
+    hoster: github
+    type: user
+    name: scm-backup-testuser
 
 
 options:
@@ -55,4 +52,4 @@ options:
         timestampFormat: yyyy-MM-dd_HHmm
 
         # if this is not empty, save the files to an S3 bucket
-        s3BucketName: dof-mgmt-bitbucket-backup
+        s3BucketName:
