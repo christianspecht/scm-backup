@@ -43,7 +43,7 @@ options:
         removeDeletedRepos : false
 
         # output a second log message for each repo when backing it up is finished
-        logRepoFinished: true
+        logRepoFinished: false
 
         # add subfolder to localfolder in format yyyy-MM-dd_HHmm
         addTimestampedSubfolder: false
