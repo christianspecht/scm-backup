@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyFileVersion("0.0.0")]
 [assembly: AssemblyInformationalVersion("0.0.0-DEV")]
 [assembly: AssemblyTitle("SCM Backup")]
-[assembly: AssemblyDescription("Backup repositories from cloud hosters to your local machine")]
+[assembly: AssemblyDescription("Backup repositories from cloud hosters to your local machine or S3 bucket")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("scm-backup.org")]
 [assembly: AssemblyProduct("SCM Backup")]
