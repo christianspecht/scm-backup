@@ -104,6 +104,12 @@ namespace ScmBackup.Hosters.Github
                 // We only want the repos under the user:
                 var userRepos = repos.Where(r => r.Owner.Login == source.Name);
 
+                ScmCredentials credentials = null;
+                if (source.IsAuthenticated)
+                {
+                    credentials = new ScmCredentials(source.AuthName, source.Password);
+                }
+
                 foreach (var apiRepo in userRepos)
                 {
                     var repo = new HosterRepository(apiRepo.FullName, apiRepo.Name, apiRepo.CloneUrl, ScmType.Git);
@@ -117,7 +123,7 @@ namespace ScmBackup.Hosters.Github
 
                         // issue #13: the GitHub API only returns whether it's *possible* to create a wiki, but not if the repo actually *has* a wiki.
                         // So we need to skip the wiki when the URL (which we just built manually) is not a valid repository.
-                        if (scm.RemoteRepositoryExists(wikiUrl))
+                        if (scm.RemoteRepositoryExists(wikiUrl, credentials))
                         {
                             repo.SetWiki(true, wikiUrl);
                         }
