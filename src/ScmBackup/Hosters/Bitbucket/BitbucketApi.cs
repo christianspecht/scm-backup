@@ -28,7 +28,9 @@ namespace ScmBackup.Hosters.Bitbucket
 
             if (source.IsAuthenticated)
             {
-                request.AddBasicAuthHeader(source.AuthName, source.Password);
+                // The new Bitbucket authentication method uses a different user for API authentication. See issue 84.
+                var authName = string.IsNullOrWhiteSpace(source.ApiAuthName) ? source.AuthName : source.ApiAuthName;
+                request.AddBasicAuthHeader(authName, source.Password);
             }
 
             string url = "/2.0/repositories/" + source.Name;

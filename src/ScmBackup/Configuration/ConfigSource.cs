@@ -30,11 +30,17 @@ namespace ScmBackup.Configuration
         public string Name { get; set; }
 
         /// <summary>
+        /// user name for api authentication, used only for Bitbucket
+        /// See issue 84
+        /// </summary>
+        public string ApiAuthName { get; set; }
+        
+        /// <summary>
         /// user name for authentication
         /// (can be a different than the user whose repositories are backed up)
         /// </summary>
         public string AuthName { get; set; }
-
+        
         /// <summary>
         /// list of repository names which should be ignored
         /// </summary>
