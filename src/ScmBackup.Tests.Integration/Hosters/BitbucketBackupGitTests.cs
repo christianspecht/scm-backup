@@ -54,9 +54,8 @@ namespace ScmBackup.Tests.Integration.Hosters
 
         protected override void AssertWiki(string dir)
         {
-            Assert.True(Directory.Exists(dir));
-            Assert.True(this.scm.DirectoryIsRepository(dir));
-            Assert.True(scm.RepositoryContainsCommit(dir, "8c621fd488ee5fa1ed19ca78113ccc92d55820bd"));
+            // Bitbucket Cloud wikis were removed in August 2026; no wiki should be cloned.
+            Assert.False(Directory.Exists(dir));
         }
 
         protected override void AssertPrivateRepo(string dir)
