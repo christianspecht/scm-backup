@@ -63,11 +63,9 @@ namespace ScmBackup.Hosters.Bitbucket
 
                         repo.SetPrivate(apiRepo.is_private);
 
-                        if (apiRepo.has_wiki)
-                        {
-                            string wikiUrl = cloneurl + "/wiki";
-                            repo.SetWiki(true, wikiUrl.ToString());
-                        }
+                        // Bitbucket Cloud removed hosted wikis on August 20, 2026 (issue #87).
+                        // The API may still report has_wiki=true for legacy repositories,
+                        // but their wiki Git endpoints no longer exist. Do not queue wiki backups.
 
                         // TODO: Issues
 
