@@ -12,31 +12,71 @@ namespace ScmBackup.Tests.Integration.Hosters
     public abstract class IHosterApiTests
     {
         // user, repo etc. (must be implemented in the child classes)
-        internal abstract string HosterUser { get; }                    // test user
-        internal abstract string HosterOrganization { get; }            // test organization
-        internal abstract string HosterRepo { get; }                    // a repository with wiki (must exist under user AND organization)
-        internal abstract string HosterCommit { get; }                  // a commit in the repository
-        internal abstract string HosterWikiCommit { get; }              // a commit in the wiki
-        internal abstract string HosterPaginationUser { get; }          // a user with enough public repos to test pagination
-        internal abstract string HosterPrivateRepo { get; }             // a private repository, must exist under the user from the environment variable. Return null to skip tests
 
-        // environment variables with this prefix (from environment-variables.ps1) are used
+        /// <summary>
+        /// test user
+        /// </summary>
+        internal abstract string HosterUser { get; }
+
+        /// <summary>
+        /// test organization
+        /// </summary>
+        internal abstract string HosterOrganization { get; }
+
+        /// <summary>
+        /// a repository with wiki (must exist under user AND organization)
+        /// </summary>
+        internal abstract string HosterRepo { get; }
+
+        /// <summary>
+        /// a commit in the repository
+        /// </summary>
+        internal abstract string HosterCommit { get; }
+
+        /// <summary>
+        /// a commit in the wiki
+        /// </summary>
+        internal abstract string HosterWikiCommit { get; }
+
+        /// <summary>
+        /// a user with enough public repos to test pagination
+        /// </summary>
+        internal abstract string HosterPaginationUser { get; }
+
+        /// <summary>
+        /// a private repository, must exist under the user from the environment variable. Return null to skip tests
+        /// </summary>
+        internal abstract string HosterPrivateRepo { get; }
+
+        /// <summary>
+        /// environment variables with this prefix (from environment-variables.ps1) are used 
+        /// </summary>
         internal abstract string EnvVarPrefix { get; }
 
-        // "hoster" value for config sources
+        /// <summary>
+        /// "hoster" value for config sources 
+        /// </summary>
         internal abstract string ConfigHoster { get; }
 
-        // minimum number of repos which must be returned in "GetRepositoryList_PaginationWorks" -> should be more than the default page size of the hoster's API
+        /// <summary>
+        /// minimum number of repos which must be returned in "GetRepositoryList_PaginationWorks" -> should be more than the default page size of the hoster's API
+        /// </summary>
         internal abstract int Pagination_MinNumberOfRepos { get; }
 
-        // set this to true in order to skip all tests without authentication (because of rate limits, see #7)
+        /// <summary>
+        /// set this to true in order to skip all tests without authentication (because of rate limits, see #7) 
+        /// </summary>
         internal abstract bool SkipUnauthenticatedTests { get; }
 
-        // this needs to be created in the child classes' constructor:
+        /// <summary>
+        /// this needs to be created in the child classes' constructor:
+        /// </summary>
         internal IHosterApi sut;
 
-        // skip certain tests because of https://github.com/christianspecht/scm-backup/issues/15
-        // Child classes which need to skip those tests need to implement this and return true
+        /// <summary>
+        /// skip certain tests because of https://github.com/christianspecht/scm-backup/issues/15<para/>
+        /// Child classes which need to skip those tests need to implement this and return true
+        /// </summary>
         protected virtual bool SkipTestsIssue15()
         {
             return false;
